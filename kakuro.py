@@ -140,7 +140,6 @@ class grilleKakuro:
     #     # if the number is not valid, we try another number
     #     # if we have tried all the numbers and none of them are valid, we go back to the previous cell
 
-    #     while 
     
 test = grilleKakuro(11, 11, 10)
 test.affiche()
