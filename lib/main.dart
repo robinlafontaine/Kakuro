@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
 
+// BOILERPLATE FIREBASE
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
+
+await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
+
+// MAIN
+
+
 void main() {
   runApp(const MyApp());
 }
