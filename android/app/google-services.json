@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "432183058187",
+    "project_id": "kakuro-insa",
+    "storage_bucket": "kakuro-insa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432183058187:android:784b7587c2c2dd4d04cc0e",
+        "android_client_info": {
+          "package_name": "com.example.kakuro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432183058187-4t37lnkk6kh98q34rrkvbh618numse33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBRChQfuqZzCuqvAEwqtxxFfCA2pZcSkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432183058187-4t37lnkk6kh98q34rrkvbh618numse33.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "432183058187-p8ul9hbijgk4glr7lrm2lq6r7vh7g25l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kakuro"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
