@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "432183058187-gcfpcp0f7qh8100o7pcpnpp933tqmjr4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kakuro",
+            "certificate_hash": "c1391731b7a449196cf0ca28b7e6751298fac2df"
+          }
+        },
+        {
           "client_id": "432183058187-4t37lnkk6kh98q34rrkvbh618numse33.apps.googleusercontent.com",
           "client_type": 3
         }
