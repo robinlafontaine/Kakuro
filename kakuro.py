@@ -170,14 +170,8 @@ class grilleKakuro:
             for j in range(self.m):
                 if self.grille[i][j] != -1 and j > 0 and self.grille[i][j - 1] != -1:
                     self.entete[i][j] = (0, self.entete[i][j][1])
-        # on met à 0 le premier tuple si on a un voisin en haut
-        for i in range(self.n):
-            for j in range(self.m):
                 if self.grille[i][j] != -1 and i > 0 and self.grille[i - 1][j] != -1:
                     self.entete[i][j] = (self.entete[i][j][0], 0)
-        # change all the tuples with o,0 to an empty tuple
-        for i in range(self.n):
-            for j in range(self.m):
                 if self.entete[i][j] == (0, 0):
                     self.entete[i][j] = ()
 
@@ -188,7 +182,7 @@ class grilleKakuro:
         return self.grille
     
     
-test = grilleKakuro(6, 6, 10)
+test = grilleKakuro(6, 12, 10)
 test.affiche()
 print()
 test.afficheEntete()
