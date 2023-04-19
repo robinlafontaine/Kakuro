@@ -2,11 +2,12 @@ import 'dart:math';
 
 class Kakuro {
   late int n, m, maxi, difficulte;
-  late dynamic grille, entete;
+  late List<List<int>> grille;
+  late List<List<List<int>>> entete;
 
   Kakuro(int n, int m, int difficulte) {
     grille = List.generate(n, (i) => List.generate(m, (j) => 0));
-    entete = List.generate(n, (i) => List.generate(m, (j) => 0));
+    entete = List.generate(n, (i) => List.generate(m, (j) => []));
     maxi = max(n, m);
     this.n = n;
     this.m = m;
@@ -112,13 +113,21 @@ class Kakuro {
   void deleteUselessTuples() {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (grille[i][j] != -1 && j > 0 && grille[i][j - 1] != -1) {
+        if (grille[i][j] != -1 &&
+            j > 0 &&
+            entete[i][j].length > 1 &&
+            grille[i][j - 1] != -1) {
           entete[i][j] = [0, entete[i][j][1]];
         }
-        if (grille[i][j] != -1 && i > 0 && grille[i - 1][j] != -1) {
+        if (grille[i][j] != -1 &&
+            i > 0 &&
+            grille[i - 1][j] != -1 &&
+            entete[i][j].length > 1) {
           entete[i][j] = [entete[i][j][0], 0];
         }
-        if (entete[i][j] == [0, 0]) {
+        if (entete[i][j].isNotEmpty &&
+            entete[i][j][0] == 0 &&
+            entete[i][j][1] == 0) {
           entete[i][j] = [];
         }
       }
@@ -200,9 +209,9 @@ class Kakuro {
   }
 }
 
-// test main
-void main() {
-  Kakuro g = Kakuro(5, 5, 9);
-  g.affiche();
-  g.afficheEntete();
-}
+// // test main
+// void main() {
+//   Kakuro g = Kakuro(5, 5, 9);
+//   g.affiche();
+//   g.afficheEntete();
+// }
