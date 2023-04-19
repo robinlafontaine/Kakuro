@@ -15,29 +15,78 @@ class grilleKakuro:
     # on remplit la grille avec des des valeurs de 1 à maxi
     def genererGrille(self):
         self.genererTrou()
-        for i in range(self.n):
-            for j in range(self.m):
-                if self.grille[i][j] == 0:
-                    valeur = random.randint(1, self.maxi)
-                    while self.estDansLigneOuColonne(i, j, valeur):
-                        valeur = random.randint(1, self.maxi)
-                    self.grille[i][j] = valeur
+        # for i in range(self.n):
+        #     for j in range(self.m):
+        #         if self.grille[i][j] == 0:
+        #             valeur = random.randint(1, self.maxi)
+        #             while self.estDansLigneOuColonne(i, j, valeur):
+        #                 valeur = random.randint(1, self.maxi)
+        #             self.grille[i][j] = valeur
+        # self.estValide(0, 0, 0)
+        self.estValideRandom(0, 0, 0)
         self.genererEntete()
         self.deleteUselessTuples()
         
 
     def estDansLigneOuColonne(self, i, j, val):
         # on vérifie que la valeur n'est pas déjà dans la ligne ou la colonne, on s'arrête si on est sur un trou
-        k = j
+        k = 0
         while k < self.m and self.grille[i][k] != -1:
             if self.grille[i][k] == val:
                 return True
             k += 1
-        k = i
+        k = 0
         while k < self.n and self.grille[k][j] != -1:
             if self.grille[k][j] == val:
                 return True
             k += 1
+        return False
+    
+    # algo de backtracking
+    def estValide(self, i, j, position):
+        if position == self.n * self.m:
+            return True
+        
+        if self.grille[i][j] != 0:
+            if j == self.m - 1:
+                return self.estValide(i + 1, 0, position + 1)
+            else:
+                return self.estValide(i, j + 1, position + 1)
+            
+        for val in range(1, self.maxi + 1):
+            if not self.estDansLigneOuColonne(i, j, val):
+                self.grille[i][j] = val
+                if j == self.m - 1:
+                    if self.estValide(i + 1, 0, position + 1):
+                        return True
+                else:
+                    if self.estValide(i, j + 1, position + 1):
+                        return True
+                self.grille[i][j] = 0
+        return False
+    
+    # on refait la même fonction en utilisant des valeurs aléatoires pour la génération de la grille
+    def estValideRandom(self, i, j, position):
+        if position == self.n * self.m:
+            return True
+        
+        if self.grille[i][j] != 0:
+            if j == self.m - 1:
+                return self.estValideRandom(i + 1, 0, position + 1)
+            else:
+                return self.estValideRandom(i, j + 1, position + 1)
+            
+        for val in range(1, self.maxi + 1):
+            valeur = random.randint(1, self.maxi)
+            if not self.estDansLigneOuColonne(i, j, valeur):
+                self.grille[i][j] = valeur
+                if j == self.m - 1:
+                    if self.estValideRandom(i + 1, 0, position + 1):
+                        return True
+                else:
+                    if self.estValideRandom(i, j + 1, position + 1):
+                        return True
+                self.grille[i][j] = 0
         return False
     
     
@@ -126,6 +175,14 @@ class grilleKakuro:
             for j in range(self.m):
                 if self.grille[i][j] != -1 and i > 0 and self.grille[i - 1][j] != -1:
                     self.entete[i][j] = (self.entete[i][j][0], 0)
+        # change all the tuples with o,0 to an empty tuple
+        for i in range(self.n):
+            for j in range(self.m):
+                if self.entete[i][j] == (0, 0):
+                    self.entete[i][j] = ()
+
+    def enteteVide(self, i, j):
+        return self.entete[i][j] == ()
 
     def getGrille(self):
         return self.grille
@@ -141,7 +198,7 @@ class grilleKakuro:
     #     # if we have tried all the numbers and none of them are valid, we go back to the previous cell
 
     
-test = grilleKakuro(11, 11, 10)
+test = grilleKakuro(6, 6, 10)
 test.affiche()
 print()
 test.afficheEntete()
