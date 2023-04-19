@@ -187,16 +187,6 @@ class grilleKakuro:
     def getGrille(self):
         return self.grille
     
-
-    
-    # def solve(self):
-    #     # backtracking algorithm to solve the grid
-    #     # we start at the top left corner
-    #     # if the cell is empty, we try to fill it with a number
-    #     # if the number is valid, we go to the next cell
-    #     # if the number is not valid, we try another number
-    #     # if we have tried all the numbers and none of them are valid, we go back to the previous cell
-
     
 test = grilleKakuro(6, 6, 10)
 test.affiche()
