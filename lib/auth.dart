@@ -30,8 +30,9 @@ class Auth {
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.message!)));
+          .showSnackBar(const SnackBar(content: Text("Couldn't Sign In!")));
     }
+    return null;
   }
 
   Future<void> signOutFromGoogle() async {
