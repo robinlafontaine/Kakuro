@@ -7,7 +7,7 @@ class Auth {
   final FirebaseAuth _auth;
   Auth(this._auth);
 
-  Future<String?> signInWithGoogle(BuildContext context) async {
+  Future<String?> signInGoogle(BuildContext context) async {
     try {
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
@@ -35,7 +35,13 @@ class Auth {
     return null;
   }
 
-  Future<void> signOutFromGoogle() async {
+  Future<User> getUser() async {
+    print(_auth.currentUser);
+    return _auth.currentUser!;
+  }
+
+  Future<void> signOutGoogle() async {
+    //TODO : Popup to show Sign Out
     await FirebaseAuth.instance.signOut();
     await _auth.signOut();
   }

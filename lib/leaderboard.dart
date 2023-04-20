@@ -6,14 +6,12 @@ FirebaseDatabase database = FirebaseDatabase.instance;
 DatabaseReference ref = FirebaseDatabase.instance.ref();
 
 class Leaderboard {
-  Future<void> saveHighScore(String name, int newScore) async {
+  Future<void> saveHighScore(String uid, int newScore) async {
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) return;
 
     try {
       final uid = currentUser.uid;
-      final userName = currentUser.displayName ?? name;
-
       // Get the previous score
       final scoreRef = FirebaseDatabase.instance.ref('leaderboard/$uid');
       final userScoreResult = await scoreRef.child('score').once();
@@ -25,7 +23,7 @@ class Leaderboard {
       }
 
       await scoreRef.set({
-        'name': userName,
+        'uid': uid,
         'score': newScore,
       });
     } catch (e) {
@@ -33,5 +31,43 @@ class Leaderboard {
         print(e);
       }
     }
+  }
+
+  Future<Iterable<LeaderboardModel>> getTopHighScores() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final userId = currentUser?.uid;
+
+    // Retrieve first 20 data from highest to lowest in firebase
+    final result = await FirebaseDatabase.instance
+        .ref()
+        .child('leaderboard')
+        .orderByChild('score')
+        .limitToLast(20)
+        .once();
+
+    final leaderboardScores = result.snapshot.children
+        .map(
+          (e) => LeaderboardModel.fromJson(e.value as Map, e.key == userId),
+        )
+        .toList();
+
+    return leaderboardScores.reversed;
+  }
+}
+
+class LeaderboardModel {
+  final String uid;
+  final int score;
+
+  LeaderboardModel({
+    required this.uid,
+    required this.score,
+  });
+
+  factory LeaderboardModel.fromJson(Map json, bool isUser) {
+    return LeaderboardModel(
+      uid: isUser ? 'Toi' : json['uid'],
+      score: json['score'],
+    );
   }
 }
