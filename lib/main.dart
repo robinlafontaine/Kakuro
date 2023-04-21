@@ -1,8 +1,13 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kakuro/widgets/boutton.dart';
 import 'firebase_options.dart';
+import 'package:kakuro/config/config.dart';
+import 'package:kakuro/config/fonctions.dart';
 import 'auth.dart';
+
 
 void main() async {
   await Firebase.initializeApp(
@@ -19,14 +24,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(_title),
-          backgroundColor: Colors.green,
-        ),
-        body: MyStatefulWidget(),
-      ),
+        debugShowCheckedModeBanner: false,
+        home:  MyStatefulWidget(),
     );
   }
 }
@@ -39,24 +38,30 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () =>
-            {Auth(FirebaseAuth.instance).signInWithGoogle(context)},
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'GeeksforGeeks is',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ), // <-- Text
-
-            Icon(
-              // <-- Icon
-              Icons.favorite,
-              size: 24.0,
+            Image.asset(config.images.logo,
+              width: width(context)/2,
+              height: width(context)/2,
+            ),
+            SizedBox(
+              height: 70,
+            ),
+            boutton(
+                value: "En ligne",
+                onPress: () => {
+                  Auth(FirebaseAuth.instance).signInGoogle(context)}
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            boutton(
+                value: "Hors ligne",
+                onPress: () => {
+                  Auth(FirebaseAuth.instance).signInGoogle(context)}
             ),
           ],
         ),
