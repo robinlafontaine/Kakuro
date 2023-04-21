@@ -1,11 +1,14 @@
+import 'dart:developer';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'firebase_options.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/kakuro.dart';
 import 'auth.dart';
 
 
@@ -61,7 +64,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             boutton(
                 value: "Hors ligne",
                 onPress: () => {
-                  Auth(FirebaseAuth.instance).signInGoogle(context)}
+                  //Auth(FirebaseAuth.instance).signInGoogle(context),
+                  //log(FirebaseAuth.instance.app.name),
+                  route(context, game(Kakuro(6, 6, 6)))
+                }
             ),
           ],
         ),

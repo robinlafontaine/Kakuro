@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/lib/config/config.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/config/fonctions.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/boutton.dart" afterDir="false" />
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Accueil + structure&#10;appli">
+      <change afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/plateau.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/images/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kakuro.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kakuro.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +40,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\verse\AndroidStudioProjects\kakuroGit\lib" />
       <recent name="C:\Users\verse\AndroidStudioProjects\kakuroGit\assets\images" />
     </key>
   </component>
@@ -81,7 +80,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681997252625</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Accueil + structure&#10;appli">
+      <created>1682072911452</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682072911452</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Accueil + structure&#10;appli">
+      <created>1682072922422</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682072922422</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +112,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Page d'accueil" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="Accueil + structure&#10;appli" />
+    <option name="LAST_COMMIT_MESSAGE" value="Accueil + structure&#10;appli" />
   </component>
 </project>
