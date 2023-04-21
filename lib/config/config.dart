@@ -8,6 +8,7 @@ class config{
 class _Color{
   final primaryColor = Color(0xFF464646);
   final primaryTextColor = Color(0xFFFFFFFF);
+  final caseColor = Color(0xFFEEEEEE);
 }
 
 class _Image {

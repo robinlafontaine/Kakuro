@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/widgets/case.dart';
+import 'package:kakuro/widgets/caseVide.dart';
+import 'package:kakuro/widgets/indice.dart';
 
 class scene extends StatefulWidget{
   final Kakuro kakuro;
@@ -38,8 +40,30 @@ class _sceneState extends State<scene>{
                  child: Row(
                   children: <Widget>[
                     for(int j=0; j<kakuro.m-1;j++)
-                      Case(i, j, ((width(context)/1.1)/kakuro.m)-2, true),
-                    Case(i, kakuro.m, ((width(context)/1.1)/kakuro.m)-2, false),
+                      if(kakuro.entete.elementAt(i).elementAt(j).isNotEmpty)
+                        Indice(
+                            kakuro.entete.elementAt(i).elementAt(j).elementAt(0),
+                            kakuro.entete.elementAt(i).elementAt(j).elementAt(1),
+                            ((width(context)/1.1)/kakuro.m)-2,
+                            false
+                        )
+                      else
+                        if(kakuro.grille.elementAt(i).elementAt(j)==-1)
+                          CaseVide(((width(context)/1.1)/kakuro.m)-2, false)
+                        else
+                        Case(0,i, j, ((width(context)/1.1)/kakuro.m)-2, false),
+                    if(kakuro.entete.elementAt(i).elementAt(kakuro.m-1).isNotEmpty)
+                      Indice(
+                          kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(0),
+                          kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(1),
+                          ((width(context)/1.1)/kakuro.m)-2,
+                          true
+                      )
+                    else
+                      if(kakuro.grille.elementAt(i).elementAt(kakuro.m-1)==-1)
+                        CaseVide(((width(context)/1.1)/kakuro.m)-2, true)
+                      else
+                        Case(0,i, kakuro.m, ((width(context)/1.1)/kakuro.m)-2, true),
                   ],
                  ),
              );

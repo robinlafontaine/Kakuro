@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Debut plateau">
-      <change afterPath="$PROJECT_DIR$/lib/screens/scene.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/case.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/caseVide.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/indice.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/kakuro.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kakuro.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/scene.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/scene.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/case.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/case.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682096174790</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Debut plateau">
+      <created>1682101143942</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682101143942</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

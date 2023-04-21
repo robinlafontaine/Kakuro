@@ -20,6 +20,7 @@ class _gameState extends State<game> {
   @override
   void initState(){
     kakuro.affiche();
+    kakuro.afficheEntete();
   }
 
   @override

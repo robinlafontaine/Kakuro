@@ -190,6 +190,10 @@ class Kakuro {
     return false;
   }
 
+  List<List<int>> getGrille(){
+    return grille;
+  }
+
   void affiche() {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
