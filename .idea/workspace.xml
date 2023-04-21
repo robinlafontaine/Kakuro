@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Accueil + structure&#10;appli">
-      <change afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/plateau.dart" afterDir="false" />
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Debut plateau">
+      <change afterPath="$PROJECT_DIR$/lib/screens/scene.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/widgets/case.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kakuro.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kakuro.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +18,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\verse\.android\avd\Android_TV_720p_API_31.avd]" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -94,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682072922422</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Debut plateau">
+      <created>1682096174790</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682096174790</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,6 +124,7 @@
     <MESSAGE value="Page d'accueil" />
     <MESSAGE value="test" />
     <MESSAGE value="Accueil + structure&#10;appli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Accueil + structure&#10;appli" />
+    <MESSAGE value="Debut plateau" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debut plateau" />
   </component>
 </project>

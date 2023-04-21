@@ -66,7 +66,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 onPress: () => {
                   //Auth(FirebaseAuth.instance).signInGoogle(context),
                   //log(FirebaseAuth.instance.app.name),
-                  route(context, game(Kakuro(6, 6, 6)))
+                  route(context, game(Kakuro(10, 10, 6)))
                 }
             ),
           ],

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/kakuro.dart';
+import 'package:kakuro/screens/scene.dart';
 
 class game extends StatefulWidget{
   final Kakuro kakuro;
@@ -25,7 +26,7 @@ class _gameState extends State<game> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("SALUT"),
+        child: scene(kakuro),
       ),
     );
   }
