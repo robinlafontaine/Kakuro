@@ -15,7 +15,7 @@ class Indice extends StatelessWidget{
   Widget build(BuildContext context) {
     if(indiceLigne!=0 && indiceColonne!=0)
       return Container(
-        margin: last?EdgeInsets.only(right: 0):EdgeInsets.only(right: 2),
+        margin: last?null:EdgeInsets.only(right: 2),
         width: taille,
         height: taille,
         decoration: BoxDecoration(
@@ -24,14 +24,20 @@ class Indice extends StatelessWidget{
         child: Stack(
           children: [
             Positioned(
-              top: 3,
-              right: 3,
-              child: Text(indiceLigne.toString(),),
+              top: 2,
+              right: 2,
+              child: Text(indiceLigne.toString(),
+                style: TextStyle(
+                    fontSize: taille*0.35
+                ),),
             ),
             Positioned(
-              bottom: 3,
-              left: 3,
-              child: Text(indiceColonne.toString(),),
+              bottom: 2,
+              left: 2,
+              child: Text(indiceColonne.toString(),
+                style: TextStyle(
+                    fontSize: taille*0.35
+                ),),
             ),
           ]
         ),
@@ -39,7 +45,7 @@ class Indice extends StatelessWidget{
     else
       if(indiceLigne!=0)
         return Container(
-          margin: last?EdgeInsets.only(right: 0):EdgeInsets.only(right: 2),
+          margin: last?null:EdgeInsets.only(right: 2),
           child: Stack(
             children: [
               ClipPath(
@@ -53,16 +59,19 @@ class Indice extends StatelessWidget{
                 ),
               ),
               Positioned(
-                top: 3,
-                right: 3,
-                child: Text(indiceLigne.toString(),),
+                top: 2,
+                right: 2,
+                child: Text(indiceLigne.toString(),
+                  style: TextStyle(
+                      fontSize: taille*0.35
+                  ),),
               ),
             ]
           ),
         );
       else
         return Container(
-          margin: last?EdgeInsets.only(right: 0):EdgeInsets.only(right: 2),
+          margin: last?null:EdgeInsets.only(right: 2),
           child: Stack(
             children:[
               ClipPath(
@@ -76,9 +85,12 @@ class Indice extends StatelessWidget{
                 ),
               ),
               Positioned(
-                bottom: 3,
-                left: 3,
-                child: Text(indiceColonne.toString(),),
+                bottom: 2,
+                left: 2,
+                child: Text(indiceColonne.toString(),
+                  style: TextStyle(
+                    fontSize: taille*0.35
+                  ),),
               ),
             ]
             ),
@@ -100,8 +112,7 @@ class ClipColonne extends CustomClipper<Path>{
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    throw UnimplementedError();
+    return true;
   }
 
 }
@@ -120,8 +131,7 @@ class ClipLigne extends CustomClipper<Path>{
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    throw UnimplementedError();
+    return true;
   }
 
 }

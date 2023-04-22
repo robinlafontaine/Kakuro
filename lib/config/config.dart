@@ -8,7 +8,9 @@ class config{
 class _Color{
   final primaryColor = Color(0xFF464646);
   final primaryTextColor = Color(0xFFFFFFFF);
-  final caseColor = Color(0xFFEEEEEE);
+  final caseColor = Color(0xFFFFFFFF);
+  final gris = Color(0xFFE0E0E0);
+  final actifnav = Color(0xFFD22626);
 }
 
 class _Image {

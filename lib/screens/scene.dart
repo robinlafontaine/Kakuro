@@ -51,7 +51,7 @@ class _sceneState extends State<scene>{
                         if(kakuro.grille.elementAt(i).elementAt(j)==-1)
                           CaseVide(((width(context)/1.1)/kakuro.m)-2, false)
                         else
-                        Case(0,i, j, ((width(context)/1.1)/kakuro.m)-2, false),
+                          Case(0,i, j, ((width(context)/1.1)/kakuro.m)-2, false),
                     if(kakuro.entete.elementAt(i).elementAt(kakuro.m-1).isNotEmpty)
                       Indice(
                           kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(0),

@@ -27,6 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme:ThemeData(
+          scaffoldBackgroundColor: config.colors.gris,
+        textTheme: GoogleFonts.montserratTextTheme(
+        Theme.of(context).textTheme)),
         debugShowCheckedModeBanner: false,
         home:  MyStatefulWidget(),
     );
@@ -66,7 +70,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 onPress: () => {
                   //Auth(FirebaseAuth.instance).signInGoogle(context),
                   //log(FirebaseAuth.instance.app.name),
-                  route(context, game(Kakuro(10, 10, 6)))
+                  route(context, game(Kakuro(5, 5, 7)))
                 }
             ),
           ],

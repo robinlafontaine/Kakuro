@@ -36,14 +36,19 @@ class _caseState extends State<Case>{
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        margin: widget.last?EdgeInsets.only(right: 0):EdgeInsets.only(right: 2),
+        margin: widget.last?null:EdgeInsets.only(right: 2),
         width: taille,
         height: taille,
         decoration: BoxDecoration(
           color: config.colors.caseColor
         ),
         child: Center(
-          child: Text(valeur.toString()),
+          child: (valeur==0)?null:
+          Text(valeur.toString(),
+          style: TextStyle(
+            fontSize: taille*0.5,
+            color: Colors.red
+          ),),
         ),
       ),
       onTap: add
