@@ -58,23 +58,36 @@ class _appbarState extends State<appbar> {
     return AppBar(
       backgroundColor: config.colors.gris,
       elevation: 0,
-      leadingWidth: width(context)/8.5,
+      leadingWidth: widget.home?width(context)/3:width(context)/8.5,
       centerTitle: true,
       leading: (widget.home)
           ?
           Builder(
             builder: (BuildContext context) {
               return Container(
-                child: Center(
-                  child: IconButton(
-                    icon: FaIcon(
-                        FontAwesomeIcons.navicon
-                    ),
-                    iconSize: 21,
+                decoration: BoxDecoration(
                     color: config.colors.primaryColor,
-                    hoverColor: Colors.transparent,
-                    onPressed: (){widget.retour;},
-                    tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+                    borderRadius: BorderRadius.circular(50),
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: width(context)/20,
+                        height: width(context)/20,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.red
+                        ),
+                      ),
+                      Text(
+                        "Hors ligne",
+                        style: TextStyle(
+                          fontSize: width(context)/25
+                        ),
+                      )
+                    ],
                   ),
                 ),
               );
@@ -107,13 +120,42 @@ class _appbarState extends State<appbar> {
           ),
 
       title: (widget.enjeu)
-          ? Text("$minute:$seconde",
-              style: TextStyle(
-                color: config.colors.primaryColor,
-                fontSize: width(context)/14
-              )
-            ,)
+          ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.timer, size: width(context)/11,color: Colors.black,),
+              SizedBox(
+                width: 5,
+              ),
+              Text("$minute:$seconde",
+                  style: TextStyle(
+                    color: config.colors.primaryColor,
+                    fontSize: width(context)/11
+                  )
+                ,),
+            ],
+          )
           :null,
+
+      actions: [ (widget.enjeu) ?
+        Container(
+          width: width(context)/8.5,
+            decoration: BoxDecoration(
+              color: config.colors.primaryColor,
+              borderRadius: BorderRadius.circular(100)
+            ),
+            child: Center(
+                child: FaIcon(
+                  FontAwesomeIcons.ban,
+                  size: width(context)/20,
+                )
+            )
+        ) :
+        SizedBox(
+          width: 0.0001,
+        )
+      ],
     );
   }
 }

@@ -6,3 +6,4 @@ route(context, widget, {bool close = false}) => close
 
 width(context)=>MediaQuery.of(context).size.width;
 height(context)=>MediaQuery.of(context).size.height;
+

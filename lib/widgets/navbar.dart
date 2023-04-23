@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/screens/horsligne.dart';
+import 'package:kakuro/screens/nouvellepartie.dart';
 
 class navbar extends StatelessWidget{
   final int actif;
@@ -21,16 +23,19 @@ class navbar extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-              onPressed: null,
+              onPressed: (){
+                route(context, horsligne());
+              },
               icon: FaIcon(
                 FontAwesomeIcons.home,
                 color: (actif!=0)?config.colors.gris:config.colors.primaryTextColor,
                 size: height(context)/35,
               ),
           ),
-
           IconButton(
-            onPressed: null,
+            onPressed: (){
+              route(context, nouvellepartie());
+            },
             icon: FaIcon(
               FontAwesomeIcons.plus,
               color: (actif!=1)?config.colors.gris:config.colors.primaryTextColor,

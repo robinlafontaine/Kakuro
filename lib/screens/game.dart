@@ -55,7 +55,7 @@ class _gameState extends State<game> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(0),
+      bottomNavigationBar: navbar(10),
     );
   }
 

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'firebase_options.dart';
 import 'package:kakuro/config/config.dart';
@@ -70,7 +71,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 onPress: () => {
                   //Auth(FirebaseAuth.instance).signInGoogle(context),
                   //log(FirebaseAuth.instance.app.name),
-                  route(context, game(Kakuro(10, 8, 7)))
+                  //route(context, game(Kakuro(10, 8, 7)))
+                  route(context, horsligne())
                 }
             ),
           ],
