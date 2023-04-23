@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
@@ -9,17 +10,19 @@ import 'package:kakuro/widgets/indice.dart';
 
 class scene extends StatefulWidget{
   final Kakuro kakuro;
-
+  
   scene(this.kakuro);
 
   @override State<scene> createState() => _sceneState(kakuro);
-
 }
 
 class _sceneState extends State<scene>{
   Kakuro kakuro;
   _sceneState(this.kakuro);
 
+  void initState(){
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class _sceneState extends State<scene>{
             itemCount: kakuro.n,
             itemBuilder: (_,i){
              return Container(
-                 margin: EdgeInsets.only(bottom: 2),
+                 margin: (i<kakuro.n-1)?EdgeInsets.only(bottom: 2):null,
                  child: Row(
                   children: <Widget>[
                     for(int j=0; j<kakuro.m-1;j++)

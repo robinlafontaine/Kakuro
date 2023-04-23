@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
+import 'dart:math' as math;
 
 class Indice extends StatelessWidget{
   final int indiceLigne, indiceColonne;
@@ -23,8 +24,19 @@ class Indice extends StatelessWidget{
         ),
         child: Stack(
           children: [
+            Center(
+              child: Transform.rotate(
+                  angle: 3*math.pi / 4,
+                  child: Container(
+                    width: taille/30,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.black
+                    ),
+                  ),
+              )
+            ),
             Positioned(
-              top: 2,
               right: 2,
               child: Text(indiceLigne.toString(),
                 style: TextStyle(
@@ -32,7 +44,7 @@ class Indice extends StatelessWidget{
                 ),),
             ),
             Positioned(
-              bottom: 2,
+              bottom: 0,
               left: 2,
               child: Text(indiceColonne.toString(),
                 style: TextStyle(

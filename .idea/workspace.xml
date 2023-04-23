@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Plateau">
-      <change afterPath="$PROJECT_DIR$/lib/widgets/appbar.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/navbar.dart" afterDir="false" />
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Navbar et appbar">
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/config.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/scene.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/scene.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/case.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/case.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/appbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/boutton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/boutton.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/indice.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/indice.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navbar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +50,7 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../app_food" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -133,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682107732296</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Navbar et appbar">
+      <created>1682175529338</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682175529338</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,6 +158,7 @@
     <MESSAGE value="Accueil + structure&#10;appli" />
     <MESSAGE value="Debut plateau" />
     <MESSAGE value="Plateau" />
-    <option name="LAST_COMMIT_MESSAGE" value="Plateau" />
+    <MESSAGE value="Navbar et appbar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Navbar et appbar" />
   </component>
 </project>

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 
 class game extends StatefulWidget{
@@ -20,32 +22,36 @@ class _gameState extends State<game> {
   Kakuro kakuro;
   _gameState(this.kakuro);
 
-  @override
-  void initState(){
-    kakuro.affiche();
-    kakuro.afficheEntete();
+  void retour(){
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, height(context)/12),
+        preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(false,true),
+          child: appbar(false,true,this.retour),
         ),
       ),
       body: Center(
         child: Column(
           children: [
             SizedBox(
-              height: 60,
+              height: height(context)/10,
             ),
             Center(
               child: scene(kakuro),
-            )
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            boutton(
+                value: "VALIDER",
+                onPress: ()=>{}
+            ),
           ],
         ),
       ),

@@ -12,7 +12,7 @@ class navbar extends StatelessWidget{
   Widget build(BuildContext context) {
     return Container(
       width: width(context),
-      height: height(context)/10,
+      height: height(context)/12,
       padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: config.colors.primaryColor
@@ -25,7 +25,7 @@ class navbar extends StatelessWidget{
               icon: FaIcon(
                 FontAwesomeIcons.home,
                 color: (actif!=0)?config.colors.gris:config.colors.primaryTextColor,
-                size: height(context)/30,
+                size: height(context)/35,
               ),
           ),
 
@@ -34,7 +34,7 @@ class navbar extends StatelessWidget{
             icon: FaIcon(
               FontAwesomeIcons.plus,
               color: (actif!=1)?config.colors.gris:config.colors.primaryTextColor,
-              size: height(context)/30,
+              size: height(context)/35,
             ),
           ),
           IconButton(
@@ -42,7 +42,7 @@ class navbar extends StatelessWidget{
             icon: FaIcon(
               FontAwesomeIcons.gamepad,
               color: (actif!=2)?config.colors.gris:config.colors.primaryTextColor,
-              size: height(context)/30,
+              size: height(context)/35,
             ),
           ),
           IconButton(
@@ -50,7 +50,7 @@ class navbar extends StatelessWidget{
             icon: FaIcon(
               FontAwesomeIcons.cogs,
               color: (actif!=3)?config.colors.gris:config.colors.primaryTextColor,
-              size: height(context)/30,
+              size: height(context)/35,
             ),
           ),
         ],

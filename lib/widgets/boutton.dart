@@ -15,7 +15,7 @@ class boutton extends StatelessWidget{
         child: InkWell(
           child: Container(
             alignment: Alignment.center,
-            width: width(context)/1.2,
+            width: width(context)/1.1,
             height: 50,
             decoration: BoxDecoration(
                 color: config.colors.primaryColor
