@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Timer">
-      <change afterPath="$PROJECT_DIR$/lib/screens/horsligne.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" afterDir="false" />
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Page nouvelle partie">
+      <change afterPath="$PROJECT_DIR$/lib/screens/abandon.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/config/fonctions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/fonctions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navbar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682249438921</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Page nouvelle partie">
+      <created>1682258955710</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682258955710</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +168,7 @@
     <MESSAGE value="Plateau" />
     <MESSAGE value="Navbar et appbar" />
     <MESSAGE value="Timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Timer" />
+    <MESSAGE value="Page nouvelle partie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Page nouvelle partie" />
   </component>
 </project>

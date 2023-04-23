@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/screens/abandon.dart';
 
 class appbar extends StatefulWidget{
   final bool home;
@@ -146,9 +147,14 @@ class _appbarState extends State<appbar> {
               borderRadius: BorderRadius.circular(100)
             ),
             child: Center(
-                child: FaIcon(
-                  FontAwesomeIcons.ban,
-                  size: width(context)/20,
+                child: InkWell(
+                  child: FaIcon(
+                    FontAwesomeIcons.ban,
+                    size: width(context)/20,
+                  ),
+                  onTap: (){
+                    route(context, abandon());
+                  },
                 )
             )
         ) :
