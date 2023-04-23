@@ -7,8 +7,17 @@ import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-class horsligne extends StatelessWidget{
+class multijoueur extends StatefulWidget{
 
+  @override
+  State<multijoueur> createState() => _multijoueurState();
+}
+
+class _multijoueurState extends State<multijoueur> {
+
+  void retour(){
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,20 +26,22 @@ class horsligne extends StatelessWidget{
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(home: true,enjeu:false,retour:()=>{}, enligne: false,),
+          child: appbar(home:false,enjeu:false,retour: ()=>{retour()}, enligne: true,),
         ),
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               config.images.icon,
               width: width(context)/2,
-              height: height(context)/2,
+              height: width(context)/2,
             ),
+            SizedBox(height: 40,),
             boutton(
-                value: "NOUVELLE PARTIE",
-                onPress: (){route(context, nouvellepartie(false));}
+                value: "ENVOYER INVITATION",
+                onPress: (){}
             ),
             SizedBox(
               height: 10,
@@ -43,14 +54,20 @@ class horsligne extends StatelessWidget{
               height: 10,
             ),
             boutton(
-                value: "STATISTIQUES",
+                value: "RESULTATS",
+                onPress: (){}
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            boutton(
+                value: "CLASSEMENT",
                 onPress: (){}
             ),
           ],
         ),
       ),
-      bottomNavigationBar: navbar(0, false),
+      bottomNavigationBar: navbar(10, true),
     );
   }
-
 }

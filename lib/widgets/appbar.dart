@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/screens/abandon.dart';
+import 'package:kakuro/screens/enligne.dart';
+import 'package:kakuro/screens/horsligne.dart';
 
 class appbar extends StatefulWidget{
   final bool home;
   final bool enjeu;
   final Function retour;
+  final bool? enligne;
 
-  appbar(this.home,this.enjeu, this.retour);
+  appbar({required this.home,required this.enjeu,required this.retour, this.enligne});
 
   @override
   State<appbar> createState() => _appbarState(this.retour);
@@ -71,24 +72,32 @@ class _appbarState extends State<appbar> {
                     borderRadius: BorderRadius.circular(50),
                 ),
                 child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: width(context)/20,
-                        height: width(context)/20,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.red
+                  child: InkWell(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          width: width(context)/20,
+                          height: width(context)/20,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: (widget.enligne==null)?Colors.red:
+                            (widget.enligne==true)?Colors.green:Colors.red
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Hors ligne",
-                        style: TextStyle(
-                          fontSize: width(context)/25
-                        ),
-                      )
-                    ],
+                        Text( (widget.enligne==null)?
+                          "Hors ligne":(widget.enligne==true)?"En ligne":"Hors ligne",
+                          style: TextStyle(
+                            fontSize: width(context)/25
+                          ),
+                        )
+                      ],
+                    ),
+                    onTap: (){
+                      (widget.enligne==null)?null:
+                      (widget.enligne==true)?route(context, horsligne()):
+                          route(context, enligne());
+                    },
                   ),
                 ),
               );
@@ -125,13 +134,13 @@ class _appbarState extends State<appbar> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(Icons.timer, size: width(context)/11,color: Colors.black,),
+              Icon(Icons.timer, size: width(context)/12,color: Colors.black,),
               SizedBox(
                 width: 5,
               ),
               Text("$minute:$seconde",
                   style: TextStyle(
-                    color: config.colors.primaryColor,
+                    color: Colors.black,
                     fontSize: width(context)/11
                   )
                 ,),
@@ -153,7 +162,9 @@ class _appbarState extends State<appbar> {
                     size: width(context)/20,
                   ),
                   onTap: (){
-                    route(context, abandon());
+                    (enligne==null)?null:
+                    (enligne==true)?route(context, abandon(true)):
+                    route(context, abandon(false));
                   },
                 )
             )

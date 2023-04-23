@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Page nouvelle partie">
-      <change afterPath="$PROJECT_DIR$/lib/screens/abandon.dart" afterDir="false" />
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Abandon">
+      <change afterPath="$PROJECT_DIR$/lib/screens/enligne.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/multijoueur.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/abandon.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/abandon.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/horsligne.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/horsligne.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/scene.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/scene.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/appbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navbar.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +53,7 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../app_food" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -145,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682258955710</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Abandon">
+      <created>1682264748401</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682264748402</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,6 +185,7 @@
     <MESSAGE value="Navbar et appbar" />
     <MESSAGE value="Timer" />
     <MESSAGE value="Page nouvelle partie" />
-    <option name="LAST_COMMIT_MESSAGE" value="Page nouvelle partie" />
+    <MESSAGE value="Abandon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Abandon" />
   </component>
 </project>

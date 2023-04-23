@@ -7,6 +7,9 @@ import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 
 class abandon extends StatefulWidget{
+  final bool online;
+
+  abandon(this.online);
 
   @override
   State<abandon> createState() => _abandonState();
@@ -25,7 +28,7 @@ class _abandonState extends State<abandon> {
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(false,false,retour),
+          child: appbar(home:false,enjeu:false,retour:retour),
         ),
       ),
       body: Container(
@@ -50,7 +53,7 @@ class _abandonState extends State<abandon> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10),
+      bottomNavigationBar: navbar(10, widget.online),
     );
   }
 }

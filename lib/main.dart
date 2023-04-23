@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/widgets/boutton.dart';
@@ -61,7 +62,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             boutton(
                 value: "En ligne",
                 onPress: () => {
-                  Auth(FirebaseAuth.instance).signInGoogle(context)}
+                  Auth(FirebaseAuth.instance).signInGoogle(context),
+                  route(context, enligne())
+                },
             ),
             SizedBox(
               height: 20,

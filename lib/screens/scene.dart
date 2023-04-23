@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';

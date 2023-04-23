@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -12,8 +11,9 @@ import 'package:kakuro/widgets/navbar.dart';
 
 class game extends StatefulWidget{
   final Kakuro kakuro;
+  final bool online;
 
-  game(this.kakuro);
+  game(this.kakuro,this.online);
 
   @override State<game> createState() => _gameState(kakuro);
 }
@@ -33,7 +33,7 @@ class _gameState extends State<game> {
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(false,true,this.retour),
+          child: appbar(home:false,enjeu:true,retour:this.retour),
         ),
       ),
       body: Center(
@@ -55,7 +55,7 @@ class _gameState extends State<game> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10),
+      bottomNavigationBar: navbar(10,widget.online),
     );
   }
 

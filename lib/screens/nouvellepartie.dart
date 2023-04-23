@@ -5,12 +5,14 @@ import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/widgets/boutton.dart';
-
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class nouvellepartie extends StatefulWidget{
+  final bool online;
+
+  nouvellepartie(this.online);
 
   @override
   State<nouvellepartie> createState() => nouvellepartieState();
@@ -43,7 +45,7 @@ class nouvellepartieState extends State<nouvellepartie>{
           preferredSize: Size(double.infinity, width(context)/6),
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: appbar(false,false,retour),
+            child: appbar(home:false,enjeu:false,retour: retour),
           ),
         ),
         body: Center(
@@ -138,7 +140,8 @@ class nouvellepartieState extends State<nouvellepartie>{
                           game(Kakuro(
                               int.parse(ligne),
                               int.parse(colonne),
-                              int.parse(diff))
+                              int.parse(diff)),
+                            widget.online
                           )
                       );
                     }
@@ -147,7 +150,7 @@ class nouvellepartieState extends State<nouvellepartie>{
             ),
           ),
         ),
-        bottomNavigationBar: navbar(1),
+        bottomNavigationBar: navbar(1, widget.online),
     );
   }
 
