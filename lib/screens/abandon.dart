@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
@@ -44,7 +47,7 @@ class _abandonState extends State<abandon> {
             ),
             SizedBox(height: 30,),
             boutton(value: "OUI", onPress: (){
-              route(context, horsligne());
+              route(context, (widget.online)?enligne():horsligne());
             }),
             SizedBox(height: 10,),
             boutton(value: "NON", onPress: (){

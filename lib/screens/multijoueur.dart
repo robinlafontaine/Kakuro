@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
+import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/widgets/boutton.dart';
 
@@ -41,7 +42,9 @@ class _multijoueurState extends State<multijoueur> {
             SizedBox(height: 40,),
             boutton(
                 value: "ENVOYER INVITATION",
-                onPress: (){}
+                onPress: (){
+                  route(context, invitation());
+                }
             ),
             SizedBox(
               height: 10,

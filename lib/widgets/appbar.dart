@@ -162,8 +162,8 @@ class _appbarState extends State<appbar> {
                     size: width(context)/20,
                   ),
                   onTap: (){
-                    (enligne==null)?null:
-                    (enligne==true)?route(context, abandon(true)):
+                    (widget.enligne==null)?null:
+                    (widget.enligne==true)?route(context, abandon(true)):
                     route(context, abandon(false));
                   },
                 )

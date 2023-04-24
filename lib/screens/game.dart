@@ -33,7 +33,7 @@ class _gameState extends State<game> {
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(home:false,enjeu:true,retour:this.retour),
+          child: appbar(home:false,enjeu:true,retour:this.retour, enligne: widget.online,),
         ),
       ),
       body: Center(
