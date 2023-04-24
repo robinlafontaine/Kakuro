@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 class config{
   static final colors = _Color();
   static final images = _Image();
+  static final audios = _Audio();
 }
 
 class _Color{
@@ -16,4 +17,8 @@ class _Color{
 class _Image {
   final logo = "assets/images/logo.png";
   final icon = "assets/images/icon.png";
+}
+
+class _Audio{
+  final jojo = "assets/audio/jojo.mp3";
 }

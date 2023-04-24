@@ -14,6 +14,48 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "audioplayers",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "audioplayers_android",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers_android-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "audioplayers_darwin",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers_darwin-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "audioplayers_linux",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers_linux-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "audioplayers_platform_interface",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers_platform_interface-5.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "audioplayers_web",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers_web-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "audioplayers_windows",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/audioplayers_windows-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -338,6 +380,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "synchronized",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/synchronized-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -352,6 +400,12 @@
     {
       "name": "typed_data",
       "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/typed_data-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "uuid",
+      "rootUri": "file:///C:/Users/verse/AppData/Local/Pub/Cache/hosted/pub.dev/uuid-3.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -380,7 +434,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-04-23T16:43:03.339930Z",
+  "generated": "2023-04-24T13:49:39.261593Z",
   "generator": "pub",
   "generatorVersion": "2.19.0"
 }

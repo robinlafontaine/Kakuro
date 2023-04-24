@@ -5,6 +5,7 @@ import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/parametres.dart';
 
 class navbar extends StatelessWidget{
   final int actif;
@@ -55,7 +56,9 @@ class navbar extends StatelessWidget{
             ),
           ),
           IconButton(
-            onPressed: null,
+            onPressed: (){
+              route(context, parametre(online));
+              },
             icon: FaIcon(
               FontAwesomeIcons.cogs,
               color: (actif!=3)?config.colors.gris:config.colors.primaryTextColor,
