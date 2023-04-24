@@ -42,6 +42,7 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   google_fonts: ^4.0.3
   audioplayers: ^4.0.1
+  xml: ^6.2.2
 
 dev_dependencies:
   flutter_test:

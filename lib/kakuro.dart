@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:xml/xml.dart';
 
 class Kakuro {
   late int n, m, maxi, difficulte;
@@ -14,6 +15,82 @@ class Kakuro {
     this.difficulte = difficulte;
 
     genererGrille();
+  }
+
+  Kakuro.withXML(String xml){
+    var infos = XmlDocument.parse(xml);
+    String? ns = infos.getElement("kakuro")?.getElement("n")?.text;
+    String? ms = infos.getElement("kakuro")?.getElement("m")?.text;
+    String? diff = infos.getElement("kakuro")?.getElement("diff")?.text;
+    if(ns != null && ms != null && diff != null){
+      n = int.parse(ns);
+      m = int.parse(ms);
+      difficulte = int.parse(diff);
+    }
+    var cases = infos.getElement("kakuro")?.findAllElements("case").toList();
+    var nb=0;
+    if(cases!=null) {
+      grille = List.generate(n, (i) => List.generate(m, (j) => 0));
+      entete = List.generate(n, (i) => List.generate(m, (j) => []));
+      print(cases[1].getElement("type"));
+      for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+          if (cases[nb].getElement("type")?.text == "vide") {
+            grille[i][j] = -1;
+          }
+          else {
+            if (cases[nb].getElement("type")?.text == "indice") {
+              grille[i][j] =
+                  int.parse(cases[nb].getElement("valeur")?.text as String);
+              List<int> l = [];
+              l.add(int.parse(cases[nb].getElement("indiceligne")?.text as String));
+              l.add(int.parse(cases[nb].getElement("indicecolonne")?.text as String));
+              entete[i][j] = l;
+            } else {
+              grille[i][j] =
+                  int.parse(cases[nb].getElement("valeur")?.text as String);
+            }
+          }
+          nb++;
+        }
+      }
+    }
+  }
+
+  String toXML(){
+    String cases="";
+    for(var i=0;i<n;i++)
+      for(var j=0;j<n;j++)
+        if(grille[i][j]==-1)
+          cases = cases + "<case>"
+              "<type>vide</type>"
+              "<indiceligne>0</indiceligne>"
+              "<indicecolonne>0</indicecolonne>"
+              "<valeur>-1</valeur>"
+              "</case>";
+        else
+          if(entete[i][j].isNotEmpty)
+            cases = cases + "<case>"
+                "<type>indice</type>"
+                "<indiceligne>${entete[i][j][0]}</indiceligne>"
+                "<indicecolonne>${entete[i][j][1]}</indicecolonne>"
+                "<valeur>${grille[i][j]}</valeur>"
+                "</case>";
+          else
+            cases = cases + "<case>"
+                "<type>click</type>"
+                "<indiceligne>0</indiceligne>"
+                "<indicecolonne>0</indicecolonne>"
+                "<valeur>${grille[i][j]}</valeur>"
+                "</case>";
+    var xml = '''<?xml version="1.0"?>
+    <kakuro>
+      <n>${n}</n>
+      <m>${m}</m>
+      <diff>${difficulte}</diff>
+      ${cases}
+    </kakuro>''';
+    return xml;
   }
 
   void genererGrille() {

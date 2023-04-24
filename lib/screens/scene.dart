@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';
@@ -17,10 +18,6 @@ class scene extends StatefulWidget{
 class _sceneState extends State<scene>{
   Kakuro kakuro;
   _sceneState(this.kakuro);
-
-  void initState(){
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
