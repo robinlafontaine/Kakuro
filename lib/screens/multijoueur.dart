@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
+import 'package:kakuro/screens/classement.dart';
 import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/widgets/boutton.dart';
@@ -65,7 +66,7 @@ class _multijoueurState extends State<multijoueur> {
             ),
             boutton(
                 value: "CLASSEMENT",
-                onPress: (){}
+                onPress: (){route(context, classement());}
             ),
           ],
         ),
