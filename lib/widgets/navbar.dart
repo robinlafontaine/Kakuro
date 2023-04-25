@@ -7,7 +7,7 @@ import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/screens/parametres.dart';
 
-class navbar extends StatelessWidget{
+class navbar extends StatelessWidget {
   final int actif;
   final bool online;
 
@@ -17,57 +17,62 @@ class navbar extends StatelessWidget{
   Widget build(BuildContext context) {
     return Container(
       width: width(context),
-      height: height(context)/12,
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        color: config.colors.primaryColor
-      ),
+      height: height(context) / 12,
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(color: config.colors.primaryColor),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-              onPressed: (){
-                (online)?
-                route(context, enligne()):
-                route(context, horsligne());
-              },
-              icon: FaIcon(
-                FontAwesomeIcons.home,
-                color: (actif!=0)?config.colors.gris:config.colors.primaryTextColor,
-                size: height(context)/35,
-              ),
+            onPressed: () {
+              (online)
+                  ? route(context, enligne())
+                  : route(context, horsligne());
+            },
+            icon: FaIcon(
+              FontAwesomeIcons.house,
+              color: (actif != 0)
+                  ? config.colors.gris
+                  : config.colors.primaryTextColor,
+              size: height(context) / 35,
+            ),
           ),
           IconButton(
-            onPressed: (){
+            onPressed: () {
               route(context, nouvellepartie(online));
             },
             icon: FaIcon(
               FontAwesomeIcons.plus,
-              color: (actif!=1)?config.colors.gris:config.colors.primaryTextColor,
-              size: height(context)/35,
+              color: (actif != 1)
+                  ? config.colors.gris
+                  : config.colors.primaryTextColor,
+              size: height(context) / 35,
             ),
           ),
           IconButton(
             onPressed: null,
             icon: FaIcon(
               FontAwesomeIcons.gamepad,
-              color: (actif!=2)?config.colors.gris:config.colors.primaryTextColor,
-              size: height(context)/35,
+              color: (actif != 2)
+                  ? config.colors.gris
+                  : config.colors.primaryTextColor,
+              size: height(context) / 35,
             ),
           ),
           IconButton(
-            onPressed: (){
+            onPressed: () {
               route(context, parametre(online));
-              },
+            },
             icon: FaIcon(
-              FontAwesomeIcons.cogs,
-              color: (actif!=3)?config.colors.gris:config.colors.primaryTextColor,
-              size: height(context)/35,
+              FontAwesomeIcons.gears,
+              color: (actif != 3)
+                  ? config.colors.gris
+                  : config.colors.primaryTextColor,
+              size: height(context) / 35,
             ),
           ),
         ],
       ),
     );
   }
-
 }
