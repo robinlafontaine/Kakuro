@@ -11,12 +11,12 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 // await database.enablePersistence(const PersistenceSettings(synchronizeTabs: true));
 
 class Leaderboard {
-  static Future<List<QueryDocumentSnapshot>> getLeaderboard() async {
+  static Future<List<QueryDocumentSnapshot>> getLeaderboard(int limite) async {
     try {
       final snapshot = await db
           .collection("leaderboard")
           .orderBy("score", descending: true)
-          .limit(10)
+          .limit(limite)
           .get();
       return snapshot.docs;
     } catch (e) {
