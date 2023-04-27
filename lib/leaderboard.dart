@@ -70,4 +70,30 @@ class Leaderboard {
       }
     }
   }
+
+  static Future<void> addNewScore(int newPoints) async {
+    // Sauvegarde le score de l'utilisateur dans la BDD
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) return;
+
+    try {
+      final uid = currentUser.uid;
+      final docRef = db.collection("leaderboard").doc(uid);
+      final docData = await docRef.get();
+      var score = (docData.data()?["score"] as int?) ?? 0;
+      score += newPoints;
+
+      await docRef.set({"name": currentUser.displayName, "score": score},
+          SetOptions(merge: true));
+      return;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+
 }
+
+

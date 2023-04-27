@@ -29,6 +29,7 @@ class appbar extends StatefulWidget {
 class _appbarState extends State<appbar> {
   String time = "0", seconde = "00", minute = "00";
   Timer? timer;
+  Function ?timerFunction;
   Function retour;
   Duration duration = Duration();
 
