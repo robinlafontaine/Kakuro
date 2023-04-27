@@ -1,23 +1,34 @@
-import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/enligne.dart';
-import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'firebase_options.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
-import 'package:kakuro/kakuro.dart';
 import 'auth.dart';
+import 'leaderboard.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if (kDebugMode) {
+    try {
+      FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+      await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+  }
+
   runApp(const MyApp());
 }
 
@@ -82,8 +93,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       //log(FirebaseAuth.instance.app.name),
                       //route(context, game(Kakuro(10, 8, 7)))
 
-                      route(context, horsligne())
-                      //Leaderboard().saveHighScoreTest("10", "Test", 2000)
+                      //route(context, horsligne())
+                      Leaderboard.saveHighScore(6000)
                     }),
           ],
         ),

@@ -4,16 +4,12 @@ import 'package:flutter/foundation.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-// // Apple and Android
-// database.settings = const Settings(persistenceEnabled: true);
-
-// // Web
-// await database.enablePersistence(const PersistenceSettings(synchronizeTabs: true));
+// await db
+//     .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
 
 class Leaderboard {
   static Future getLeaderboard(int limite) async {
-    List scores = [];
-
+    // Récupère les 'documents' pour les n (limite) meilleurs scores
     try {
       final snapshot = await db
           .collection("leaderboard")
@@ -30,7 +26,8 @@ class Leaderboard {
     }
   }
 
-  Future<void> saveHighScore(int newScore) async {
+  static Future<void> saveHighScore(int newScore) async {
+    // Sauvegarde le score de l'utilisateur dans la BDD
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) return;
 
