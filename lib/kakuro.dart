@@ -271,6 +271,20 @@ class Kakuro {
     return grille;
   }
 
+  List<List<int>> getBase(){
+    List<List<int>> base = List.generate(n, (i) => List.generate(m, (j) => 0));
+    for(int i=0;i<n;i++){
+      for(int j=0;j<m;j++){
+        if(entete[i][j].isEmpty && grille[i][j]!=-1){
+          base[i][j]=0;
+        }else{
+          base[i][j]=grille[i][j];
+        }
+      }
+    }
+    return base;
+  }
+
   void affiche() {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {

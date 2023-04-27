@@ -20,7 +20,28 @@ class game extends StatefulWidget{
 
 class _gameState extends State<game> {
   Kakuro kakuro;
+  List grille=[];
   _gameState(this.kakuro);
+
+  void initState(){
+    grille = kakuro.getBase();
+    print(kakuro.grille);
+  }
+
+  bool testValide(){
+    for(int i=0;i<kakuro.n;i++){
+      for(int j=0;j<kakuro.m;j++){
+        if(grille[i][j]!=kakuro.grille[i][j]){
+          return false;
+        }
+      }
+    }
+  return true;
+  }
+
+  void maj(int i,int j,int valeur){
+    this.grille[i][j] = valeur;
+  }
 
   void retour(){
     Navigator.pop(context);
@@ -43,14 +64,16 @@ class _gameState extends State<game> {
               height: height(context)/10,
             ),
             Center(
-              child: scene(kakuro),
+              child: scene(kakuro,maj),
             ),
             SizedBox(
               height: 30,
             ),
             boutton(
                 value: "VALIDER",
-                onPress: ()=>{}
+                onPress: (){
+                  testValide();
+                }
             ),
           ],
         ),

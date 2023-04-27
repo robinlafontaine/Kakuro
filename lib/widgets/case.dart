@@ -9,10 +9,11 @@ class Case extends StatefulWidget{
   final int colonne;
   final double taille;
   final bool last;
+  final Function maj;
 
-  Case(this.valeur,this.ligne, this.colonne, this.taille, this.last);
+  Case(this.valeur,this.ligne, this.colonne, this.taille, this.last, this.maj);
 
-  @override State<Case> createState() => _caseState(valeur,ligne,colonne, taille);
+  @override State<Case> createState() => _caseState(valeur,ligne,colonne, taille, maj);
 
 }
 
@@ -20,7 +21,8 @@ class _caseState extends State<Case>{
   int ligne,colonne;
   double taille;
   int valeur;
-  _caseState(this.valeur,this.ligne,this.colonne, this.taille);
+  Function maj;
+  _caseState(this.valeur,this.ligne,this.colonne, this.taille,this.maj);
 
   void add(){
     setState(() {
@@ -51,7 +53,10 @@ class _caseState extends State<Case>{
           ),),
         ),
       ),
-      onTap: add
+      onTap: (){
+        this.add();
+        maj(ligne,colonne,valeur);
+      }
     );
   }
 }

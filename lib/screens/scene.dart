@@ -9,15 +9,18 @@ import 'package:kakuro/widgets/indice.dart';
 
 class scene extends StatefulWidget{
   final Kakuro kakuro;
+  final Function maj;
   
-  scene(this.kakuro);
+  scene(this.kakuro,this.maj);
 
-  @override State<scene> createState() => _sceneState(kakuro);
+  @override State<scene> createState() => _sceneState(kakuro,maj);
 }
 
 class _sceneState extends State<scene>{
   Kakuro kakuro;
-  _sceneState(this.kakuro);
+  Function maj;
+  _sceneState(this.kakuro,this.maj);
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class _sceneState extends State<scene>{
                         if(kakuro.grille.elementAt(i).elementAt(j)==-1)
                           CaseVide(((width(context)/1.1)/kakuro.m)-2, false)
                         else
-                          Case(0,i, j, ((width(context)/1.1)/kakuro.m)-2, false),
+                          Case(0,i, j, ((width(context)/1.1)/kakuro.m)-2, false, maj),
                     if(kakuro.entete.elementAt(i).elementAt(kakuro.m-1).isNotEmpty)
                       Indice(
                           kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(0),
@@ -61,7 +64,7 @@ class _sceneState extends State<scene>{
                       if(kakuro.grille.elementAt(i).elementAt(kakuro.m-1)==-1)
                         CaseVide(((width(context)/1.1)/kakuro.m)-2, true)
                       else
-                        Case(0,i, kakuro.m, ((width(context)/1.1)/kakuro.m)-2, true),
+                        Case(0,i, kakuro.m-1, ((width(context)/1.1)/kakuro.m)-2, true, maj),
                   ],
                  ),
              );
