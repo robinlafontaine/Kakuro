@@ -39,13 +39,6 @@ class horsligne extends StatelessWidget{
                 value: "MES PARTIES",
                 onPress: (){}
             ),
-            SizedBox(
-              height: 10,
-            ),
-            boutton(
-                value: "STATISTIQUES",
-                onPress: (){}
-            ),
           ],
         ),
       ),

@@ -65,7 +65,7 @@ class _appbarState extends State<appbar> {
     return AppBar(
       backgroundColor: config.colors.gris,
       elevation: 0,
-      leadingWidth: widget.home ? width(context) / 3 : width(context) / 8.5,
+      leadingWidth: width(context) / 9,
       centerTitle: true,
       leading: (widget.home)
           ? Builder(
@@ -76,49 +76,29 @@ class _appbarState extends State<appbar> {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Center(
-                    child: InkWell(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            width: width(context) / 20,
-                            height: width(context) / 20,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: (widget.enligne == null)
-                                    ? Colors.red
-                                    : (widget.enligne == true)
-                                        ? Colors.green
-                                        : Colors.red),
-                          ),
-                          Text(
-                            (widget.enligne == null)
-                                ? "Hors ligne"
-                                : (widget.enligne == true)
-                                    ? "En ligne"
-                                    : "Hors ligne",
-                            style: TextStyle(fontSize: width(context) / 25),
-                          )
-                        ],
-                      ),
-                      onTap: () {
-                        (widget.enligne == null)
-                            ? null
-                            : (widget.enligne == true)
-                                ? route(context, horsligne())
-                                : {
-                                    FirebaseAuth.instance
-                                        .authStateChanges()
-                                        .listen((User? user) {
-                                      if (user == null) {
-                                        Auth(FirebaseAuth.instance)
-                                            .signInGoogle(context);
-                                      } else {
-                                        route(context, enligne());
-                                      }
-                                    }).onError((error, stackTrace) {})
-                                  };
-                      },
+                    child: IconButton(
+                        icon: FaIcon((widget.enligne==true)?FontAwesomeIcons.signOut:FontAwesomeIcons.signIn),
+                        iconSize: width(context) / 20,
+                        color: config.colors.primaryTextColor,
+                        hoverColor: Colors.transparent,
+                        onPressed: () {
+                          (widget.enligne == null)
+                              ? null
+                              : (widget.enligne == true)
+                              ? route(context, horsligne())
+                              : {
+                            FirebaseAuth.instance
+                                .authStateChanges()
+                                .listen((User? user) {
+                              if (user == null) {
+                                Auth(FirebaseAuth.instance)
+                                    .signInGoogle(context);
+                              } else {
+                                route(context, enligne());
+                              }
+                            }).onError((error, stackTrace) {})
+                          };
+                        },
                     ),
                   ),
                 );
@@ -170,7 +150,7 @@ class _appbarState extends State<appbar> {
       actions: [
         (widget.enjeu)
             ? Container(
-                width: width(context) / 8.5,
+                width: width(context) / 9,
                 decoration: BoxDecoration(
                     color: config.colors.primaryColor,
                     borderRadius: BorderRadius.circular(100)),
