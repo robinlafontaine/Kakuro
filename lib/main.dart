@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          scaffoldBackgroundColor: config.colors.gris,
+          //scaffoldBackgroundColor: config.colors.primaryBackground,
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
@@ -58,6 +58,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: config.colors.primaryBackground,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -92,8 +93,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       //log(FirebaseAuth.instance.app.name),
                       //route(context, game(Kakuro(10, 8, 7)))
 
-                      //route(context, horsligne())
-                      Leaderboard.saveHighScore(6000)
+                      route(context, horsligne())
+                      //Leaderboard.saveHighScore(6000)
                     }),
           ],
         ),

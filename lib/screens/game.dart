@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+import 'package:kakuro/config/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -73,6 +73,7 @@ class _gameState extends State<game> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: config.colors.primaryBackground,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(

@@ -24,6 +24,7 @@ class _multijoueurState extends State<multijoueur> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: config.colors.primaryBackground,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(

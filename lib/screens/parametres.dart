@@ -25,9 +25,24 @@ class parametreState extends State<parametre> {
     Navigator.pop(context);
   }
 
+  void changeTheme(){
+    setState(() {
+      if(config.colors.primaryBackground==config.colors.defaultBackground){
+        config.colors.primaryBackground=config.colors.DarkBackground;
+        config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
+        config.colors.primarySelect=config.colors.primaryColor;
+      }else{
+        config.colors.primaryBackground=config.colors.defaultBackground;
+        config.colors.primaryTextBlack=config.colors.defaultTextBlack;
+        config.colors.primarySelect=config.colors.defaultPrimarySelect;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: config.colors.primaryBackground,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
@@ -36,12 +51,22 @@ class parametreState extends State<parametre> {
         ),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: Text('music'),
-          onPressed: (){
-            final player = AudioPlayer();
-            player.play(AssetSource("jojo.mp3"));
-          },
+        child: Column(
+          children: [
+            ElevatedButton(
+              child: Text('music'),
+              onPressed: (){
+                final player = AudioPlayer();
+                player.play(AssetSource("jojo.mp3"));
+              },
+            ),
+            ElevatedButton(
+              child: Text('toDark'),
+              onPressed: (){
+                changeTheme();
+              },
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: navbar(3, widget.online),

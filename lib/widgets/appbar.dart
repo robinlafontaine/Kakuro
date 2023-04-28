@@ -64,7 +64,7 @@ class _appbarState extends State<appbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: config.colors.gris,
+      backgroundColor: Colors.transparent,
       elevation: 0,
       leadingWidth: width(context) / 9,
       centerTitle: true,

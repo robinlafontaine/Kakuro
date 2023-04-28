@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:kakuro/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
@@ -27,6 +27,7 @@ class _abandonState extends State<abandon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: config.colors.primaryBackground,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
