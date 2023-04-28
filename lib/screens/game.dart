@@ -7,6 +7,8 @@ import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
+import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
 import 'package:kakuro/widgets/boutton.dart';
@@ -67,7 +69,7 @@ class _gameState extends State<game> {
   }
 
   void retour(){
-    Navigator.pop(context);
+    route(context, nouvellepartie(widget.online));
   }
 
   @override
@@ -102,8 +104,12 @@ class _gameState extends State<game> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10,widget.online),
-    );
+      bottomNavigationBar: navbar(10,widget.online,
+        (){
+        Navigator.push(
+        context,
+            MaterialPageRoute(builder: (context) => parametre(widget.online,widget))).then((value) { setState(() {});});}
+      ));
   }
 
 

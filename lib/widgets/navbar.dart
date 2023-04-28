@@ -10,8 +10,9 @@ import 'package:kakuro/screens/parametres.dart';
 class navbar extends StatelessWidget {
   final int actif;
   final bool online;
+  final Function reaload;
 
-  navbar(this.actif, this.online);
+  navbar(this.actif, this.online, this.reaload);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,8 @@ class navbar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              route(context, parametre(online));
+              //route(context, parametre(online,widgetBack));
+              reaload();
             },
             icon: FaIcon(
               FontAwesomeIcons.gears,

@@ -135,7 +135,7 @@ class _appbarState extends State<appbar> {
                 Icon(
                   Icons.timer,
                   size: width(context) / 12,
-                  color: Colors.black,
+                  color: config.colors.primaryTextBlack,
                 ),
                 SizedBox(
                   width: 5,
@@ -143,7 +143,7 @@ class _appbarState extends State<appbar> {
                 Text(
                   "$minute:$seconde",
                   style: TextStyle(
-                      color: Colors.black, fontSize: width(context) / 11),
+                      color: config.colors.primaryTextBlack, fontSize: width(context) / 11),
                 ),
               ],
             )

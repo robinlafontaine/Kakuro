@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
+import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/horsligne.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
@@ -35,7 +38,7 @@ class nouvellepartieState extends State<nouvellepartie>{
   }
 
   void retour(){
-    Navigator.pop(context);
+    route(context, (widget.online)?enligne():horsligne());
   }
 
   @override
@@ -162,7 +165,7 @@ class nouvellepartieState extends State<nouvellepartie>{
                     child: DropdownButton(
                         dropdownColor: config.colors.primarySelect,
                         value: diff,
-                        icon: Icon(Icons.keyboard_arrow_down),
+                        icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack,),
                         items: difficulte.map((items) {
                           return DropdownMenuItem(
                               value: items,
@@ -203,8 +206,11 @@ class nouvellepartieState extends State<nouvellepartie>{
             ),
           ),
         ),
-        bottomNavigationBar: navbar(1, widget.online),
-    );
+        bottomNavigationBar: navbar(1, widget.online,(){
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => parametre(widget.online,widget))).then((value) { setState(() {});});}
+    ));
   }
 
 }

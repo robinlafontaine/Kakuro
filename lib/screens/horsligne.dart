@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-class horsligne extends StatelessWidget{
+class horsligne extends StatefulWidget{
 
 
+  @override
+  State<horsligne> createState() => _horsligneState();
+}
+
+class _horsligneState extends State<horsligne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +49,10 @@ class horsligne extends StatelessWidget{
           ],
         ),
       ),
-      bottomNavigationBar: navbar(0, false),
-    );
+      bottomNavigationBar: navbar(0, false,(){
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => parametre(false,this))).then((value) { setState(() {});});
+    }));
   }
-
 }

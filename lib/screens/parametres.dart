@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
+import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 
@@ -12,8 +13,9 @@ import '../widgets/appbar.dart';
 
 class parametre extends StatefulWidget{
   final bool online;
+  final widgetBack;
 
-  parametre(this.online);
+  parametre(this.online,this.widgetBack);
 
   @override
   State<parametre> createState() => parametreState();
@@ -69,7 +71,7 @@ class parametreState extends State<parametre> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(3, widget.online),
+      bottomNavigationBar: navbar(3, widget.online,(){setState(() {});}),
     );
   }
 

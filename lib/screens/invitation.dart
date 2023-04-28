@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
@@ -60,20 +61,21 @@ class invitationState extends State<invitation>{
                 SizedBox(
                   height: height(context)/10,
                 ),
-                Text("Adversaire", style: TextStyle(fontSize: width(context)/21,fontWeight: FontWeight.w600),),
+                Text("Adversaire", style: TextStyle(color:config.colors.primaryTextBlack,fontSize: width(context)/21,fontWeight: FontWeight.w600),),
                 SizedBox(height: 10,),
                 Container(
                   width: width(context)/1.1,
                   decoration: BoxDecoration(
-                      color: config.colors.primaryTextColor
+                      color: config.colors.primarySelect
                   ),
                   padding: EdgeInsets.only(left: 15,right: 10),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
+                        dropdownColor: config.colors.primarySelect,
                         value: adversaire,
-                        icon: Icon(Icons.keyboard_arrow_down),
+                        icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack),
                         items: joueurs.map((items) {
-                          return DropdownMenuItem(value: items, child: Container(child: Text(items),));
+                          return DropdownMenuItem(value: items, child: Container(child: Text(items, style: TextStyle(color: config.colors.primaryTextBlack),),));
                         }).toList(),
                         onChanged: (value){
                           setState(() {
@@ -85,22 +87,23 @@ class invitationState extends State<invitation>{
                   ),
                 ),
                 SizedBox(height: 30,),
-                Text("Taille de la grille", style: TextStyle(fontSize: width(context)/21,fontWeight: FontWeight.w600),),
+                Text("Taille de la grille", style: TextStyle(color:config.colors.primaryTextBlack,fontSize: width(context)/21,fontWeight: FontWeight.w600),),
                 SizedBox(height: 10,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: config.colors.primaryTextColor
+                          color: config.colors.primarySelect
                       ),
                       padding: EdgeInsets.only(left: 15, right: 10),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
+                            dropdownColor: config.colors.primarySelect,
                             value: ligne,
-                            icon: Icon(Icons.keyboard_arrow_down),
+                            icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack),
                             items: items.map((items) {
-                              return DropdownMenuItem(value: items, child: Container(child: Text(items), width: width(context)/4,),);
+                              return DropdownMenuItem(value: items, child: Container(child: Text(items,style: TextStyle(color:config.colors.primaryTextBlack,)), width: width(context)/4,),);
                             }).toList(),
                             onChanged: (value){
                               setState(() {
@@ -111,18 +114,19 @@ class invitationState extends State<invitation>{
                         ),
                       ),
                     ),
-                    FaIcon(FontAwesomeIcons.close, size: width(context)/20,),
+                    FaIcon(FontAwesomeIcons.close, size: width(context)/20,color:config.colors.primaryTextBlack,),
                     Container(
                       decoration: BoxDecoration(
-                          color: config.colors.primaryTextColor
+                          color: config.colors.primarySelect
                       ),
                       padding: EdgeInsets.only(left: 15,right: 10),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
+                            dropdownColor: config.colors.primarySelect,
                             value: colonne,
-                            icon: Icon(Icons.keyboard_arrow_down),
+                            icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack),
                             items: items.map((items) {
-                              return DropdownMenuItem(value: items, child: Container(child: Text(items), width: width(context)/4,));
+                              return DropdownMenuItem(value: items, child: Container(child: Text(items,style: TextStyle(color:config.colors.primaryTextBlack,),), width: width(context)/4,));
                             }).toList(),
                             onChanged: (value){
                               setState(() {
@@ -136,20 +140,21 @@ class invitationState extends State<invitation>{
                   ],
                 ),
                 SizedBox(height: 30,),
-                Text("Niveau de difficulté", style: TextStyle(fontSize: width(context)/21,fontWeight: FontWeight.w600),),
+                Text("Niveau de difficulté", style: TextStyle(color:config.colors.primaryTextBlack,fontSize: width(context)/21,fontWeight: FontWeight.w600),),
                 SizedBox(height: 10,),
                 Container(
                   width: width(context)/1.1,
                   decoration: BoxDecoration(
-                      color: config.colors.primaryTextColor
+                      color: config.colors.primarySelect
                   ),
                   padding: EdgeInsets.only(left: 15,right: 10),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
+                        dropdownColor: config.colors.primarySelect,
                         value: diff,
-                        icon: Icon(Icons.keyboard_arrow_down),
+                        icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack),
                         items: difficulte.map((items) {
-                          return DropdownMenuItem(value: items, child: Container(child: Text(items),));
+                          return DropdownMenuItem(value: items, child: Container(child: Text(items,style: TextStyle(color:config.colors.primaryTextBlack,)),));
                         }).toList(),
                         onChanged: (value){
                           setState(() {
@@ -178,8 +183,10 @@ class invitationState extends State<invitation>{
           ),
         ),
       ),
-      bottomNavigationBar: navbar(1, true),
-    );
+      bottomNavigationBar: navbar(1, true,(){Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => parametre(true,widget))).then((value) { setState(() {});});
+      }));
   }
 
 }

@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-class enligne extends StatelessWidget{
+class enligne extends StatefulWidget{
 
+  @override
+  State<enligne> createState() => _enligneState();
+}
 
+class _enligneState extends State<enligne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,18 +55,13 @@ class enligne extends StatelessWidget{
                 value: "MES PARTIES",
                 onPress: (){}
             ),
-            SizedBox(
-              height: 10,
-            ),
-            boutton(
-                value: "STATISTIQUES",
-                onPress: (){}
-            ),
           ],
         ),
       ),
-      bottomNavigationBar: navbar(0, true),
-    );
+      bottomNavigationBar: navbar(0, true,(){
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => parametre(true,this))).then((value) { setState(() {});});}
+      ));
   }
-
 }

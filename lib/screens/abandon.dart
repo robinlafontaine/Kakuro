@@ -3,6 +3,7 @@ import 'package:kakuro/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 
@@ -22,6 +23,12 @@ class _abandonState extends State<abandon> {
 
   void retour() {
     Navigator.pop(context);
+  }
+
+  void maj(){
+    setState(() {
+
+    });
   }
 
   @override
@@ -57,7 +64,9 @@ class _abandonState extends State<abandon> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10, widget.online),
-    );
+      bottomNavigationBar: navbar(10, widget.online,(){Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => parametre(true,widget))).then((value) { setState(() {});});
+      }));
   }
 }

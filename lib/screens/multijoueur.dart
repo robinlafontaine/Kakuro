@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/classement.dart';
+import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 
 import '../config/fonctions.dart';
@@ -18,7 +20,7 @@ class multijoueur extends StatefulWidget{
 class _multijoueurState extends State<multijoueur> {
 
   void retour(){
-    Navigator.pop(context);
+    route(context, enligne());
   }
 
   @override
@@ -72,7 +74,9 @@ class _multijoueurState extends State<multijoueur> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10, true),
-    );
+      bottomNavigationBar: navbar(10, true,(){Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => parametre(true,widget))).then((value) { setState(() {});});
+      }));
   }
 }
