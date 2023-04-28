@@ -7,26 +7,25 @@ class Auth {
   final FirebaseAuth _auth;
   Auth(this._auth);
 
-  Future<String?> signInGoogle(BuildContext context) async {
+  Future<UserCredential?> signInGoogle(BuildContext context) async {
     try {
       if (kIsWeb) {
         GoogleAuthProvider googleProvider = GoogleAuthProvider();
         googleProvider
-            .addScope('https://www.googleapis.com/auth/contacts.readonly');
+            .addScope('https://www.googleapis.com/auth/userinfo.profile');
         await _auth.signInWithPopup(googleProvider);
+
+        return await FirebaseAuth.instance.signInWithPopup(googleProvider);
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        final GoogleSignInAuthentication? googleAuth =
+            await googleUser?.authentication;
 
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser!.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
         );
-
-        UserCredential userCredential =
-            await _auth.signInWithCredential(credential);
+        return await FirebaseAuth.instance.signInWithCredential(credential);
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context)
