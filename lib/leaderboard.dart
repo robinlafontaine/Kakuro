@@ -26,6 +26,20 @@ class Leaderboard {
     }
   }
 
+  static Future getPlayers() async {
+    // Récupère les 'documents'
+    try {
+      final snapshot = await db.collection("leaderboard").get();
+
+      return snapshot.docs;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return [];
+    }
+  }
+
   static Future<void> saveHighScore(int newScore) async {
     // Sauvegarde le score de l'utilisateur dans la BDD
     final currentUser = FirebaseAuth.instance.currentUser;
