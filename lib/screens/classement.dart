@@ -6,7 +6,7 @@ import '../leaderboard.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-const int limite = 7; //une limite variable ?
+const int limite = 6; //une limite variable ?
 
 class classement extends StatefulWidget {
   const classement({super.key});

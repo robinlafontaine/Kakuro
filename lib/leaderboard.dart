@@ -92,8 +92,4 @@ class Leaderboard {
       }
     }
   }
-
-
 }
-
-
