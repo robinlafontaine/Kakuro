@@ -30,5 +30,8 @@ class _Image {
 }
 
 class _Audio{
-  final jojo = "assets/audio/jojo.mp3";
+  final sons = [
+    "jojo.mp3",
+    "quoicoubeh.mp3"
+  ];
 }
