@@ -8,8 +8,6 @@ import '../leaderboard.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-const int limite = 6; //une limite variable ?
-
 class classement extends StatefulWidget {
   const classement({super.key});
 
@@ -19,7 +17,7 @@ class classement extends StatefulWidget {
 }
 
 class classementState extends State<classement> {
-  final Future scoresFuture = Leaderboard.getLeaderboard(limite);
+  final Future scoresFuture = Leaderboard.getLeaderboard();
 
   void retour() {
     route(context, multijoueur());
@@ -53,8 +51,8 @@ class classementState extends State<classement> {
                             height: 30,
                           ),
                           Container(
-                            decoration:
-                            BoxDecoration(color: config.colors.primaryColor),
+                            decoration: BoxDecoration(
+                                color: config.colors.primaryColor),
                             width: width(context) / 1.1,
                             child: Row(
                               children: [
@@ -64,32 +62,31 @@ class classementState extends State<classement> {
                                     margin: const EdgeInsets.only(right: 10),
                                     child: Center(
                                         child: Text(
-                                          "RANG",
-                                          style: TextStyle(
-                                              color: config.colors
-                                                  .primaryTextColor),
-                                        ))),
+                                      "RANG",
+                                      style: TextStyle(
+                                          color:
+                                              config.colors.primaryTextColor),
+                                    ))),
                                 Container(
                                     alignment: Alignment.centerLeft,
                                     width: width(context) / 2.7,
                                     height: 40,
                                     child: Text("JOUEUR",
                                         style: TextStyle(
-                                            color:
-                                            config.colors.primaryTextColor))),
+                                            color: config
+                                                .colors.primaryTextColor))),
                                 Container(
                                     width: width(context) / 3.3,
                                     height: 40,
                                     child: Center(
                                         child: Text("POINTS",
                                             style: TextStyle(
-                                                color: config
-                                                    .colors
+                                                color: config.colors
                                                     .primaryTextColor)))),
                               ],
                             ),
                           ),
-                          for (int i = 0; i < limite; i++)
+                          for (int i = 0; i < snapshot.data.length; i++)
                             Container(
                               width: width(context) / 1.1,
                               decoration: BoxDecoration(
@@ -130,8 +127,8 @@ class classementState extends State<classement> {
         bottomNavigationBar: navbar(10, true, () {
           Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => parametre(true, widget)))
-              .then((value) {
+              MaterialPageRoute(
+                  builder: (context) => parametre(true, widget))).then((value) {
             setState(() {});
           });
         }));

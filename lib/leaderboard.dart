@@ -8,13 +8,12 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 //     .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
 
 class Leaderboard {
-  static Future getLeaderboard(int limite) async {
+  static Future<List> getLeaderboard() async {
     // Récupère les 'documents' pour les n (limite) meilleurs scores
     try {
       final snapshot = await db
           .collection("leaderboard")
           .orderBy("score", descending: true)
-          .limit(limite)
           .get();
 
       return snapshot.docs;
@@ -26,7 +25,7 @@ class Leaderboard {
     }
   }
 
-  static Future getPlayers() async {
+  static Future<List> getPlayers() async {
     // Récupère les 'documents'
     try {
       final snapshot = await db.collection("leaderboard").get();
