@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
@@ -10,7 +9,6 @@ import '../config/fonctions.dart';
 import '../leaderboard.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class invitation extends StatefulWidget {
   @override
@@ -57,7 +55,7 @@ class invitationState extends State<invitation> {
                     const DropdownMenuItem(
                       value: "",
                       enabled: false,
-                      child: Text("Choisissez un Joueur..."),
+                      child: Text("Choisissez un Adversaire..."),
                     )
                   ];
                   for (var document in snapshot.data) {
@@ -140,13 +138,13 @@ class invitationState extends State<invitation> {
                                         return DropdownMenuItem(
                                           value: items,
                                           child: Container(
+                                            width: width(context) / 4,
                                             child: Text(
                                               items,
                                               style: TextStyle(
                                                   color: config
                                                       .colors.primaryTextBlack),
                                             ),
-                                            width: width(context) / 4,
                                           ),
                                         );
                                       }).toList(),
@@ -180,11 +178,11 @@ class invitationState extends State<invitation> {
                                         return DropdownMenuItem(
                                             value: items,
                                             child: Container(
+                                              width: width(context) / 4,
                                               child: Text(items,
                                                   style: TextStyle(
                                                       color: config.colors
                                                           .primaryTextBlack)),
-                                              width: width(context) / 4,
                                             ));
                                       }).toList(),
                                       onChanged: (value) {
