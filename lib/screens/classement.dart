@@ -9,7 +9,9 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class classement extends StatefulWidget {
-  const classement({super.key});
+  var player;
+
+  classement(this.player);
 
   @override
   //Leaderboard.getLeaderboard(limite)
@@ -20,7 +22,7 @@ class classementState extends State<classement> {
   final Future scoresFuture = Leaderboard.getLeaderboard();
 
   void retour() {
-    route(context, multijoueur());
+    route(context, multijoueur(widget.player));
   }
 
   @override
@@ -128,9 +130,9 @@ class classementState extends State<classement> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => parametre(true, widget))).then((value) {
+                  builder: (context) => parametre(true, widget,widget.player))).then((value) {
             setState(() {});
           });
-        }));
+        },widget.player));
   }
 }

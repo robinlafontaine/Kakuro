@@ -17,8 +17,9 @@ import 'package:kakuro/widgets/navbar.dart';
 class game extends StatefulWidget{
   final Kakuro kakuro;
   final bool online;
+  var player;
 
-  game(this.kakuro,this.online);
+  game(this.kakuro,this.online,this.player);
 
   @override State<game> createState() => _gameState(kakuro);
 }
@@ -40,7 +41,7 @@ class _gameState extends State<game> {
   void addPoints(){
     int puntos = (20*(kakuro.n +kakuro.m +kakuro.difficulte) -seconde) as int ;
     Leaderboard.addNewScore(puntos);
-    route(context, (widget.online)?enligne():horsligne());
+    route(context, (widget.online)?enligne(widget.player):horsligne(widget.player));
   }
 
   void testValide(){
@@ -69,7 +70,7 @@ class _gameState extends State<game> {
   }
 
   void retour(){
-    route(context, nouvellepartie(widget.online));
+    route(context, nouvellepartie(widget.online, widget.player));
   }
 
   @override
@@ -108,8 +109,8 @@ class _gameState extends State<game> {
         (){
         Navigator.push(
         context,
-            MaterialPageRoute(builder: (context) => parametre(widget.online,widget))).then((value) { setState(() {});});}
-      ));
+            MaterialPageRoute(builder: (context) => parametre(widget.online,widget,widget.player))).then((value) { setState(() {});});}
+          ,widget.player));
   }
 
 

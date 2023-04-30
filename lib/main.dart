@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,6 +56,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  var player = AudioPlayer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +80,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   if (user == null) {
                     Auth(FirebaseAuth.instance).signInGoogle(context);
                   } else {
-                    route(context, enligne());
+                    route(context, enligne(player));
                   }
                 })
               },
@@ -93,7 +95,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       //log(FirebaseAuth.instance.app.name),
                       //route(context, game(Kakuro(10, 8, 7)))
 
-                      route(context, horsligne())
+                      route(context, horsligne(player))
                       //Leaderboard.saveHighScore(6000)
                     }),
           ],

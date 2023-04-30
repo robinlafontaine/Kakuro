@@ -11,8 +11,9 @@ class navbar extends StatelessWidget {
   final int actif;
   final bool online;
   final Function reaload;
+  final player;
 
-  navbar(this.actif, this.online, this.reaload);
+  navbar(this.actif, this.online, this.reaload,this.player);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,8 @@ class navbar extends StatelessWidget {
           IconButton(
             onPressed: () {
               (online)
-                  ? route(context, enligne())
-                  : route(context, horsligne());
+                  ? route(context, enligne(player))
+                  : route(context, horsligne(player));
             },
             icon: FaIcon(
               FontAwesomeIcons.house,
@@ -40,7 +41,7 @@ class navbar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              route(context, nouvellepartie(online));
+              route(context, nouvellepartie(online,player));
             },
             icon: FaIcon(
               FontAwesomeIcons.plus,

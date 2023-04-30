@@ -13,7 +13,9 @@ import '../widgets/navbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class invitation extends StatefulWidget {
-  invitation();
+  var player;
+
+  invitation(this.player);
 
   @override
   State<invitation> createState() => invitationState();
@@ -218,7 +220,7 @@ class invitationState extends State<invitation> {
                                             int.parse(ligne),
                                             int.parse(colonne),
                                             int.parse(diff)),
-                                        true));
+                                        true,widget.player));
                               })
                         ]),
                   );
@@ -232,10 +234,10 @@ class invitationState extends State<invitation> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => parametre(true, widget))).then((value) {
+                builder: (context) => parametre(true, widget,widget.player))).then((value) {
           setState(() {});
         });
-      }),
+      },widget.player),
     );
   }
 }

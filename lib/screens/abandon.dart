@@ -11,9 +11,10 @@ import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 
 class abandon extends StatefulWidget{
-  final bool online;
+  bool online;
+  var player;
 
-  abandon(this.online);
+  abandon(this.online,this.player);
 
   @override
   State<abandon> createState() => _abandonState();
@@ -55,7 +56,7 @@ class _abandonState extends State<abandon> {
             ),
             SizedBox(height: 30,),
             boutton(value: "OUI", onPress: (){
-              route(context, (widget.online)?enligne():horsligne());
+              route(context, (widget.online)?enligne(widget.player):horsligne(widget.player));
             }),
             SizedBox(height: 10,),
             boutton(value: "NON", onPress: (){
@@ -66,7 +67,7 @@ class _abandonState extends State<abandon> {
       ),
       bottomNavigationBar: navbar(10, widget.online,(){Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => parametre(true,widget))).then((value) { setState(() {});});
-      }));
+          MaterialPageRoute(builder: (context) => parametre(true,widget,widget.player))).then((value) { setState(() {});});
+      },widget.player));
   }
 }

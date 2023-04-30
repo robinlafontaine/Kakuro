@@ -11,16 +11,17 @@ import 'package:kakuro/screens/horsligne.dart';
 import '../auth.dart';
 
 class appbar extends StatefulWidget {
-  final bool home;
-  final bool enjeu;
-  final Function retour;
-  final bool? enligne;
+  bool home;
+  bool enjeu;
+  Function retour;
+  bool? enligne;
+  var player;
 
   appbar(
       {required this.home,
       required this.enjeu,
       required this.retour,
-      this.enligne});
+      this.enligne, this.player});
 
   @override
   State<appbar> createState() => _appbarState(this.retour);
@@ -86,7 +87,7 @@ class _appbarState extends State<appbar> {
                           (widget.enligne == null)
                               ? null
                               : (widget.enligne == true)
-                              ? route(context, horsligne())
+                              ? route(context, horsligne(widget.player))
                               : {
                             FirebaseAuth.instance
                                 .authStateChanges()
@@ -95,7 +96,7 @@ class _appbarState extends State<appbar> {
                                 Auth(FirebaseAuth.instance)
                                     .signInGoogle(context);
                               } else {
-                                route(context, enligne());
+                                route(context, enligne(widget.player));
                               }
                             }).onError((error, stackTrace) {})
                           };
@@ -165,8 +166,8 @@ class _appbarState extends State<appbar> {
                     (widget.enligne == null)
                         ? null
                         : (widget.enligne == true)
-                            ? route(context, abandon(true))
-                            : route(context, abandon(false));
+                            ? route(context, abandon(true,widget.player))
+                            : route(context, abandon(false,widget.player));
                   },
                 )))
             : SizedBox(

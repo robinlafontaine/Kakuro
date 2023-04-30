@@ -12,6 +12,9 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class multijoueur extends StatefulWidget{
+  var player;
+
+  multijoueur(this.player);
 
   @override
   State<multijoueur> createState() => _multijoueurState();
@@ -20,7 +23,7 @@ class multijoueur extends StatefulWidget{
 class _multijoueurState extends State<multijoueur> {
 
   void retour(){
-    route(context, enligne());
+    route(context, enligne(widget.player));
   }
 
   @override
@@ -47,7 +50,7 @@ class _multijoueurState extends State<multijoueur> {
             boutton(
                 value: "ENVOYER INVITATION",
                 onPress: (){
-                  route(context, invitation());
+                  route(context, invitation(widget.player));
                 }
             ),
             SizedBox(
@@ -69,14 +72,14 @@ class _multijoueurState extends State<multijoueur> {
             ),
             boutton(
                 value: "CLASSEMENT",
-                onPress: (){route(context, classement());}
+                onPress: (){route(context, classement(widget.player));}
             ),
           ],
         ),
       ),
       bottomNavigationBar: navbar(10, true,(){Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => parametre(true,widget))).then((value) { setState(() {});});
-      }));
+          MaterialPageRoute(builder: (context) => parametre(true,widget,widget.player))).then((value) { setState(() {});});
+      },widget.player));
   }
 }

@@ -9,7 +9,9 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class horsligne extends StatefulWidget{
+  var player;
 
+  horsligne(this.player);
 
   @override
   State<horsligne> createState() => _horsligneState();
@@ -37,7 +39,7 @@ class _horsligneState extends State<horsligne> {
             ),
             boutton(
                 value: "NOUVELLE PARTIE",
-                onPress: (){route(context, nouvellepartie(false));}
+                onPress: (){route(context, nouvellepartie(false,widget.player));}
             ),
             SizedBox(
               height: 10,
@@ -52,7 +54,7 @@ class _horsligneState extends State<horsligne> {
       bottomNavigationBar: navbar(0, false,(){
         Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => parametre(false,this))).then((value) { setState(() {});});
-    }));
+        MaterialPageRoute(builder: (context) => parametre(false,this,widget.player))).then((value) { setState(() {});});
+    },widget.player));
   }
 }

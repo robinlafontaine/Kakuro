@@ -1,3 +1,4 @@
+import 'package:audioplayers/src/audioplayer.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/multijoueur.dart';
@@ -10,7 +11,9 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class enligne extends StatefulWidget{
+  var player;
 
+  enligne(AudioPlayer player);
   @override
   State<enligne> createState() => _enligneState();
 }
@@ -39,14 +42,14 @@ class _enligneState extends State<enligne> {
             SizedBox(height: 40,),
             boutton(
                 value: "NOUVELLE PARTIE",
-                onPress: (){route(context, nouvellepartie(true));}
+                onPress: (){route(context, nouvellepartie(true,widget.player));}
             ),
             SizedBox(
               height: 10,
             ),
             boutton(
                 value: "MULTIJOUEUR",
-                onPress: (){route(context, multijoueur());}
+                onPress: (){route(context, multijoueur(widget.player));}
             ),
             SizedBox(
               height: 10,
@@ -61,7 +64,7 @@ class _enligneState extends State<enligne> {
       bottomNavigationBar: navbar(0, true,(){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => parametre(true,this))).then((value) { setState(() {});});}
-      ));
+            MaterialPageRoute(builder: (context) => parametre(true,this,widget.player))).then((value) { setState(() {});});}
+          ,widget.player));
   }
 }

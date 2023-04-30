@@ -14,8 +14,9 @@ import '../widgets/navbar.dart';
 
 class nouvellepartie extends StatefulWidget{
   final bool online;
+  var player;
 
-  nouvellepartie(this.online);
+  nouvellepartie(this.online,this.player);
 
   @override
   State<nouvellepartie> createState() => nouvellepartieState();
@@ -38,7 +39,7 @@ class nouvellepartieState extends State<nouvellepartie>{
   }
 
   void retour(){
-    route(context, (widget.online)?enligne():horsligne());
+    route(context, (widget.online)?enligne(widget.player):horsligne(widget.player));
   }
 
   @override
@@ -197,7 +198,8 @@ class nouvellepartieState extends State<nouvellepartie>{
                               int.parse(ligne),
                               int.parse(colonne),
                               int.parse(diff)),
-                            widget.online
+                            widget.online,
+                            widget.player
                           )
                       );
                     }
@@ -209,8 +211,8 @@ class nouvellepartieState extends State<nouvellepartie>{
         bottomNavigationBar: navbar(1, widget.online,(){
           Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => parametre(widget.online,widget))).then((value) { setState(() {});});}
-    ));
+          MaterialPageRoute(builder: (context) => parametre(widget.online,widget,widget.player))).then((value) { setState(() {});});}
+            ,widget.player));
   }
 
 }
