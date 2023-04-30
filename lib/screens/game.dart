@@ -16,10 +16,8 @@ import 'package:kakuro/widgets/navbar.dart';
 
 class game extends StatefulWidget{
   final Kakuro kakuro;
-  final bool online;
-  var player;
 
-  game(this.kakuro,this.online,this.player);
+  game(this.kakuro);
 
   @override State<game> createState() => _gameState(kakuro);
 }
@@ -41,7 +39,7 @@ class _gameState extends State<game> {
   void addPoints(){
     int puntos = (20*(kakuro.n +kakuro.m +kakuro.difficulte) -seconde) as int ;
     Leaderboard.addNewScore(puntos);
-    route(context, (widget.online)?enligne(widget.player):horsligne(widget.player));
+    route(context, (config.online)?enligne():horsligne());
   }
 
   void testValide(){
@@ -70,7 +68,7 @@ class _gameState extends State<game> {
   }
 
   void retour(){
-    route(context, nouvellepartie(widget.online, widget.player));
+    route(context, nouvellepartie());
   }
 
   @override
@@ -81,7 +79,7 @@ class _gameState extends State<game> {
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(home:false,enjeu:true,retour:this.retour, enligne: widget.online),
+          child: appbar(home:false,enjeu:true,retour:this.retour),
         ),
       ),
       body: Center(
@@ -105,12 +103,7 @@ class _gameState extends State<game> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10,widget.online,
-        (){
-        Navigator.push(
-        context,
-            MaterialPageRoute(builder: (context) => parametre(widget.online,widget,widget.player))).then((value) { setState(() {});});}
-          ,widget.player));
+      bottomNavigationBar: navbar(10, (){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}));
   }
 
 

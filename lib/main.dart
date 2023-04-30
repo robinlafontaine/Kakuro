@@ -80,7 +80,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   if (user == null) {
                     Auth(FirebaseAuth.instance).signInGoogle(context);
                   } else {
-                    route(context, enligne(player));
+                    config.online=true;
+                    route(context, enligne());
                   }
                 })
               },
@@ -95,7 +96,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       //log(FirebaseAuth.instance.app.name),
                       //route(context, game(Kakuro(10, 8, 7)))
 
-                      route(context, horsligne(player))
+                      route(context, horsligne())
                       //Leaderboard.saveHighScore(6000)
                     }),
           ],

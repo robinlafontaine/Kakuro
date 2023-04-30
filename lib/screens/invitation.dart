@@ -13,9 +13,6 @@ import '../widgets/navbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class invitation extends StatefulWidget {
-  var player;
-
-  invitation(this.player);
 
   @override
   State<invitation> createState() => invitationState();
@@ -78,7 +75,9 @@ class invitationState extends State<invitation> {
                             "Adversaire",
                             style: TextStyle(
                                 fontSize: width(context) / 21,
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600,
+                                color: config.colors.primaryTextBlack
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -86,12 +85,14 @@ class invitationState extends State<invitation> {
                           Container(
                             width: width(context) / 1.1,
                             decoration: BoxDecoration(
-                                color: config.colors.primaryTextColor),
+                                color: config.colors.primarySelect
+                            ),
                             padding: const EdgeInsets.only(left: 15, right: 10),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
+                                  dropdownColor: config.colors.primarySelectItem,
                                   value: adversaire,
-                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  icon: Icon(Icons.keyboard_arrow_down, color: config.colors.primaryTextBlack,),
                                   items: joueurs,
                                   onChanged: (String? value) {
                                     setState(() {
@@ -107,7 +108,8 @@ class invitationState extends State<invitation> {
                             "Taille de la grille",
                             style: TextStyle(
                                 fontSize: width(context) / 21,
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600,
+                                color: config.colors.primaryTextBlack),
                           ),
                           const SizedBox(
                             height: 10,
@@ -117,19 +119,20 @@ class invitationState extends State<invitation> {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    color: config.colors.primaryTextColor),
+                                    color: config.colors.primarySelect),
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                      dropdownColor: config.colors.primarySelectItem,
                                       value: ligne,
                                       icon:
-                                          const Icon(Icons.keyboard_arrow_down),
+                                          Icon(Icons.keyboard_arrow_down, color: config.colors.primaryTextBlack,),
                                       items: items.map((items) {
                                         return DropdownMenuItem(
                                           value: items,
                                           child: Container(
-                                            child: Text(items),
+                                            child: Text(items,style: TextStyle(color: config.colors.primaryTextBlack),),
                                             width: width(context) / 4,
                                           ),
                                         );
@@ -144,22 +147,24 @@ class invitationState extends State<invitation> {
                               FaIcon(
                                 FontAwesomeIcons.xmark,
                                 size: width(context) / 20,
+                                color: config.colors.primaryTextBlack,
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    color: config.colors.primaryTextColor),
+                                    color: config.colors.primarySelect),
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                      dropdownColor: config.colors.primarySelectItem,
                                       value: colonne,
                                       icon:
-                                          const Icon(Icons.keyboard_arrow_down),
+                                          Icon(Icons.keyboard_arrow_down, color: config.colors.primaryTextBlack,),
                                       items: items.map((items) {
                                         return DropdownMenuItem(
                                             value: items,
                                             child: Container(
-                                              child: Text(items),
+                                              child: Text(items,style: TextStyle(color: config.colors.primaryTextBlack)),
                                               width: width(context) / 4,
                                             ));
                                       }).toList(),
@@ -179,7 +184,9 @@ class invitationState extends State<invitation> {
                             "Niveau de difficulté",
                             style: TextStyle(
                                 fontSize: width(context) / 21,
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600,
+                                color: config.colors.primaryTextBlack
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -187,17 +194,18 @@ class invitationState extends State<invitation> {
                           Container(
                             width: width(context) / 1.1,
                             decoration: BoxDecoration(
-                                color: config.colors.primaryTextColor),
+                                color: config.colors.primarySelect),
                             padding: const EdgeInsets.only(left: 15, right: 10),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton(
+                                  dropdownColor: config.colors.primarySelectItem,
                                   value: diff,
-                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  icon: Icon(Icons.keyboard_arrow_down, color: config.colors.primaryTextBlack,),
                                   items: difficulte.map((items) {
                                     return DropdownMenuItem(
                                         value: items,
                                         child: Container(
-                                          child: Text(items),
+                                          child: Text(items,style: TextStyle(color: config.colors.primaryTextBlack)),
                                         ));
                                   }).toList(),
                                   onChanged: (value) {
@@ -219,8 +227,9 @@ class invitationState extends State<invitation> {
                                         Kakuro(
                                             int.parse(ligne),
                                             int.parse(colonne),
-                                            int.parse(diff)),
-                                        true,widget.player));
+                                            int.parse(diff)
+                                        ),
+                                    ));
                               })
                         ]),
                   );
@@ -230,14 +239,14 @@ class invitationState extends State<invitation> {
                   return const CircularProgressIndicator();
                 }
               })),
-      bottomNavigationBar: navbar(1, true, () {
+      bottomNavigationBar: navbar(1, () {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => parametre(true, widget,widget.player))).then((value) {
+                builder: (context) => parametre())).then((value) {
           setState(() {});
         });
-      },widget.player),
+      }),
     );
   }
 }

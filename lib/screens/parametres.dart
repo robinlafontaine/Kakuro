@@ -14,11 +14,6 @@ import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 
 class parametre extends StatefulWidget{
-  final bool online;
-  var player;
-  final widgetBack;
-
-  parametre(this.online,this.widgetBack,this.player);
 
   @override
   State<parametre> createState() => parametreState();
@@ -26,47 +21,41 @@ class parametre extends StatefulWidget{
 
 class parametreState extends State<parametre> {
 
-  var themes = ["Light", "Dark"];
-  String theme="";
   String son="";
-  var player = AudioPlayer();
   String etatPlayer="";
   Color pickerColor = Color(0xFFFFFFF);
   bool picker=false;
 
   void initState(){
-    player = widget.player;
-    son=config.audios.sons[0];
-    theme=themes[1];
-    if(config.colors.primaryBackground==config.colors.defaultBackground){
-      theme=themes[0];
+    son=config.sons.sons[0];
+    if(config.sons.player.state==PlayerState.playing){
+      etatPlayer="play";
     }
   }
 
   void stopMusic(){
-    player.stop();
+    config.sons.player.stop();
     setState(() {
       etatPlayer="pause";
     });
+    print(etatPlayer);
   }
 
   void PlayBreak() {
-      print(son);
-      if(player.state == PlayerState.playing){
-        player.pause();
+      if(config.sons.player.state == PlayerState.playing){
+        config.sons.player.pause();
         setState(() {
           etatPlayer="pause";
         });
       }else{
-        if(player.state==PlayerState.paused){
-          player.resume();
+        if(config.sons.player.state==PlayerState.paused){
+          config.sons.player.resume();
         }
-        player.play(AssetSource(son));
+        config.sons.player.play(AssetSource(son));
         setState(() {
           etatPlayer="play";
         });
       }
-      print(etatPlayer);
   }
 
   void retour() {
@@ -88,15 +77,17 @@ class parametreState extends State<parametre> {
       config.colors.primaryBackground=config.colors.DarkBackground;
       config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
       config.colors.primarySelect=config.colors.primaryColor;
+      config.colors.primarySelectItem=config.colors.primaryColor;
     });
   }
 
   void toPerso(){
     setState(() {
-      config.colors.primaryBackground=pickerColor;
+      config.colors.primaryBackground=pickerColor.withOpacity(1);
       config.colors.primaryColor = Colors.black.withOpacity(0.3);
       config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
       config.colors.primarySelect=Colors.black.withOpacity(0.3);
+      config.colors.primarySelectItem=config.colors.defaultPrimary;
       picker=false;
     });
   }
@@ -164,12 +155,12 @@ class parametreState extends State<parametre> {
                             Icons.keyboard_arrow_down,
                             color: config.colors.primaryTextBlack,
                           ),
-                          items: config.audios.sons.map((items) {
+                          items: config.sons.sons.map((items) {
                             return DropdownMenuItem(
                               value: items,
                               child: Container(
                                 child: Text(
-                                  items,
+                                  items.replaceRange(items.length-4, items.length, ""),
                                   style: TextStyle(
                                       color: config.colors.primaryTextBlack
                                   ),
@@ -181,8 +172,8 @@ class parametreState extends State<parametre> {
                             setState(() {
                               value == null?"":
                               son = value;
-                              player.stop();
-                              etatPlayer = "";
+                              etatPlayer="pause";
+                              config.sons.player.stop();
                             });
                           }
                       ),
@@ -303,7 +294,7 @@ class parametreState extends State<parametre> {
           ),
         ),
       ),
-      bottomNavigationBar: navbar(3, widget.online,(){setState(() {});},widget.player),
+      bottomNavigationBar: navbar(3,(){setState(() {});}),
     );
   }
 

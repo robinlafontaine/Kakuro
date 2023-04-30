@@ -12,9 +12,6 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class multijoueur extends StatefulWidget{
-  var player;
-
-  multijoueur(this.player);
 
   @override
   State<multijoueur> createState() => _multijoueurState();
@@ -23,7 +20,7 @@ class multijoueur extends StatefulWidget{
 class _multijoueurState extends State<multijoueur> {
 
   void retour(){
-    route(context, enligne(widget.player));
+    route(context, enligne());
   }
 
   @override
@@ -34,7 +31,7 @@ class _multijoueurState extends State<multijoueur> {
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(home:false,enjeu:false,retour: ()=>{retour()}, enligne: true,),
+          child: appbar(home:false,enjeu:false,retour: ()=>{retour()}),
         ),
       ),
       body: Center(
@@ -50,7 +47,7 @@ class _multijoueurState extends State<multijoueur> {
             boutton(
                 value: "ENVOYER INVITATION",
                 onPress: (){
-                  route(context, invitation(widget.player));
+                  route(context, invitation());
                 }
             ),
             SizedBox(
@@ -72,14 +69,14 @@ class _multijoueurState extends State<multijoueur> {
             ),
             boutton(
                 value: "CLASSEMENT",
-                onPress: (){route(context, classement(widget.player));}
+                onPress: (){route(context, classement());}
             ),
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10, true,(){Navigator.push(
+      bottomNavigationBar: navbar(10,(){Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => parametre(true,widget,widget.player))).then((value) { setState(() {});});
-      },widget.player));
+          MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});
+      }));
   }
 }

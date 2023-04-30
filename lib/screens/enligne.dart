@@ -11,9 +11,7 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class enligne extends StatefulWidget{
-  var player;
 
-  enligne(AudioPlayer player);
   @override
   State<enligne> createState() => _enligneState();
 }
@@ -27,7 +25,7 @@ class _enligneState extends State<enligne> {
         preferredSize: Size(double.infinity, width(context)/6),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: appbar(home:true,enjeu:false,retour: ()=>{}, enligne: true,),
+          child: appbar(home:true,enjeu:false,retour: ()=>{}),
         ),
       ),
       body: Center(
@@ -42,14 +40,14 @@ class _enligneState extends State<enligne> {
             SizedBox(height: 40,),
             boutton(
                 value: "NOUVELLE PARTIE",
-                onPress: (){route(context, nouvellepartie(true,widget.player));}
+                onPress: (){route(context, nouvellepartie());}
             ),
             SizedBox(
               height: 10,
             ),
             boutton(
                 value: "MULTIJOUEUR",
-                onPress: (){route(context, multijoueur(widget.player));}
+                onPress: (){route(context, multijoueur());}
             ),
             SizedBox(
               height: 10,
@@ -61,10 +59,10 @@ class _enligneState extends State<enligne> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(0, true,(){
+      bottomNavigationBar: navbar(0,(){
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => parametre(true,this,widget.player))).then((value) { setState(() {});});}
-          ,widget.player));
+            MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}
+          ));
   }
 }

@@ -9,11 +9,9 @@ import 'package:kakuro/screens/parametres.dart';
 
 class navbar extends StatelessWidget {
   final int actif;
-  final bool online;
   final Function reaload;
-  final player;
 
-  navbar(this.actif, this.online, this.reaload,this.player);
+  navbar(this.actif, this.reaload);
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +25,26 @@ class navbar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              (online)
-                  ? route(context, enligne(player))
-                  : route(context, horsligne(player));
+              (config.online)
+                  ? route(context, enligne())
+                  : route(context, horsligne());
             },
             icon: FaIcon(
               FontAwesomeIcons.house,
               color: (actif != 0)
-                  ? config.colors.primaryBackground
+                  ? config.colors.primaryNavIcon
                   : config.colors.primaryTextColor,
               size: height(context) / 35,
             ),
           ),
           IconButton(
             onPressed: () {
-              route(context, nouvellepartie(online,player));
+              route(context, nouvellepartie());
             },
             icon: FaIcon(
               FontAwesomeIcons.plus,
               color: (actif != 1)
-                  ? config.colors.primaryBackground
+                  ? config.colors.primaryNavIcon
                   : config.colors.primaryTextColor,
               size: height(context) / 35,
             ),
@@ -56,20 +54,19 @@ class navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.gamepad,
               color: (actif != 2)
-                  ? config.colors.primaryBackground
+                  ? config.colors.primaryNavIcon
                   : config.colors.primaryTextColor,
               size: height(context) / 35,
             ),
           ),
           IconButton(
             onPressed: () {
-              //route(context, parametre(online,widgetBack));
               reaload();
             },
             icon: FaIcon(
               FontAwesomeIcons.gears,
               color: (actif != 3)
-                  ? config.colors.primaryBackground
+                  ? config.colors.primaryNavIcon
                   : config.colors.primaryTextColor,
               size: height(context) / 35,
             ),

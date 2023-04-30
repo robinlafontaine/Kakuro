@@ -6,15 +6,10 @@ import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
-
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 
 class abandon extends StatefulWidget{
-  bool online;
-  var player;
-
-  abandon(this.online,this.player);
 
   @override
   State<abandon> createState() => _abandonState();
@@ -56,7 +51,7 @@ class _abandonState extends State<abandon> {
             ),
             SizedBox(height: 30,),
             boutton(value: "OUI", onPress: (){
-              route(context, (widget.online)?enligne(widget.player):horsligne(widget.player));
+              route(context, (config.online)?enligne():horsligne());
             }),
             SizedBox(height: 10,),
             boutton(value: "NON", onPress: (){
@@ -65,9 +60,9 @@ class _abandonState extends State<abandon> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10, widget.online,(){Navigator.push(
+      bottomNavigationBar: navbar(10,(){Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => parametre(true,widget,widget.player))).then((value) { setState(() {});});
-      },widget.player));
+          MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});
+      }));
   }
 }

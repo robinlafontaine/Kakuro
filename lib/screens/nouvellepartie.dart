@@ -13,10 +13,6 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class nouvellepartie extends StatefulWidget{
-  final bool online;
-  var player;
-
-  nouvellepartie(this.online,this.player);
 
   @override
   State<nouvellepartie> createState() => nouvellepartieState();
@@ -39,7 +35,7 @@ class nouvellepartieState extends State<nouvellepartie>{
   }
 
   void retour(){
-    route(context, (widget.online)?enligne(widget.player):horsligne(widget.player));
+    route(context, (config.online)?enligne():horsligne());
   }
 
   @override
@@ -80,7 +76,7 @@ class nouvellepartieState extends State<nouvellepartie>{
                       padding: EdgeInsets.only(left: 15, right: 10),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                            dropdownColor: config.colors.primarySelect,
+                            dropdownColor: config.colors.primarySelectItem,
                           value: ligne,
                           icon: Icon(
                             Icons.keyboard_arrow_down,
@@ -119,7 +115,7 @@ class nouvellepartieState extends State<nouvellepartie>{
                       padding: EdgeInsets.only(left: 15,right: 10),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                            dropdownColor: config.colors.primarySelect,
+                            dropdownColor: config.colors.primarySelectItem,
                             value: colonne,
                             icon: Icon(
                                 Icons.keyboard_arrow_down,
@@ -164,7 +160,7 @@ class nouvellepartieState extends State<nouvellepartie>{
                   padding: EdgeInsets.only(left: 15,right: 10),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
-                        dropdownColor: config.colors.primarySelect,
+                        dropdownColor: config.colors.primarySelectItem,
                         value: diff,
                         icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack,),
                         items: difficulte.map((items) {
@@ -197,9 +193,8 @@ class nouvellepartieState extends State<nouvellepartie>{
                           game(Kakuro(
                               int.parse(ligne),
                               int.parse(colonne),
-                              int.parse(diff)),
-                            widget.online,
-                            widget.player
+                              int.parse(diff)
+                          ),
                           )
                       );
                     }
@@ -208,11 +203,11 @@ class nouvellepartieState extends State<nouvellepartie>{
             ),
           ),
         ),
-        bottomNavigationBar: navbar(1, widget.online,(){
+        bottomNavigationBar: navbar(1,(){
           Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => parametre(widget.online,widget,widget.player))).then((value) { setState(() {});});}
-            ,widget.player));
+          MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}
+          ));
   }
 
 }

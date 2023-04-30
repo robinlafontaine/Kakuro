@@ -14,14 +14,12 @@ class appbar extends StatefulWidget {
   bool home;
   bool enjeu;
   Function retour;
-  bool? enligne;
-  var player;
 
   appbar(
       {required this.home,
       required this.enjeu,
       required this.retour,
-      this.enligne, this.player});
+      });
 
   @override
   State<appbar> createState() => _appbarState(this.retour);
@@ -79,24 +77,26 @@ class _appbarState extends State<appbar> {
                   ),
                   child: Center(
                     child: IconButton(
-                        icon: FaIcon((widget.enligne==true)?FontAwesomeIcons.signOut:FontAwesomeIcons.signIn),
+                        icon: FaIcon((config.online)?FontAwesomeIcons.signOut:FontAwesomeIcons.signIn),
                         iconSize: width(context) / 20,
                         color: config.colors.primaryTextColor,
                         hoverColor: Colors.transparent,
                         onPressed: () {
-                          (widget.enligne == null)
-                              ? null
-                              : (widget.enligne == true)
-                              ? route(context, horsligne(widget.player))
+                            (config.online)
+                              ? {
+                              config.online = false,
+                              route(context, horsligne())
+                              }
                               : {
-                            FirebaseAuth.instance
+                              FirebaseAuth.instance
                                 .authStateChanges()
                                 .listen((User? user) {
                               if (user == null) {
                                 Auth(FirebaseAuth.instance)
                                     .signInGoogle(context);
                               } else {
-                                route(context, enligne(widget.player));
+                                config.online=true;
+                                route(context, enligne());
                               }
                             }).onError((error, stackTrace) {})
                           };
@@ -163,11 +163,7 @@ class _appbarState extends State<appbar> {
                     size: width(context) / 20,
                   ),
                   onTap: () {
-                    (widget.enligne == null)
-                        ? null
-                        : (widget.enligne == true)
-                            ? route(context, abandon(true,widget.player))
-                            : route(context, abandon(false,widget.player));
+                    route(context, abandon());
                   },
                 )))
             : SizedBox(
