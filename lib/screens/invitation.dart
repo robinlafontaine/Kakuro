@@ -52,17 +52,17 @@ class invitationState extends State<invitation> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   List<DropdownMenuItem<String>> joueurs = [
-                    const DropdownMenuItem(
+                    DropdownMenuItem(
                       value: "",
                       enabled: false,
-                      child: Text("Choisissez un Adversaire..."),
+                      child: Text("Choisissez un Adversaire...", style: TextStyle(color: config.colors.primaryTextBlack),),
                     )
                   ];
                   for (var document in snapshot.data) {
                     String name = document['name'];
                     String documentId = document.id;
                     joueurs.add(
-                        DropdownMenuItem(value: documentId, child: Text(name)));
+                        DropdownMenuItem(value: documentId, child: Text(name, style: TextStyle(color: config.colors.primaryTextBlack),)));
                   }
                   return Padding(
                     padding: const EdgeInsets.all(15),
@@ -89,8 +89,7 @@ class invitationState extends State<invitation> {
                             padding: const EdgeInsets.only(left: 15, right: 10),
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
-                                  dropdownColor:
-                                      config.colors.primarySelectItem,
+                                  dropdownColor: config.colors.primarySelectItem,
                                   value: adversaire,
                                   icon: Icon(
                                     Icons.keyboard_arrow_down,

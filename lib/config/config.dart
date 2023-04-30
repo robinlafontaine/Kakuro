@@ -37,8 +37,9 @@ class _Image {
 class _Audio{
   final player = AudioPlayer();
   final sons = [
-    "jojo.mp3",
-    "quoicoubeh.mp3"
+    "Jojo.mp3",
+    "Quoicoubeh.mp3",
+    "MarioSlider.mp3"
   ];
 }
 

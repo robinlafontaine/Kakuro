@@ -149,7 +149,7 @@ class parametreState extends State<parametre> {
                     padding: EdgeInsets.only(left: 15, right: 10),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
-                          dropdownColor: config.colors.primarySelect,
+                          dropdownColor: config.colors.primarySelectItem,
                           value: son,
                           icon: Icon(
                             Icons.keyboard_arrow_down,
