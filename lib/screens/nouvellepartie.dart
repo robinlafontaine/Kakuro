@@ -189,8 +189,9 @@ class nouvellepartieState extends State<nouvellepartie>{
                 boutton(
                     value: "LANCER LA PARTIE",
                     onPress: (){
+                      config.newgame=true;
                       route(context,
-                          game(Kakuro(
+                          game(kakuro :Kakuro(
                               int.parse(ligne),
                               int.parse(colonne),
                               int.parse(diff)

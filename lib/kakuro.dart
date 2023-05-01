@@ -32,7 +32,6 @@ class Kakuro {
     if(cases!=null) {
       grille = List.generate(n, (i) => List.generate(m, (j) => 0));
       entete = List.generate(n, (i) => List.generate(m, (j) => []));
-      print(cases[1].getElement("type"));
       for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
           if (cases[nb].getElement("type")?.text == "vide") {
@@ -60,7 +59,7 @@ class Kakuro {
   String toXML(){
     String cases="";
     for(var i=0;i<n;i++)
-      for(var j=0;j<n;j++)
+      for(var j=0;j<m;j++)
         if(grille[i][j]==-1)
           cases = cases + "<case>"
               "<type>vide</type>"

@@ -245,7 +245,7 @@ class invitationState extends State<invitation> {
                               onPress: () {
                                 route(
                                     context,
-                                    game(
+                                    game(kakuro:
                                       Kakuro(int.parse(ligne),
                                           int.parse(colonne), int.parse(diff)),
                                     ));

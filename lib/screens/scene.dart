@@ -10,8 +10,10 @@ import 'package:kakuro/widgets/indice.dart';
 class scene extends StatefulWidget{
   final Kakuro kakuro;
   final Function maj;
-  
-  scene(this.kakuro,this.maj);
+  final List? base;
+
+  const scene({super.key, required this.kakuro, required this.maj, this.base});
+
 
   @override State<scene> createState() => _sceneState(kakuro,maj);
 }
@@ -21,6 +23,8 @@ class _sceneState extends State<scene>{
   Function maj;
   _sceneState(this.kakuro,this.maj);
 
+  void initState(){
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class _sceneState extends State<scene>{
                         if(kakuro.grille.elementAt(i).elementAt(j)==-1)
                           CaseVide(((width(context)/1.1)/kakuro.m)-2, false)
                         else
-                          Case(0,i, j, ((width(context)/1.1)/kakuro.m)-2, false, maj),
+                          Case((widget.base==null)?0:widget.base![i][j],i, j, ((width(context)/1.1)/kakuro.m)-2, false, maj),
                     if(kakuro.entete.elementAt(i).elementAt(kakuro.m-1).isNotEmpty)
                       Indice(
                           kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(0),
@@ -64,7 +68,7 @@ class _sceneState extends State<scene>{
                       if(kakuro.grille.elementAt(i).elementAt(kakuro.m-1)==-1)
                         CaseVide(((width(context)/1.1)/kakuro.m)-2, true)
                       else
-                        Case(0,i, kakuro.m-1, ((width(context)/1.1)/kakuro.m)-2, true, maj),
+                        Case((widget.base==null)?0:widget.base![i][kakuro.m-1],i, kakuro.m-1, ((width(context)/1.1)/kakuro.m)-2, true, maj),
                   ],
                  ),
              );

@@ -14,11 +14,13 @@ class appbar extends StatefulWidget {
   bool home;
   bool enjeu;
   Function retour;
+  int? chrono;
 
   appbar(
       {required this.home,
       required this.enjeu,
       required this.retour,
+        this.chrono
       });
 
   @override
@@ -45,7 +47,14 @@ class _appbarState extends State<appbar> {
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (_) => addTime());
+    if(widget.enjeu) {
+      if(widget.chrono!=null){
+        duration = Duration(seconds: widget.chrono!);
+        minute = getAffichage(duration.inMinutes.remainder(60));
+        seconde = getAffichage(duration.inSeconds.remainder(60));
+      }
+      timer = Timer.periodic(Duration(seconds: 1), (_) => addTime());
+    }
   }
 
   void addTime() {

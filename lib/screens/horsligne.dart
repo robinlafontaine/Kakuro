@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
+import 'package:kakuro/screens/mesparties.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
@@ -43,7 +44,7 @@ class _horsligneState extends State<horsligne> {
             ),
             boutton(
                 value: "MES PARTIES",
-                onPress: (){}
+                onPress: (){route(context, mesparties());}
             ),
           ],
         ),

@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kakuro">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="kakuro"
+        android:label="Kakuro"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

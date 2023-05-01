@@ -6,6 +6,7 @@ class config{
   static final images = _Image();
   static final sons = _Audio();
   static var online = false;
+  static var newgame = false;
 }
 
 class _Color{
