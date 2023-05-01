@@ -9,9 +9,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Sauvegarde partie">
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Sauvegarde partie + verif + popub abandon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/abandon.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/abandon.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/config/config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/abandon.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/classement.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/classement.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/enligne.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/enligne.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
@@ -21,8 +22,10 @@
       <change beforePath="$PROJECT_DIR$/lib/screens/multijoueur.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/multijoueur.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/parametres.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/parametres.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/splashscreen.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/navbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/boutton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/boutton.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/splashwidget.dart" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +266,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682941963406</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Sauvegarde partie + verif + popub abandon">
+      <created>1682955724945</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1682955724945</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -302,6 +312,7 @@
     <MESSAGE value="Parametres+ColorPicker+Son" />
     <MESSAGE value="Clean up" />
     <MESSAGE value="Sauvegarde partie" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde partie" />
+    <MESSAGE value="Sauvegarde partie + verif + popub abandon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde partie + verif + popub abandon" />
   </component>
 </project>

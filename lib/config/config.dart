@@ -17,6 +17,8 @@ class _Color{
   var primarySelect = Color(0xFFFFFFFF);
   var primaryNavIcon = Color(0xFFE0E0E0);
   var primarySelectItem = Color(0xFFFFFFFF);
+  var primaryTitreSelect = Color(0xFF464646);
+  var primaryTextBackground = Color(0xFF464646);
 
   final caseColor = Color(0xFFFFFFFF);
   final DarkBackground = Color(0xFF303030);

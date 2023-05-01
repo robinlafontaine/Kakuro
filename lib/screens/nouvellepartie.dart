@@ -20,10 +20,8 @@ class nouvellepartie extends StatefulWidget{
 }
 
 class nouvellepartieState extends State<nouvellepartie>{
-  String ligne="2",colonne="2",diff="1";
-  var items = [
-    "2","3","4","5","6","7","8","9","10","11",
-    "12"
+  String ligne="4",colonne="4",diff="1";
+  var items = ["4","5","6","7","8","9","10","11",
   ];
   var difficulte = ["1","2","3","4","5","6","7","8","9","10"];
 
@@ -40,175 +38,181 @@ class nouvellepartieState extends State<nouvellepartie>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: config.colors.primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, width(context)/6),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: appbar(home:false,enjeu:false,retour: retour),
+    return WillPopScope(
+      onWillPop: ()async{
+        retour();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: config.colors.primaryBackground,
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, width(context)/6),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: appbar(home:false,enjeu:false,retour: retour),
+            ),
           ),
-        ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: height(context)/10,
-                ),
-                Text("Taille de la grille",
-                  style: TextStyle(
-                      fontSize: width(context)/21,
-                      fontWeight: FontWeight.w600,
-                      color: config.colors.primaryTextBlack
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: height(context)/10,
                   ),
-                ),
-                SizedBox(height: 10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: config.colors.primarySelect
-                      ),
-                      padding: EdgeInsets.only(left: 15, right: 10),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            dropdownColor: config.colors.primarySelectItem,
-                          value: ligne,
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: config.colors.primaryTextBlack,
-                          ),
-                          items: items.map((items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Container(
-                                child: Text(
-                                    items,
-                                    style: TextStyle(
-                                      color: config.colors.primaryTextBlack
-                                    ),
-                                ),
-                                width: width(context)/4,),
-                            );
-                          }).toList(),
-                          onChanged: (value){
-                            setState(() {
-                              value == null?"":
-                              ligne = value;
-                            });
-                          }
-                        ),
-                      ),
+                  Text("Taille de la grille",
+                    style: TextStyle(
+                        fontSize: width(context)/21,
+                        fontWeight: FontWeight.w600,
+                        color: config.colors.primaryTitreSelect
                     ),
-                    FaIcon(FontAwesomeIcons.close,
-                        size: width(context)/20,
-                        color: config.colors.primaryTextBlack
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
                           color: config.colors.primarySelect
-                      ),
-                      padding: EdgeInsets.only(left: 15,right: 10),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            dropdownColor: config.colors.primarySelectItem,
-                            value: colonne,
+                        ),
+                        padding: EdgeInsets.only(left: 15, right: 10),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              dropdownColor: config.colors.primarySelectItem,
+                            value: ligne,
                             icon: Icon(
-                                Icons.keyboard_arrow_down,
-                                color:config.colors.primaryTextBlack
+                              Icons.keyboard_arrow_down,
+                              color: config.colors.primaryTextBlack,
                             ),
                             items: items.map((items) {
                               return DropdownMenuItem(
-                                  value: items,
-                                  child: Container(
-                                    child: Text(
-                                      items,style: TextStyle(
+                                value: items,
+                                child: Container(
+                                  child: Text(
+                                      items,
+                                      style: TextStyle(
                                         color: config.colors.primaryTextBlack
                                       ),
-                                    ), width: width(context)/4,)
+                                  ),
+                                  width: width(context)/4,),
                               );
                             }).toList(),
                             onChanged: (value){
                               setState(() {
                                 value == null?"":
-                                colonne = value;
+                                ligne = value;
                               });
                             }
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 30,),
-                Text("Niveau de difficulté",
-                  style: TextStyle(
-                      fontSize: width(context)/21,
-                      fontWeight: FontWeight.w600,
-                      color: config.colors.primaryTextBlack
-                  ),
-                ),
-                SizedBox(height: 10,),
-                Container(
-                  width: width(context)/1.1,
-                  decoration: BoxDecoration(
-                      color: config.colors.primarySelect
-                  ),
-                  padding: EdgeInsets.only(left: 15,right: 10),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton(
-                        dropdownColor: config.colors.primarySelectItem,
-                        value: diff,
-                        icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack,),
-                        items: difficulte.map((items) {
-                          return DropdownMenuItem(
-                              value: items,
-                              child: Container(
-                                child: Text(
-                                  items,
-                                  style: TextStyle(
-                                    color: config.colors.primaryTextBlack
-                                  ),
-                                ),
-                              )
-                          );
-                        }).toList(),
-                        onChanged: (value){
-                          setState(() {
-                            value == null?"":
-                            diff = value;
-                          });
-                        }
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30,),
-                boutton(
-                    value: "LANCER LA PARTIE",
-                    onPress: (){
-                      config.newgame=true;
-                      route(context,
-                          game(kakuro :Kakuro(
-                              int.parse(ligne),
-                              int.parse(colonne),
-                              int.parse(diff)
+                      FaIcon(FontAwesomeIcons.close,
+                          size: width(context)/20,
+                          color: config.colors.primaryTitreSelect
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: config.colors.primarySelect
+                        ),
+                        padding: EdgeInsets.only(left: 15,right: 10),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                              dropdownColor: config.colors.primarySelectItem,
+                              value: colonne,
+                              icon: Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color:config.colors.primaryTextBlack
+                              ),
+                              items: items.map((items) {
+                                return DropdownMenuItem(
+                                    value: items,
+                                    child: Container(
+                                      child: Text(
+                                        items,style: TextStyle(
+                                          color: config.colors.primaryTextBlack
+                                        ),
+                                      ), width: width(context)/4,)
+                                );
+                              }).toList(),
+                              onChanged: (value){
+                                setState(() {
+                                  value == null?"":
+                                  colonne = value;
+                                });
+                              }
                           ),
-                          )
-                      );
-                    }
-                )
-              ]
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30,),
+                  Text("Niveau de difficulté",
+                    style: TextStyle(
+                        fontSize: width(context)/21,
+                        fontWeight: FontWeight.w600,
+                        color: config.colors.primaryTitreSelect
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Container(
+                    width: width(context)/1.1,
+                    decoration: BoxDecoration(
+                        color: config.colors.primarySelect
+                    ),
+                    padding: EdgeInsets.only(left: 15,right: 10),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                          dropdownColor: config.colors.primarySelectItem,
+                          value: diff,
+                          icon: Icon(Icons.keyboard_arrow_down,color: config.colors.primaryTextBlack,),
+                          items: difficulte.map((items) {
+                            return DropdownMenuItem(
+                                value: items,
+                                child: Container(
+                                  child: Text(
+                                    items,
+                                    style: TextStyle(
+                                      color: config.colors.primaryTextBlack
+                                    ),
+                                  ),
+                                )
+                            );
+                          }).toList(),
+                          onChanged: (value){
+                            setState(() {
+                              value == null?"":
+                              diff = value;
+                            });
+                          }
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+                  boutton(
+                      value: "LANCER LA PARTIE",
+                      onPress: (){
+                        config.newgame=true;
+                        route(context,
+                            game(kakuro :Kakuro(
+                                int.parse(ligne),
+                                int.parse(colonne),
+                                int.parse(diff)
+                            ),
+                            )
+                        );
+                      }
+                  )
+                ]
+              ),
             ),
           ),
-        ),
-        bottomNavigationBar: navbar(actif:1,reaload: (){
-          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}
-          ));
+          bottomNavigationBar: navbar(actif:1,reaload: (){
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}
+            )),
+    );
   }
 
 }

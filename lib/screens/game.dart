@@ -154,40 +154,46 @@ class _gameState extends State<game> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: config.colors.primaryBackground,
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, width(context)/6),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: appbar(home:false,enjeu:true,retour:this.retour,chrono : widget.chrono, abandon: openDialogAbandon,),
+    return WillPopScope(
+      onWillPop: ()async{
+        retour();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: config.colors.primaryBackground,
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, width(context)/6),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: appbar(home:false,enjeu:true,retour:this.retour,chrono : widget.chrono, abandon: openDialogAbandon,),
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: height(context)/10,
-            ),
-            Center(
-              child:
-              (widget.base==null)?
-                scene(kakuro:kakuro,maj:maj):
-                scene(kakuro:kakuro,maj:maj,base: widget.base)
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            boutton(
-                value: "VALIDER",
-                onPress: (){
-                  testValide();
-                }
-            ),
-          ],
+        body: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                height: height(context)/10,
+              ),
+              Center(
+                child:
+                (widget.base==null)?
+                  scene(kakuro:kakuro,maj:maj):
+                  scene(kakuro:kakuro,maj:maj,base: widget.base)
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              boutton(
+                  value: "VALIDER",
+                  onPress: (){
+                    testValide();
+                  }
+              ),
+            ],
+          ),
         ),
+        bottomNavigationBar: navbar(actif:10,checkGrille: (){(config.newgame)?saveGrille():majGrille();} ,reaload:(){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
       ),
-      bottomNavigationBar: navbar(actif:10,checkGrille: (){(config.newgame)?saveGrille():majGrille();} ,reaload:(){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
     );
   }
 
@@ -201,13 +207,12 @@ class _gameState extends State<game> {
             if(config.newgame==true){
               route(context, nouvellepartie());
             }else{
-              suppGrille();
-              route(context, mesparties());
+              suppGrille().then((value) => route(context, mesparties()));
             }
-          }, child: Text("Oui",style: TextStyle(color: config.colors.primaryColor),)),
+          }, child: Text("Oui",style: TextStyle(color: config.colors.defaultPrimary),)),
           TextButton(onPressed: (){
             Navigator.pop(context);
-          }, child: Text("NON",style: TextStyle(color: config.colors.primaryColor),))
+          }, child: Text("NON",style: TextStyle(color: config.colors.defaultPrimary),))
         ],
       )
   );

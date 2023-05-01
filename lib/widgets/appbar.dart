@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
-import 'package:kakuro/screens/abandon.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
 
@@ -147,7 +146,7 @@ class _appbarState extends State<appbar> {
                 Icon(
                   Icons.timer,
                   size: width(context) / 12,
-                  color: config.colors.primaryTextBlack,
+                  color: config.colors.primaryTitreSelect,
                 ),
                 SizedBox(
                   width: 5,
@@ -155,7 +154,7 @@ class _appbarState extends State<appbar> {
                 Text(
                   "$minute:$seconde",
                   style: TextStyle(
-                      color: config.colors.primaryTextBlack, fontSize: width(context) / 11),
+                      color: config.colors.primaryTitreSelect, fontSize: width(context) / 11),
                 ),
               ],
             )

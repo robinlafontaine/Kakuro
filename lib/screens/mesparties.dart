@@ -96,76 +96,82 @@ class _mespartiesState extends State<mesparties> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: config.colors.primaryBackground,
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, width(context) / 6),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: appbar(
-              home: false,
-              enjeu: false,
-              retour: () => {retour()}
+    return WillPopScope(
+      onWillPop: ()async{
+        retour();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: config.colors.primaryBackground,
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, width(context) / 6),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: appbar(
+                home: false,
+                enjeu: false,
+                retour: () => {retour()}
+            ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.all(2),
-              itemCount: grilles.length,
-              itemBuilder: (_,i){
-                return Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: config.colors.primaryColor
-                  ),
-                  width: width(context)/2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Taille : (${kakuros[i].n},${kakuros[i].m})",style: TextStyle(
-                            color: config.colors.primaryTextColor
-                          )),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Text("Difficulté : ${kakuros[i].difficulte}",style: TextStyle(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.all(2),
+                itemCount: grilles.length,
+                itemBuilder: (_,i){
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: config.colors.primaryColor
+                    ),
+                    width: width(context)/2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: [
+                            Text("Taille : (${kakuros[i].n},${kakuros[i].m})",style: TextStyle(
                               color: config.colors.primaryTextColor
-                          )),
-                          SizedBox(
-                            height: 3,
-                          ),
-                          Text("Chrono : ${minutes[i]}:${secondes[i]}",style: TextStyle(
-                              color: config.colors.primaryTextColor
-                          )),
-                        ],
-                      ),
-                      boutton(
-                          value: "JOUER",
-                          couleur: true,
-                          size: width(context)/3,
-                          onPress: (){
-                            config.newgame=false;
-                            route(context, game(kakuro : kakuros[i], base: etatSet[i],index: i,chrono : int.parse(chronos[i])));
-                          }
-                      )
-                    ],
-                  ),
-                );
-              }
-            ),
-          )
+                            )),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Text("Difficulté : ${kakuros[i].difficulte}",style: TextStyle(
+                                color: config.colors.primaryTextColor
+                            )),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Text("Chrono : ${minutes[i]}:${secondes[i]}",style: TextStyle(
+                                color: config.colors.primaryTextColor
+                            )),
+                          ],
+                        ),
+                        boutton(
+                            value: "JOUER",
+                            couleur: true,
+                            size: width(context)/3,
+                            onPress: (){
+                              config.newgame=false;
+                              route(context, game(kakuro : kakuros[i], base: etatSet[i],index: i,chrono : int.parse(chronos[i])));
+                            }
+                        )
+                      ],
+                    ),
+                  );
+                }
+              ),
+            )
+          ),
         ),
+          bottomNavigationBar: navbar(actif:2, reaload:(){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
       ),
-        bottomNavigationBar: navbar(actif:2, reaload:(){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
     );
   }
 

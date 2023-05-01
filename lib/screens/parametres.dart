@@ -68,6 +68,8 @@ class parametreState extends State<parametre> {
       config.colors.primaryBackground=config.colors.defaultBackground;
       config.colors.primaryTextBlack=config.colors.defaultTextBlack;
       config.colors.primarySelect=config.colors.defaultPrimarySelect;
+      config.colors.primaryTitreSelect=config.colors.defaultTextBlack;
+      config.colors.primaryTextBackground=config.colors.primaryColor;
     });
   }
 
@@ -78,16 +80,30 @@ class parametreState extends State<parametre> {
       config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
       config.colors.primarySelect=config.colors.primaryColor;
       config.colors.primarySelectItem=config.colors.primaryColor;
+      config.colors.primaryTitreSelect=config.colors.defaultPrimaryText;
+      config.colors.primaryTextBackground=config.colors.primaryColor;
     });
   }
 
   void toPerso(){
     setState(() {
       config.colors.primaryBackground=pickerColor.withOpacity(1);
-      config.colors.primaryColor = Colors.black.withOpacity(0.3);
-      config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
-      config.colors.primarySelect=Colors.black.withOpacity(0.3);
-      config.colors.primarySelectItem=config.colors.defaultPrimary;
+      if(pickerColor.red>200 && pickerColor.green>200 && pickerColor.blue>200){
+        config.colors.primaryColor = config.colors.defaultPrimary;
+        config.colors.primarySelect=config.colors.defaultPrimary;
+        config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
+        config.colors.primarySelectItem=config.colors.defaultPrimary;
+        config.colors.primaryTitreSelect=config.colors.defaultTextBlack;
+        config.colors.primaryTextBackground=config.colors.primaryColor;
+      }else{
+        config.colors.primarySelect=Colors.black.withOpacity(0.3);
+        config.colors.primaryColor = Colors.black.withOpacity(0.3);
+        config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
+        config.colors.primarySelectItem=config.colors.defaultPrimary;
+        config.colors.primaryTitreSelect=config.colors.defaultPrimaryText;
+        config.colors.primaryTextBackground=config.colors.primaryBackground;
+
+      }
       picker=false;
     });
   }
@@ -98,203 +114,210 @@ class parametreState extends State<parametre> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: config.colors.primaryBackground,
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, width(context)/6),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: appbar(home:false,enjeu:false,retour:retour),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Center(
+    return WillPopScope(
+      onWillPop: ()async{
+        retour();
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: config.colors.primaryBackground,
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, width(context)/6),
           child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: (picker)?
-            Container(
-              width: width(context)/1.1,
-              decoration: BoxDecoration(
-                color: config.colors.defaultPrimaryText
-              ),
-              child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: ColorPicker(
-                          pickerColor: pickerColor,
-                          onColorChanged: changeColor,
+            padding: const EdgeInsets.all(10),
+            child: appbar(home:false,enjeu:false,retour:retour),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: (picker)?
+              Container(
+                width: width(context)/1.1,
+                decoration: BoxDecoration(
+                  color: config.colors.defaultPrimaryText
+                ),
+                child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: ColorPicker(
+                            pickerColor: pickerColor,
+                            onColorChanged: changeColor,
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: boutton(value: "APPLIQUER", onPress: (){
+                              toPerso();
+                            })
+                        )
+                      ],
+                    ),
+                ),
+              ):
+              Column(
+                children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: width(context)/8,
+                      decoration: BoxDecoration(
+                          color: config.colors.primarySelect
+                      ),
+                      padding: EdgeInsets.only(left: 15, right: 10),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                            dropdownColor: config.colors.primarySelectItem,
+                            value: son,
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: config.colors.primaryTextBlack,
+                            ),
+                            items: config.sons.sons.map((items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Container(
+                                  child: Text(
+                                    items.replaceRange(items.length-4, items.length, ""),
+                                    style: TextStyle(
+                                        color: config.colors.primaryTextBlack
+                                    ),
+                                  ),
+                                  width: width(context)/2.5,),
+                              );
+                            }).toList(),
+                            onChanged: (value){
+                              setState(() {
+                                value == null?"":
+                                son = value;
+                                etatPlayer="pause";
+                                config.sons.player.stop();
+                              });
+                            }
                         ),
                       ),
-                      Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: boutton(value: "APPLIQUER", onPress: (){
-                            toPerso();
-                          })
+                    ),
+                    Container(
+                      width: width(context)/8,
+                      height: width(context)/8,
+                      decoration: BoxDecoration(
+                        color: config.colors.primarySelect
+                      ),
+                      child: Center(
+                        child: InkWell(
+                          child: Icon(
+                            (etatPlayer=="play")?Icons.pause:Icons.play_arrow,
+                            size: width(context)/15,
+                            color: config.colors.primaryTextBlack,
+                          ),
+                          onTap: (){
+                            PlayBreak();
+                          },
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: width(context)/8,
+                      height: width(context)/8,
+                      decoration: BoxDecoration(
+                          color: config.colors.primarySelect
+                      ),
+                      child: Center(
+                        child: InkWell(
+                          child: Icon(
+                            Icons.square,
+                            size: width(context)/20,
+                            color: config.colors.primaryTextBlack,
+                          ),
+                          onTap: (){
+                            stopMusic();
+                          },
+                        ),
+                      ),
+                    )
+                    ]
+                  ),
+                  SizedBox(height:height(context)/20),
+                  Row(
+                    children: [
+                      InkWell(
+                        child: Container(
+                          height: width(context)/6,
+                          width: (width(context)/3) - 10,
+                          decoration: BoxDecoration(
+                            color: config.colors.primarySelect,
+                            border: Border(
+                              right: BorderSide(width: 2,color: config.colors.primaryBackground)
+                            )
+                          ),
+                          child: Center(
+                            child:Icon(
+                              Icons.wb_sunny,
+                              size: width(context)/15,
+                              color: config.colors.primaryTextBlack,
+                            )
+                          ),
+                        ),
+                        onTap: (){
+                          toLight();
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          height: width(context)/6,
+                          width:(width(context)/3) - 10,
+                          decoration: BoxDecoration(
+                              color: config.colors.primarySelect,
+                              border: Border(
+                                  right: BorderSide(width: 2,color: config.colors.primaryBackground)
+                              )
+                          ),
+                          child: Center(
+                              child:Icon(
+                                Icons.format_paint,
+                                size: width(context)/15,
+                                color: config.colors.primaryTextBlack,
+                              )
+                          ),
+                        ),
+                        onTap: (){
+                          setState(() {
+                            picker=true;
+                          });
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          height: width(context)/6,
+                          width: (width(context)/3) - 10,
+                          decoration: BoxDecoration(
+                              color: config.colors.primarySelect,
+                          ),
+                          child: Center(
+                              child:FaIcon(
+                                FontAwesomeIcons.solidMoon,
+                                size: width(context)/15,
+                                color: config.colors.primaryTextBlack,
+                              )
+                          ),
+                        ),
+                        onTap: (){
+                          toDark();
+                        },
                       )
                     ],
                   ),
+                ],
               ),
-            ):
-            Column(
-              children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: config.colors.primarySelect
-                    ),
-                    padding: EdgeInsets.only(left: 15, right: 10),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                          dropdownColor: config.colors.primarySelectItem,
-                          value: son,
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: config.colors.primaryTextBlack,
-                          ),
-                          items: config.sons.sons.map((items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Container(
-                                child: Text(
-                                  items.replaceRange(items.length-4, items.length, ""),
-                                  style: TextStyle(
-                                      color: config.colors.primaryTextBlack
-                                  ),
-                                ),
-                                width: width(context)/2.5,),
-                            );
-                          }).toList(),
-                          onChanged: (value){
-                            setState(() {
-                              value == null?"":
-                              son = value;
-                              etatPlayer="pause";
-                              config.sons.player.stop();
-                            });
-                          }
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: width(context)/7,
-                    height: width(context)/7,
-                    decoration: BoxDecoration(
-                      color: config.colors.primarySelect
-                    ),
-                    child: Center(
-                      child: InkWell(
-                        child: Icon(
-                          (etatPlayer=="play")?Icons.pause:Icons.play_arrow,
-                          size: width(context)/15,
-                          color: config.colors.primaryTextBlack,
-                        ),
-                        onTap: (){
-                          PlayBreak();
-                        },
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: width(context)/7,
-                    height: width(context)/7,
-                    decoration: BoxDecoration(
-                        color: config.colors.primarySelect
-                    ),
-                    child: Center(
-                      child: InkWell(
-                        child: Icon(
-                          Icons.square,
-                          size: width(context)/20,
-                          color: config.colors.primaryTextBlack,
-                        ),
-                        onTap: (){
-                          stopMusic();
-                        },
-                      ),
-                    ),
-                  )
-                  ]
-                ),
-                SizedBox(height:height(context)/20),
-                Row(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        height: width(context)/6,
-                        width: (width(context)/3) - 10,
-                        decoration: BoxDecoration(
-                          color: config.colors.primarySelect,
-                          border: Border(
-                            right: BorderSide(width: 2,color: config.colors.primaryBackground)
-                          )
-                        ),
-                        child: Center(
-                          child:Icon(
-                            Icons.wb_sunny,
-                            size: width(context)/15,
-                            color: config.colors.primaryTextBlack,
-                          )
-                        ),
-                      ),
-                      onTap: (){
-                        toLight();
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: width(context)/6,
-                        width:(width(context)/3) - 10,
-                        decoration: BoxDecoration(
-                            color: config.colors.primarySelect,
-                            border: Border(
-                                right: BorderSide(width: 2,color: config.colors.primaryBackground)
-                            )
-                        ),
-                        child: Center(
-                            child:Icon(
-                              Icons.format_paint,
-                              size: width(context)/15,
-                              color: config.colors.primaryTextBlack,
-                            )
-                        ),
-                      ),
-                      onTap: (){
-                        setState(() {
-                          picker=true;
-                        });
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        height: width(context)/6,
-                        width: (width(context)/3) - 10,
-                        decoration: BoxDecoration(
-                            color: config.colors.primarySelect,
-                        ),
-                        child: Center(
-                            child:FaIcon(
-                              FontAwesomeIcons.solidMoon,
-                              size: width(context)/15,
-                              color: config.colors.primaryTextBlack,
-                            )
-                        ),
-                      ),
-                      onTap: (){
-                        toDark();
-                      },
-                    )
-                  ],
-                ),
-              ],
             ),
           ),
         ),
+        bottomNavigationBar: navbar(actif:3,reaload:(){setState(() {});}),
       ),
-      bottomNavigationBar: navbar(actif:3,reaload:(){setState(() {});}),
     );
   }
 

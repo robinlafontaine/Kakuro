@@ -27,7 +27,7 @@ class boutton extends StatelessWidget{
               style: GoogleFonts.montserrat(
                 fontSize: 19,
                 fontWeight: FontWeight.w500,
-                color: (couleur==null)?config.colors.primaryTextColor:config.colors.primaryTextBlack
+                color: (couleur==null)?config.colors.primaryTextColor:config.colors.primaryTextBackground
               ),/*
               style: TextStyle(
                   fontSize: 19,
