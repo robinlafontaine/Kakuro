@@ -60,7 +60,7 @@ class _abandonState extends State<abandon> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(10,(){Navigator.push(
+      bottomNavigationBar: navbar(actif:10,reaload: (){Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});
       }));

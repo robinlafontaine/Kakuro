@@ -4,14 +4,16 @@ import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/horsligne.dart';
+import 'package:kakuro/screens/mesparties.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/screens/parametres.dart';
 
 class navbar extends StatelessWidget {
   final int actif;
   final Function reaload;
+  final Function? checkGrille;
 
-  navbar(this.actif, this.reaload);
+  const navbar({super.key, required this.actif, required this.reaload, this.checkGrille});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,12 @@ class navbar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () {
-              (config.online)
-                  ? route(context, enligne())
-                  : route(context, horsligne());
+              if(checkGrille!=null)checkGrille!();
+              if(config.online) {
+                route(context, enligne());
+              }else {
+                route(context, horsligne());
+              }
             },
             icon: FaIcon(
               FontAwesomeIcons.house,
@@ -39,6 +44,7 @@ class navbar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
+              if(checkGrille!=null)checkGrille!();
               route(context, nouvellepartie());
             },
             icon: FaIcon(
@@ -50,7 +56,10 @@ class navbar extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: null,
+            onPressed: (){
+              if(checkGrille!=null)checkGrille!();
+              route(context, mesparties());
+            },
             icon: FaIcon(
               FontAwesomeIcons.gamepad,
               color: (actif != 2)
@@ -62,6 +71,7 @@ class navbar extends StatelessWidget {
           IconButton(
             onPressed: () {
               reaload();
+              if(checkGrille!=null) checkGrille!();
             },
             icon: FaIcon(
               FontAwesomeIcons.gears,

@@ -59,7 +59,7 @@ class _enligneState extends State<enligne> {
           ],
         ),
       ),
-      bottomNavigationBar: navbar(0,(){
+      bottomNavigationBar: navbar(actif:0,reaload:(){
         Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}

@@ -294,7 +294,7 @@ class parametreState extends State<parametre> {
           ),
         ),
       ),
-      bottomNavigationBar: navbar(3,(){setState(() {});}),
+      bottomNavigationBar: navbar(actif:3,reaload:(){setState(() {});}),
     );
   }
 

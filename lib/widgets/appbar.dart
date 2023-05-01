@@ -14,13 +14,15 @@ class appbar extends StatefulWidget {
   bool home;
   bool enjeu;
   Function retour;
+  Function? abandon;
   int? chrono;
 
   appbar(
       {required this.home,
       required this.enjeu,
       required this.retour,
-        this.chrono
+        this.abandon,
+        this.chrono,
       });
 
   @override
@@ -172,7 +174,7 @@ class _appbarState extends State<appbar> {
                     size: width(context) / 20,
                   ),
                   onTap: () {
-                    route(context, abandon());
+                    widget.abandon!();
                   },
                 )))
             : SizedBox(

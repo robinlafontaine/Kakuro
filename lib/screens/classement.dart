@@ -122,7 +122,7 @@ class classementState extends State<classement> {
                     return const Center(child: CircularProgressIndicator());
                   }
                 })),
-        bottomNavigationBar: navbar(10, (){
+        bottomNavigationBar: navbar(actif:10, reaload: (){
           Navigator.push(
               context,
               MaterialPageRoute(

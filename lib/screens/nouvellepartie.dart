@@ -204,7 +204,7 @@ class nouvellepartieState extends State<nouvellepartie>{
             ),
           ),
         ),
-        bottomNavigationBar: navbar(1,(){
+        bottomNavigationBar: navbar(actif:1,reaload: (){
           Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});}

@@ -165,7 +165,7 @@ class _mespartiesState extends State<mesparties> {
           )
         ),
       ),
-        bottomNavigationBar: navbar(2, (){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
+        bottomNavigationBar: navbar(actif:2, reaload:(){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
     );
   }
 
