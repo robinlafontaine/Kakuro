@@ -9,23 +9,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Sauvegarde partie + verif + popub abandon">
+    <list default="true" id="de551a23-80c0-4b15-9058-03b19bc79596" name="Changes" comment="Color fixed + swap back">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/config/config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/config/config.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/abandon.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/classement.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/classement.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/enligne.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/enligne.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/kakuro.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/kakuro.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/game.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/game.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/horsligne.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/horsligne.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/invitation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/invitation.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/mesparties.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/mesparties.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/multijoueur.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/multijoueur.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/nouvellepartie.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/parametres.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/parametres.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/splashscreen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/appbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/boutton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/boutton.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/widgets/splashwidget.dart" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682955724945</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Color fixed + swap back">
+      <created>1682971686395</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1682971686395</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -313,6 +310,7 @@
     <MESSAGE value="Clean up" />
     <MESSAGE value="Sauvegarde partie" />
     <MESSAGE value="Sauvegarde partie + verif + popub abandon" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sauvegarde partie + verif + popub abandon" />
+    <MESSAGE value="Color fixed + swap back" />
+    <option name="LAST_COMMIT_MESSAGE" value="Color fixed + swap back" />
   </component>
 </project>

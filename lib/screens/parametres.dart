@@ -27,7 +27,7 @@ class parametreState extends State<parametre> {
   bool picker=false;
 
   void initState(){
-    son=config.sons.sons[0];
+    son=config.sons.actuel;
     if(config.sons.player.state==PlayerState.playing){
       etatPlayer="play";
     }
@@ -194,6 +194,7 @@ class parametreState extends State<parametre> {
                               setState(() {
                                 value == null?"":
                                 son = value;
+                                config.sons.actuel = value!;
                                 etatPlayer="pause";
                                 config.sons.player.stop();
                               });

@@ -38,6 +38,7 @@ class _Image {
 }
 
 class _Audio{
+  var actuel = "Jojo.mp3";
   final player = AudioPlayer();
   final sons = [
     "Jojo.mp3",
