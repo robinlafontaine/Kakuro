@@ -71,7 +71,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               height: 70,
             ),
             boutton(
-              value: "En ligne",
+              value: "EN LIGNE",
               onPress: () => {
                 FirebaseAuth.instance.authStateChanges().listen((User? user) {
                   if (user == null) {
@@ -87,7 +87,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               height: 20,
             ),
             boutton(
-                value: "Hors ligne",
+                value: "HORS LIGNE",
                 onPress: () => {
                       //Auth(FirebaseAuth.instance).signInGoogle(context),
                       //log(FirebaseAuth.instance.app.name),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -25,42 +27,21 @@ class _mespartiesState extends State<mesparties> {
   List<String> minutes=[];
   List<String> secondes=[];
   List<String> etats=[];
-  List<List<List<int>>> etatSet=[];
+  List etatSet=[];
   List<Kakuro> kakuros=[];
 
   void initState(){
     launch();
   }
 
-  List<List<List<int>>> setEtat(){
-    List<List<List<int>>> liste = [];
-    for(int k=0;k<etats.length;k++){
-      List<List<int>> lactuel = [];
-      var nbl = kakuros[k].n;
-      var nbc = kakuros[k].m;
-      int ligne = 0;
-      int colonne = 0;
-      int curseur = 0;
-      while(ligne<nbl){
-        List<int> l = [];
-        while(colonne<nbc){
-          if(etats[k][curseur]=="-"){
-            l.add(-(int.parse(etats[k][curseur+1])));
-            curseur+=2;
-          }else{
-            l.add(int.parse(etats[k][curseur]));
-            curseur++;
-          }
-          colonne++;
-        }
-        ligne+=1;
-        colonne=0;
-        lactuel.add(l);
-      }
-      liste.add(lactuel);
+  List setEtat(){
+    List liste = [];
+    for(int k=0;k<etats.length;k++) {
+      liste.add(jsonDecode(etats[k]));
     }
     return liste;
   }
+
 
   String getAffichage(int n) {
     return n.toString().padLeft(2, "0");

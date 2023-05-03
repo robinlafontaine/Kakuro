@@ -26,9 +26,11 @@ class navbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-            onPressed: () {
-              if(checkGrille!=null)checkGrille!();
-              if(config.online) {
+            onPressed: (){
+              if(checkGrille!=null){
+                checkGrille!();
+              }
+              if(config.online){
                 route(context, enligne());
               }else {
                 route(context, horsligne());
@@ -57,8 +59,11 @@ class navbar extends StatelessWidget {
           ),
           IconButton(
             onPressed: (){
-              if(checkGrille!=null)checkGrille!();
+              if(checkGrille!=null) {
+                checkGrille!();
+              }
               route(context, mesparties());
+
             },
             icon: FaIcon(
               FontAwesomeIcons.gamepad,

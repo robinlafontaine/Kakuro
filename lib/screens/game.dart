@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:kakuro/config/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,12 +55,13 @@ class _gameState extends State<game> {
 
   String getEtat(){
     String etat = "";
+    var s = json.encode(grille);
     for(int i=0; i<kakuro.n; i++){
       for(int j=0; j<kakuro.m;j++){
         etat+=(grille[i][j].toString());
       }
     }
-    return etat;
+    return s;
   }
 
   Future<void> saveGrille() async {
@@ -192,7 +194,15 @@ class _gameState extends State<game> {
             ],
           ),
         ),
-        bottomNavigationBar: navbar(actif:10,checkGrille: (){(config.newgame)?saveGrille():majGrille();} ,reaload:(){Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
+        bottomNavigationBar: navbar(
+            actif:10,
+            checkGrille: (){
+              (config.newgame)
+                  ?saveGrille()
+                  :majGrille();
+              } ,
+            reaload:(){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
       ),
     );
   }
