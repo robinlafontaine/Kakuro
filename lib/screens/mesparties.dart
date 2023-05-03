@@ -118,7 +118,10 @@ class _mespartiesState extends State<mesparties> {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(15),
-              child: ListView.builder(
+              child: (grilles.length==0)
+                  ?
+                  Text("Aucune partie en cours")
+                  :ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.all(2),
