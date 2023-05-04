@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "432183058187",
+    "firebase_url": "https://kakuro-insa-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "kakuro-insa",
     "storage_bucket": "kakuro-insa.appspot.com"
   },
