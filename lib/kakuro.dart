@@ -366,7 +366,8 @@ class Kakuro {
   }
 
   void updateGrille() {
-    grilleUpdated = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    grilleUpdated =
+        List.generate(n + 1, (i) => List.generate(m + 1, (j) => -1));
     for (int i = n - 1; i >= 0; i--) {
       for (int j = m - 1; j >= 0; j--) {
         grilleUpdated[i + 1][j + 1] = grille[i][j];
