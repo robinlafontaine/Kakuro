@@ -116,6 +116,7 @@ class Kakuro {
   }
 
   void genererTrou() {
+    if (difficulte == 1) difficulte = 2;
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
         if (i == 0 || j == 0) {
@@ -364,9 +365,24 @@ class Kakuro {
   }
 
   void updateGrille() {
-    grilleUpdated = getGrilleUpdated();
-    indiceColonne = getIndiceColomnes();
-    indiceLigne = getIndiceLignes();
+    grilleUpdated = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        grilleUpdated[i + 1][j + 1] = grille[i][j];
+      }
+    }
+    indiceColonne = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        if (entete[i][j].isNotEmpty) indiceColonne[i][j + 1] = entete[i][j][1];
+      }
+    }
+    indiceLigne = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        if (entete[i][j].isNotEmpty) indiceLigne[i + 1][j] = entete[i][j][0];
+      }
+    }
     n += 1;
     m += 1;
   }
