@@ -339,7 +339,7 @@ class Kakuro {
         grilleUpdated[i + 1][j + 1] = grille[i][j];
       }
     }
-    return grilleUpdated;
+    grilleUpdated[0][0] = -1;
   }
 
   List<List<int>> getIndiceColomnes() {
