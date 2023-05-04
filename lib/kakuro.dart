@@ -345,7 +345,7 @@ class Kakuro {
 
   List<List<int>> getIndiceColomnes() {
     List<List<int>> indiceColomnes =
-        List.generate(n + 1, (i) => List.generate(m + 1, (j) => -1));
+        List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
     for (int i = n - 1; i >= 0; i--) {
       for (int j = m - 1; j >= 0; j--) {
         if (entete[i][j].isNotEmpty) indiceColomnes[i][j + 1] = entete[i][j][1];
@@ -356,7 +356,7 @@ class Kakuro {
 
   List<List<int>> getIndiceLignes() {
     List<List<int>> indiceLignes =
-        List.generate(n + 1, (i) => List.generate(m + 1, (j) => -1));
+        List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
     for (int i = n - 1; i >= 0; i--) {
       for (int j = m - 1; j >= 0; j--) {
         if (entete[i][j].isNotEmpty) indiceLignes[i + 1][j] = entete[i][j][0];
@@ -366,8 +366,7 @@ class Kakuro {
   }
 
   void updateGrille() {
-    grilleUpdated =
-        List.generate(n + 1, (i) => List.generate(m + 1, (j) => -1));
+    grilleUpdated = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
     for (int i = n - 1; i >= 0; i--) {
       for (int j = m - 1; j >= 0; j--) {
         grilleUpdated[i + 1][j + 1] = grille[i][j];
