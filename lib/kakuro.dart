@@ -119,12 +119,11 @@ class Kakuro {
     if (difficulte == 1) difficulte = 2;
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (i == 0 || j == 0) {
-          if (Random().nextInt(difficulte ~/ 2).toInt() == 1) {
-            grille[i][j] = -1;
-          }
-        } else if (emptyNeighbour(i, j)) {
+        if (i == 0 || j == 0 || emptyNeighbour(i, j)) {
+          // try two times to generate a hole
           if (Random().nextInt(difficulte).toInt() == 1) {
+            grille[i][j] = -1;
+          } else if (Random().nextInt(difficulte).toInt() == 1) {
             grille[i][j] = -1;
           }
         } else if (Random().nextInt(difficulte).toInt() == 1) {
@@ -371,7 +370,10 @@ class Kakuro {
       for (int j = m - 1; j >= 0; j--) {
         grilleUpdated[i + 1][j + 1] = grille[i][j];
       }
-      grilleUpdated[0][0] = -1;
+      for (int i = 0; i <= n; i++) {
+        grilleUpdated[0][i] = -1;
+        grilleUpdated[i][0] = -1;
+      }
     }
     indiceColonne = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
     for (int i = n - 1; i >= 0; i--) {
