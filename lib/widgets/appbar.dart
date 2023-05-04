@@ -16,13 +16,13 @@ class appbar extends StatefulWidget {
   Function? abandon;
   int? chrono;
 
-  appbar(
-      {required this.home,
-      required this.enjeu,
-      required this.retour,
-        this.abandon,
-        this.chrono,
-      });
+  appbar({
+    required this.home,
+    required this.enjeu,
+    required this.retour,
+    this.abandon,
+    this.chrono,
+  });
 
   @override
   State<appbar> createState() => _appbarState(this.retour);
@@ -31,7 +31,7 @@ class appbar extends StatefulWidget {
 class _appbarState extends State<appbar> {
   String time = "0", seconde = "00", minute = "00";
   Timer? timer;
-  Function ?timerFunction;
+  Function? timerFunction;
   Function retour;
   Duration duration = Duration();
 
@@ -48,8 +48,8 @@ class _appbarState extends State<appbar> {
   }
 
   void startTimer() {
-    if(widget.enjeu) {
-      if(widget.chrono!=null){
+    if (widget.enjeu) {
+      if (widget.chrono != null) {
         duration = Duration(seconds: widget.chrono!);
         minute = getAffichage(duration.inMinutes.remainder(60));
         seconde = getAffichage(duration.inSeconds.remainder(60));
@@ -87,30 +87,29 @@ class _appbarState extends State<appbar> {
                   ),
                   child: Center(
                     child: IconButton(
-                        icon: Icon((config.online)?Icons.wifi:Icons.wifi_off),
-                        iconSize: width(context) / 20,
-                        color: (config.online)?Colors.green:Colors.red,
-                        hoverColor: Colors.transparent,
-                        onPressed: () {
-                            (config.online)
-                              ? {
-                              config.online = false,
-                              route(context, horsligne())
+                      icon: Icon((config.online) ? Icons.wifi : Icons.wifi_off),
+                      iconSize: width(context) / 15,
+                      color: (config.online) ? Colors.green : Colors.red,
+                      onPressed: () {
+                        (config.online)
+                            ? {
+                                config.online = false,
+                                route(context, horsligne())
                               }
-                              : {
-                              FirebaseAuth.instance
-                                .authStateChanges()
-                                .listen((User? user) {
-                              if (user == null) {
-                                Auth(FirebaseAuth.instance)
-                                    .signInGoogle(context);
-                              } else {
-                                config.online=true;
-                                route(context, enligne());
-                              }
-                            }).onError((error, stackTrace) {})
-                          };
-                        },
+                            : {
+                                FirebaseAuth.instance
+                                    .authStateChanges()
+                                    .listen((User? user) {
+                                  if (user == null) {
+                                    Auth(FirebaseAuth.instance)
+                                        .signInGoogle(context);
+                                  } else {
+                                    config.online = true;
+                                    route(context, enligne());
+                                  }
+                                }).onError((error, stackTrace) {})
+                              };
+                      },
                     ),
                   ),
                 );
@@ -154,7 +153,8 @@ class _appbarState extends State<appbar> {
                 Text(
                   "$minute:$seconde",
                   style: TextStyle(
-                      color: config.colors.primaryTitreSelect, fontSize: width(context) / 11),
+                      color: config.colors.primaryTitreSelect,
+                      fontSize: width(context) / 11),
                 ),
               ],
             )
