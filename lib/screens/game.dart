@@ -40,7 +40,7 @@ class _gameState extends State<game> {
 
   void initState(){
     if(widget.base==null && widget.chrono==null){
-      //grille = kakuro.getBase();
+      grille = kakuro.getBase();
     }else{
       seconde = widget.chrono!;
       grille = widget.base!;
@@ -54,17 +54,12 @@ class _gameState extends State<game> {
   }
 
   String getEtat(){
-    String etat = "";
     var s = json.encode(grille);
-    for(int i=0; i<kakuro.n; i++){
-      for(int j=0; j<kakuro.m;j++){
-        etat+=(grille[i][j].toString());
-      }
-    }
     return s;
   }
 
   Future<void> saveGrille() async {
+    print(grille);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? grilles = await prefs.getStringList("grilles");
     List<String>? chronos = await prefs.getStringList("chronos");

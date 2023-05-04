@@ -24,7 +24,7 @@ class _sceneState extends State<scene>{
   _sceneState(this.kakuro,this.maj);
 
   void initState(){
-    print(kakuro.indiceLigne.length);
+    print(kakuro.getIndiceLignes().length);
     print(kakuro.indiceColonne.length);
     print(kakuro.indiceLigne);
     print(kakuro.indiceColonne);

@@ -30,6 +30,10 @@ class _mespartiesState extends State<mesparties> {
   List etatSet=[];
   List<Kakuro> kakuros=[];
 
+  void initState(){
+    launch();
+  }
+
   List setEtat(){
     List liste = [];
     for(int k=0;k<etats.length;k++) {
@@ -62,6 +66,7 @@ class _mespartiesState extends State<mesparties> {
         secondes.add(getAffichage(duration.inSeconds.remainder(60)));
       }
       etatSet = setEtat();
+      print(grilles);
     });
     return grilles.length>0;
   }

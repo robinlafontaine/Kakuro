@@ -60,7 +60,7 @@ class Kakuro {
     String cases = "";
     for (var i = 0; i < n; i++)
       for (var j = 0; j < m; j++)
-        if (grille[i][j] == -1)
+        if (grilleUpdated[i][j] == -1 && indiceLigne[i][j]==0 && indiceColonne[i][j]==0)
           cases = cases +
               "<case>"
                   "<type>vide</type>"
@@ -68,13 +68,13 @@ class Kakuro {
                   "<indicecolonne>0</indicecolonne>"
                   "<valeur>-1</valeur>"
                   "</case>";
-        else if (entete[i][j].isNotEmpty)
+        else if (indiceLigne[i][j]!=0 || indiceColonne[i][j]!=0)
           cases = cases +
               "<case>"
                   "<type>indice</type>"
-                  "<indiceligne>${entete[i][j][0]}</indiceligne>"
-                  "<indicecolonne>${entete[i][j][1]}</indicecolonne>"
-                  "<valeur>${grille[i][j]}</valeur>"
+                  "<indiceligne>${indiceLigne[i][j]}</indiceligne>"
+                  "<indicecolonne>${indiceColonne[i][j]}</indicecolonne>"
+                  "<valeur>${0}</valeur>"
                   "</case>";
         else
           cases = cases +
@@ -82,7 +82,7 @@ class Kakuro {
                   "<type>click</type>"
                   "<indiceligne>0</indiceligne>"
                   "<indicecolonne>0</indicecolonne>"
-                  "<valeur>${grille[i][j]}</valeur>"
+                  "<valeur>${0}</valeur>"
                   "</case>";
     var xml = '''<?xml version="1.0"?>
     <kakuro>
@@ -301,10 +301,8 @@ class Kakuro {
     List<List<int>> base = List.generate(n, (i) => List.generate(m, (j) => 0));
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (entete[i][j].isEmpty && grille[i][j] != -1) {
-          base[i][j] = 0;
-        } else {
-          base[i][j] = grille[i][j];
+        if (grilleUpdated[i][j]==-1 && indiceColonne[i][j]==0 && indiceLigne[i][j]==0) {
+          base[i][j] = -1;
         }
       }
     }
