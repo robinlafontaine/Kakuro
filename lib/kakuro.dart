@@ -340,6 +340,7 @@ class Kakuro {
       }
     }
     grilleUpdated[0][0] = -1;
+    return grilleUpdated;
   }
 
   List<List<int>> getIndiceColomnes() {
@@ -370,6 +371,7 @@ class Kakuro {
       for (int j = m - 1; j >= 0; j--) {
         grilleUpdated[i + 1][j + 1] = grille[i][j];
       }
+      grilleUpdated[0][0] = -1;
     }
     indiceColonne = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
     for (int i = n - 1; i >= 0; i--) {
