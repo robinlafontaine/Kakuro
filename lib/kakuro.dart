@@ -372,11 +372,11 @@ class Kakuro {
   }
 }
 
-// test main
-void main() {
-  Kakuro g = Kakuro(5, 5, 9);
-  // g.affiche();
-  // g.afficheEntete();
-  print(g.getGrilleUpdated());
-  // print(g.getIndiceColomnes());
-}
+// // test main
+// void main() {
+//   Kakuro g = Kakuro(5, 5, 9);
+//   // g.affiche();
+//   // g.afficheEntete();
+//   print(g.getGrilleUpdated());
+//   // print(g.getIndiceColomnes());
+// }
