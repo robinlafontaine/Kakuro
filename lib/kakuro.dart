@@ -5,16 +5,15 @@ class Kakuro {
   late int n, m, maxi, difficulte;
   late List<List<int>> grille;
   late List<List<List<int>>> entete;
+  late List<List<int>> grilleUpdated, indiceColonne, indiceLigne;
 
-  Kakuro(int n, int m, int difficulte) {
+  Kakuro(this.n, this.m, this.difficulte) {
     grille = List.generate(n, (i) => List.generate(m, (j) => 0));
     entete = List.generate(n, (i) => List.generate(m, (j) => []));
     maxi = max(n, m);
-    this.n = n;
-    this.m = m;
-    this.difficulte = difficulte;
 
     genererGrille();
+    updateGrille();
   }
 
   Kakuro.withXML(String xml) {
@@ -362,6 +361,14 @@ class Kakuro {
       }
     }
     return indiceLignes;
+  }
+
+  void updateGrille() {
+    grilleUpdated = getGrilleUpdated();
+    indiceColonne = getIndiceColomnes();
+    indiceLigne = getIndiceLignes();
+    n += 1;
+    m += 1;
   }
 }
 
