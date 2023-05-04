@@ -17,33 +17,34 @@ class Kakuro {
     genererGrille();
   }
 
-  Kakuro.withXML(String xml){
+  Kakuro.withXML(String xml) {
     var infos = XmlDocument.parse(xml);
     String? ns = infos.getElement("kakuro")?.getElement("n")?.text;
     String? ms = infos.getElement("kakuro")?.getElement("m")?.text;
     String? diff = infos.getElement("kakuro")?.getElement("diff")?.text;
-    if(ns != null && ms != null && diff != null){
+    if (ns != null && ms != null && diff != null) {
       n = int.parse(ns);
       m = int.parse(ms);
       difficulte = int.parse(diff);
     }
     var cases = infos.getElement("kakuro")?.findAllElements("case").toList();
-    var nb=0;
-    if(cases!=null) {
+    var nb = 0;
+    if (cases != null) {
       grille = List.generate(n, (i) => List.generate(m, (j) => 0));
       entete = List.generate(n, (i) => List.generate(m, (j) => []));
       for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
           if (cases[nb].getElement("type")?.text == "vide") {
             grille[i][j] = -1;
-          }
-          else {
+          } else {
             if (cases[nb].getElement("type")?.text == "indice") {
               grille[i][j] =
                   int.parse(cases[nb].getElement("valeur")?.text as String);
               List<int> l = [];
-              l.add(int.parse(cases[nb].getElement("indiceligne")?.text as String));
-              l.add(int.parse(cases[nb].getElement("indicecolonne")?.text as String));
+              l.add(int.parse(
+                  cases[nb].getElement("indiceligne")?.text as String));
+              l.add(int.parse(
+                  cases[nb].getElement("indicecolonne")?.text as String));
               entete[i][j] = l;
             } else {
               grille[i][j] =
@@ -56,32 +57,34 @@ class Kakuro {
     }
   }
 
-  String toXML(){
-    String cases="";
-    for(var i=0;i<n;i++)
-      for(var j=0;j<m;j++)
-        if(grille[i][j]==-1)
-          cases = cases + "<case>"
-              "<type>vide</type>"
-              "<indiceligne>0</indiceligne>"
-              "<indicecolonne>0</indicecolonne>"
-              "<valeur>-1</valeur>"
-              "</case>";
+  String toXML() {
+    String cases = "";
+    for (var i = 0; i < n; i++)
+      for (var j = 0; j < m; j++)
+        if (grille[i][j] == -1)
+          cases = cases +
+              "<case>"
+                  "<type>vide</type>"
+                  "<indiceligne>0</indiceligne>"
+                  "<indicecolonne>0</indicecolonne>"
+                  "<valeur>-1</valeur>"
+                  "</case>";
+        else if (entete[i][j].isNotEmpty)
+          cases = cases +
+              "<case>"
+                  "<type>indice</type>"
+                  "<indiceligne>${entete[i][j][0]}</indiceligne>"
+                  "<indicecolonne>${entete[i][j][1]}</indicecolonne>"
+                  "<valeur>${grille[i][j]}</valeur>"
+                  "</case>";
         else
-          if(entete[i][j].isNotEmpty)
-            cases = cases + "<case>"
-                "<type>indice</type>"
-                "<indiceligne>${entete[i][j][0]}</indiceligne>"
-                "<indicecolonne>${entete[i][j][1]}</indicecolonne>"
-                "<valeur>${grille[i][j]}</valeur>"
-                "</case>";
-          else
-            cases = cases + "<case>"
-                "<type>click</type>"
-                "<indiceligne>0</indiceligne>"
-                "<indicecolonne>0</indicecolonne>"
-                "<valeur>${grille[i][j]}</valeur>"
-                "</case>";
+          cases = cases +
+              "<case>"
+                  "<type>click</type>"
+                  "<indiceligne>0</indiceligne>"
+                  "<indicecolonne>0</indicecolonne>"
+                  "<valeur>${grille[i][j]}</valeur>"
+                  "</case>";
     var xml = '''<?xml version="1.0"?>
     <kakuro>
       <n>${n}</n>
@@ -266,18 +269,18 @@ class Kakuro {
     return false;
   }
 
-  List<List<int>> getGrille(){
+  List<List<int>> getGrille() {
     return grille;
   }
 
-  List<List<int>> getBase(){
+  List<List<int>> getBase() {
     List<List<int>> base = List.generate(n, (i) => List.generate(m, (j) => 0));
-    for(int i=0;i<n;i++){
-      for(int j=0;j<m;j++){
-        if(entete[i][j].isEmpty && grille[i][j]!=-1){
-          base[i][j]=0;
-        }else{
-          base[i][j]=grille[i][j];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (entete[i][j].isEmpty && grille[i][j] != -1) {
+          base[i][j] = 0;
+        } else {
+          base[i][j] = grille[i][j];
         }
       }
     }
@@ -301,11 +304,47 @@ class Kakuro {
       print("");
     }
   }
+
+  List<List<int>> getGrilleUpdated() {
+    // add a row and column of zeros in the first position of the grid
+    List<List<int>> grilleUpdated =
+        List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        grilleUpdated[i + 1][j + 1] = grille[i][j];
+      }
+    }
+    return grilleUpdated;
+  }
+
+  List<List<int>> getIndiceColomnes() {
+    List<List<int>> indiceColomnes =
+        List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        if (entete[i][j].isNotEmpty) indiceColomnes[i][j + 1] = entete[i][j][1];
+      }
+    }
+    return indiceColomnes;
+  }
+
+  List<List<int>> getIndiceLignes() {
+    List<List<int>> indiceLignes =
+        List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
+    for (int i = n - 1; i >= 0; i--) {
+      for (int j = m - 1; j >= 0; j--) {
+        if (entete[i][j].isNotEmpty) indiceLignes[i + 1][j] = entete[i][j][0];
+      }
+    }
+    return indiceLignes;
+  }
 }
 
-// // test main
-// void main() {
-//   Kakuro g = Kakuro(5, 5, 9);
-//   g.affiche();
-//   g.afficheEntete();
-// }
+// test main
+void main() {
+  Kakuro g = Kakuro(5, 5, 9);
+  // g.affiche();
+  // g.afficheEntete();
+  print(g.getGrilleUpdated());
+  // print(g.getIndiceColomnes());
+}
