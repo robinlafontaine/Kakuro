@@ -58,7 +58,6 @@ class _gameState extends State<game> {
   }
 
   Future<void> saveGrille() async {
-    print(grille);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? grilles = await prefs.getStringList("grilles");
     List<String>? chronos = await prefs.getStringList("chronos");
@@ -113,7 +112,7 @@ class _gameState extends State<game> {
     bool valide=true;
     for(int i=0;i<kakuro.n;i++){
       for(int j=0;j<kakuro.m;j++){
-        if(grille[i][j]!=kakuro.grille[i][j]){
+        if(grille[i][j]!=kakuro.grilleUpdated[i][j]){
           valide=false;
           break;
         }

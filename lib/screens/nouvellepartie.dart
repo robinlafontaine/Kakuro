@@ -19,10 +19,10 @@ class nouvellepartie extends StatefulWidget{
 }
 
 class nouvellepartieState extends State<nouvellepartie>{
-  String ligne="4",colonne="4",diff="1";
-  var items = ["4","5","6","7","8","9","10","11",
+  String ligne="4",colonne="4",diff="Facile";
+  var items = ["6","7","8","9","10","11",
   ];
-  var difficulte = ["1","2","3","4","5","6","7","8","9","10"];
+  var difficulte = ["Facile", "Moyen", "Difficile"];
 
   void initState(){
     super.initState();
@@ -196,7 +196,11 @@ class nouvellepartieState extends State<nouvellepartie>{
                             game(kakuro :Kakuro(
                                 int.parse(ligne)-1,
                                 int.parse(colonne)-1,
-                                int.parse(diff)
+                                (diff==difficulte[0])?
+                                    4
+                                    :(diff==difficulte[1])?
+                                    7
+                                    :10
                             ),
                             )
                         );

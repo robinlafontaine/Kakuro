@@ -80,7 +80,7 @@ class Kakuro {
                   "<type>indice</type>"
                   "<indiceligne>${indiceLigne[i][j]}</indiceligne>"
                   "<indicecolonne>${indiceColonne[i][j]}</indicecolonne>"
-                  "<valeur>${0}</valeur>"
+                  "<valeur>-1</valeur>"
                   "</case>";
         else
           cases = cases +
@@ -88,7 +88,7 @@ class Kakuro {
                   "<type>click</type>"
                   "<indiceligne>0</indiceligne>"
                   "<indicecolonne>0</indicecolonne>"
-                  "<valeur>${0}</valeur>"
+                  "<valeur>${grilleUpdated[i][j]}</valeur>"
                   "</case>";
     var xml = '''<?xml version="1.0"?>
     <kakuro>
@@ -307,7 +307,7 @@ class Kakuro {
     List<List<int>> base = List.generate(n, (i) => List.generate(m, (j) => 0));
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (grilleUpdated[i][j]==-1 && indiceColonne[i][j]==0 && indiceLigne[i][j]==0) {
+        if (grilleUpdated[i][j]==-1) {
           base[i][j] = -1;
         }
       }
