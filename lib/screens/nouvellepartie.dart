@@ -195,8 +195,8 @@ class nouvellepartieState extends State<nouvellepartie>{
                         config.newgame=true;
                         route(context,
                             game(kakuro :Kakuro(
-                                int.parse(ligne),
-                                int.parse(colonne),
+                                int.parse(ligne)-1,
+                                int.parse(colonne)-1,
                                 int.parse(diff)
                             ),
                             )

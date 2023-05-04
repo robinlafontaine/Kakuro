@@ -24,6 +24,11 @@ class _sceneState extends State<scene>{
   _sceneState(this.kakuro,this.maj);
 
   void initState(){
+    print(kakuro.indiceLigne.length);
+    print(kakuro.indiceColonne.length);
+    print(kakuro.indiceLigne);
+    print(kakuro.indiceColonne);
+    print(kakuro.grilleUpdated);
   }
 
   @override
@@ -45,27 +50,27 @@ class _sceneState extends State<scene>{
                  child: Row(
                   children: <Widget>[
                     for(int j=0; j<kakuro.m-1;j++)
-                      if(kakuro.entete.elementAt(i).elementAt(j).isNotEmpty)
+                      if(kakuro.indiceColonne[i][j]!=0 || kakuro.indiceLigne[i][j]!=0)
                         Indice(
-                            kakuro.entete.elementAt(i).elementAt(j).elementAt(0),
-                            kakuro.entete.elementAt(i).elementAt(j).elementAt(1),
+                            kakuro.indiceLigne[i][j],
+                            kakuro.indiceColonne[i][j],
                             ((width(context)/1.1)/kakuro.m)-2,
                             false
                         )
                       else
-                        if(kakuro.grille.elementAt(i).elementAt(j)==-1)
+                        if(kakuro.grilleUpdated[i][j]==-1)
                           CaseVide(((width(context)/1.1)/kakuro.m)-2, false)
                         else
                           Case((widget.base==null)?0:widget.base![i][j],i, j, ((width(context)/1.1)/kakuro.m)-2, false, maj),
-                    if(kakuro.entete.elementAt(i).elementAt(kakuro.m-1).isNotEmpty)
+                    if(kakuro.indiceColonne[i][kakuro.m-1]!=0 || kakuro.indiceLigne[i][kakuro.m-1]!=0)
                       Indice(
-                          kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(0),
-                          kakuro.entete.elementAt(i).elementAt(kakuro.m-1).elementAt(1),
+                          kakuro.indiceLigne[i][kakuro.m-1],
+                          kakuro.indiceColonne[i][kakuro.m-1],
                           ((width(context)/1.1)/kakuro.m)-2,
                           true
                       )
                     else
-                      if(kakuro.grille.elementAt(i).elementAt(kakuro.m-1)==-1)
+                      if(kakuro.grilleUpdated[i][kakuro.m-1]==-1)
                         CaseVide(((width(context)/1.1)/kakuro.m)-2, true)
                       else
                         Case((widget.base==null)?0:widget.base![i][kakuro.m-1],i, kakuro.m-1, ((width(context)/1.1)/kakuro.m)-2, true, maj),

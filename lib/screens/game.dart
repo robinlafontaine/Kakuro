@@ -40,7 +40,7 @@ class _gameState extends State<game> {
 
   void initState(){
     if(widget.base==null && widget.chrono==null){
-      grille = kakuro.getBase();
+      //grille = kakuro.getBase();
     }else{
       seconde = widget.chrono!;
       grille = widget.base!;

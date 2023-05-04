@@ -87,9 +87,9 @@ class _appbarState extends State<appbar> {
                   ),
                   child: Center(
                     child: IconButton(
-                        icon: FaIcon((config.online)?FontAwesomeIcons.signOut:FontAwesomeIcons.signIn),
+                        icon: Icon((config.online)?Icons.wifi:Icons.wifi_off),
                         iconSize: width(context) / 20,
-                        color: config.colors.primaryTextColor,
+                        color: (config.online)?Colors.green:Colors.red,
                         hoverColor: Colors.transparent,
                         onPressed: () {
                             (config.online)

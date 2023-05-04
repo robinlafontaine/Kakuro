@@ -30,10 +30,6 @@ class _mespartiesState extends State<mesparties> {
   List etatSet=[];
   List<Kakuro> kakuros=[];
 
-  void initState(){
-    launch();
-  }
-
   List setEtat(){
     List liste = [];
     for(int k=0;k<etats.length;k++) {
@@ -47,7 +43,7 @@ class _mespartiesState extends State<mesparties> {
     return n.toString().padLeft(2, "0");
   }
 
-  Future<void> launch() async {
+  Future<bool> launch() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? _grilles = await prefs.getStringList("grilles");
     List<String>? _chronos = await prefs.getStringList("chronos");
@@ -67,7 +63,7 @@ class _mespartiesState extends State<mesparties> {
       }
       etatSet = setEtat();
     });
-
+    return grilles.length>0;
   }
 
   void retour(){
