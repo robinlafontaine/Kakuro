@@ -13,7 +13,7 @@ class Duels {
       if (kDebugMode) {
         print(e);
       }
-      return [];
+      return null;
     }
   }
 
@@ -68,6 +68,16 @@ class Duels {
         });
         value.reference.delete();
       });
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
+
+  Future<void> deleteDuel(String gameID) async {
+    try {
+      await db.collection("duels").doc(gameID).delete();
     } catch (e) {
       if (kDebugMode) {
         print(e);
