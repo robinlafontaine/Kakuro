@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import '../config/fonctions.dart';
@@ -16,8 +17,8 @@ class invitation extends StatefulWidget {
 }
 
 class invitationState extends State<invitation> {
-  String ligne = "2", colonne = "2", diff = "1", adversaire = "";
-  var items = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+  String ligne = "6", colonne = "6", diff = "1", adversaire = "";
+  var items = ["6", "7", "8", "9", "10", "11", "12"];
   var difficulte = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
   final Future playersFuture = Leaderboard.getPlayers();
@@ -32,7 +33,7 @@ class invitationState extends State<invitation> {
   }
 
   void retour() {
-    Navigator.pop(context);
+    route(context, multijoueur());
   }
 
   @override
@@ -246,7 +247,7 @@ class invitationState extends State<invitation> {
                               height: 30,
                             ),
                             boutton(
-                                value: "LANCER LA PARTIE",
+                                value: "LANCER LE DUEL",
                                 onPress: () {
                                   route(
                                       context,

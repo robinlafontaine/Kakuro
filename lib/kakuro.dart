@@ -31,23 +31,29 @@ class Kakuro {
     if (cases != null) {
       grille = List.generate(n, (i) => List.generate(m, (j) => 0));
       entete = List.generate(n, (i) => List.generate(m, (j) => []));
+      grilleUpdated = List.generate(n, (i) => List.generate(m, (j) => 0));
+      indiceColonne = List.generate(n, (i) => List.generate(m, (j) => 0));
+      indiceLigne = List.generate(n, (i) => List.generate(m, (j) => 0));
       for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
           if (cases[nb].getElement("type")?.text == "vide") {
             grille[i][j] = -1;
+            grilleUpdated[i][j] = -1;
+            indiceLigne[i][j] = 0;
+            indiceColonne[i][j] = 0;
           } else {
             if (cases[nb].getElement("type")?.text == "indice") {
-              grille[i][j] =
-                  int.parse(cases[nb].getElement("valeur")?.text as String);
+              grille[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
+              grilleUpdated[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
+              indiceLigne[i][j] = int.parse(cases[nb].getElement("indiceligne")?.text as String);
+              indiceColonne[i][j] = int.parse(cases[nb].getElement("indicecolonne")?.text as String);
               List<int> l = [];
-              l.add(int.parse(
-                  cases[nb].getElement("indiceligne")?.text as String));
-              l.add(int.parse(
-                  cases[nb].getElement("indicecolonne")?.text as String));
+              l.add(int.parse(cases[nb].getElement("indiceligne")?.text as String));
+              l.add(int.parse(cases[nb].getElement("indicecolonne")?.text as String));
               entete[i][j] = l;
             } else {
-              grille[i][j] =
-                  int.parse(cases[nb].getElement("valeur")?.text as String);
+              grille[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
+              grilleUpdated[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
             }
           }
           nb++;

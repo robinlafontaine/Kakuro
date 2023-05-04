@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
-import 'package:kakuro/screens/enligne.dart';
-import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/screens/mesparties.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/screens/parametres.dart';
+
+import '../screens/menu.dart';
 
 class navbar extends StatelessWidget {
   final int actif;
@@ -30,11 +30,7 @@ class navbar extends StatelessWidget {
               if(checkGrille!=null){
                 checkGrille!();
               }
-              if(config.online){
-                route(context, enligne());
-              }else {
-                route(context, horsligne());
-              }
+              route(context, menu());
             },
             icon: FaIcon(
               FontAwesomeIcons.house,

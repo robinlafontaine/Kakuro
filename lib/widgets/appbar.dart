@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
-import 'package:kakuro/screens/enligne.dart';
-import 'package:kakuro/screens/horsligne.dart';
-
 import '../auth.dart';
+import '../screens/menu.dart';
 
 class appbar extends StatefulWidget {
   bool home;
@@ -94,7 +92,7 @@ class _appbarState extends State<appbar> {
                         (config.online)
                             ? {
                                 config.online = false,
-                                route(context, horsligne())
+                                route(context, menu())
                               }
                             : {
                                 FirebaseAuth.instance
@@ -105,7 +103,7 @@ class _appbarState extends State<appbar> {
                                         .signInGoogle(context);
                                   } else {
                                     config.online = true;
-                                    route(context, enligne());
+                                    route(context, menu());
                                   }
                                 }).onError((error, stackTrace) {})
                               };

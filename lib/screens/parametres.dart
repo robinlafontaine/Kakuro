@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
-import 'package:kakuro/screens/enligne.dart';
-import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';

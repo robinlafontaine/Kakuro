@@ -1,15 +1,8 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:kakuro/screens/enligne.dart';
-import 'package:kakuro/screens/horsligne.dart';
-import 'package:kakuro/widgets/boutton.dart';
+import 'package:kakuro/screens/menu.dart';
 import 'firebase_options.dart';
-import 'package:kakuro/config/config.dart';
-import 'package:kakuro/config/fonctions.dart';
-import 'auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,63 +35,7 @@ class MyApp extends StatelessWidget {
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
-      home: MyStatefulWidget(),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  var player = AudioPlayer();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: config.colors.primaryBackground,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              config.images.logo,
-              width: width(context) / 2,
-              height: width(context) / 2,
-            ),
-            const SizedBox(
-              height: 70,
-            ),
-            boutton(
-              value: "EN LIGNE",
-              onPress: () => {
-                FirebaseAuth.instance.authStateChanges().listen((User? user) {
-                  if (user == null) {
-                    Auth(FirebaseAuth.instance).signInGoogle(context);
-                  } else {
-                    config.online = true;
-                    route(context, enligne());
-                  }
-                })
-              },
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            boutton(
-                value: "HORS LIGNE",
-                onPress: () => {
-                      //Auth(FirebaseAuth.instance).signInGoogle(context),
-                      //log(FirebaseAuth.instance.app.name),
-                      //route(context, game(Kakuro(10, 8, 7)))
-
-                      route(context, horsligne())
-                      //Leaderboard.saveHighScore(6000)
-                    }),
-          ],
-        ),
-      ),
+      home: menu(),
     );
   }
 }

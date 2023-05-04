@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
-import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/game.dart';
-import 'package:kakuro/screens/horsligne.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
+import 'menu.dart';
 
 class nouvellepartie extends StatefulWidget{
 
@@ -33,7 +32,7 @@ class nouvellepartieState extends State<nouvellepartie>{
   }
 
   void retour(){
-    route(context, (config.online)?enligne():horsligne());
+    route(context, menu());
   }
 
   @override

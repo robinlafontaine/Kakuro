@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/classement.dart';
-import 'package:kakuro/screens/enligne.dart';
 import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/screens/parametres.dart';
@@ -10,6 +9,7 @@ import 'package:kakuro/widgets/boutton.dart';
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
+import 'menu.dart';
 
 class multijoueur extends StatefulWidget{
 
@@ -20,7 +20,7 @@ class multijoueur extends StatefulWidget{
 class _multijoueurState extends State<multijoueur> {
 
   void retour(){
-    route(context, enligne());
+    route(context, menu());
   }
 
   @override
@@ -50,7 +50,7 @@ class _multijoueurState extends State<multijoueur> {
               ),
               SizedBox(height: 40,),
               boutton(
-                  value: "ENVOYER INVITATION",
+                  value: "LANCER DUEL",
                   onPress: (){
                     route(context, invitation());
                   }
