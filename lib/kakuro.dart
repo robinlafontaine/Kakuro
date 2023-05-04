@@ -119,13 +119,38 @@ class Kakuro {
   void genererTrou() {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (Random().nextInt(difficulte).toInt() == 1) {
+        if (i == 0 || j == 0) {
+          if (Random().nextInt(difficulte ~/ 2).toInt() == 1) {
+            grille[i][j] = -1;
+          }
+        } else if (emptyNeighbour(i, j)) {
+          if (Random().nextInt(difficulte).toInt() == 1) {
+            grille[i][j] = -1;
+          }
+        } else if (Random().nextInt(difficulte).toInt() == 1) {
           grille[i][j] = -1;
         }
       }
     }
     checkTrou();
     genererEntete();
+  }
+
+  bool emptyNeighbour(int i, int j) {
+    // check if there is an empty neighbour
+    if (i > 0 && (grille[i - 1][j] == -1 || grille[i - 1][j] == 0)) {
+      return true;
+    }
+    if (i < n - 1 && (grille[i + 1][j] == -1 || grille[i + 1][j] == 0)) {
+      return true;
+    }
+    if (j > 0 && (grille[i][j - 1] == -1 || grille[i][j - 1] == 0)) {
+      return true;
+    }
+    if (j < m - 1 && (grille[i][j + 1] == -1 || grille[i][j + 1] == 0)) {
+      return true;
+    }
+    return false;
   }
 
   void checkTrou() {
