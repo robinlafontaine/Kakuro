@@ -44,7 +44,7 @@ class _menuState extends State<menu> {
                   width: width(context) / 2,
                   height: width(context) / 2,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 boutton(
@@ -52,7 +52,7 @@ class _menuState extends State<menu> {
                     onPress: () {
                       route(context, nouvellepartie());
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 boutton(
@@ -60,7 +60,7 @@ class _menuState extends State<menu> {
                     onPress: () {
                       route(context, mesparties());
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 boutton(
