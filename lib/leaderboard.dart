@@ -43,7 +43,6 @@ class Leaderboard {
     // Sauvegarde le score de l'utilisateur dans la BDD
     final currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser == null) return;
-
     try {
       final uid = currentUser.uid;
       final docRef = db.collection("leaderboard").doc(uid);
@@ -104,5 +103,13 @@ class Leaderboard {
         print(e);
       }
     }
+  }
+
+  Future<void> userExists(context) async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+    await db.collection("leaderboard").doc(uid).set(
+        {"name": FirebaseAuth.instance.currentUser?.displayName},
+        SetOptions(merge: true));
   }
 }

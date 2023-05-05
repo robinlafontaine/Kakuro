@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
 import '../auth.dart';
+import '../leaderboard.dart';
 import '../screens/menu.dart';
 
 class appbar extends StatefulWidget {
@@ -90,17 +91,16 @@ class _appbarState extends State<appbar> {
                       color: (config.online) ? Colors.green : Colors.red,
                       onPressed: () {
                         (config.online)
-                            ? {
-                                config.online = false,
-                                route(context, menu())
-                              }
+                            ? {config.online = false, route(context, menu())}
                             : {
                                 FirebaseAuth.instance
                                     .authStateChanges()
                                     .listen((User? user) {
                                   if (user == null) {
                                     Auth(FirebaseAuth.instance)
-                                        .signInGoogle(context);
+                                        .signInGoogle(context)
+                                        .then((value) =>
+                                            Leaderboard().userExists(context));
                                   } else {
                                     config.online = true;
                                     route(context, menu());
