@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/multijoueur.dart';
@@ -9,7 +10,6 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
 class classement extends StatefulWidget {
-
   @override
   //Leaderboard.getLeaderboard(limite)
   State<classement> createState() => classementState();
@@ -25,7 +25,7 @@ class classementState extends State<classement> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         retour();
         return true;
       },
@@ -35,11 +35,8 @@ class classementState extends State<classement> {
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: appbar(
-                home: false,
-                enjeu: false,
-                retour: () => {retour()}
-              ),
+              child:
+                  appbar(home: false, enjeu: false, retour: () => {retour()}),
             ),
           ),
           body: SingleChildScrollView(
@@ -99,7 +96,8 @@ class classementState extends State<classement> {
                                 child: Row(
                                   children: [
                                     Container(
-                                        margin: const EdgeInsets.only(right: 10),
+                                        margin:
+                                            const EdgeInsets.only(right: 10),
                                         width: width(context) / 5,
                                         height: 40,
                                         child: Center(
@@ -108,12 +106,17 @@ class classementState extends State<classement> {
                                         alignment: Alignment.centerLeft,
                                         width: width(context) / 2.7,
                                         height: 40,
-                                        child: Text(snapshot.data[i]["name"])),
+                                        child: Text(snapshot.data[i].id ==
+                                                FirebaseAuth
+                                                    .instance.currentUser?.uid
+                                            ? "Moi"
+                                            : snapshot.data[i]["name"])),
                                     Container(
                                         width: width(context) / 3.3,
                                         height: 40,
                                         child: Center(
-                                            child: Text(snapshot.data[i]["score"]
+                                            child: Text(snapshot.data[i]
+                                                    ["score"]
                                                 .toString()))),
                                   ],
                                 ),
@@ -127,14 +130,15 @@ class classementState extends State<classement> {
                       return const Center(child: CircularProgressIndicator());
                     }
                   })),
-          bottomNavigationBar: navbar(actif:10, reaload: (){
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => parametre())).then((value) {
-              setState(() {});
-            });
-          })),
+          bottomNavigationBar: navbar(
+              actif: 10,
+              reaload: () {
+                Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => parametre()))
+                    .then((value) {
+                  setState(() {});
+                });
+              })),
     );
   }
 }
