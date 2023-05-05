@@ -11,6 +11,7 @@ class Kakuro {
     grille = List.generate(n, (i) => List.generate(m, (j) => 0));
     entete = List.generate(n, (i) => List.generate(m, (j) => []));
     maxi = max(n, m);
+    if (maxi < 9) maxi = 9;
 
     genererGrille();
     updateGrille();
