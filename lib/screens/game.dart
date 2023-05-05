@@ -17,42 +17,44 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'menu.dart';
 import 'mesparties.dart';
 
-class game extends StatefulWidget{
+class game extends StatefulWidget {
   final Kakuro kakuro;
   final List? base;
   final int? index;
   final int? chrono;
 
-  const game({super.key, required this.kakuro, this.base, this.index, this.chrono});
+  const game(
+      {super.key, required this.kakuro, this.base, this.index, this.chrono});
 
-
-  @override State<game> createState() => _gameState(kakuro);
+  @override
+  State<game> createState() => _gameState(kakuro);
 }
 
 class _gameState extends State<game> {
   Kakuro kakuro;
-  List grille=[];
-  int seconde=0;
+  List grille = [];
+  int seconde = 0;
   Timer? timer;
   Duration duration = Duration();
   _gameState(this.kakuro);
 
-  void initState(){
-    if(widget.base==null && widget.chrono==null){
+  void initState() {
+    if (widget.base == null && widget.chrono == null) {
       grille = kakuro.getBase();
-    }else{
+    } else {
       seconde = widget.chrono!;
       grille = widget.base!;
     }
     startTimer();
   }
 
-  void addPoints(){
-    int puntos = (20*(kakuro.n +kakuro.m +kakuro.difficulte) -seconde) as int ;
+  void addPoints() {
+    int puntos =
+        (20 * (kakuro.n + kakuro.m + kakuro.difficulte) - seconde) as int;
     Leaderboard.addNewScore(puntos);
   }
 
-  String getEtat(){
+  String getEtat() {
     var s = json.encode(grille);
     return s;
   }
@@ -73,7 +75,7 @@ class _gameState extends State<game> {
     await prefs.setStringList('chronos', chronos);
     await prefs.setStringList('etats', etats);
 
-  /*  await prefs.setStringList('grilles', []);
+    /*  await prefs.setStringList('grilles', []);
     await prefs.setStringList('chronos', []);
     await prefs.setStringList('etats', []);*/
   }
@@ -86,8 +88,8 @@ class _gameState extends State<game> {
     chronos ??= [];
     String etatsActuel = getEtat();
     String chronoActuel = seconde.toString();
-    etats[widget.index!]=etatsActuel;
-    chronos[widget.index!]=chronoActuel;
+    etats[widget.index!] = etatsActuel;
+    chronos[widget.index!] = chronoActuel;
     await prefs.setStringList('etats', etats);
     await prefs.setStringList('chronos', chronos);
   }
@@ -108,19 +110,19 @@ class _gameState extends State<game> {
     await prefs.setStringList('etats', etats);
   }
 
-  void testValide(){
-    bool valide=true;
-    for(int i=0;i<kakuro.n;i++){
-      for(int j=0;j<kakuro.m;j++){
-        if(grille[i][j]!=kakuro.grilleUpdated[i][j]){
-          valide=false;
+  void testValide() {
+    bool valide = true;
+    for (int i = 0; i < kakuro.n; i++) {
+      for (int j = 0; j < kakuro.m; j++) {
+        if (grille[i][j] != kakuro.grilleUpdated[i][j]) {
+          valide = false;
           break;
         }
       }
     }
-    if(valide){
+    if (valide) {
       addPoints();
-      if(config.newgame==false) suppGrille();
+      if (config.newgame == false) suppGrille();
       route(context, menu());
     }
   }
@@ -130,18 +132,18 @@ class _gameState extends State<game> {
   }
 
   void addTime() {
-    seconde +=1;
+    seconde += 1;
   }
 
-  void maj(int i,int j,int valeur){
+  void maj(int i, int j, int valeur) {
     this.grille[i][j] = valeur;
   }
 
-  void retour(){
-    if(config.newgame){
+  void retour() {
+    if (config.newgame) {
       saveGrille();
       route(context, nouvellepartie());
-    }else{
+    } else {
       majGrille();
       route(context, mesparties());
     }
@@ -150,75 +152,90 @@ class _gameState extends State<game> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         retour();
         return true;
       },
       child: Scaffold(
-        backgroundColor: config.colors.primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, width(context)/6),
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: appbar(home:false,enjeu:true,retour:this.retour,chrono : widget.chrono, abandon: openDialogAbandon,),
+          backgroundColor: config.colors.primaryBackground,
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, width(context) / 6),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: appbar(
+                home: false,
+                enjeu: true,
+                retour: this.retour,
+                chrono: widget.chrono,
+                abandon: openDialogAbandon,
+              ),
+            ),
           ),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              SizedBox(
-                height: height(context)/10,
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: height(context) / 10,
+                  ),
+                  Center(
+                      child: (widget.base == null)
+                          ? scene(kakuro: kakuro, maj: maj)
+                          : scene(kakuro: kakuro, maj: maj, base: widget.base)),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  boutton(
+                      value: "VALIDER",
+                      onPress: () {
+                        testValide();
+                      }),
+                ],
               ),
-              Center(
-                child:
-                (widget.base==null)?
-                  scene(kakuro:kakuro,maj:maj):
-                  scene(kakuro:kakuro,maj:maj,base: widget.base)
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              boutton(
-                  value: "VALIDER",
-                  onPress: (){
-                    testValide();
-                  }
-              ),
-            ],
+            ),
           ),
-        ),
-        bottomNavigationBar: navbar(
-            actif:10,
-            checkGrille: (){
-              (config.newgame)
-                  ?saveGrille()
-                  :majGrille();
-              } ,
-            reaload:(){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => parametre())).then((value) { setState(() {});});})
-      ),
+          bottomNavigationBar: navbar(
+              actif: 10,
+              checkGrille: () {
+                (config.newgame) ? saveGrille() : majGrille();
+              },
+              reaload: () {
+                Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => parametre()))
+                    .then((value) {
+                  setState(() {});
+                });
+              })),
     );
   }
 
   Future openDialogAbandon() => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Abandon'),
-        content: Text('Etes-vous sûr de vouloir abandonner cette partie ?'),
-        actions: [
-          TextButton(onPressed: (){
-            if(config.newgame==true){
-              route(context, nouvellepartie());
-            }else{
-              suppGrille().then((value) => route(context, mesparties()));
-            }
-          }, child: Text("Oui",style: TextStyle(color: config.colors.defaultPrimary),)),
-          TextButton(onPressed: (){
-            Navigator.pop(context);
-          }, child: Text("NON",style: TextStyle(color: config.colors.defaultPrimary),))
-        ],
-      )
-  );
-
-
+            title: Text('Abandon'),
+            content: Text('Etes-vous sûr de vouloir abandonner cette partie ?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    if (config.newgame == true) {
+                      route(context, nouvellepartie());
+                    } else {
+                      suppGrille()
+                          .then((value) => route(context, mesparties()));
+                    }
+                  },
+                  child: Text(
+                    "Oui",
+                    style: TextStyle(color: config.colors.defaultPrimary),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "NON",
+                    style: TextStyle(color: config.colors.defaultPrimary),
+                  ))
+            ],
+          ));
 }
