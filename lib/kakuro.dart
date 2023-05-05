@@ -43,17 +43,25 @@ class Kakuro {
             indiceColonne[i][j] = 0;
           } else {
             if (cases[nb].getElement("type")?.text == "indice") {
-              grille[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
-              grilleUpdated[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
-              indiceLigne[i][j] = int.parse(cases[nb].getElement("indiceligne")?.text as String);
-              indiceColonne[i][j] = int.parse(cases[nb].getElement("indicecolonne")?.text as String);
+              grille[i][j] =
+                  int.parse(cases[nb].getElement("valeur")?.text as String);
+              grilleUpdated[i][j] =
+                  int.parse(cases[nb].getElement("valeur")?.text as String);
+              indiceLigne[i][j] = int.parse(
+                  cases[nb].getElement("indiceligne")?.text as String);
+              indiceColonne[i][j] = int.parse(
+                  cases[nb].getElement("indicecolonne")?.text as String);
               List<int> l = [];
-              l.add(int.parse(cases[nb].getElement("indiceligne")?.text as String));
-              l.add(int.parse(cases[nb].getElement("indicecolonne")?.text as String));
+              l.add(int.parse(
+                  cases[nb].getElement("indiceligne")?.text as String));
+              l.add(int.parse(
+                  cases[nb].getElement("indicecolonne")?.text as String));
               entete[i][j] = l;
             } else {
-              grille[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
-              grilleUpdated[i][j] = int.parse(cases[nb].getElement("valeur")?.text as String);
+              grille[i][j] =
+                  int.parse(cases[nb].getElement("valeur")?.text as String);
+              grilleUpdated[i][j] =
+                  int.parse(cases[nb].getElement("valeur")?.text as String);
             }
           }
           nb++;
@@ -66,7 +74,9 @@ class Kakuro {
     String cases = "";
     for (var i = 0; i < n; i++)
       for (var j = 0; j < m; j++)
-        if (grilleUpdated[i][j] == -1 && indiceLigne[i][j]==0 && indiceColonne[i][j]==0)
+        if (grilleUpdated[i][j] == -1 &&
+            indiceLigne[i][j] == 0 &&
+            indiceColonne[i][j] == 0)
           cases = cases +
               "<case>"
                   "<type>vide</type>"
@@ -74,7 +84,7 @@ class Kakuro {
                   "<indicecolonne>0</indicecolonne>"
                   "<valeur>-1</valeur>"
                   "</case>";
-        else if (indiceLigne[i][j]!=0 || indiceColonne[i][j]!=0)
+        else if (indiceLigne[i][j] != 0 || indiceColonne[i][j] != 0)
           cases = cases +
               "<case>"
                   "<type>indice</type>"
@@ -307,7 +317,7 @@ class Kakuro {
     List<List<int>> base = List.generate(n, (i) => List.generate(m, (j) => 0));
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (grilleUpdated[i][j]==-1) {
+        if (grilleUpdated[i][j] == -1) {
           base[i][j] = -1;
         }
       }
@@ -375,8 +385,10 @@ class Kakuro {
         grilleUpdated[i + 1][j + 1] = grille[i][j];
       }
       for (int i = 0; i <= n; i++) {
-        grilleUpdated[0][i] = -1;
         grilleUpdated[i][0] = -1;
+      }
+      for (int i = 0; i <= m; i++) {
+        grilleUpdated[0][i] = -1;
       }
     }
     indiceColonne = List.generate(n + 1, (i) => List.generate(m + 1, (j) => 0));
