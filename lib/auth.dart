@@ -2,9 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kakuro/screens/menu.dart';
+import 'package:kakuro/config/config.dart';
+import 'config/fonctions.dart';
 
 class Auth {
   final FirebaseAuth _auth;
+
   Auth(this._auth);
 
   Future<UserCredential?> signInGoogle(BuildContext context) async {
@@ -27,21 +31,30 @@ class Auth {
         );
         return await FirebaseAuth.instance.signInWithCredential(credential);
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Couldn't Sign In!")));
+          .showSnackBar(const SnackBar(content: Text("Echec de connection !")));
     }
     return null;
   }
 
-  Future<User> getUser() async {
-    print(_auth.currentUser);
-    return _auth.currentUser!;
+  Future<bool> signedIn() async {
+    return _auth.currentUser != null;
   }
 
-  Future<void> signOutGoogle() async {
-    //TODO : Popup to show Sign Out
+  //check if signed in user is new or not
+  Future<bool> isNewUser() async {
+    return _auth.currentUser!.metadata.creationTime ==
+        _auth.currentUser!.metadata.lastSignInTime;
+  }
+
+  void signOutGoogle(context) async {
+    await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
-    await _auth.signOut();
+    config.online = false;
+    route(context, menu());
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text("Déconnecté !")));
   }
 }

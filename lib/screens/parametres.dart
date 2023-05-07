@@ -1,108 +1,110 @@
 import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
+import 'package:kakuro/screens/menu.dart';
 import 'package:kakuro/screens/nouvellepartie.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 
+import '../auth.dart';
 import '../config/fonctions.dart';
 import '../widgets/appbar.dart';
 
-class parametre extends StatefulWidget{
-
+class parametre extends StatefulWidget {
   @override
   State<parametre> createState() => parametreState();
 }
 
 class parametreState extends State<parametre> {
+  String son = "";
+  String etatPlayer = "";
+  Color pickerColor = const Color(0x0fffffff);
+  bool picker = false;
 
-  String son="";
-  String etatPlayer="";
-  Color pickerColor = Color(0xFFFFFFF);
-  bool picker=false;
-
-  void initState(){
-    son=config.sons.actuel;
-    if(config.sons.player.state==PlayerState.playing){
-      etatPlayer="play";
+  void initState() {
+    son = config.sons.actuel;
+    if (config.sons.player.state == PlayerState.playing) {
+      etatPlayer = "play";
     }
   }
 
-  void stopMusic(){
+  void stopMusic() {
     config.sons.player.stop();
     setState(() {
-      etatPlayer="pause";
+      etatPlayer = "pause";
     });
     print(etatPlayer);
   }
 
   void PlayBreak() {
-      if(config.sons.player.state == PlayerState.playing){
-        config.sons.player.pause();
-        setState(() {
-          etatPlayer="pause";
-        });
-      }else{
-        if(config.sons.player.state==PlayerState.paused){
-          config.sons.player.resume();
-        }
-        config.sons.player.play(AssetSource(son));
-        setState(() {
-          etatPlayer="play";
-        });
+    if (config.sons.player.state == PlayerState.playing) {
+      config.sons.player.pause();
+      setState(() {
+        etatPlayer = "pause";
+      });
+    } else {
+      if (config.sons.player.state == PlayerState.paused) {
+        config.sons.player.resume();
       }
+      config.sons.player.play(AssetSource(son));
+      setState(() {
+        etatPlayer = "play";
+      });
+    }
   }
 
   void retour() {
     Navigator.pop(context);
   }
 
-  void toLight(){
+  void toLight() {
     setState(() {
-      config.colors.primaryColor=config.colors.defaultPrimary;
-      config.colors.primaryBackground=config.colors.defaultBackground;
-      config.colors.primaryTextBlack=config.colors.defaultTextBlack;
-      config.colors.primarySelect=config.colors.defaultPrimarySelect;
-      config.colors.primaryTitreSelect=config.colors.defaultTextBlack;
-      config.colors.primaryTextBackground=config.colors.primaryColor;
+      config.colors.primaryColor = config.colors.defaultPrimary;
+      config.colors.primaryBackground = config.colors.defaultBackground;
+      config.colors.primaryTextBlack = config.colors.defaultTextBlack;
+      config.colors.primarySelect = config.colors.defaultPrimarySelect;
+      config.colors.primaryTitreSelect = config.colors.defaultTextBlack;
+      config.colors.primaryTextBackground = config.colors.primaryColor;
     });
   }
 
-  void toDark(){
+  void toDark() {
     setState(() {
-      config.colors.primaryColor=config.colors.defaultPrimary;
-      config.colors.primaryBackground=config.colors.DarkBackground;
-      config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
-      config.colors.primarySelect=config.colors.primaryColor;
-      config.colors.primarySelectItem=config.colors.primaryColor;
-      config.colors.primaryTitreSelect=config.colors.defaultPrimaryText;
-      config.colors.primaryTextBackground=config.colors.primaryColor;
+      config.colors.primaryColor = config.colors.defaultPrimary;
+      config.colors.primaryBackground = config.colors.DarkBackground;
+      config.colors.primaryTextBlack = config.colors.defaultPrimaryText;
+      config.colors.primarySelect = config.colors.primaryColor;
+      config.colors.primarySelectItem = config.colors.primaryColor;
+      config.colors.primaryTitreSelect = config.colors.defaultPrimaryText;
+      config.colors.primaryTextBackground = config.colors.primaryColor;
     });
   }
 
-  void toPerso(){
+  void toPerso() {
     setState(() {
-      config.colors.primaryBackground=pickerColor.withOpacity(1);
-      if(pickerColor.red>200 && pickerColor.green>200 && pickerColor.blue>200){
+      config.colors.primaryBackground = pickerColor.withOpacity(1);
+      if (pickerColor.red > 200 &&
+          pickerColor.green > 200 &&
+          pickerColor.blue > 200) {
         config.colors.primaryColor = config.colors.defaultPrimary;
-        config.colors.primarySelect=config.colors.defaultPrimary;
-        config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
-        config.colors.primarySelectItem=config.colors.defaultPrimary;
-        config.colors.primaryTitreSelect=config.colors.defaultTextBlack;
-        config.colors.primaryTextBackground=config.colors.primaryColor;
-      }else{
-        config.colors.primarySelect=Colors.black.withOpacity(0.3);
+        config.colors.primarySelect = config.colors.defaultPrimary;
+        config.colors.primaryTextBlack = config.colors.defaultPrimaryText;
+        config.colors.primarySelectItem = config.colors.defaultPrimary;
+        config.colors.primaryTitreSelect = config.colors.defaultTextBlack;
+        config.colors.primaryTextBackground = config.colors.primaryColor;
+      } else {
+        config.colors.primarySelect = Colors.black.withOpacity(0.3);
         config.colors.primaryColor = Colors.black.withOpacity(0.3);
-        config.colors.primaryTextBlack=config.colors.defaultPrimaryText;
-        config.colors.primarySelectItem=config.colors.defaultPrimary;
-        config.colors.primaryTitreSelect=config.colors.defaultPrimaryText;
-        config.colors.primaryTextBackground=config.colors.primaryBackground;
-
+        config.colors.primaryTextBlack = config.colors.defaultPrimaryText;
+        config.colors.primarySelectItem = config.colors.defaultPrimary;
+        config.colors.primaryTitreSelect = config.colors.defaultPrimaryText;
+        config.colors.primaryTextBackground = config.colors.primaryBackground;
       }
-      picker=false;
+      picker = false;
     });
   }
 
@@ -113,214 +115,223 @@ class parametreState extends State<parametre> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         retour();
         return true;
       },
       child: Scaffold(
         backgroundColor: config.colors.primaryBackground,
         appBar: PreferredSize(
-          preferredSize: Size(double.infinity, width(context)/6),
+          preferredSize: Size(double.infinity, width(context) / 6),
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: appbar(home:false,enjeu:false,retour:retour),
+            child: appbar(home: false, enjeu: false, retour: retour),
           ),
         ),
         body: SingleChildScrollView(
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(15),
-              child: (picker)?
-              Container(
-                width: width(context)/1.1,
-                decoration: BoxDecoration(
-                  color: config.colors.defaultPrimaryText
-                ),
-                child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: ColorPicker(
-                            pickerColor: pickerColor,
-                            onColorChanged: changeColor,
-                          ),
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: boutton(value: "APPLIQUER", onPress: (){
-                              toPerso();
-                            })
-                        )
-                      ],
-                    ),
-                ),
-              ):
-              Column(
-                children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: width(context)/8,
+              child: (picker)
+                  ? Container(
+                      width: width(context) / 1.1,
                       decoration: BoxDecoration(
-                          color: config.colors.primarySelect
-                      ),
-                      padding: EdgeInsets.only(left: 15, right: 10),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            dropdownColor: config.colors.primarySelectItem,
-                            value: son,
-                            icon: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: config.colors.primaryTextBlack,
+                          color: config.colors.defaultPrimaryText),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              child: ColorPicker(
+                                pickerColor: pickerColor,
+                                onColorChanged: changeColor,
+                              ),
                             ),
-                            items: config.sons.sons.map((items) {
-                              return DropdownMenuItem(
-                                value: items,
-                                child: Container(
-                                  child: Text(
-                                    items.replaceRange(items.length-4, items.length, ""),
-                                    style: TextStyle(
-                                        color: config.colors.primaryTextBlack
-                                    ),
-                                  ),
-                                  width: width(context)/2.5,),
-                              );
-                            }).toList(),
-                            onChanged: (value){
-                              setState(() {
-                                value == null?"":
-                                son = value;
-                                config.sons.actuel = value!;
-                                etatPlayer="pause";
-                                config.sons.player.stop();
-                              });
-                            }
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: width(context)/8,
-                      height: width(context)/8,
-                      decoration: BoxDecoration(
-                        color: config.colors.primarySelect
-                      ),
-                      child: Center(
-                        child: InkWell(
-                          child: Icon(
-                            (etatPlayer=="play")?Icons.pause:Icons.play_arrow,
-                            size: width(context)/15,
-                            color: config.colors.primaryTextBlack,
-                          ),
-                          onTap: (){
-                            PlayBreak();
-                          },
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: width(context)/8,
-                      height: width(context)/8,
-                      decoration: BoxDecoration(
-                          color: config.colors.primarySelect
-                      ),
-                      child: Center(
-                        child: InkWell(
-                          child: Icon(
-                            Icons.square,
-                            size: width(context)/20,
-                            color: config.colors.primaryTextBlack,
-                          ),
-                          onTap: (){
-                            stopMusic();
-                          },
+                            Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: boutton(
+                                    value: "APPLIQUER",
+                                    onPress: () {
+                                      toPerso();
+                                    }))
+                          ],
                         ),
                       ),
                     )
-                    ]
-                  ),
-                  SizedBox(height:height(context)/20),
-                  Row(
-                    children: [
-                      InkWell(
-                        child: Container(
-                          height: width(context)/6,
-                          width: (width(context)/3) - 10,
-                          decoration: BoxDecoration(
-                            color: config.colors.primarySelect,
-                            border: Border(
-                              right: BorderSide(width: 2,color: config.colors.primaryBackground)
+                  : Column(
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: width(context) / 8,
+                                decoration: BoxDecoration(
+                                    color: config.colors.primarySelect),
+                                padding:
+                                    const EdgeInsets.only(left: 15, right: 10),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                      dropdownColor:
+                                          config.colors.primarySelectItem,
+                                      value: son,
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: config.colors.primaryTextBlack,
+                                      ),
+                                      items: config.sons.sons.map((items) {
+                                        return DropdownMenuItem(
+                                          value: items,
+                                          child: Container(
+                                            width: width(context) / 2.5,
+                                            child: Text(
+                                              items.replaceRange(
+                                                  items.length - 4,
+                                                  items.length,
+                                                  ""),
+                                              style: TextStyle(
+                                                  color: config
+                                                      .colors.primaryTextBlack),
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          value == null ? "" : son = value;
+                                          config.sons.actuel = value!;
+                                          etatPlayer = "pause";
+                                          config.sons.player.stop();
+                                        });
+                                      }),
+                                ),
+                              ),
+                              Container(
+                                width: width(context) / 8,
+                                height: width(context) / 8,
+                                decoration: BoxDecoration(
+                                    color: config.colors.primarySelect),
+                                child: Center(
+                                  child: InkWell(
+                                    child: Icon(
+                                      (etatPlayer == "play")
+                                          ? Icons.pause
+                                          : Icons.play_arrow,
+                                      size: width(context) / 15,
+                                      color: config.colors.primaryTextBlack,
+                                    ),
+                                    onTap: () {
+                                      PlayBreak();
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: width(context) / 8,
+                                height: width(context) / 8,
+                                decoration: BoxDecoration(
+                                    color: config.colors.primarySelect),
+                                child: Center(
+                                  child: InkWell(
+                                    child: Icon(
+                                      Icons.square,
+                                      size: width(context) / 20,
+                                      color: config.colors.primaryTextBlack,
+                                    ),
+                                    onTap: () {
+                                      stopMusic();
+                                    },
+                                  ),
+                                ),
+                              )
+                            ]),
+                        SizedBox(height: height(context) / 20),
+                        Row(
+                          children: [
+                            InkWell(
+                              child: Container(
+                                height: width(context) / 6,
+                                width: (width(context) / 3) - 10,
+                                decoration: BoxDecoration(
+                                    color: config.colors.primarySelect,
+                                    border: Border(
+                                        right: BorderSide(
+                                            width: 2,
+                                            color: config
+                                                .colors.primaryBackground))),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.wb_sunny,
+                                  size: width(context) / 15,
+                                  color: config.colors.primaryTextBlack,
+                                )),
+                              ),
+                              onTap: () {
+                                toLight();
+                              },
+                            ),
+                            InkWell(
+                              child: Container(
+                                height: width(context) / 6,
+                                width: (width(context) / 3) - 10,
+                                decoration: BoxDecoration(
+                                    color: config.colors.primarySelect,
+                                    border: Border(
+                                        right: BorderSide(
+                                            width: 2,
+                                            color: config
+                                                .colors.primaryBackground))),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.format_paint,
+                                  size: width(context) / 15,
+                                  color: config.colors.primaryTextBlack,
+                                )),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  picker = true;
+                                });
+                              },
+                            ),
+                            InkWell(
+                              child: Container(
+                                height: width(context) / 6,
+                                width: (width(context) / 3) - 10,
+                                decoration: BoxDecoration(
+                                  color: config.colors.primarySelect,
+                                ),
+                                child: Center(
+                                    child: FaIcon(
+                                  FontAwesomeIcons.solidMoon,
+                                  size: width(context) / 15,
+                                  color: config.colors.primaryTextBlack,
+                                )),
+                              ),
+                              onTap: () {
+                                toDark();
+                              },
                             )
-                          ),
-                          child: Center(
-                            child:Icon(
-                              Icons.wb_sunny,
-                              size: width(context)/15,
-                              color: config.colors.primaryTextBlack,
-                            )
-                          ),
+                          ],
                         ),
-                        onTap: (){
-                          toLight();
-                        },
-                      ),
-                      InkWell(
-                        child: Container(
-                          height: width(context)/6,
-                          width:(width(context)/3) - 10,
-                          decoration: BoxDecoration(
-                              color: config.colors.primarySelect,
-                              border: Border(
-                                  right: BorderSide(width: 2,color: config.colors.primaryBackground)
-                              )
-                          ),
-                          child: Center(
-                              child:Icon(
-                                Icons.format_paint,
-                                size: width(context)/15,
-                                color: config.colors.primaryTextBlack,
-                              )
-                          ),
-                        ),
-                        onTap: (){
-                          setState(() {
-                            picker=true;
-                          });
-                        },
-                      ),
-                      InkWell(
-                        child: Container(
-                          height: width(context)/6,
-                          width: (width(context)/3) - 10,
-                          decoration: BoxDecoration(
-                              color: config.colors.primarySelect,
-                          ),
-                          child: Center(
-                              child:FaIcon(
-                                FontAwesomeIcons.solidMoon,
-                                size: width(context)/15,
-                                color: config.colors.primaryTextBlack,
-                              )
-                          ),
-                        ),
-                        onTap: (){
-                          toDark();
-                        },
-                      )
-                    ],
-                  ),
-                  ElevatedButton(onPressed: (){
-
-                  }, child: Text("TEST"))
-                ],
-              ),
+                        ElevatedButton(
+                            onPressed: () {
+                              Auth(FirebaseAuth.instance)
+                                  .signOutGoogle(context);
+                            },
+                            child: const Text("SIGN OUT")),
+                        ElevatedButton(
+                            onPressed: () {}, child: const Text("TEST"))
+                      ],
+                    ),
             ),
           ),
         ),
-        bottomNavigationBar: navbar(actif:3,reaload:(){setState(() {});}),
+        bottomNavigationBar: navbar(
+            actif: 3,
+            reaload: () {
+              setState(() {});
+            }),
       ),
     );
   }
-
 }

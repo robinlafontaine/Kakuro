@@ -93,19 +93,28 @@ class _appbarState extends State<appbar> {
                         (config.online)
                             ? {config.online = false, route(context, menu())}
                             : {
-                                FirebaseAuth.instance
-                                    .authStateChanges()
-                                    .listen((User? user) {
-                                  if (user == null) {
-                                    Auth(FirebaseAuth.instance)
-                                        .signInGoogle(context)
-                                        .then((value) =>
-                                            Leaderboard().userExists(context));
-                                  } else {
-                                    config.online = true;
-                                    route(context, menu());
-                                  }
-                                }).onError((error, stackTrace) {})
+                                Auth(FirebaseAuth.instance)
+                                    .signedIn()
+                                    .then(((connected) => {
+                                          if (!connected)
+                                            {
+                                              Auth(FirebaseAuth.instance)
+                                                  .signInGoogle(context)
+                                                  .then((value) => Leaderboard()
+                                                      .userExists(context)
+                                                      .then((value) => {
+                                                            config.online =
+                                                                true,
+                                                            route(
+                                                                context, menu())
+                                                          }))
+                                            }
+                                          else
+                                            {
+                                              config.online = true,
+                                              route(context, menu())
+                                            }
+                                        }))
                               };
                       },
                     ),
@@ -121,7 +130,7 @@ class _appbarState extends State<appbar> {
                       color: config.colors.primaryColor),
                   child: Center(
                     child: IconButton(
-                      icon: FaIcon(FontAwesomeIcons.arrowLeftLong),
+                      icon: const FaIcon(FontAwesomeIcons.arrowLeftLong),
                       iconSize: width(context) / 20,
                       color: config.colors.primaryTextColor,
                       hoverColor: Colors.transparent,

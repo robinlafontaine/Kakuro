@@ -66,18 +66,24 @@ class _menuState extends State<menu> {
                 boutton(
                   value: "MULTIJOUEUR",
                   onPress: () => {
-                    FirebaseAuth.instance
-                        .authStateChanges()
-                        .listen((User? user) {
-                      if (user == null) {
-                        Auth(FirebaseAuth.instance)
-                            .signInGoogle(context)
-                            .then((value) => Leaderboard().userExists(context));
-                      } else {
-                        config.online = true;
-                        route(context, multijoueur());
-                      }
-                    })
+                    Auth(FirebaseAuth.instance)
+                        .signedIn()
+                        .then(((connected) => {
+                              if (!connected)
+                                {
+                                  Auth(FirebaseAuth.instance)
+                                      .signInGoogle(context)
+                                      .then((value) => Leaderboard()
+                                          .userExists(context)
+                                          .then((value) =>
+                                              route(context, multijoueur())))
+                                }
+                              else
+                                {
+                                  config.online = true,
+                                  route(context, multijoueur())
+                                }
+                            }))
                   },
                 ),
               ],
