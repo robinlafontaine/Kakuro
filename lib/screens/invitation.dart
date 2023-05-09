@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
@@ -18,7 +20,7 @@ class invitation extends StatefulWidget {
 
 class invitationState extends State<invitation> {
   String ligne = "6", colonne = "6", diff = "1", adversaire = "";
-  var items = ["6", "7", "8", "9", "10", "11", "12"];
+  var items = ["5", "6", "7", "8", "9", "10"];
   var difficulte = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
   final Future playersFuture = Leaderboard.getPlayers();
@@ -39,7 +41,7 @@ class invitationState extends State<invitation> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         retour();
         return true;
       },
@@ -57,19 +59,16 @@ class invitationState extends State<invitation> {
                 future: playersFuture,
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    List<DropdownMenuItem<String>> joueurs = [
-                      DropdownMenuItem(
-                        value: "",
-                        enabled: false,
-                        child: Text("Choisissez un Adversaire...", style: TextStyle(color: config.colors.primaryTextBlack),),
-                      )
-                    ];
+                    // empty map
+                    Map<String, String> data = {};
                     for (var document in snapshot.data) {
                       String name = document['name'];
                       String documentId = document.id;
-                      joueurs.add(
-                          DropdownMenuItem(value: documentId, child: Text(name, style: TextStyle(color: config.colors.primaryTextBlack),)));
+                      // add document id to list
+                      data[name] = documentId;
                     }
+                    var choix = '';
+
                     return Padding(
                       padding: const EdgeInsets.all(15),
                       child: Column(
@@ -78,6 +77,7 @@ class invitationState extends State<invitation> {
                             SizedBox(
                               height: height(context) / 10,
                             ),
+                            // textbox where you can type player name
                             Text(
                               "Adversaire",
                               style: TextStyle(
@@ -88,26 +88,118 @@ class invitationState extends State<invitation> {
                             const SizedBox(
                               height: 10,
                             ),
+
+                            // raw autocomplete
+                            RawAutocomplete(
+                              optionsBuilder:
+                                  (TextEditingValue textEditingValue) {
+                                if (textEditingValue.text == '') {
+                                  return const Iterable<String>.empty();
+                                }
+                                return data.keys.where((String option) {
+                                  return option.toLowerCase().contains(
+                                      textEditingValue.text.toLowerCase());
+                                });
+                              },
+                              onSelected: (String selection) async {
+                                // invite(selection, data[selection]);
+                                // popup with name and uid
+                                await showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Inviter $selection'),
+                                      content: Text(
+                                          'Voulez-vous inviter $selection ?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Annuler'),
+                                          child: const Text('Annuler'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            choix = selection;
+                                            // await invite(selection, data[selection]);
+                                            Navigator.pop(context, 'Inviter');
+                                          },
+                                          child: const Text('Inviter'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              fieldViewBuilder: (BuildContext context,
+                                  TextEditingController textEditingController,
+                                  FocusNode focusNode,
+                                  VoidCallback onFieldSubmitted) {
+                                return TextField(
+                                  controller: textEditingController,
+                                  focusNode: focusNode,
+                                  onSubmitted: (String value) async {
+                                    // invite(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: 'Nom de l\'adversaire',
+                                  ),
+                                );
+                              },
+                              optionsViewBuilder: (BuildContext context,
+                                  AutocompleteOnSelected<String> onSelected,
+                                  Iterable<String> options) {
+                                return Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Material(
+                                    elevation: 4.0,
+                                    child: SizedBox(
+                                      height: 200.0,
+                                      child: ListView.builder(
+                                        padding: const EdgeInsets.all(8.0),
+                                        itemCount: options.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          final String option =
+                                              options.elementAt(index);
+                                          return GestureDetector(
+                                            onTap: () {
+                                              onSelected(option);
+                                            },
+                                            child: ListTile(
+                                              title: Text(option),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+
                             Container(
                               width: width(context) / 1.1,
                               decoration: BoxDecoration(
                                   color: config.colors.primarySelect),
-                              padding: const EdgeInsets.only(left: 15, right: 10),
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                    dropdownColor: config.colors.primarySelectItem,
-                                    value: adversaire,
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: config.colors.primaryTextBlack,
-                                    ),
-                                    items: joueurs,
-                                    onChanged: (String? value) {
-                                      setState(() {
-                                        adversaire = value!;
-                                      });
-                                    }),
-                              ),
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 10),
+                              // child: DropdownButtonHideUnderline(
+                              //   child: DropdownButton<String>(
+                              //       dropdownColor:
+                              //           config.colors.primarySelectItem,
+                              //       value: adversaire,
+                              //       icon: Icon(
+                              //         Icons.keyboard_arrow_down,
+                              //         color: config.colors.primaryTextBlack,
+                              //       ),
+                              //       items: joueurs,
+                              //       onChanged: (String? value) {
+                              //         setState(() {
+                              //           adversaire = value!;
+                              //         });
+                              //       }),
+                              // ),
                             ),
                             const SizedBox(
                               height: 30,
@@ -128,8 +220,8 @@ class invitationState extends State<invitation> {
                                 Container(
                                   decoration: BoxDecoration(
                                       color: config.colors.primarySelect),
-                                  padding:
-                                      const EdgeInsets.only(left: 15, right: 10),
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 10),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                         dropdownColor:
@@ -147,8 +239,8 @@ class invitationState extends State<invitation> {
                                               child: Text(
                                                 items,
                                                 style: TextStyle(
-                                                    color: config
-                                                        .colors.primaryTextBlack),
+                                                    color: config.colors
+                                                        .primaryTextBlack),
                                               ),
                                             ),
                                           );
@@ -168,8 +260,8 @@ class invitationState extends State<invitation> {
                                 Container(
                                   decoration: BoxDecoration(
                                       color: config.colors.primarySelect),
-                                  padding:
-                                      const EdgeInsets.only(left: 15, right: 10),
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 10),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
                                         dropdownColor:
@@ -192,7 +284,9 @@ class invitationState extends State<invitation> {
                                         }).toList(),
                                         onChanged: (value) {
                                           setState(() {
-                                            value == null ? "" : colonne = value;
+                                            value == null
+                                                ? ""
+                                                : colonne = value;
                                           });
                                         }),
                                   ),
@@ -216,7 +310,8 @@ class invitationState extends State<invitation> {
                               width: width(context) / 1.1,
                               decoration: BoxDecoration(
                                   color: config.colors.primarySelect),
-                              padding: const EdgeInsets.only(left: 15, right: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 15, right: 10),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(
                                     dropdownColor:
@@ -251,9 +346,11 @@ class invitationState extends State<invitation> {
                                 onPress: () {
                                   route(
                                       context,
-                                      game(kakuro:
-                                        Kakuro(int.parse(ligne),
-                                            int.parse(colonne), int.parse(diff)),
+                                      game(
+                                        kakuro: Kakuro(
+                                            int.parse(ligne),
+                                            int.parse(colonne),
+                                            int.parse(diff)),
                                       ));
                                 })
                           ]),
@@ -264,13 +361,15 @@ class invitationState extends State<invitation> {
                     return const CircularProgressIndicator();
                   }
                 })),
-        bottomNavigationBar: navbar(actif:1, reaload:() {
-          Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => parametre()))
-              .then((value) {
-            setState(() {});
-          });
-        }),
+        bottomNavigationBar: navbar(
+            actif: 1,
+            reaload: () {
+              Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => parametre()))
+                  .then((value) {
+                setState(() {});
+              });
+            }),
       ),
     );
   }
