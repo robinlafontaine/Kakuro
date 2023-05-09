@@ -110,13 +110,13 @@ class _gameState extends State<game> {
     await prefs.setStringList('etats', etats);
   }
 
-  void testValide() {
+  bool testValide() {
     bool valide = true;
     for (int i = 0; i < kakuro.n; i++) {
       for (int j = 0; j < kakuro.m; j++) {
         if (grille[i][j] != kakuro.grilleUpdated[i][j]) {
           valide = false;
-          break;
+          return valide;
         }
       }
     }
@@ -125,6 +125,7 @@ class _gameState extends State<game> {
       if (config.newgame == false) suppGrille();
       route(context, menu());
     }
+    return valide;
   }
 
   void startTimer() {
@@ -188,7 +189,10 @@ class _gameState extends State<game> {
                   boutton(
                       value: "VALIDER",
                       onPress: () {
-                        testValide();
+                        bool res = testValide();
+                        if (!res) {
+                          openDialogFaux();
+                        }
                       }),
                 ],
               ),
@@ -208,6 +212,24 @@ class _gameState extends State<game> {
               })),
     );
   }
+
+  Future openDialogFaux() => showDialog(
+      // met un message comme quoi la grille n'est pas valide
+      context: context,
+      builder: (context) => AlertDialog(
+            title: Text('Grille non valide'),
+            content: Text('La grille n\'est pas valide, veuillez réessayer'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "OK",
+                    style: TextStyle(color: config.colors.defaultPrimary),
+                  ))
+            ],
+          ));
 
   Future openDialogAbandon() => showDialog(
       context: context,
