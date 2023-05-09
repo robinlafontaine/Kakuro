@@ -103,8 +103,12 @@ class _appbarState extends State<appbar> {
                                                   .then((value) => Leaderboard()
                                                       .userExists(context)
                                                       .then((value) => {
-                                                            config.online =
-                                                                true,
+                                                            if (FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser !=
+                                                                null)
+                                                              config.online =
+                                                                  true,
                                                             route(
                                                                 context, menu())
                                                           }))

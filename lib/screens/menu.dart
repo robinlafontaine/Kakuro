@@ -75,8 +75,12 @@ class _menuState extends State<menu> {
                                       .signInGoogle(context)
                                       .then((value) => Leaderboard()
                                           .userExists(context)
-                                          .then((value) =>
-                                              route(context, multijoueur())))
+                                          .then((value) => {
+                                                if (FirebaseAuth
+                                                        .instance.currentUser !=
+                                                    null)
+                                                  route(context, multijoueur())
+                                              }))
                                 }
                               else
                                 {
