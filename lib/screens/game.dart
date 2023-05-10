@@ -121,6 +121,9 @@ class GameState extends State<Game> {
         }
       }
     }
+    if (!valide) {
+      valide = kakuro.estValideDiff(grille);
+    }
     if (valide) {
       addPoints();
       if (Config.newgame == false) suppGrille();

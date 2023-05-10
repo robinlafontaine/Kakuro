@@ -418,6 +418,41 @@ class Kakuro {
     n += 1;
     m += 1;
   }
+
+  // check validity of the grid in parameter knowing the updated grid, indiceColonne and indiceLigne
+  bool estValideDiff(List grilleAVerif) {
+    // we count the sum of the values in each row and each column until we find a -1
+    // if the sum is equal to the indice, we continue
+    // else we return false
+    // if we reach the end of the grid, we return true
+    for (int i = 1; i < n; i++) {
+      int sum = 0;
+      for (int j = 1; j < m; j++) {
+        if (grilleUpdated[i][j] == -1) {
+          if (sum != indiceLigne[i][j]) {
+            return false;
+          }
+          sum = 0;
+        } else {
+          sum += (grilleAVerif[i][j] as int);
+        }
+      }
+    }
+    for (int j = 1; j < m; j++) {
+      int sum = 0;
+      for (int i = 1; i < n; i++) {
+        if (grilleUpdated[i][j] == -1) {
+          if (sum != indiceColonne[i][j]) {
+            return false;
+          }
+          sum = 0;
+        } else {
+          sum += (grilleAVerif[i][j] as int);
+        }
+      }
+    }
+    return true;
+  }
 }
 
 // // test main
