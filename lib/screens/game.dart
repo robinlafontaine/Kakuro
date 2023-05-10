@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:kakuro/Config/Config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
@@ -117,12 +118,15 @@ class GameState extends State<Game> {
       for (int j = 0; j < kakuro.m; j++) {
         if (grille[i][j] != kakuro.grilleUpdated[i][j]) {
           valide = false;
-          return valide;
+          // return valide;
         }
       }
     }
     if (!valide) {
-      valide = kakuro.estValideDiff(grille);
+      var copie = List.from(grille);
+      // add a row and column of -1 at the beginning of the grid
+      copie.insert(0, List.filled(kakuro.m, -1));
+      valide = kakuro.estValideDiff(copie);
     }
     if (valide) {
       addPoints();
@@ -190,6 +194,15 @@ class GameState extends State<Game> {
                   const SizedBox(
                     height: 30,
                   ),
+                  // boutton to get a hint
+                  Boutton(
+                      value: "INDICE",
+                      onPress: () {
+                        openDialogIndice();
+                      }),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Boutton(
                       value: "VALIDER",
                       onPress: () {
@@ -252,6 +265,125 @@ class GameState extends State<Game> {
                       suppGrille()
                           .then((value) => route(context, const MesParties()));
                     }
+                  },
+                  child: Text(
+                    "Oui",
+                    style: TextStyle(color: Config.colors.defaultPrimary),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "NON",
+                    style: TextStyle(color: Config.colors.defaultPrimary),
+                  ))
+            ],
+          ));
+
+  // show a dialog to say that the player has asked for a hint
+  // then find a random value to give to the playerv and update the grid with the value
+  Future openDialogIndice() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: const Text('Indice'),
+            content: const Text('Voulez-vous un indice ?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    int i = Random().nextInt(kakuro.n - 1);
+                    int j = Random().nextInt(kakuro.m - 1);
+                    var zero = false;
+                    for (var i = 0; i < kakuro.n; i++) {
+                      for (var j = 0; j < kakuro.m; j++) {
+                        if (grille[i][j] == 0) {
+                          zero = true;
+                        }
+                      }
+                    }
+                    if (!zero) {
+                      if (!testValide()) {
+                        while (kakuro.grilleUpdated[i][j] == grille[i][j]) {
+                          i = Random().nextInt(kakuro.n - 1) + 1;
+                          j = Random().nextInt(kakuro.m - 1) + 1;
+                        }
+                        grille[i][j] = kakuro.grilleUpdated[i][j];
+                        // popup avec la valeur changee et la position
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Indice'),
+                                  content: Text(
+                                      'La valeur en position (${i + 1}, ${j + 1}) est ${kakuro.grilleUpdated[i][j]}'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "OK",
+                                          style: TextStyle(
+                                              color:
+                                                  Config.colors.defaultPrimary),
+                                        ))
+                                  ],
+                                ));
+                      } else {
+                        Navigator.pop(context);
+                        // popup disant que la grille est valide
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Indice'),
+                                  content: const Text(
+                                      'La grille est valide, vous n\'avez pas besoin d\'indice'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          "OK",
+                                          style: TextStyle(
+                                              color:
+                                                  Config.colors.defaultPrimary),
+                                        ))
+                                  ],
+                                ));
+                        return;
+                      }
+                    } else {
+                      while (grille[i][j] != 0) {
+                        i = Random().nextInt(kakuro.n - 1) + 1;
+                        j = Random().nextInt(kakuro.m - 1) + 1;
+                      }
+                      grille[i][j] = kakuro.grilleUpdated[i][j];
+                      // popup avec la valeur changee et la position
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: const Text('Indice'),
+                                content: Text(
+                                    'La valeur en position (${i + 1}, ${j + 1}) est ${kakuro.grilleUpdated[i][j]}'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "OK",
+                                        style: TextStyle(
+                                            color:
+                                                Config.colors.defaultPrimary),
+                                      ))
+                                ],
+                              ));
+                    }
+                    // show the number in the grid
+                    setState(() {
+                      grille[i][j] = kakuro.grilleUpdated[i][j];
+                    });
+                    Navigator.pop(context);
                   },
                   child: Text(
                     "Oui",
