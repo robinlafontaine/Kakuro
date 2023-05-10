@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/screens/classement.dart';
 import 'package:kakuro/screens/invitation.dart';
-import 'package:kakuro/screens/mesparties_multijoueur.dart';
-import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/mes_parties_multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/boutton.dart';
+import 'package:kakuro/widgets/Boutton.dart';
 
-import '../config/fonctions.dart';
+import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 import 'menu.dart';
 
-class multijoueur extends StatefulWidget {
+class Multijoueur extends StatefulWidget {
+  const Multijoueur({super.key});
+
   @override
-  State<multijoueur> createState() => _multijoueurState();
+  State<Multijoueur> createState() => MultijoueurState();
 }
 
-class _multijoueurState extends State<multijoueur> {
+class MultijoueurState extends State<Multijoueur> {
   void retour() {
-    route(context, menu());
+    route(context, const Menu());
   }
 
   @override
@@ -30,13 +31,13 @@ class _multijoueurState extends State<multijoueur> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: config.colors.primaryBackground,
+          backgroundColor: Config.colors.primaryBackground,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child:
-                  appbar(home: false, enjeu: false, retour: () => {retour()}),
+                  Appbar(home: false, enjeu: false, retour: () => {retour()}),
             ),
           ),
           body: Center(
@@ -44,47 +45,48 @@ class _multijoueurState extends State<multijoueur> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  config.images.icon,
+                  Config.images.icon,
                   width: width(context) / 2,
                   height: width(context) / 2,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
-                boutton(
+                Boutton(
                     value: "LANCER DUEL",
                     onPress: () {
-                      route(context, invitation());
+                      route(context, const Invitation());
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                boutton(
+                Boutton(
                     value: "MES PARTIES",
                     onPress: () {
-                      route(context, mesparties_multijoueur());
+                      // route(context, const MesPartiesMultijoueur());
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                boutton(value: "RESULTATS", onPress: () {}),
-                SizedBox(
+                Boutton(value: "RESULTATS", onPress: () {}),
+                const SizedBox(
                   height: 10,
                 ),
-                boutton(
+                Boutton(
                     value: "CLASSEMENT",
                     onPress: () {
-                      route(context, classement());
+                      route(context, const Classement());
                     }),
               ],
             ),
           ),
-          bottomNavigationBar: navbar(
+          bottomNavigationBar: Navbar(
               actif: 10,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),

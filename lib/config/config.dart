@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 
-class config{
+class Config {
   static final colors = _Color();
   static final images = _Image();
   static final sons = _Audio();
@@ -9,27 +9,27 @@ class config{
   static var newgame = false;
 }
 
-class _Color{
-  var primaryColor = Color(0xFF464646);
-  var primaryTextColor = Color(0xFFFFFFFF);
-  var primaryBackground = Color(0xFFE0E0E0);
-  var primaryTextBlack = Color(0xFF464646);
-  var primarySelect = Color(0xFFFFFFFF);
-  var primaryNavIcon = Color(0xFFE0E0E0);
-  var primarySelectItem = Color(0xFFFFFFFF);
-  var primaryTitreSelect = Color(0xFF464646);
-  var primaryTextBackground = Color(0xFF464646);
+class _Color {
+  var primaryColor = const Color(0xFF464646);
+  var primaryTextColor = const Color(0xFFFFFFFF);
+  var primaryBackground = const Color(0xFFE0E0E0);
+  var primaryTextBlack = const Color(0xFF464646);
+  var primarySelect = const Color(0xFFFFFFFF);
+  var primaryNavIcon = const Color(0xFFE0E0E0);
+  var primarySelectItem = const Color(0xFFFFFFFF);
+  var primaryTitreSelect = const Color(0xFF464646);
+  var primaryTextBackground = const Color(0xFF464646);
 
-  final caseColor = Color(0xFFFFFFFF);
-  final DarkBackground = Color(0xFF303030);
+  final caseColor = const Color(0xFFFFFFFF);
+  final darkBackground = const Color(0xFF303030);
 
-  final defaultPrimary = Color(0xFF464646);
-  final defaultTextBlack = Color(0xFF464646);
-  final defaultPrimaryText = Color(0xFFFFFFFF);
-  final defaultBackground = Color(0xFFE0E0E0);
-  final defaultPrimarySelect = Color(0xFFFFFFFF);
-  final defaultNavIcon = Color(0xFFE0E0E0);
-  final defaultSelectItem = Color(0xFFFFFFFF);
+  final defaultPrimary = const Color(0xFF464646);
+  final defaultTextBlack = const Color(0xFF464646);
+  final defaultPrimaryText = const Color(0xFFFFFFFF);
+  final defaultBackground = const Color(0xFFE0E0E0);
+  final defaultPrimarySelect = const Color(0xFFFFFFFF);
+  final defaultNavIcon = const Color(0xFFE0E0E0);
+  final defaultSelectItem = const Color(0xFFFFFFFF);
 }
 
 class _Image {
@@ -37,13 +37,8 @@ class _Image {
   final icon = "assets/images/icon.png";
 }
 
-class _Audio{
+class _Audio {
   var actuel = "Jojo.mp3";
   final player = AudioPlayer();
-  final sons = [
-    "Jojo.mp3",
-    "Quoicoubeh.mp3",
-    "MarioSlider.mp3"
-  ];
+  final sons = ["Jojo.mp3", "Quoicoubeh.mp3", "MarioSlider.mp3"];
 }
-

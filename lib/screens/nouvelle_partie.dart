@@ -1,22 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/config/config.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
-import '../config/fonctions.dart';
+import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 import 'menu.dart';
 
-class nouvellepartie extends StatefulWidget {
+class NouvellePartie extends StatefulWidget {
+  const NouvellePartie({super.key});
+
   @override
-  State<nouvellepartie> createState() => nouvellepartieState();
+  State<NouvellePartie> createState() => NouvellePartieState();
 }
 
-class nouvellepartieState extends State<nouvellepartie> {
+class NouvellePartieState extends State<NouvellePartie> {
   String ligne = "4", colonne = "4", diff = "Facile";
   var items = [
     "4",
@@ -29,6 +30,7 @@ class nouvellepartieState extends State<nouvellepartie> {
   ];
   var difficulte = ["Facile", "Moyen", "Difficile"];
 
+  @override
   void initState() {
     super.initState();
     ligne = items[0];
@@ -37,7 +39,7 @@ class nouvellepartieState extends State<nouvellepartie> {
   }
 
   void retour() {
-    route(context, menu());
+    route(context, const Menu());
   }
 
   @override
@@ -48,12 +50,12 @@ class nouvellepartieState extends State<nouvellepartie> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: config.colors.primaryBackground,
+          backgroundColor: Config.colors.primaryBackground,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: appbar(home: false, enjeu: false, retour: retour),
+              child: Appbar(home: false, enjeu: false, retour: retour),
             ),
           ),
           body: Center(
@@ -70,9 +72,9 @@ class nouvellepartieState extends State<nouvellepartie> {
                       style: TextStyle(
                           fontSize: width(context) / 21,
                           fontWeight: FontWeight.w600,
-                          color: config.colors.primaryTitreSelect),
+                          color: Config.colors.primaryTitreSelect),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -80,27 +82,27 @@ class nouvellepartieState extends State<nouvellepartie> {
                       children: [
                         Container(
                           decoration:
-                              BoxDecoration(color: config.colors.primarySelect),
-                          padding: EdgeInsets.only(left: 15, right: 10),
+                              BoxDecoration(color: Config.colors.primarySelect),
+                          padding: const EdgeInsets.only(left: 15, right: 10),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
-                                dropdownColor: config.colors.primarySelectItem,
+                                dropdownColor: Config.colors.primarySelectItem,
                                 value: ligne,
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
-                                  color: config.colors.primaryTextBlack,
+                                  color: Config.colors.primaryTextBlack,
                                 ),
                                 items: items.map((items) {
                                   return DropdownMenuItem(
                                     value: items,
                                     child: Container(
+                                      width: width(context) / 4,
                                       child: Text(
                                         items,
                                         style: TextStyle(
                                             color:
-                                                config.colors.primaryTextBlack),
+                                                Config.colors.primaryTextBlack),
                                       ),
-                                      width: width(context) / 4,
                                     ),
                                   );
                                 }).toList(),
@@ -111,30 +113,30 @@ class nouvellepartieState extends State<nouvellepartie> {
                                 }),
                           ),
                         ),
-                        FaIcon(FontAwesomeIcons.close,
+                        FaIcon(FontAwesomeIcons.xmark,
                             size: width(context) / 20,
-                            color: config.colors.primaryTitreSelect),
+                            color: Config.colors.primaryTitreSelect),
                         Container(
                           decoration:
-                              BoxDecoration(color: config.colors.primarySelect),
-                          padding: EdgeInsets.only(left: 15, right: 10),
+                              BoxDecoration(color: Config.colors.primarySelect),
+                          padding: const EdgeInsets.only(left: 15, right: 10),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
-                                dropdownColor: config.colors.primarySelectItem,
+                                dropdownColor: Config.colors.primarySelectItem,
                                 value: colonne,
                                 icon: Icon(Icons.keyboard_arrow_down,
-                                    color: config.colors.primaryTextBlack),
+                                    color: Config.colors.primaryTextBlack),
                                 items: items.map((items) {
                                   return DropdownMenuItem(
                                       value: items,
                                       child: Container(
+                                        width: width(context) / 4,
                                         child: Text(
                                           items,
                                           style: TextStyle(
-                                              color: config
+                                              color: Config
                                                   .colors.primaryTextBlack),
                                         ),
-                                        width: width(context) / 4,
                                       ));
                                 }).toList(),
                                 onChanged: (value) {
@@ -146,7 +148,7 @@ class nouvellepartieState extends State<nouvellepartie> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Text(
@@ -154,23 +156,23 @@ class nouvellepartieState extends State<nouvellepartie> {
                       style: TextStyle(
                           fontSize: width(context) / 21,
                           fontWeight: FontWeight.w600,
-                          color: config.colors.primaryTitreSelect),
+                          color: Config.colors.primaryTitreSelect),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
                       width: width(context) / 1.1,
                       decoration:
-                          BoxDecoration(color: config.colors.primarySelect),
-                      padding: EdgeInsets.only(left: 15, right: 10),
+                          BoxDecoration(color: Config.colors.primarySelect),
+                      padding: const EdgeInsets.only(left: 15, right: 10),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                            dropdownColor: config.colors.primarySelectItem,
+                            dropdownColor: Config.colors.primarySelectItem,
                             value: diff,
                             icon: Icon(
                               Icons.keyboard_arrow_down,
-                              color: config.colors.primaryTextBlack,
+                              color: Config.colors.primaryTextBlack,
                             ),
                             items: difficulte.map((items) {
                               return DropdownMenuItem(
@@ -180,7 +182,7 @@ class nouvellepartieState extends State<nouvellepartie> {
                                       items,
                                       style: TextStyle(
                                           color:
-                                              config.colors.primaryTextBlack),
+                                              Config.colors.primaryTextBlack),
                                     ),
                                   ));
                             }).toList(),
@@ -191,16 +193,16 @@ class nouvellepartieState extends State<nouvellepartie> {
                             }),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                    boutton(
+                    Boutton(
                         value: "LANCER LA PARTIE",
                         onPress: () {
-                          config.newgame = true;
+                          Config.newgame = true;
                           route(
                               context,
-                              game(
+                              Game(
                                 kakuro: Kakuro(
                                     int.parse(ligne) - 1,
                                     int.parse(colonne) - 1,
@@ -214,11 +216,11 @@ class nouvellepartieState extends State<nouvellepartie> {
                   ]),
             ),
           ),
-          bottomNavigationBar: navbar(
+          bottomNavigationBar: Navbar(
               actif: 1,
               reaload: () {
                 Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => parametre()))
+                        MaterialPageRoute(builder: (context) => Parametre()))
                     .then((value) {
                   setState(() {});
                 });

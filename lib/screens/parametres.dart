@@ -1,56 +1,57 @@
-import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/config/config.dart';
-import 'package:kakuro/screens/menu.dart';
-import 'package:kakuro/screens/nouvellepartie.dart';
-import 'package:kakuro/widgets/boutton.dart';
+import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/widgets/Boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 
 import '../auth.dart';
-import '../config/fonctions.dart';
+import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
 
-class parametre extends StatefulWidget {
+class Parametre extends StatefulWidget {
+  const Parametre({super.key});
+
   @override
-  State<parametre> createState() => parametreState();
+  State<Parametre> createState() => ParametreState();
 }
 
-class parametreState extends State<parametre> {
+class ParametreState extends State<Parametre> {
   String son = "";
   String etatPlayer = "";
   Color pickerColor = const Color(0x0fffffff);
   bool picker = false;
 
+  @override
   void initState() {
-    son = config.sons.actuel;
-    if (config.sons.player.state == PlayerState.playing) {
+    super.initState();
+    son = Config.sons.actuel;
+    if (Config.sons.player.state == PlayerState.playing) {
       etatPlayer = "play";
     }
   }
 
   void stopMusic() {
-    config.sons.player.stop();
+    Config.sons.player.stop();
     setState(() {
       etatPlayer = "pause";
     });
     print(etatPlayer);
   }
 
-  void PlayBreak() {
-    if (config.sons.player.state == PlayerState.playing) {
-      config.sons.player.pause();
+  void playBreak() {
+    if (Config.sons.player.state == PlayerState.playing) {
+      Config.sons.player.pause();
       setState(() {
         etatPlayer = "pause";
       });
     } else {
-      if (config.sons.player.state == PlayerState.paused) {
-        config.sons.player.resume();
+      if (Config.sons.player.state == PlayerState.paused) {
+        Config.sons.player.resume();
       }
-      config.sons.player.play(AssetSource(son));
+      Config.sons.player.play(AssetSource(son));
       setState(() {
         etatPlayer = "play";
       });
@@ -63,46 +64,46 @@ class parametreState extends State<parametre> {
 
   void toLight() {
     setState(() {
-      config.colors.primaryColor = config.colors.defaultPrimary;
-      config.colors.primaryBackground = config.colors.defaultBackground;
-      config.colors.primaryTextBlack = config.colors.defaultTextBlack;
-      config.colors.primarySelect = config.colors.defaultPrimarySelect;
-      config.colors.primaryTitreSelect = config.colors.defaultTextBlack;
-      config.colors.primaryTextBackground = config.colors.primaryColor;
+      Config.colors.primaryColor = Config.colors.defaultPrimary;
+      Config.colors.primaryBackground = Config.colors.defaultBackground;
+      Config.colors.primaryTextBlack = Config.colors.defaultTextBlack;
+      Config.colors.primarySelect = Config.colors.defaultPrimarySelect;
+      Config.colors.primaryTitreSelect = Config.colors.defaultTextBlack;
+      Config.colors.primaryTextBackground = Config.colors.primaryColor;
     });
   }
 
   void toDark() {
     setState(() {
-      config.colors.primaryColor = config.colors.defaultPrimary;
-      config.colors.primaryBackground = config.colors.DarkBackground;
-      config.colors.primaryTextBlack = config.colors.defaultPrimaryText;
-      config.colors.primarySelect = config.colors.primaryColor;
-      config.colors.primarySelectItem = config.colors.primaryColor;
-      config.colors.primaryTitreSelect = config.colors.defaultPrimaryText;
-      config.colors.primaryTextBackground = config.colors.primaryColor;
+      Config.colors.primaryColor = Config.colors.defaultPrimary;
+      Config.colors.primaryBackground = Config.colors.darkBackground;
+      Config.colors.primaryTextBlack = Config.colors.defaultPrimaryText;
+      Config.colors.primarySelect = Config.colors.primaryColor;
+      Config.colors.primarySelectItem = Config.colors.primaryColor;
+      Config.colors.primaryTitreSelect = Config.colors.defaultPrimaryText;
+      Config.colors.primaryTextBackground = Config.colors.primaryColor;
     });
   }
 
   void toPerso() {
     setState(() {
-      config.colors.primaryBackground = pickerColor.withOpacity(1);
+      Config.colors.primaryBackground = pickerColor.withOpacity(1);
       if (pickerColor.red > 200 &&
           pickerColor.green > 200 &&
           pickerColor.blue > 200) {
-        config.colors.primaryColor = config.colors.defaultPrimary;
-        config.colors.primarySelect = config.colors.defaultPrimary;
-        config.colors.primaryTextBlack = config.colors.defaultPrimaryText;
-        config.colors.primarySelectItem = config.colors.defaultPrimary;
-        config.colors.primaryTitreSelect = config.colors.defaultTextBlack;
-        config.colors.primaryTextBackground = config.colors.primaryColor;
+        Config.colors.primaryColor = Config.colors.defaultPrimary;
+        Config.colors.primarySelect = Config.colors.defaultPrimary;
+        Config.colors.primaryTextBlack = Config.colors.defaultPrimaryText;
+        Config.colors.primarySelectItem = Config.colors.defaultPrimary;
+        Config.colors.primaryTitreSelect = Config.colors.defaultTextBlack;
+        Config.colors.primaryTextBackground = Config.colors.primaryColor;
       } else {
-        config.colors.primarySelect = Colors.black.withOpacity(0.3);
-        config.colors.primaryColor = Colors.black.withOpacity(0.3);
-        config.colors.primaryTextBlack = config.colors.defaultPrimaryText;
-        config.colors.primarySelectItem = config.colors.defaultPrimary;
-        config.colors.primaryTitreSelect = config.colors.defaultPrimaryText;
-        config.colors.primaryTextBackground = config.colors.primaryBackground;
+        Config.colors.primarySelect = Colors.black.withOpacity(0.3);
+        Config.colors.primaryColor = Colors.black.withOpacity(0.3);
+        Config.colors.primaryTextBlack = Config.colors.defaultPrimaryText;
+        Config.colors.primarySelectItem = Config.colors.defaultPrimary;
+        Config.colors.primaryTitreSelect = Config.colors.defaultPrimaryText;
+        Config.colors.primaryTextBackground = Config.colors.primaryBackground;
       }
       picker = false;
     });
@@ -120,12 +121,12 @@ class parametreState extends State<parametre> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: config.colors.primaryBackground,
+        backgroundColor: Config.colors.primaryBackground,
         appBar: PreferredSize(
           preferredSize: Size(double.infinity, width(context) / 6),
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: appbar(home: false, enjeu: false, retour: retour),
+            child: Appbar(home: false, enjeu: false, retour: retour),
           ),
         ),
         body: SingleChildScrollView(
@@ -136,7 +137,7 @@ class parametreState extends State<parametre> {
                   ? Container(
                       width: width(context) / 1.1,
                       decoration: BoxDecoration(
-                          color: config.colors.defaultPrimaryText),
+                          color: Config.colors.defaultPrimaryText),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -149,7 +150,7 @@ class parametreState extends State<parametre> {
                             ),
                             Padding(
                                 padding: const EdgeInsets.all(15),
-                                child: boutton(
+                                child: Boutton(
                                     value: "APPLIQUER",
                                     onPress: () {
                                       toPerso();
@@ -166,19 +167,19 @@ class parametreState extends State<parametre> {
                               Container(
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: config.colors.primarySelect),
+                                    color: Config.colors.primarySelect),
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
                                       dropdownColor:
-                                          config.colors.primarySelectItem,
+                                          Config.colors.primarySelectItem,
                                       value: son,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down,
-                                        color: config.colors.primaryTextBlack,
+                                        color: Config.colors.primaryTextBlack,
                                       ),
-                                      items: config.sons.sons.map((items) {
+                                      items: Config.sons.sons.map((items) {
                                         return DropdownMenuItem(
                                           value: items,
                                           child: Container(
@@ -189,7 +190,7 @@ class parametreState extends State<parametre> {
                                                   items.length,
                                                   ""),
                                               style: TextStyle(
-                                                  color: config
+                                                  color: Config
                                                       .colors.primaryTextBlack),
                                             ),
                                           ),
@@ -198,9 +199,9 @@ class parametreState extends State<parametre> {
                                       onChanged: (value) {
                                         setState(() {
                                           value == null ? "" : son = value;
-                                          config.sons.actuel = value!;
+                                          Config.sons.actuel = value!;
                                           etatPlayer = "pause";
-                                          config.sons.player.stop();
+                                          Config.sons.player.stop();
                                         });
                                       }),
                                 ),
@@ -209,7 +210,7 @@ class parametreState extends State<parametre> {
                                 width: width(context) / 8,
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: config.colors.primarySelect),
+                                    color: Config.colors.primarySelect),
                                 child: Center(
                                   child: InkWell(
                                     child: Icon(
@@ -217,10 +218,10 @@ class parametreState extends State<parametre> {
                                           ? Icons.pause
                                           : Icons.play_arrow,
                                       size: width(context) / 15,
-                                      color: config.colors.primaryTextBlack,
+                                      color: Config.colors.primaryTextBlack,
                                     ),
                                     onTap: () {
-                                      PlayBreak();
+                                      playBreak();
                                     },
                                   ),
                                 ),
@@ -229,13 +230,13 @@ class parametreState extends State<parametre> {
                                 width: width(context) / 8,
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: config.colors.primarySelect),
+                                    color: Config.colors.primarySelect),
                                 child: Center(
                                   child: InkWell(
                                     child: Icon(
                                       Icons.square,
                                       size: width(context) / 20,
-                                      color: config.colors.primaryTextBlack,
+                                      color: Config.colors.primaryTextBlack,
                                     ),
                                     onTap: () {
                                       stopMusic();
@@ -252,17 +253,17 @@ class parametreState extends State<parametre> {
                                 height: width(context) / 6,
                                 width: (width(context) / 3) - 10,
                                 decoration: BoxDecoration(
-                                    color: config.colors.primarySelect,
+                                    color: Config.colors.primarySelect,
                                     border: Border(
                                         right: BorderSide(
                                             width: 2,
-                                            color: config
+                                            color: Config
                                                 .colors.primaryBackground))),
                                 child: Center(
                                     child: Icon(
                                   Icons.wb_sunny,
                                   size: width(context) / 15,
-                                  color: config.colors.primaryTextBlack,
+                                  color: Config.colors.primaryTextBlack,
                                 )),
                               ),
                               onTap: () {
@@ -274,17 +275,17 @@ class parametreState extends State<parametre> {
                                 height: width(context) / 6,
                                 width: (width(context) / 3) - 10,
                                 decoration: BoxDecoration(
-                                    color: config.colors.primarySelect,
+                                    color: Config.colors.primarySelect,
                                     border: Border(
                                         right: BorderSide(
                                             width: 2,
-                                            color: config
+                                            color: Config
                                                 .colors.primaryBackground))),
                                 child: Center(
                                     child: Icon(
                                   Icons.format_paint,
                                   size: width(context) / 15,
-                                  color: config.colors.primaryTextBlack,
+                                  color: Config.colors.primaryTextBlack,
                                 )),
                               ),
                               onTap: () {
@@ -298,13 +299,13 @@ class parametreState extends State<parametre> {
                                 height: width(context) / 6,
                                 width: (width(context) / 3) - 10,
                                 decoration: BoxDecoration(
-                                  color: config.colors.primarySelect,
+                                  color: Config.colors.primarySelect,
                                 ),
                                 child: Center(
                                     child: FaIcon(
                                   FontAwesomeIcons.solidMoon,
                                   size: width(context) / 15,
-                                  color: config.colors.primaryTextBlack,
+                                  color: Config.colors.primaryTextBlack,
                                 )),
                               ),
                               onTap: () {
@@ -326,7 +327,7 @@ class parametreState extends State<parametre> {
             ),
           ),
         ),
-        bottomNavigationBar: navbar(
+        bottomNavigationBar: Navbar(
             actif: 3,
             reaload: () {
               setState(() {});

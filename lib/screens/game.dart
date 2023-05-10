@@ -1,44 +1,46 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:kakuro/config/config.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
-import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
-import 'package:kakuro/widgets/boutton.dart';
+import 'package:kakuro/widgets/Boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'menu.dart';
-import 'mesparties.dart';
+import 'mes_parties.dart';
 
-class game extends StatefulWidget {
+class Game extends StatefulWidget {
   final Kakuro kakuro;
   final List? base;
   final int? index;
   final int? chrono;
 
-  const game(
+  const Game(
       {super.key, required this.kakuro, this.base, this.index, this.chrono});
 
   @override
-  State<game> createState() => _gameState(kakuro);
+  State<Game> createState() => GameState(kakuro);
 }
 
-class _gameState extends State<game> {
+class GameState extends State<Game> {
   Kakuro kakuro;
   List grille = [];
   int seconde = 0;
   Timer? timer;
-  Duration duration = Duration();
-  _gameState(this.kakuro);
+  Duration duration = const Duration();
 
+  GameState(this.kakuro);
+
+  @override
   void initState() {
+    super.initState();
     if (widget.base == null && widget.chrono == null) {
       grille = kakuro.getBase();
     } else {
@@ -49,8 +51,7 @@ class _gameState extends State<game> {
   }
 
   void addPoints() {
-    int puntos =
-        (20 * (kakuro.n + kakuro.m + kakuro.difficulte) - seconde) as int;
+    int puntos = (20 * (kakuro.n + kakuro.m + kakuro.difficulte) - seconde);
     Leaderboard.addNewScore(puntos);
   }
 
@@ -61,9 +62,9 @@ class _gameState extends State<game> {
 
   Future<void> saveGrille() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? grilles = await prefs.getStringList("grilles");
-    List<String>? chronos = await prefs.getStringList("chronos");
-    List<String>? etats = await prefs.getStringList("etats");
+    List<String>? grilles = prefs.getStringList("grilles");
+    List<String>? chronos = prefs.getStringList("chronos");
+    List<String>? etats = prefs.getStringList("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
@@ -82,8 +83,8 @@ class _gameState extends State<game> {
 
   Future<void> majGrille() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? etats = await prefs.getStringList("etats");
-    List<String>? chronos = await prefs.getStringList("chronos");
+    List<String>? etats = prefs.getStringList("etats");
+    List<String>? chronos = prefs.getStringList("chronos");
     etats ??= [];
     chronos ??= [];
     String etatsActuel = getEtat();
@@ -96,9 +97,9 @@ class _gameState extends State<game> {
 
   Future<void> suppGrille() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? grilles = await prefs.getStringList("grilles");
-    List<String>? chronos = await prefs.getStringList("chronos");
-    List<String>? etats = await prefs.getStringList("etats");
+    List<String>? grilles = prefs.getStringList("grilles");
+    List<String>? chronos = prefs.getStringList("chronos");
+    List<String>? etats = prefs.getStringList("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
@@ -122,14 +123,14 @@ class _gameState extends State<game> {
     }
     if (valide) {
       addPoints();
-      if (config.newgame == false) suppGrille();
-      route(context, menu());
+      if (Config.newgame == false) suppGrille();
+      route(context, const Menu());
     }
     return valide;
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (_) => addTime());
+    timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
 
   void addTime() {
@@ -141,12 +142,12 @@ class _gameState extends State<game> {
   }
 
   void retour() {
-    if (config.newgame) {
+    if (Config.newgame) {
       saveGrille();
-      route(context, nouvellepartie());
+      route(context, const NouvellePartie());
     } else {
       majGrille();
-      route(context, mesparties());
+      route(context, const MesParties());
     }
   }
 
@@ -158,15 +159,15 @@ class _gameState extends State<game> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: config.colors.primaryBackground,
+          backgroundColor: Config.colors.primaryBackground,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: appbar(
+              child: Appbar(
                 home: false,
                 enjeu: true,
-                retour: this.retour,
+                retour: retour,
                 chrono: widget.chrono,
                 abandon: openDialogAbandon,
               ),
@@ -181,12 +182,12 @@ class _gameState extends State<game> {
                   ),
                   Center(
                       child: (widget.base == null)
-                          ? scene(kakuro: kakuro, maj: maj)
-                          : scene(kakuro: kakuro, maj: maj, base: widget.base)),
-                  SizedBox(
+                          ? Scene(kakuro: kakuro, maj: maj)
+                          : Scene(kakuro: kakuro, maj: maj, base: widget.base)),
+                  const SizedBox(
                     height: 30,
                   ),
-                  boutton(
+                  Boutton(
                       value: "VALIDER",
                       onPress: () {
                         bool res = testValide();
@@ -198,14 +199,14 @@ class _gameState extends State<game> {
               ),
             ),
           ),
-          bottomNavigationBar: navbar(
+          bottomNavigationBar: Navbar(
               actif: 10,
               checkGrille: () {
-                (config.newgame) ? saveGrille() : majGrille();
+                (Config.newgame) ? saveGrille() : majGrille();
               },
               reaload: () {
                 Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => parametre()))
+                        MaterialPageRoute(builder: (context) => Parametre()))
                     .then((value) {
                   setState(() {});
                 });
@@ -217,8 +218,9 @@ class _gameState extends State<game> {
       // met un message comme quoi la grille n'est pas valide
       context: context,
       builder: (context) => AlertDialog(
-            title: Text('Grille non valide'),
-            content: Text('La grille n\'est pas valide, veuillez réessayer'),
+            title: const Text('Grille non valide'),
+            content:
+                const Text('La grille n\'est pas valide, veuillez réessayer'),
             actions: [
               TextButton(
                   onPressed: () {
@@ -226,7 +228,7 @@ class _gameState extends State<game> {
                   },
                   child: Text(
                     "OK",
-                    style: TextStyle(color: config.colors.defaultPrimary),
+                    style: TextStyle(color: Config.colors.defaultPrimary),
                   ))
             ],
           ));
@@ -234,21 +236,22 @@ class _gameState extends State<game> {
   Future openDialogAbandon() => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-            title: Text('Abandon'),
-            content: Text('Etes-vous sûr de vouloir abandonner cette partie ?'),
+            title: const Text('Abandon'),
+            content: const Text(
+                'Etes-vous sûr de vouloir abandonner cette partie ?'),
             actions: [
               TextButton(
                   onPressed: () {
-                    if (config.newgame == true) {
-                      route(context, nouvellepartie());
+                    if (Config.newgame == true) {
+                      route(context, const NouvellePartie());
                     } else {
                       suppGrille()
-                          .then((value) => route(context, mesparties()));
+                          .then((value) => route(context, const MesParties()));
                     }
                   },
                   child: Text(
                     "Oui",
-                    style: TextStyle(color: config.colors.defaultPrimary),
+                    style: TextStyle(color: Config.colors.defaultPrimary),
                   )),
               TextButton(
                   onPressed: () {
@@ -256,7 +259,7 @@ class _gameState extends State<game> {
                   },
                   child: Text(
                     "NON",
-                    style: TextStyle(color: config.colors.defaultPrimary),
+                    style: TextStyle(color: Config.colors.defaultPrimary),
                   ))
             ],
           ));

@@ -2,20 +2,21 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/config/config.dart';
-import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/Config/fonctions.dart';
 import '../auth.dart';
 import '../leaderboard.dart';
 import '../screens/menu.dart';
 
-class appbar extends StatefulWidget {
+class Appbar extends StatefulWidget {
   bool home;
   bool enjeu;
   Function retour;
   Function? abandon;
   int? chrono;
 
-  appbar({
+  Appbar({
+    super.key,
     required this.home,
     required this.enjeu,
     required this.retour,
@@ -24,17 +25,17 @@ class appbar extends StatefulWidget {
   });
 
   @override
-  State<appbar> createState() => _appbarState(this.retour);
+  State<Appbar> createState() => AppbarState(retour);
 }
 
-class _appbarState extends State<appbar> {
+class AppbarState extends State<Appbar> {
   String time = "0", seconde = "00", minute = "00";
   Timer? timer;
   Function? timerFunction;
   Function retour;
-  Duration duration = Duration();
+  Duration duration = const Duration();
 
-  _appbarState(this.retour);
+  AppbarState(this.retour);
 
   @override
   void initState() {
@@ -53,13 +54,13 @@ class _appbarState extends State<appbar> {
         minute = getAffichage(duration.inMinutes.remainder(60));
         seconde = getAffichage(duration.inSeconds.remainder(60));
       }
-      timer = Timer.periodic(Duration(seconds: 1), (_) => addTime());
+      timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
     }
   }
 
   void addTime() {
-    final addSeconds = 1;
-    if (this.mounted) {
+    const addSeconds = 1;
+    if (mounted) {
       setState(() {
         final seconds = duration.inSeconds + addSeconds;
         duration = Duration(seconds: seconds);
@@ -81,17 +82,20 @@ class _appbarState extends State<appbar> {
               builder: (BuildContext context) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: config.colors.primaryColor,
+                    color: Config.colors.primaryColor,
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Center(
                     child: IconButton(
-                      icon: Icon((config.online) ? Icons.wifi : Icons.wifi_off),
+                      icon: Icon((Config.online) ? Icons.wifi : Icons.wifi_off),
                       iconSize: width(context) / 15,
-                      color: (config.online) ? Colors.green : Colors.red,
+                      color: (Config.online) ? Colors.green : Colors.red,
                       onPressed: () {
-                        (config.online)
-                            ? {config.online = false, route(context, menu())}
+                        (Config.online)
+                            ? {
+                                Config.online = false,
+                                route(context, const Menu())
+                              }
                             : {
                                 Auth(FirebaseAuth.instance)
                                     .signedIn()
@@ -107,16 +111,16 @@ class _appbarState extends State<appbar> {
                                                                     .instance
                                                                     .currentUser !=
                                                                 null)
-                                                              config.online =
+                                                              Config.online =
                                                                   true,
-                                                            route(
-                                                                context, menu())
+                                                            route(context,
+                                                                const Menu())
                                                           }))
                                             }
                                           else
                                             {
-                                              config.online = true,
-                                              route(context, menu())
+                                              Config.online = true,
+                                              route(context, const Menu())
                                             }
                                         }))
                               };
@@ -131,12 +135,12 @@ class _appbarState extends State<appbar> {
                 return Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: config.colors.primaryColor),
+                      color: Config.colors.primaryColor),
                   child: Center(
                     child: IconButton(
                       icon: const FaIcon(FontAwesomeIcons.arrowLeftLong),
                       iconSize: width(context) / 20,
-                      color: config.colors.primaryTextColor,
+                      color: Config.colors.primaryTextColor,
                       hoverColor: Colors.transparent,
                       onPressed: () {
                         widget.retour();
@@ -156,15 +160,15 @@ class _appbarState extends State<appbar> {
                 Icon(
                   Icons.timer,
                   size: width(context) / 12,
-                  color: config.colors.primaryTitreSelect,
+                  color: Config.colors.primaryTitreSelect,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Text(
                   "$minute:$seconde",
                   style: TextStyle(
-                      color: config.colors.primaryTitreSelect,
+                      color: Config.colors.primaryTitreSelect,
                       fontSize: width(context) / 11),
                 ),
               ],
@@ -175,7 +179,7 @@ class _appbarState extends State<appbar> {
             ? Container(
                 width: width(context) / 9,
                 decoration: BoxDecoration(
-                    color: config.colors.primaryColor,
+                    color: Config.colors.primaryColor,
                     borderRadius: BorderRadius.circular(100)),
                 child: Center(
                     child: InkWell(
@@ -187,7 +191,7 @@ class _appbarState extends State<appbar> {
                     widget.abandon!();
                   },
                 )))
-            : SizedBox(
+            : const SizedBox(
                 width: 0.0001,
               )
       ],

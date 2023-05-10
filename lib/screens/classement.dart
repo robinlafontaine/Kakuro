@@ -1,25 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 
-import '../config/fonctions.dart';
+import '../Config/fonctions.dart';
 import '../leaderboard.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-class classement extends StatefulWidget {
+class Classement extends StatefulWidget {
+  const Classement({super.key});
+
   @override
   //Leaderboard.getLeaderboard(limite)
-  State<classement> createState() => classementState();
+  State<Classement> createState() => ClassementState();
 }
 
-class classementState extends State<classement> {
+class ClassementState extends State<Classement> {
   final Future scoresFuture = Leaderboard.getLeaderboard();
 
   void retour() {
-    route(context, multijoueur());
+    route(context, const Multijoueur());
   }
 
   @override
@@ -30,13 +32,13 @@ class classementState extends State<classement> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: config.colors.primaryBackground,
+          backgroundColor: Config.colors.primaryBackground,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child:
-                  appbar(home: false, enjeu: false, retour: () => {retour()}),
+                  Appbar(home: false, enjeu: false, retour: () => {retour()}),
             ),
           ),
           body: SingleChildScrollView(
@@ -52,7 +54,7 @@ class classementState extends State<classement> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  color: config.colors.primaryColor),
+                                  color: Config.colors.primaryColor),
                               width: width(context) / 1.1,
                               child: Row(
                                 children: [
@@ -65,7 +67,7 @@ class classementState extends State<classement> {
                                         "RANG",
                                         style: TextStyle(
                                             color:
-                                                config.colors.primaryTextColor),
+                                                Config.colors.primaryTextColor),
                                       ))),
                                   Container(
                                       alignment: Alignment.centerLeft,
@@ -73,7 +75,7 @@ class classementState extends State<classement> {
                                       height: 40,
                                       child: Text("JOUEUR",
                                           style: TextStyle(
-                                              color: config
+                                              color: Config
                                                   .colors.primaryTextColor))),
                                   Container(
                                       width: width(context) / 3.3,
@@ -81,7 +83,7 @@ class classementState extends State<classement> {
                                       child: Center(
                                           child: Text("POINTS",
                                               style: TextStyle(
-                                                  color: config.colors
+                                                  color: Config.colors
                                                       .primaryTextColor)))),
                                 ],
                               ),
@@ -91,7 +93,7 @@ class classementState extends State<classement> {
                                 width: width(context) / 1.1,
                                 decoration: BoxDecoration(
                                     color: (i % 2 == 0)
-                                        ? config.colors.primaryTextColor
+                                        ? Config.colors.primaryTextColor
                                         : Colors.white54),
                                 child: Row(
                                   children: [
@@ -130,11 +132,11 @@ class classementState extends State<classement> {
                       return const Center(child: CircularProgressIndicator());
                     }
                   })),
-          bottomNavigationBar: navbar(
+          bottomNavigationBar: Navbar(
               actif: 10,
               reaload: () {
                 Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => parametre()))
+                        MaterialPageRoute(builder: (context) => Parametre()))
                     .then((value) {
                   setState(() {});
                 });

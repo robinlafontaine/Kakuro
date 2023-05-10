@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/fonctions.dart';
-import 'package:kakuro/config/config.dart';
+import 'package:kakuro/Config/fonctions.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/duels.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
-import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,12 +16,14 @@ import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 import 'menu.dart';
 
-class mesparties_multijoueur extends StatefulWidget {
+class MesPartiesMultijoueur extends StatefulWidget {
+  const MesPartiesMultijoueur({super.key});
+
   @override
-  State<mesparties_multijoueur> createState() => _mespartiesState();
+  State<MesPartiesMultijoueur> createState() => MesPartiesState();
 }
 
-class _mespartiesState extends State<mesparties_multijoueur> {
+class MesPartiesState extends State<MesPartiesMultijoueur> {
   List<String> grilles = [];
   List<String> chronos = [];
   List<String> minutes = [];
@@ -44,9 +45,11 @@ class _mespartiesState extends State<mesparties_multijoueur> {
   }
 
   Future<bool> launch() async {
-    Future<List> duelsEnCours =
-        Duels.getPendingDuels(FirebaseAuth.instance.currentUser!.uid);
-    print("duelsEnCours: $duelsEnCours");
+    // Future<List> duelsEnCours =
+    // Duels.getPendingDuels(FirebaseAuth.instance.currentUser!.uid);
+    if (kDebugMode) {
+      //print("duelsEnCours: $duelsEnCours");
+    }
     // for (var doc in duelsEnCours) {
     //   if (doc.data()["etat"] == "attente") {
     //     route(context, multijoueur());
@@ -55,29 +58,29 @@ class _mespartiesState extends State<mesparties_multijoueur> {
     // }
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? _grilles = await prefs.getStringList("grilles");
-    List<String>? _chronos = await prefs.getStringList("chronos");
-    List<String>? _etats = await prefs.getStringList("etats");
-    _grilles ??= [];
-    _chronos ??= [];
-    _etats ??= [];
+    List<String>? grilles = prefs.getStringList("grilles");
+    List<String>? chronos = prefs.getStringList("chronos");
+    List<String>? etats = prefs.getStringList("etats");
+    grilles ??= [];
+    chronos ??= [];
+    etats ??= [];
     setState(() {
-      grilles = _grilles!;
-      chronos = _chronos!;
-      etats = _etats!;
-      for (int i = 0; i < grilles.length; i++) {
-        kakuros.add(Kakuro.withXML(grilles[i]));
-        Duration duration = Duration(seconds: int.parse(chronos[i]));
+      grilles = grilles!;
+      chronos = chronos!;
+      etats = etats!;
+      for (int i = 0; i < grilles!.length; i++) {
+        kakuros.add(Kakuro.withXML(grilles![i]));
+        Duration duration = Duration(seconds: int.parse(chronos![i]));
         minutes.add(getAffichage(duration.inMinutes.remainder(60)));
         secondes.add(getAffichage(duration.inSeconds.remainder(60)));
       }
       etatSet = setEtat();
     });
-    return grilles.length > 0;
+    return grilles!.isNotEmpty;
   }
 
   void retour() {
-    route(context, menu());
+    route(context, const Menu());
   }
 
   @override
@@ -88,13 +91,13 @@ class _mespartiesState extends State<mesparties_multijoueur> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: config.colors.primaryBackground,
+          backgroundColor: Config.colors.primaryBackground,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
               child:
-                  appbar(home: false, enjeu: false, retour: () => {retour()}),
+                  Appbar(home: false, enjeu: false, retour: () => {retour()}),
             ),
           ),
           body: SingleChildScrollView(
@@ -109,14 +112,14 @@ class _mespartiesState extends State<mesparties_multijoueur> {
                         child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            padding: EdgeInsets.all(2),
+                            padding: const EdgeInsets.all(2),
                             itemCount: grilles.length,
                             itemBuilder: (_, i) {
                               return Container(
-                                margin: EdgeInsets.only(bottom: 20),
-                                padding: EdgeInsets.all(15),
+                                margin: const EdgeInsets.only(bottom: 20),
+                                padding: const EdgeInsets.all(15),
                                 decoration: BoxDecoration(
-                                    color: config.colors.primaryColor),
+                                    color: Config.colors.primaryColor),
                                 width: width(context) / 2,
                                 child: Row(
                                   mainAxisAlignment:
@@ -127,35 +130,35 @@ class _mespartiesState extends State<mesparties_multijoueur> {
                                         Text(
                                             "Taille : (${kakuros[i].n},${kakuros[i].m})",
                                             style: TextStyle(
-                                                color: config
+                                                color: Config
                                                     .colors.primaryTextColor)),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
                                             "Difficulté : ${kakuros[i].difficulte}",
                                             style: TextStyle(
-                                                color: config
+                                                color: Config
                                                     .colors.primaryTextColor)),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
                                             "Chrono : ${minutes[i]}:${secondes[i]}",
                                             style: TextStyle(
-                                                color: config
+                                                color: Config
                                                     .colors.primaryTextColor)),
                                       ],
                                     ),
-                                    boutton(
+                                    Boutton(
                                         value: "JOUER",
                                         couleur: true,
                                         size: width(context) / 3,
                                         onPress: () {
-                                          config.newgame = false;
+                                          Config.newgame = false;
                                           route(
                                               context,
-                                              game(
+                                              Game(
                                                   kakuro: kakuros[i],
                                                   base: etatSet[i],
                                                   index: i,
@@ -172,7 +175,7 @@ class _mespartiesState extends State<mesparties_multijoueur> {
                           child: Text(
                         'Aucune partie en cours',
                         style:
-                            TextStyle(color: config.colors.primaryTitreSelect),
+                            TextStyle(color: Config.colors.primaryTitreSelect),
                       ));
                     }
                   } else {
@@ -180,12 +183,13 @@ class _mespartiesState extends State<mesparties_multijoueur> {
                   }
                 }),
           ),
-          bottomNavigationBar: navbar(
+          bottomNavigationBar: Navbar(
               actif: 2,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),

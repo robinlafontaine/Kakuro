@@ -1,25 +1,26 @@
-import 'package:audioplayers/src/audioplayer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/leaderboard.dart';
-import 'package:kakuro/screens/mesparties.dart';
+import 'package:kakuro/screens/mes_parties.dart';
 import 'package:kakuro/screens/multijoueur.dart';
-import 'package:kakuro/screens/nouvellepartie.dart';
+import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/boutton.dart';
+import 'package:kakuro/widgets/Boutton.dart';
 
 import '../auth.dart';
-import '../config/fonctions.dart';
+import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 
-class menu extends StatefulWidget {
+class Menu extends StatefulWidget {
+  const Menu({super.key});
+
   @override
-  State<menu> createState() => _menuState();
+  State<Menu> createState() => MenuState();
 }
 
-class _menuState extends State<menu> {
+class MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -27,12 +28,12 @@ class _menuState extends State<menu> {
         return false;
       },
       child: Scaffold(
-          backgroundColor: config.colors.primaryBackground,
+          backgroundColor: Config.colors.primaryBackground,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
               padding: const EdgeInsets.all(10),
-              child: appbar(home: true, enjeu: false, retour: () => {}),
+              child: Appbar(home: true, enjeu: false, retour: () => {}),
             ),
           ),
           body: Center(
@@ -40,30 +41,30 @@ class _menuState extends State<menu> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  config.images.icon,
+                  Config.images.icon,
                   width: width(context) / 2,
                   height: width(context) / 2,
                 ),
                 const SizedBox(
                   height: 40,
                 ),
-                boutton(
+                Boutton(
                     value: "NOUVELLE PARTIE",
                     onPress: () {
-                      route(context, nouvellepartie());
+                      route(context, const NouvellePartie());
                     }),
                 const SizedBox(
                   height: 10,
                 ),
-                boutton(
+                Boutton(
                     value: "MES PARTIES",
                     onPress: () {
-                      route(context, mesparties());
+                      route(context, const MesParties());
                     }),
                 const SizedBox(
                   height: 10,
                 ),
-                boutton(
+                Boutton(
                   value: "MULTIJOUEUR",
                   onPress: () => {
                     Auth(FirebaseAuth.instance)
@@ -79,13 +80,14 @@ class _menuState extends State<menu> {
                                                 if (FirebaseAuth
                                                         .instance.currentUser !=
                                                     null)
-                                                  route(context, multijoueur())
+                                                  route(context,
+                                                      const Multijoueur())
                                               }))
                                 }
                               else
                                 {
-                                  config.online = true,
-                                  route(context, multijoueur())
+                                  Config.online = true,
+                                  route(context, const Multijoueur())
                                 }
                             }))
                   },
@@ -93,12 +95,13 @@ class _menuState extends State<menu> {
               ],
             ),
           ),
-          bottomNavigationBar: navbar(
+          bottomNavigationBar: Navbar(
               actif: 0,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),

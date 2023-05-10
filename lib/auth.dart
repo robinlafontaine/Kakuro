@@ -51,8 +51,8 @@ class Auth {
   void signOutGoogle(context) async {
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
-    config.online = false;
-    route(context, menu());
+    Config.online = false;
+    route(context, const Menu());
 
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text("Déconnecté !")));

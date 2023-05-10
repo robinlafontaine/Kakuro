@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/config/config.dart';
 
-class Case extends StatefulWidget{
+class Case extends StatefulWidget {
   final int valeur;
   final int ligne;
   final int colonne;
@@ -11,25 +9,27 @@ class Case extends StatefulWidget{
   final bool last;
   final Function maj;
 
-  Case(this.valeur,this.ligne, this.colonne, this.taille, this.last, this.maj);
+  const Case(
+      this.valeur, this.ligne, this.colonne, this.taille, this.last, this.maj,
+      {super.key});
 
-  @override State<Case> createState() => _caseState(valeur,ligne,colonne, taille, maj);
-
+  @override
+  State<Case> createState() => CaseState(valeur, ligne, colonne, taille, maj);
 }
 
-class _caseState extends State<Case>{
-  int ligne,colonne;
+class CaseState extends State<Case> {
+  int ligne, colonne;
   double taille;
   int valeur;
   Function maj;
-  _caseState(this.valeur,this.ligne,this.colonne, this.taille,this.maj);
+  CaseState(this.valeur, this.ligne, this.colonne, this.taille, this.maj);
 
-  void add(){
+  void add() {
     setState(() {
-      if(valeur==9){
-        valeur=1;
-      }else{
-        valeur+=1;
+      if (valeur == 9) {
+        valeur = 1;
+      } else {
+        valeur += 1;
       }
     });
   }
@@ -37,27 +37,23 @@ class _caseState extends State<Case>{
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Container(
-        margin: widget.last?null:EdgeInsets.only(right: 2),
-        width: taille,
-        height: taille,
-        decoration: BoxDecoration(
-          color: config.colors.caseColor
+        child: Container(
+          margin: widget.last ? null : const EdgeInsets.only(right: 2),
+          width: taille,
+          height: taille,
+          decoration: BoxDecoration(color: Config.colors.caseColor),
+          child: Center(
+            child: (valeur == 0)
+                ? null
+                : Text(
+                    valeur.toString(),
+                    style: TextStyle(fontSize: taille * 0.5, color: Colors.red),
+                  ),
+          ),
         ),
-        child: Center(
-          child: (valeur==0)?null:
-          Text(valeur.toString(),
-          style: TextStyle(
-            fontSize: taille*0.5,
-            color: Colors.red
-          ),),
-        ),
-      ),
-      onTap: (){
-        this.add();
-        maj(ligne,colonne,valeur);
-      }
-    );
+        onTap: () {
+          add();
+          maj(ligne, colonne, valeur);
+        });
   }
 }
-

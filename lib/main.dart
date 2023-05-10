@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)),
       debugShowCheckedModeBanner: false,
-      home: menu(),
+      home: const Menu(),
     );
   }
 }

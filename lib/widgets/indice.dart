@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
-import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/Config/Config.dart';
 import 'dart:math' as math;
 
 class Indice extends StatelessWidget {
@@ -9,16 +7,17 @@ class Indice extends StatelessWidget {
   final double taille;
   final bool last;
 
-  Indice(this.indiceLigne, this.indiceColonne, this.taille, this.last);
+  const Indice(this.indiceLigne, this.indiceColonne, this.taille, this.last,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (indiceLigne != 0 && indiceColonne != 0)
+    if (indiceLigne != 0 && indiceColonne != 0) {
       return Container(
-        margin: last ? null : EdgeInsets.only(right: 2),
+        margin: last ? null : const EdgeInsets.only(right: 2),
         width: taille,
         height: taille,
-        decoration: BoxDecoration(color: config.colors.caseColor),
+        decoration: BoxDecoration(color: Config.colors.caseColor),
         child: Stack(children: [
           Center(
               child: Transform.rotate(
@@ -26,7 +25,7 @@ class Indice extends StatelessWidget {
             child: Container(
               width: taille / 30,
               height: 200,
-              decoration: BoxDecoration(color: Colors.black),
+              decoration: const BoxDecoration(color: Colors.black),
             ),
           )),
           Positioned(
@@ -46,16 +45,16 @@ class Indice extends StatelessWidget {
           ),
         ]),
       );
-    else if (indiceLigne != 0)
+    } else if (indiceLigne != 0) {
       return Container(
-        margin: last ? null : EdgeInsets.only(right: 2),
+        margin: last ? null : const EdgeInsets.only(right: 2),
         child: Stack(children: [
           ClipPath(
             clipper: ClipLigne(taille),
             child: Container(
               width: taille,
               height: taille,
-              decoration: BoxDecoration(color: config.colors.caseColor),
+              decoration: BoxDecoration(color: Config.colors.caseColor),
             ),
           ),
           Positioned(
@@ -68,16 +67,16 @@ class Indice extends StatelessWidget {
           ),
         ]),
       );
-    else
+    } else {
       return Container(
-        margin: last ? null : EdgeInsets.only(right: 2),
+        margin: last ? null : const EdgeInsets.only(right: 2),
         child: Stack(children: [
           ClipPath(
             clipper: ClipColonne(taille),
             child: Container(
               width: taille,
               height: taille,
-              decoration: BoxDecoration(color: config.colors.caseColor),
+              decoration: BoxDecoration(color: Config.colors.caseColor),
             ),
           ),
           Positioned(
@@ -90,11 +89,12 @@ class Indice extends StatelessWidget {
           ),
         ]),
       );
+    }
   }
 }
 
 class ClipColonne extends CustomClipper<Path> {
-  final taille;
+  final double taille;
   ClipColonne(this.taille);
 
   @override
