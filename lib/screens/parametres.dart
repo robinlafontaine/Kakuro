@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -38,7 +39,9 @@ class ParametreState extends State<Parametre> {
     setState(() {
       etatPlayer = "pause";
     });
-    print(etatPlayer);
+    if (kDebugMode) {
+      print(etatPlayer);
+    }
   }
 
   void playBreak() {

@@ -138,7 +138,7 @@ class GameState extends State<Game> {
   }
 
   void maj(int i, int j, int valeur) {
-    this.grille[i][j] = valeur;
+    grille[i][j] = valeur;
   }
 
   void retour() {
@@ -205,9 +205,10 @@ class GameState extends State<Game> {
                 (Config.newgame) ? saveGrille() : majGrille();
               },
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),

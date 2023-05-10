@@ -112,7 +112,7 @@ class ClipColonne extends CustomClipper<Path> {
 }
 
 class ClipLigne extends CustomClipper<Path> {
-  final taille;
+  final double taille;
   ClipLigne(this.taille);
 
   @override

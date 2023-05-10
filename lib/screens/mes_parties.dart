@@ -166,9 +166,10 @@ class _MesPartiesState extends State<MesParties> {
           bottomNavigationBar: Navbar(
               actif: 2,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),

@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
-import 'package:kakuro/duels.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/parametres.dart';

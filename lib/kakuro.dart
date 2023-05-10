@@ -1,4 +1,7 @@
+// ignore_for_file: curly_braces_in_flow_control_structures, prefer_interpolation_to_compose_strings
+
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:xml/xml.dart';
 
 class Kakuro {
@@ -103,10 +106,10 @@ class Kakuro {
                   "</case>";
     var xml = '''<?xml version="1.0"?>
     <kakuro>
-      <n>${n}</n>
-      <m>${m}</m>
-      <diff>${difficulte}</diff>
-      ${cases}
+      <n>$n</n>
+      <m>$m</m>
+      <diff>$difficulte</diff>
+      $cases
     </kakuro>''';
     return xml;
   }
@@ -329,18 +332,26 @@ class Kakuro {
   void affiche() {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        print(grille[i][j]);
+        if (kDebugMode) {
+          print(grille[i][j]);
+        }
       }
-      print("");
+      if (kDebugMode) {
+        print("");
+      }
     }
   }
 
   void afficheEntete() {
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        print(entete[i][j]);
+        if (kDebugMode) {
+          print(entete[i][j]);
+        }
       }
-      print("");
+      if (kDebugMode) {
+        print("");
+      }
     }
   }
 

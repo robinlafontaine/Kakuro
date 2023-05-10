@@ -135,9 +135,10 @@ class ClassementState extends State<Classement> {
           bottomNavigationBar: Navbar(
               actif: 10,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),

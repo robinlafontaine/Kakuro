@@ -362,9 +362,10 @@ class InvitationState extends State<Invitation> {
         bottomNavigationBar: Navbar(
             actif: 1,
             reaload: () {
-              Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Parametre()))
-                  .then((value) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Parametre())).then((value) {
                 setState(() {});
               });
             }),
