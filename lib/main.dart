@@ -17,16 +17,6 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
-  // Pour avoir la base de données en local
-  // if (kDebugMode) {
-  //   try {
-  //     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
-  //     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-  //   } catch (e) {
-  //     // ignore: avoid_print
-  //     print(e);
-  //   }
-  // }
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
