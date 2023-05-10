@@ -327,7 +327,31 @@ class ParametreState extends State<Parametre> {
                             onPressed: () {
                               throw Exception();
                             },
-                            child: const Text("Throw Test Exception"))
+                            child: const Text("Throw Test Exception")),
+                        // put space to the bottom of the page
+                        // TODO: A REMPLACER PAR SPACER
+                        SizedBox(height: height(context) / 5),
+                        // const Spacer(),
+                        ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        title: const Text("Développeurs"),
+                                        content: const Text(
+                                            "Ce projet a été réalisé par : \n\n- Robin Lafontaine\n- Korantin Varnière\n- Tristan Versel \n- Maxime Zimmermann"),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Fermer"),
+                                          )
+                                        ],
+                                      ));
+                            },
+                            child: const Text("Développeurs"))
                       ],
                     ),
             ),
