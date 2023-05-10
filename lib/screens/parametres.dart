@@ -324,7 +324,10 @@ class ParametreState extends State<Parametre> {
                             },
                             child: const Text("SIGN OUT")),
                         ElevatedButton(
-                            onPressed: () {}, child: const Text("TEST"))
+                            onPressed: () {
+                              throw Exception();
+                            },
+                            child: const Text("Throw Test Exception"))
                       ],
                     ),
             ),

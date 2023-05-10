@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '432183058187',
     projectId: 'kakuro-insa',
     authDomain: 'kakuro-insa.firebaseapp.com',
+    databaseURL: 'https://kakuro-insa-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'kakuro-insa.appspot.com',
     measurementId: 'G-XYR2C10XEC',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:432183058187:android:784b7587c2c2dd4d04cc0e',
     messagingSenderId: '432183058187',
     projectId: 'kakuro-insa',
+    databaseURL: 'https://kakuro-insa-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'kakuro-insa.appspot.com',
   );
 
@@ -66,11 +68,10 @@ class DefaultFirebaseOptions {
     appId: '1:432183058187:ios:1dd4de3250b1f53e04cc0e',
     messagingSenderId: '432183058187',
     projectId: 'kakuro-insa',
+    databaseURL: 'https://kakuro-insa-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'kakuro-insa.appspot.com',
-    androidClientId:
-        '432183058187-gcfpcp0f7qh8100o7pcpnpp933tqmjr4.apps.googleusercontent.com',
-    iosClientId:
-        '432183058187-p8ul9hbijgk4glr7lrm2lq6r7vh7g25l.apps.googleusercontent.com',
+    androidClientId: '432183058187-5movd6bcsdoghtrvaao55tdubfobair5.apps.googleusercontent.com',
+    iosClientId: '432183058187-p8ul9hbijgk4glr7lrm2lq6r7vh7g25l.apps.googleusercontent.com',
     iosBundleId: 'com.example.kakuro',
   );
 
@@ -79,11 +80,10 @@ class DefaultFirebaseOptions {
     appId: '1:432183058187:ios:1dd4de3250b1f53e04cc0e',
     messagingSenderId: '432183058187',
     projectId: 'kakuro-insa',
+    databaseURL: 'https://kakuro-insa-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'kakuro-insa.appspot.com',
-    androidClientId:
-        '432183058187-gcfpcp0f7qh8100o7pcpnpp933tqmjr4.apps.googleusercontent.com',
-    iosClientId:
-        '432183058187-p8ul9hbijgk4glr7lrm2lq6r7vh7g25l.apps.googleusercontent.com',
+    androidClientId: '432183058187-5movd6bcsdoghtrvaao55tdubfobair5.apps.googleusercontent.com',
+    iosClientId: '432183058187-p8ul9hbijgk4glr7lrm2lq6r7vh7g25l.apps.googleusercontent.com',
     iosBundleId: 'com.example.kakuro',
   );
 }
