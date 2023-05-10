@@ -314,7 +314,7 @@ class GameState extends State<Game> {
                             builder: (context) => AlertDialog(
                                   title: const Text('Indice'),
                                   content: Text(
-                                      'La valeur en position (${i + 1}, ${j + 1}) est ${kakuro.grilleUpdated[i][j]}'),
+                                      'La valeur en position (${i + 1}, ${j + 1}) doit être changée par ${kakuro.grilleUpdated[i][j]}'),
                                   actions: [
                                     TextButton(
                                         onPressed: () {
@@ -383,7 +383,6 @@ class GameState extends State<Game> {
                     setState(() {
                       grille[i][j] = kakuro.grilleUpdated[i][j];
                     });
-                    Navigator.pop(context);
                   },
                   child: Text(
                     "Oui",
