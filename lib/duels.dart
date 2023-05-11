@@ -84,4 +84,37 @@ class Duels {
       }
     }
   }
+
+  Future<bool> checkuid(String uid) async {
+    try {
+      final snapshot = await db.collection("leaderboard").doc(uid).get();
+      if (snapshot.exists) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return false;
+    }
+  }
+
+  Future startDuel(uid1, uid2, diff, xmlKakuro) async {
+    try {
+      await db.collection("duels").add({
+        'board': xmlKakuro,
+        'difficulty': diff,
+        'done': {uid1: false, uid2: false},
+        'players': [uid1, uid2],
+        'timers': {uid1: 0, uid2: 0},
+        'winner': ""
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
 }

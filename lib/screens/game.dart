@@ -307,6 +307,7 @@ class GameState extends State<Game> {
                           i = Random().nextInt(kakuro.n - 1) + 1;
                           j = Random().nextInt(kakuro.m - 1) + 1;
                         }
+
                         grille[i][j] = kakuro.grilleUpdated[i][j];
                         // popup avec la valeur changee et la position
                         showDialog(

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/duels.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/multijoueur.dart';
@@ -118,6 +120,8 @@ class InvitationState extends State<Invitation> {
                                         ),
                                         TextButton(
                                           onPressed: () async {
+                                            adversaire =
+                                                (data[selection] as String);
                                             // await invite(selection, data[selection]);
                                             Navigator.pop(context, 'Inviter');
                                           },
@@ -322,12 +326,10 @@ class InvitationState extends State<Invitation> {
                                     items: difficulte.map((items) {
                                       return DropdownMenuItem(
                                           value: items,
-                                          child: Container(
-                                            child: Text(items,
-                                                style: TextStyle(
-                                                    color: Config.colors
-                                                        .primaryTextBlack)),
-                                          ));
+                                          child: Text(items,
+                                              style: TextStyle(
+                                                  color: Config.colors
+                                                      .primaryTextBlack)));
                                     }).toList(),
                                     onChanged: (value) {
                                       setState(() {
@@ -341,15 +343,47 @@ class InvitationState extends State<Invitation> {
                             ),
                             Boutton(
                                 value: "LANCER LE DUEL",
-                                onPress: () {
-                                  route(
-                                      context,
-                                      Game(
-                                        kakuro: Kakuro(
-                                            int.parse(ligne),
-                                            int.parse(colonne),
-                                            int.parse(diff)),
-                                      ));
+                                onPress: () async {
+                                  var uid2 = "test";
+                                  var uid1 =
+                                      FirebaseAuth.instance.currentUser!.uid;
+
+                                  var kakuroOnline = Kakuro(int.parse(ligne),
+                                      int.parse(colonne), int.parse(diff));
+                                  // call Future checkuid(String uid) from duels on adversaire
+                                  Duels duels = Duels();
+                                  if (await duels.checkuid(adversaire) &&
+                                      adversaire != "") {
+                                    uid2 = adversaire;
+                                  } else {
+                                    // si le doc n'existe pas, on affiche un message d'erreur et on ne lance pas le duel
+                                    // ignore: use_build_context_synchronously
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text(
+                                                "Veuillez choisir un autre adversaire"),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text("OK"))
+                                            ],
+                                          );
+                                        });
+                                  }
+                                  if (uid2 != "test") {
+                                    duels.startDuel(
+                                        uid1, uid2, diff, kakuroOnline.toXML());
+                                    // ignore: use_build_context_synchronously
+                                    route(
+                                        context,
+                                        Game(
+                                          kakuro: kakuroOnline,
+                                        ));
+                                  }
                                 })
                           ]),
                     );
