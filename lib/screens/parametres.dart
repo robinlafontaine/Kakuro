@@ -170,13 +170,14 @@ class ParametreState extends State<Parametre> {
                               Container(
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect),
+                                    color: Config.colors.primarySelect,
+                                    borderRadius: BorderRadius.circular(10)),
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
                                       dropdownColor:
-                                          Config.colors.primarySelectItem,
+                                          Config.colors.primaryBackground,
                                       value: son,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down,
@@ -213,7 +214,9 @@ class ParametreState extends State<Parametre> {
                                 width: width(context) / 8,
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect),
+                                    color: Config.colors.primarySelect,
+                                    borderRadius: BorderRadius.circular(
+                                        width(context) / 8)),
                                 child: Center(
                                   child: InkWell(
                                     child: Icon(
@@ -233,7 +236,9 @@ class ParametreState extends State<Parametre> {
                                 width: width(context) / 8,
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect),
+                                    color: Config.colors.primarySelect,
+                                    borderRadius: BorderRadius.circular(
+                                        width(context) / 8)),
                                 child: Center(
                                   child: InkWell(
                                     child: Icon(
@@ -317,22 +322,41 @@ class ParametreState extends State<Parametre> {
                             )
                           ],
                         ),
+                        Row(
+                          children: [
+                            Divider(
+                              color: Config.colors.primaryTextBlack,
+                              thickness: 2,
+                              // put adaptive height to the divider to make it responsive to the screen size and put it at the bottom of the page
+                              height: height(context) / 3,
+                            ),
+                          ],
+                        ),
                         ElevatedButton(
                             onPressed: () {
                               Auth(FirebaseAuth.instance)
                                   .signOutGoogle(context);
                             },
                             child: const Text("SIGN OUT")),
-                        ElevatedButton(
+                        TextButton(
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                Config.colors.primaryTextBlack,
+                              ),
+                            ),
                             onPressed: () {
                               throw Exception();
                             },
                             child: const Text("Throw Test Exception")),
                         // put space to the bottom of the page
                         // TODO: A REMPLACER PAR SPACER
-                        SizedBox(height: height(context) / 5),
                         // const Spacer(),
-                        ElevatedButton(
+                        TextButton(
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                Config.colors.primaryTextBlack,
+                              ),
+                            ),
                             onPressed: () {
                               showDialog(
                                   context: context,
