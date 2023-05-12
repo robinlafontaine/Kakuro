@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,8 +16,7 @@ import '../widgets/navbar.dart';
 import 'menu.dart';
 
 class MesParties extends StatefulWidget {
-  const MesParties({super.key});
-
+  const MesParties({Key? key}) : super(key: key);
   @override
   State<MesParties> createState() => _MesPartiesState();
 }
@@ -43,19 +44,18 @@ class _MesPartiesState extends State<MesParties> {
 
   Future<bool> launch() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
+    List<String>? mesgrilles = prefs.getStringList("grilles") ?? [];
+    List<String>? meschronos = prefs.getStringList("chronos") ?? [];
+    List<String>? mesetats = prefs.getStringList("etats") ?? [];
     setState(() {
-      List<String>? grilles = prefs.getStringList("grilles") ?? [];
-      List<String>? chronos = prefs.getStringList("chronos") ?? [];
-      List<String>? etats = prefs.getStringList("etats") ?? [];
-      for (int i = 0; i < grilles.length; i++) {
-        kakuros.add(Kakuro.withXML(grilles[i]));
-        Duration duration = Duration(seconds: int.parse(chronos[i]));
+      for (int i = 0; i < mesgrilles.length; i++) {
+        kakuros.add(Kakuro.withXML(mesgrilles[i]));
+        Duration duration = Duration(seconds: int.parse(meschronos[i]));
         minutes.add(getAffichage(duration.inMinutes.remainder(60)));
         secondes.add(getAffichage(duration.inSeconds.remainder(60)));
       }
-      etatSet = setEtat();
     });
+    etatSet = setEtat();
     return grilles.isNotEmpty;
   }
 
@@ -112,7 +112,7 @@ class _MesPartiesState extends State<MesParties> {
                                             style: TextStyle(
                                                 color: Config
                                                     .colors.primaryTextColor)),
-                                        const SizedBox(
+                                        SizedBox(
                                           height: 3,
                                         ),
                                         Text(
@@ -120,7 +120,7 @@ class _MesPartiesState extends State<MesParties> {
                                             style: TextStyle(
                                                 color: Config
                                                     .colors.primaryTextColor)),
-                                        const SizedBox(
+                                        SizedBox(
                                           height: 3,
                                         ),
                                         Text(
@@ -166,10 +166,9 @@ class _MesPartiesState extends State<MesParties> {
           bottomNavigationBar: Navbar(
               actif: 2,
               reaload: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Parametre()))
+                    .then((value) {
                   setState(() {});
                 });
               })),
