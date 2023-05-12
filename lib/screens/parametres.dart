@@ -256,69 +256,69 @@ class ParametreState extends State<Parametre> {
                         SizedBox(height: height(context) / 20),
                         Row(
                           children: [
-                            InkWell(
-                              child: Container(
-                                height: width(context) / 6,
-                                width: (width(context) / 3) - 10,
-                                decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect,
-                                    border: Border(
-                                        right: BorderSide(
-                                            width: 2,
-                                            color: Config
-                                                .colors.primaryBackground))),
-                                child: Center(
-                                    child: Icon(
-                                  Icons.wb_sunny,
-                                  size: width(context) / 15,
-                                  color: Config.colors.primaryTextBlack,
-                                )),
-                              ),
+                            InkResponse(
                               onTap: () {
                                 toLight();
                               },
-                            ),
-                            InkWell(
                               child: Container(
+                                width: (width(context) / 3) - 30,
                                 height: width(context) / 6,
-                                width: (width(context) / 3) - 10,
                                 decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect,
-                                    border: Border(
-                                        right: BorderSide(
-                                            width: 2,
-                                            color: Config
-                                                .colors.primaryBackground))),
+                                  color: Config.colors.primarySelect,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 child: Center(
-                                    child: Icon(
-                                  Icons.format_paint,
-                                  size: width(context) / 15,
-                                  color: Config.colors.primaryTextBlack,
-                                )),
+                                  child: FaIcon(
+                                    Icons.wb_sunny,
+                                    size: width(context) / 15,
+                                    color: Config.colors.primaryTextBlack,
+                                  ),
+                                ),
                               ),
+                            ),
+                            const Spacer(),
+                            InkResponse(
                               onTap: () {
                                 setState(() {
                                   picker = true;
                                 });
                               },
-                            ),
-                            InkWell(
                               child: Container(
+                                width: (width(context) / 3) - 30,
                                 height: width(context) / 6,
-                                width: (width(context) / 3) - 10,
                                 decoration: BoxDecoration(
                                   color: Config.colors.primarySelect,
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Center(
-                                    child: FaIcon(
-                                  FontAwesomeIcons.solidMoon,
-                                  size: width(context) / 15,
-                                  color: Config.colors.primaryTextBlack,
-                                )),
+                                  child: FaIcon(
+                                    Icons.format_paint,
+                                    size: width(context) / 15,
+                                    color: Config.colors.primaryTextBlack,
+                                  ),
+                                ),
                               ),
+                            ),
+                            const Spacer(),
+                            InkResponse(
                               onTap: () {
                                 toDark();
                               },
+                              child: Container(
+                                width: (width(context) / 3) - 30,
+                                height: width(context) / 6,
+                                decoration: BoxDecoration(
+                                  color: Config.colors.primarySelect,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: FaIcon(
+                                    FontAwesomeIcons.solidMoon,
+                                    size: width(context) / 15,
+                                    color: Config.colors.primaryTextBlack,
+                                  ),
+                                ),
+                              ),
                             )
                           ],
                         ),
