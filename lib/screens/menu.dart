@@ -60,7 +60,7 @@ class MenuState extends State<Menu> {
                     minimumSize: Size(
                         width(context) * 0.90,
                         height(context) *
-                            0.05), // Change the height to 40 pixels
+                            0.08), // Change the height to 40 pixels
                   ),
                   child: const Text(
                     "NOUVELLE PARTIE",
@@ -82,7 +82,7 @@ class MenuState extends State<Menu> {
                     minimumSize: Size(
                         width(context) * 0.90,
                         height(context) *
-                            0.05), // Change the height to 40 pixels
+                            0.08), // Change the height to 40 pixels
                   ),
                   child: const Text(
                     "MES PARTIES",
@@ -126,7 +126,7 @@ class MenuState extends State<Menu> {
                     minimumSize: Size(
                         width(context) * 0.90,
                         height(context) *
-                            0.05), // Change the height to 40 pixels
+                            0.08), // Change the height to 40 pixels
                   ),
                   child: const Text(
                     "MULTIJOUEUR",
