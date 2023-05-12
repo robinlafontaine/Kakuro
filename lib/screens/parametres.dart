@@ -256,72 +256,73 @@ class ParametreState extends State<Parametre> {
                         SizedBox(height: height(context) / 20),
                         Row(
                           children: [
-                            InkResponse(
-                              onTap: () {
+                            ElevatedButton(
+                              onPressed: () {
                                 toLight();
                               },
-                              child: Container(
-                                width: (width(context) / 3) - 30,
-                                height: width(context) / 6,
-                                decoration: BoxDecoration(
-                                  color: Config.colors.primarySelect,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Config.colors.primarySelect,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: (width(context) / 3) - 90,
+                                  vertical: width(context) / 10,
+                                ),
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Center(
-                                  child: FaIcon(
-                                    Icons.wb_sunny,
-                                    size: width(context) / 15,
-                                    color: Config.colors.primaryTextBlack,
-                                  ),
-                                ),
+                              ),
+                              child: FaIcon(
+                                Icons.wb_sunny,
+                                size: width(context) / 20,
+                                color: Config.colors.primaryTextBlack,
                               ),
                             ),
                             const Spacer(),
-                            InkResponse(
-                              onTap: () {
+                            ElevatedButton(
+                              onPressed: () {
                                 setState(() {
                                   picker = true;
                                 });
                               },
-                              child: Container(
-                                width: (width(context) / 3) - 30,
-                                height: width(context) / 6,
-                                decoration: BoxDecoration(
-                                  color: Config.colors.primarySelect,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Config.colors.primarySelect,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: (width(context) / 3) - 90,
+                                  vertical: width(context) / 10,
+                                ),
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Center(
-                                  child: FaIcon(
-                                    Icons.format_paint,
-                                    size: width(context) / 15,
-                                    color: Config.colors.primaryTextBlack,
-                                  ),
-                                ),
+                              ),
+                              child: FaIcon(
+                                Icons.format_paint,
+                                size: width(context) / 20,
+                                color: Config.colors.primaryTextBlack,
                               ),
                             ),
                             const Spacer(),
-                            InkResponse(
-                              onTap: () {
+                            ElevatedButton(
+                              onPressed: () {
                                 toDark();
                               },
-                              child: Container(
-                                width: (width(context) / 3) - 30,
-                                height: width(context) / 6,
-                                decoration: BoxDecoration(
-                                  color: Config.colors.primarySelect,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Config.colors.primarySelect,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: (width(context) / 3) - 90,
+                                  vertical: width(context) / 10,
+                                ),
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.solidMoon,
-                                    size: width(context) / 15,
-                                    color: Config.colors.primaryTextBlack,
-                                  ),
-                                ),
+                              ),
+                              child: FaIcon(
+                                FontAwesomeIcons.solidMoon,
+                                size: width(context) / 20,
+                                color: Config.colors.primaryTextBlack,
                               ),
                             )
                           ],
                         ),
+
                         Row(
                           children: [
                             Divider(
