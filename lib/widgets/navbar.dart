@@ -20,11 +20,11 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width(context),
-      height: height(context) / 12,
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(color: Config.colors.primaryColor),
+    return BottomAppBar(
+      color: Config.colors.primaryBackground,
+      elevation: 0,
+      notchMargin: 0,
+      clipBehavior: Clip.antiAlias,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -38,9 +38,9 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.house,
               color: (actif != 0)
-                  ? Config.colors.primaryNavIcon
+                  ? Theme.of(context).colorScheme.primary
                   : Config.colors.primaryTextColor,
-              size: height(context) / 35,
+              size: 24,
             ),
           ),
           IconButton(
@@ -51,9 +51,9 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.plus,
               color: (actif != 1)
-                  ? Config.colors.primaryNavIcon
+                  ? Theme.of(context).colorScheme.primary
                   : Config.colors.primaryTextColor,
-              size: height(context) / 35,
+              size: 24,
             ),
           ),
           IconButton(
@@ -66,9 +66,9 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.gamepad,
               color: (actif != 2)
-                  ? Config.colors.primaryNavIcon
+                  ? Theme.of(context).colorScheme.primary
                   : Config.colors.primaryTextColor,
-              size: height(context) / 35,
+              size: 24,
             ),
           ),
           IconButton(
@@ -79,9 +79,9 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.gears,
               color: (actif != 3)
-                  ? Config.colors.primaryNavIcon
+                  ? Theme.of(context).colorScheme.primary
                   : Config.colors.primaryTextColor,
-              size: height(context) / 35,
+              size: 24,
             ),
           ),
         ],

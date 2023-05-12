@@ -48,38 +48,52 @@ class MenuState extends State<Menu> {
                 const SizedBox(
                   height: 40,
                 ),
-                Boutton(
-                    value: "NOUVELLE PARTIE",
-                    onPress: () {
-                      route(context, const NouvellePartie());
-                    }),
-                const SizedBox(
-                  height: 10,
+                ElevatedButton(
+                  onPressed: () {
+                    route(context, const NouvellePartie());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "NOUVELLE PARTIE",
+                  ),
                 ),
-                Boutton(
-                    value: "MES PARTIES",
-                    onPress: () {
-                      route(context, const MesParties());
-                    }),
-                // FilledButton.tonal(
-                //   onPressed: () {
-                //     route(context, const MesParties());
-                //   },
-                //   // style to text to whole width
-                //   style: ElevatedButton.styleFrom(
-                //     padding: const EdgeInsets.symmetric(horizontal: 20),
-                //     minimumSize: const Size(200, 50),
-                //   ),
-                //   child: const Text(
-                //     "MES PARTIES",
-                //   ),
-                // ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
-                Boutton(
-                  value: "MULTIJOUEUR",
-                  onPress: () => {
+                ElevatedButton(
+                  onPressed: () {
+                    route(context, const MesParties());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "MES PARTIES",
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () => {
                     Auth(FirebaseAuth.instance)
                         .signedIn()
                         .then(((connected) => {
@@ -104,6 +118,20 @@ class MenuState extends State<Menu> {
                                 }
                             }))
                   },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "MULTIJOUEUR",
+                  ),
                 ),
               ],
             ),
