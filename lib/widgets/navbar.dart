@@ -38,8 +38,8 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.house,
               color: (actif != 0)
-                  ? Theme.of(context).colorScheme.primary
-                  : Config.colors.primaryTextColor,
+                  ? Config.colors.primaryTextColor
+                  : Theme.of(context).colorScheme.primary,
               size: 24,
             ),
           ),
@@ -51,8 +51,8 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.plus,
               color: (actif != 1)
-                  ? Theme.of(context).colorScheme.primary
-                  : Config.colors.primaryTextColor,
+                  ? Config.colors.primaryTextColor
+                  : Theme.of(context).colorScheme.primary,
               size: 24,
             ),
           ),
@@ -66,8 +66,8 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.gamepad,
               color: (actif != 2)
-                  ? Theme.of(context).colorScheme.primary
-                  : Config.colors.primaryTextColor,
+                  ? Config.colors.primaryTextColor
+                  : Theme.of(context).colorScheme.primary,
               size: 24,
             ),
           ),
@@ -79,8 +79,8 @@ class Navbar extends StatelessWidget {
             icon: FaIcon(
               FontAwesomeIcons.gears,
               color: (actif != 3)
-                  ? Theme.of(context).colorScheme.primary
-                  : Config.colors.primaryTextColor,
+                  ? Config.colors.primaryTextColor
+                  : Theme.of(context).colorScheme.primary,
               size: 24,
             ),
           ),
