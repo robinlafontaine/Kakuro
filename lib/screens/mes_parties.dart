@@ -181,12 +181,15 @@ class _MesPartiesState extends State<MesParties> {
                 }),
           ),
           bottomNavigationBar: Navbar(
-              actif: 2,
+              actif: 0,
               reaload: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),

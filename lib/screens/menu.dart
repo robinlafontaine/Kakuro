@@ -61,6 +61,19 @@ class MenuState extends State<Menu> {
                     onPress: () {
                       route(context, const MesParties());
                     }),
+                // FilledButton.tonal(
+                //   onPressed: () {
+                //     route(context, const MesParties());
+                //   },
+                //   // style to text to whole width
+                //   style: ElevatedButton.styleFrom(
+                //     padding: const EdgeInsets.symmetric(horizontal: 20),
+                //     minimumSize: const Size(200, 50),
+                //   ),
+                //   child: const Text(
+                //     "MES PARTIES",
+                //   ),
+                // ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -100,8 +113,11 @@ class MenuState extends State<Menu> {
               reaload: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),

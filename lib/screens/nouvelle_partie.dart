@@ -217,11 +217,15 @@ class NouvellePartieState extends State<NouvellePartie> {
             ),
           ),
           bottomNavigationBar: Navbar(
-              actif: 1,
+              actif: 0,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),
