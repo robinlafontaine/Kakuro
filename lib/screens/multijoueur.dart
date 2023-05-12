@@ -3,7 +3,6 @@ import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/screens/classement.dart';
 import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/Boutton.dart';
 
 import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
@@ -51,31 +50,89 @@ class MultijoueurState extends State<Multijoueur> {
                 const SizedBox(
                   height: 40,
                 ),
-                Boutton(
-                    value: "LANCER DUEL",
-                    onPress: () {
-                      route(context, const Invitation());
-                    }),
+                ElevatedButton(
+                  onPressed: () {
+                    route(context, const Invitation());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "LANCER DUEL",
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                Boutton(
-                    value: "MES PARTIES",
-                    onPress: () {
-                      // route(context, const MesPartiesMultijoueur());
-                    }),
+                ElevatedButton(
+                  onPressed: () {
+                    // route(context, const MesPartiesMultijoueur());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "MES PARTIES",
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                Boutton(value: "RESULTATS", onPress: () {}),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "RESULTATS",
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                Boutton(
-                    value: "CLASSEMENT",
-                    onPress: () {
-                      route(context, const Classement());
-                    }),
+                ElevatedButton(
+                  onPressed: () {
+                    route(context, const Classement());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Config.colors.primarySelect,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width(context) *
+                          0.20, // Change the horizontal padding to 20% of the screen width
+                    ),
+                    minimumSize: Size(
+                        width(context) * 0.90,
+                        height(context) *
+                            0.05), // Change the height to 40 pixels
+                  ),
+                  child: const Text(
+                    "CLASSEMENT",
+                  ),
+                ),
               ],
             ),
           ),

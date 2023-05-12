@@ -7,7 +7,6 @@ import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/boutton.dart';
 import '../Config/fonctions.dart';
 import '../leaderboard.dart';
 import '../widgets/appbar.dart';
@@ -276,7 +275,7 @@ class InvitationState extends State<Invitation> {
                                         items: items.map((items) {
                                           return DropdownMenuItem(
                                               value: items,
-                                              child: Container(
+                                              child: SizedBox(
                                                 width: width(context) / 4,
                                                 child: Text(items,
                                                     style: TextStyle(
@@ -341,50 +340,64 @@ class InvitationState extends State<Invitation> {
                             const SizedBox(
                               height: 30,
                             ),
-                            Boutton(
-                                value: "LANCER LE DUEL",
-                                onPress: () async {
-                                  var uid2 = "test";
-                                  var uid1 =
-                                      FirebaseAuth.instance.currentUser!.uid;
+                            ElevatedButton(
+                              onPressed: () async {
+                                var uid2 = "test";
+                                var uid1 =
+                                    FirebaseAuth.instance.currentUser!.uid;
 
-                                  var kakuroOnline = Kakuro(int.parse(ligne),
-                                      int.parse(colonne), int.parse(diff));
-                                  // call Future checkuid(String uid) from duels on adversaire
-                                  Duels duels = Duels();
-                                  if (await duels.checkuid(adversaire) &&
-                                      adversaire != "") {
-                                    uid2 = adversaire;
-                                  } else {
-                                    // si le doc n'existe pas, on affiche un message d'erreur et on ne lance pas le duel
-                                    // ignore: use_build_context_synchronously
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text(
-                                                "Veuillez choisir un autre adversaire"),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text("OK"))
-                                            ],
-                                          );
-                                        });
-                                  }
-                                  if (uid2 != "test") {
-                                    duels.startDuel(
-                                        uid1, uid2, diff, kakuroOnline.toXML());
-                                    // ignore: use_build_context_synchronously
-                                    route(
-                                        context,
-                                        Game(
-                                          kakuro: kakuroOnline,
-                                        ));
-                                  }
-                                })
+                                var kakuroOnline = Kakuro(int.parse(ligne),
+                                    int.parse(colonne), int.parse(diff));
+                                // call Future checkuid(String uid) from duels on adversaire
+                                Duels duels = Duels();
+                                if (await duels.checkuid(adversaire) &&
+                                    adversaire != "") {
+                                  uid2 = adversaire;
+                                } else {
+                                  // si le doc n'existe pas, on affiche un message d'erreur et on ne lance pas le duel
+                                  // ignore: use_build_context_synchronously
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: const Text(
+                                              "Veuillez choisir un autre adversaire"),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text("OK"))
+                                          ],
+                                        );
+                                      });
+                                }
+                                if (uid2 != "test") {
+                                  duels.startDuel(
+                                      uid1, uid2, diff, kakuroOnline.toXML());
+                                  // ignore: use_build_context_synchronously
+                                  route(
+                                      context,
+                                      Game(
+                                        kakuro: kakuroOnline,
+                                      ));
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Config.colors.primarySelect,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: width(context) *
+                                      0.20, // Change the horizontal padding to 20% of the screen width
+                                ),
+                                minimumSize: Size(
+                                    width(context) * 0.90,
+                                    height(context) *
+                                        0.05), // Change the height to 40 pixels
+                              ),
+                              child: const Text(
+                                "LANCER LE DUEL",
+                              ),
+                            )
                           ]),
                     );
                   } else if (snapshot.hasError) {
