@@ -52,7 +52,7 @@ class MenuState extends State<Menu> {
                     route(context, const NouvellePartie());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -74,7 +74,7 @@ class MenuState extends State<Menu> {
                     route(context, const MesParties());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -118,7 +118,7 @@ class MenuState extends State<Menu> {
                             }))
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width

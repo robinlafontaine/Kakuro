@@ -55,7 +55,7 @@ class MultijoueurState extends State<Multijoueur> {
                     route(context, const Invitation());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -77,7 +77,7 @@ class MultijoueurState extends State<Multijoueur> {
                     // route(context, const MesPartiesMultijoueur());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -97,7 +97,7 @@ class MultijoueurState extends State<Multijoueur> {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -119,7 +119,7 @@ class MultijoueurState extends State<Multijoueur> {
                     route(context, const Classement());
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primarySelect,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width

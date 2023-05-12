@@ -384,7 +384,7 @@ class InvitationState extends State<Invitation> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Config.colors.primarySelect,
+                                // backgroundColor: Config.colors.primarySelect,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: width(context) *
                                       0.20, // Change the horizontal padding to 20% of the screen width
