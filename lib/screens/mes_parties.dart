@@ -179,7 +179,7 @@ class _MesPartiesState extends State<MesParties> {
                 }),
           ),
           bottomNavigationBar: Navbar(
-              actif: 0,
+              actif: 2,
               reaload: () {
                 Navigator.push(
                     context,

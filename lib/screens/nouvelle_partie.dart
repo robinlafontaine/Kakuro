@@ -4,7 +4,6 @@ import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/boutton.dart';
 import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
@@ -196,36 +195,47 @@ class NouvellePartieState extends State<NouvellePartie> {
                     const SizedBox(
                       height: 30,
                     ),
-                    Boutton(
-                        value: "LANCER LA PARTIE",
-                        onPress: () {
-                          Config.newgame = true;
-                          route(
-                              context,
-                              Game(
-                                kakuro: Kakuro(
-                                    int.parse(ligne) - 1,
-                                    int.parse(colonne) - 1,
-                                    (diff == difficulte[0])
-                                        ? 4
-                                        : (diff == difficulte[1])
-                                            ? 7
-                                            : 10),
-                              ));
-                        })
+                    ElevatedButton(
+                      onPressed: () {
+                        Config.newgame = true;
+                        route(
+                            context,
+                            Game(
+                              kakuro: Kakuro(
+                                  int.parse(ligne) - 1,
+                                  int.parse(colonne) - 1,
+                                  (diff == difficulte[0])
+                                      ? 4
+                                      : (diff == difficulte[1])
+                                          ? 7
+                                          : 10),
+                            ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Config.colors.primarySelect,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: width(context) *
+                              0.20, // Change the horizontal padding to 20% of the screen width
+                        ),
+                        minimumSize: Size(
+                            width(context) * 0.90,
+                            height(context) *
+                                0.05), // Change the height to 40 pixels
+                      ),
+                      child: const Text(
+                        "LANCER LA PARTIE",
+                      ),
+                    )
                   ]),
             ),
           ),
           bottomNavigationBar: Navbar(
-              actif: 0,
+              actif: 1,
               reaload: () {
                 Navigator.push(
                     context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          const Parametre(),
-                      transitionDuration: const Duration(seconds: 0),
-                    )).then((value) {
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),
