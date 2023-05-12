@@ -37,8 +37,13 @@ class _MesPartiesState extends State<MesParties> {
     return liste;
   }
 
+  List<String> paddedNumbers = List.generate(
+    60,
+    (index) => index.toString().padLeft(2, '0'),
+  );
+
   String getAffichage(int n) {
-    return n.toString().padLeft(2, "0");
+    return paddedNumbers[n];
   }
 
   Future<bool> launch() async {
@@ -101,7 +106,8 @@ class _MesPartiesState extends State<MesParties> {
                                 margin: const EdgeInsets.only(bottom: 20),
                                 padding: const EdgeInsets.all(15),
                                 decoration: BoxDecoration(
-                                    color: Config.colors.primaryColor),
+                                    color: Config.colors.primaryColor,
+                                    borderRadius: BorderRadius.circular(12)),
                                 width: width(context) / 2,
                                 child: Row(
                                   mainAxisAlignment:
@@ -132,11 +138,19 @@ class _MesPartiesState extends State<MesParties> {
                                                     .colors.primaryTextColor)),
                                       ],
                                     ),
-                                    Boutton(
-                                        value: "JOUER",
-                                        couleur: true,
-                                        size: width(context) / 3,
-                                        onPress: () {
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Config.colors
+                                              .primaryBackground, // background
+                                          foregroundColor: Config.colors
+                                              .primaryTextBlack, // foreground
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                          ),
+                                          minimumSize: const Size(150, 50),
+                                        ),
+                                        onPressed: () {
                                           Config.newgame = false;
                                           route(
                                               context,
@@ -146,7 +160,8 @@ class _MesPartiesState extends State<MesParties> {
                                                   index: i,
                                                   chrono:
                                                       int.parse(chronos[i])));
-                                        })
+                                        },
+                                        child: const Text("JOUER"))
                                   ],
                                 ),
                               );
