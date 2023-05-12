@@ -6,7 +6,6 @@ import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
-import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,10 +46,13 @@ class _MesPartiesState extends State<MesParties> {
     List<String>? mesgrilles = prefs.getStringList("grilles") ?? [];
     List<String>? meschronos = prefs.getStringList("chronos") ?? [];
     List<String>? mesetats = prefs.getStringList("etats") ?? [];
+    grilles = mesgrilles;
+    chronos = meschronos;
+    etats = mesetats;
     setState(() {
       for (int i = 0; i < mesgrilles.length; i++) {
-        kakuros.add(Kakuro.withXML(mesgrilles[i]));
-        Duration duration = Duration(seconds: int.parse(meschronos[i]));
+        kakuros.add(Kakuro.withXML(grilles[i]));
+        Duration duration = Duration(seconds: int.parse(chronos[i]));
         minutes.add(getAffichage(duration.inMinutes.remainder(60)));
         secondes.add(getAffichage(duration.inSeconds.remainder(60)));
       }
@@ -112,7 +114,7 @@ class _MesPartiesState extends State<MesParties> {
                                             style: TextStyle(
                                                 color: Config
                                                     .colors.primaryTextColor)),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
@@ -120,7 +122,7 @@ class _MesPartiesState extends State<MesParties> {
                                             style: TextStyle(
                                                 color: Config
                                                     .colors.primaryTextColor)),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
@@ -166,9 +168,10 @@ class _MesPartiesState extends State<MesParties> {
           bottomNavigationBar: Navbar(
               actif: 2,
               reaload: () {
-                Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Parametre()))
-                    .then((value) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Parametre())).then((value) {
                   setState(() {});
                 });
               })),
