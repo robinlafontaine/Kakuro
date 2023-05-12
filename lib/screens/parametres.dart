@@ -186,7 +186,7 @@ class ParametreState extends State<Parametre> {
                                       items: Config.sons.sons.map((items) {
                                         return DropdownMenuItem(
                                           value: items,
-                                          child: Container(
+                                          child: SizedBox(
                                             width: width(context) / 2.5,
                                             child: Text(
                                               items.replaceRange(
@@ -210,48 +210,49 @@ class ParametreState extends State<Parametre> {
                                       }),
                                 ),
                               ),
-                              Container(
-                                width: width(context) / 8,
-                                height: width(context) / 8,
-                                decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect,
-                                    borderRadius: BorderRadius.circular(
-                                        width(context) / 8)),
-                                child: Center(
-                                  child: InkWell(
-                                    child: Icon(
-                                      (etatPlayer == "play")
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
-                                      size: width(context) / 15,
-                                      color: Config.colors.primaryTextBlack,
-                                    ),
-                                    onTap: () {
-                                      playBreak();
-                                    },
+                              ElevatedButton(
+                                // play button
+                                style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(),
+                                  padding: const EdgeInsets.all(20),
+                                  backgroundColor: Config.colors.primarySelect,
+                                  minimumSize: Size(
+                                    width(context) / 15,
+                                    width(context) / 15,
                                   ),
+                                ),
+                                onPressed: () {
+                                  playBreak();
+                                },
+                                child: Icon(
+                                  (etatPlayer == "play")
+                                      ? Icons.pause
+                                      : Icons.play_arrow,
+                                  size: width(context) / 20,
+                                  color: Config.colors.primaryTextBlack,
                                 ),
                               ),
-                              Container(
-                                width: width(context) / 8,
-                                height: width(context) / 8,
-                                decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect,
-                                    borderRadius: BorderRadius.circular(
-                                        width(context) / 8)),
-                                child: Center(
-                                  child: InkWell(
-                                    child: Icon(
-                                      Icons.square,
-                                      size: width(context) / 20,
-                                      color: Config.colors.primaryTextBlack,
-                                    ),
-                                    onTap: () {
-                                      stopMusic();
-                                    },
+                              ElevatedButton(
+                                // circular shape for stop button
+                                style: ElevatedButton.styleFrom(
+                                  shape: const CircleBorder(),
+                                  padding: const EdgeInsets.all(20),
+                                  backgroundColor: Config.colors.primarySelect,
+                                  minimumSize: Size(
+                                    width(context) / 15,
+                                    width(context) /
+                                        15, // button width and height
                                   ),
                                 ),
-                              )
+                                onPressed: () {
+                                  stopMusic();
+                                },
+                                child: Icon(
+                                  Icons.stop,
+                                  size: width(context) / 20,
+                                  color: Config.colors.primaryTextBlack,
+                                ),
+                              ),
                             ]),
                         SizedBox(height: height(context) / 20),
                         Row(
@@ -263,7 +264,7 @@ class ParametreState extends State<Parametre> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Config.colors.primarySelect,
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: (width(context) / 3) - 90,
+                                  horizontal: (width(context)) * 0.1,
                                   vertical: width(context) / 10,
                                 ),
                                 shape: RoundedRectangleBorder(
@@ -286,7 +287,7 @@ class ParametreState extends State<Parametre> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Config.colors.primarySelect,
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: (width(context) / 3) - 90,
+                                  horizontal: (width(context)) * 0.1,
                                   vertical: width(context) / 10,
                                 ),
                                 shape: RoundedRectangleBorder(
@@ -307,7 +308,7 @@ class ParametreState extends State<Parametre> {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Config.colors.primarySelect,
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: (width(context) / 3) - 90,
+                                  horizontal: (width(context)) * 0.1,
                                   vertical: width(context) / 10,
                                 ),
                                 shape: RoundedRectangleBorder(
@@ -329,7 +330,7 @@ class ParametreState extends State<Parametre> {
                               color: Config.colors.primaryTextBlack,
                               thickness: 2,
                               // put adaptive height to the divider to make it responsive to the screen size and put it at the bottom of the page
-                              height: height(context) / 3,
+                              height: height(context) / 4,
                             ),
                           ],
                         ),

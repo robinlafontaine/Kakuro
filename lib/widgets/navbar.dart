@@ -22,7 +22,7 @@ class Navbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       color: Config.colors.primaryBackground,
-      elevation: 0,
+      elevation: 2,
       notchMargin: 0,
       clipBehavior: Clip.antiAlias,
       child: Row(

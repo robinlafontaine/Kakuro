@@ -85,98 +85,105 @@ class _MesPartiesState extends State<MesParties> {
                   Appbar(home: false, enjeu: false, retour: () => {retour()}),
             ),
           ),
-          body: SingleChildScrollView(
+          body: Padding(
+            padding: const EdgeInsets.all(15),
             child: FutureBuilder<bool>(
-                future: launch(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    if (snapshot.data == true) {
-                      return Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            padding: const EdgeInsets.all(2),
-                            itemCount: grilles.length,
-                            itemBuilder: (_, i) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 20),
-                                padding: const EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                    color: Config.colors.primaryColor,
-                                    borderRadius: BorderRadius.circular(12)),
-                                width: width(context) / 2,
-                                child: Row(
+              future: launch(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data == true) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      padding: const EdgeInsets.all(2),
+                      itemCount: grilles.length,
+                      itemBuilder: (_, i) {
+                        return Card(
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: SizedBox(
+                            width: width(context) / 2,
+                            height: height(context) *
+                                0.12, // Change the height to 20% of the screen height
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Column(
                                       children: [
                                         Text(
-                                            "Taille : (${kakuros[i].n},${kakuros[i].m})",
-                                            style: TextStyle(
-                                                color: Config
-                                                    .colors.primaryTextColor)),
+                                          "Taille : ${kakuros[i].n}x${kakuros[i].m}",
+                                        ),
                                         const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
-                                            "Difficulté : ${kakuros[i].difficulte}",
-                                            style: TextStyle(
-                                                color: Config
-                                                    .colors.primaryTextColor)),
+                                          "Difficulté : ${kakuros[i].difficulte}",
+                                        ),
                                         const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
-                                            "Chrono : ${minutes[i]}:${secondes[i]}",
-                                            style: TextStyle(
-                                                color: Config
-                                                    .colors.primaryTextColor)),
+                                          "Chrono : ${minutes[i]}:${secondes[i]}",
+                                        ),
                                       ],
                                     ),
-                                    ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Config.colors
-                                              .primaryBackground, // background
-                                          foregroundColor: Config.colors
-                                              .primaryTextBlack, // foreground
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Config.newgame = false;
+                                        route(
+                                          context,
+                                          Game(
+                                            kakuro: kakuros[i],
+                                            base: etatSet[i],
+                                            index: i,
+                                            chrono: int.parse(chronos[i]),
                                           ),
-                                          minimumSize: const Size(150, 50),
+                                        );
+                                      },
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor:
+                                            Config.colors.primarySelect,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: width(context) *
+                                              0.05, // Change the horizontal padding to 20% of the screen width
                                         ),
-                                        onPressed: () {
-                                          Config.newgame = false;
-                                          route(
-                                              context,
-                                              Game(
-                                                  kakuro: kakuros[i],
-                                                  base: etatSet[i],
-                                                  index: i,
-                                                  chrono:
-                                                      int.parse(chronos[i])));
-                                        },
-                                        child: const Text("JOUER"))
+                                        minimumSize: Size(
+                                            width(context) * 0.05,
+                                            height(context) *
+                                                0.05), // Change the height to 40 pixels
+                                      ),
+                                      child: const Text(
+                                        "REPRENDRE",
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              );
-                            }),
-                      ));
-                    } else {
-                      return Center(
-                          child: Text(
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: Text(
                         'Aucune partie en cours',
                         style:
                             TextStyle(color: Config.colors.primaryTitreSelect),
-                      ));
-                    }
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
+                      ),
+                    );
                   }
-                }),
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
           ),
           bottomNavigationBar: Navbar(
               actif: 2,

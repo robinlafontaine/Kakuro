@@ -6,7 +6,6 @@ import 'package:kakuro/screens/mes_parties.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/Boutton.dart';
 
 import '../auth.dart';
 import '../Config/fonctions.dart';

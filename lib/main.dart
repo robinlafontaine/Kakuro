@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
           // color seed blue
-          // colorSchemeSeed: const Color(0xFF1E90FF),
+          colorSchemeSeed: const Color(0xFF1E90FF),
           useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: const Menu(),
