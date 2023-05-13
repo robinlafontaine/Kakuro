@@ -54,7 +54,10 @@ class ClassementState extends State<Classement> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  color: Config.colors.primaryColor),
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
+                              ),
                               width: width(context) / 1.1,
                               child: Row(
                                 children: [
@@ -66,25 +69,32 @@ class ClassementState extends State<Classement> {
                                           child: Text(
                                         "RANG",
                                         style: TextStyle(
-                                            color:
-                                                Config.colors.primaryTextColor),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer),
                                       ))),
                                   Container(
                                       alignment: Alignment.centerLeft,
                                       width: width(context) / 2.7,
                                       height: 40,
-                                      child: Text("JOUEUR",
-                                          style: TextStyle(
-                                              color: Config
-                                                  .colors.primaryTextColor))),
+                                      child: Text(
+                                        "JOUEUR",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer),
+                                      )),
                                   Container(
                                       width: width(context) / 3.3,
                                       height: 40,
                                       child: Center(
-                                          child: Text("POINTS",
-                                              style: TextStyle(
-                                                  color: Config.colors
-                                                      .primaryTextColor)))),
+                                          child: Text(
+                                        "POINTS",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer),
+                                      ))),
                                 ],
                               ),
                             ),
@@ -93,8 +103,14 @@ class ClassementState extends State<Classement> {
                                 width: width(context) / 1.1,
                                 decoration: BoxDecoration(
                                     color: (i % 2 == 0)
-                                        ? Config.colors.primaryTextColor
-                                        : Colors.white54),
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondaryContainer
+                                            .withOpacity(0.5)
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .secondaryContainer
+                                            .withOpacity(0.2)),
                                 child: Row(
                                   children: [
                                     Container(
@@ -137,8 +153,11 @@ class ClassementState extends State<Classement> {
               reaload: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),
