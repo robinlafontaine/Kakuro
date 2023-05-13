@@ -21,8 +21,8 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: Config.colors.primaryBackground,
-      elevation: 2,
+      color: Theme.of(context).colorScheme.secondaryContainer,
+      elevation: 0,
       notchMargin: 0,
       clipBehavior: Clip.antiAlias,
       child: Row(

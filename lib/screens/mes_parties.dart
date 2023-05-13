@@ -76,7 +76,7 @@ class _MesPartiesState extends State<MesParties> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: Config.colors.primaryBackground,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
@@ -147,8 +147,9 @@ class _MesPartiesState extends State<MesParties> {
                                         );
                                       },
                                       style: OutlinedButton.styleFrom(
-                                        backgroundColor:
-                                            Config.colors.primarySelect,
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondaryContainer,
                                         padding: EdgeInsets.symmetric(
                                           horizontal: width(context) *
                                               0.05, // Change the horizontal padding to 20% of the screen width

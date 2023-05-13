@@ -6,6 +6,7 @@ import 'package:kakuro/screens/menu.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
           //scaffoldBackgroundColor: config.colors.primaryBackground,
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-          // color seed light black
-          colorSchemeSeed: const Color(0xFF1E1E1E),
+          // light green
+          colorSchemeSeed: const Color(0xFFA5D6A7),
           useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: const Menu(),

@@ -82,7 +82,7 @@ class AppbarState extends State<Appbar> {
               builder: (BuildContext context) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: Config.colors.primaryColor,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Center(
@@ -179,7 +179,7 @@ class AppbarState extends State<Appbar> {
             ? Container(
                 width: width(context) / 9,
                 decoration: BoxDecoration(
-                    color: Config.colors.primaryColor,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(100)),
                 child: Center(
                     child: InkWell(

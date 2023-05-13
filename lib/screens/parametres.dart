@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/widgets/Boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 
 import '../auth.dart';
 import '../Config/fonctions.dart';
@@ -78,13 +79,14 @@ class ParametreState extends State<Parametre> {
 
   void toDark() {
     setState(() {
-      Config.colors.primaryColor = Config.colors.defaultPrimary;
-      Config.colors.primaryBackground = Config.colors.darkBackground;
-      Config.colors.primaryTextBlack = Config.colors.defaultPrimaryText;
-      Config.colors.primarySelect = Config.colors.primaryColor;
-      Config.colors.primarySelectItem = Config.colors.primaryColor;
-      Config.colors.primaryTitreSelect = Config.colors.defaultPrimaryText;
-      Config.colors.primaryTextBackground = Config.colors.primaryColor;
+      ThemeData theme = Theme.of(context);
+      Config.colors.primaryColor = theme.colorScheme.primary;
+      Config.colors.primaryBackground = theme.colorScheme.primaryVariant;
+      Config.colors.primaryTextBlack = theme.colorScheme.onPrimary;
+      Config.colors.primarySelect = theme.colorScheme.primary;
+      Config.colors.primarySelectItem = theme.colorScheme.primary;
+      Config.colors.primaryTitreSelect = theme.colorScheme.onPrimary;
+      Config.colors.primaryTextBackground = theme.colorScheme.primary;
     });
   }
 
@@ -124,7 +126,7 @@ class ParametreState extends State<Parametre> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Config.colors.primaryBackground,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: PreferredSize(
           preferredSize: Size(double.infinity, width(context) / 6),
           child: Padding(
@@ -170,14 +172,17 @@ class ParametreState extends State<Parametre> {
                               Container(
                                 height: width(context) / 8,
                                 decoration: BoxDecoration(
-                                    color: Config.colors.primarySelect,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer,
                                     borderRadius: BorderRadius.circular(10)),
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
-                                      dropdownColor:
-                                          Config.colors.primaryBackground,
+                                      dropdownColor: Theme.of(context)
+                                          .colorScheme
+                                          .secondaryContainer,
                                       value: son,
                                       icon: Icon(
                                         Icons.keyboard_arrow_down,
@@ -194,8 +199,9 @@ class ParametreState extends State<Parametre> {
                                                   items.length,
                                                   ""),
                                               style: TextStyle(
-                                                  color: Config
-                                                      .colors.primaryTextBlack),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onSecondaryContainer),
                                             ),
                                           ),
                                         );

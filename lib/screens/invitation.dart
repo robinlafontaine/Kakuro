@@ -47,7 +47,7 @@ class InvitationState extends State<Invitation> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Config.colors.primaryBackground,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: PreferredSize(
           preferredSize: Size(double.infinity, width(context) / 6),
           child: Padding(

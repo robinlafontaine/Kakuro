@@ -27,7 +27,7 @@ class MenuState extends State<Menu> {
         return false;
       },
       child: Scaffold(
-          backgroundColor: Config.colors.primaryBackground,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
@@ -52,7 +52,10 @@ class MenuState extends State<Menu> {
                     route(context, const NouvellePartie());
                   },
                   style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
+                    // backgroundColor: Config.colors.primaryColor,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
+                    // backgroundColor: Colors.transparent,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -75,6 +78,8 @@ class MenuState extends State<Menu> {
                   },
                   style: ElevatedButton.styleFrom(
                     // backgroundColor: Config.colors.primarySelect,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -84,8 +89,10 @@ class MenuState extends State<Menu> {
                         height(context) *
                             0.08), // Change the height to 40 pixels
                   ),
-                  child: const Text(
+                  child: Text(
                     "MES PARTIES",
+                    selectionColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                   ),
                 ),
                 const SizedBox(
@@ -119,6 +126,8 @@ class MenuState extends State<Menu> {
                   },
                   style: ElevatedButton.styleFrom(
                     // backgroundColor: Config.colors.primarySelect,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width

@@ -49,7 +49,7 @@ class NouvellePartieState extends State<NouvellePartie> {
         return true;
       },
       child: Scaffold(
-          backgroundColor: Config.colors.primaryBackground,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: PreferredSize(
             preferredSize: Size(double.infinity, width(context) / 6),
             child: Padding(
@@ -212,7 +212,8 @@ class NouvellePartieState extends State<NouvellePartie> {
                             ));
                       },
                       style: ElevatedButton.styleFrom(
-                        // backgroundColor: Config.colors.primarySelect,
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondaryContainer,
                         padding: EdgeInsets.symmetric(
                           horizontal: width(context) *
                               0.20, // Change the horizontal padding to 20% of the screen width
@@ -222,8 +223,10 @@ class NouvellePartieState extends State<NouvellePartie> {
                             height(context) *
                                 0.08), // Change the height to 40 pixels
                       ),
-                      child: const Text(
+                      child: Text(
                         "LANCER LA PARTIE",
+                        selectionColor:
+                            Theme.of(context).colorScheme.onSecondaryContainer,
                       ),
                     )
                   ]),
