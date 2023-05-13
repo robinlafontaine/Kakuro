@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
           //scaffoldBackgroundColor: config.colors.primaryBackground,
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-          // light blue
-          colorSchemeSeed: const Color(0xFF00B0FF),
+          // light green
+          colorSchemeSeed: const Color(0xFF00BFA5),
           useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: const Menu(),
