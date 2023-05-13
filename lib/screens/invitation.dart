@@ -220,13 +220,17 @@ class InvitationState extends State<Invitation> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: Config.colors.primarySelect),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondaryContainer,
+                                      borderRadius: BorderRadius.circular(10)),
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 10),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-                                        dropdownColor:
-                                            Config.colors.primarySelectItem,
+                                        dropdownColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondaryContainer,
                                         value: ligne,
                                         icon: Icon(
                                           Icons.keyboard_arrow_down,
@@ -240,8 +244,9 @@ class InvitationState extends State<Invitation> {
                                               child: Text(
                                                 items,
                                                 style: TextStyle(
-                                                    color: Config.colors
-                                                        .primaryTextBlack),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .onSecondaryContainer),
                                               ),
                                             ),
                                           );
@@ -260,13 +265,17 @@ class InvitationState extends State<Invitation> {
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: Config.colors.primarySelect),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondaryContainer,
+                                      borderRadius: BorderRadius.circular(10)),
                                   padding: const EdgeInsets.only(
                                       left: 15, right: 10),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
-                                        dropdownColor:
-                                            Config.colors.primarySelectItem,
+                                        dropdownColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondaryContainer,
                                         value: colonne,
                                         icon: Icon(
                                           Icons.keyboard_arrow_down,
@@ -277,10 +286,13 @@ class InvitationState extends State<Invitation> {
                                               value: items,
                                               child: SizedBox(
                                                 width: width(context) / 4,
-                                                child: Text(items,
-                                                    style: TextStyle(
-                                                        color: Config.colors
-                                                            .primaryTextBlack)),
+                                                child: Text(
+                                                  items,
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onSecondaryContainer),
+                                                ),
                                               ));
                                         }).toList(),
                                         onChanged: (value) {
@@ -310,13 +322,17 @@ class InvitationState extends State<Invitation> {
                             Container(
                               width: width(context) / 1.1,
                               decoration: BoxDecoration(
-                                  color: Config.colors.primarySelect),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
+                                  borderRadius: BorderRadius.circular(10)),
                               padding:
                                   const EdgeInsets.only(left: 15, right: 10),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(
-                                    dropdownColor:
-                                        Config.colors.primarySelectItem,
+                                    dropdownColor: Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer,
                                     value: diff,
                                     icon: Icon(
                                       Icons.keyboard_arrow_down,
@@ -325,10 +341,13 @@ class InvitationState extends State<Invitation> {
                                     items: difficulte.map((items) {
                                       return DropdownMenuItem(
                                           value: items,
-                                          child: Text(items,
-                                              style: TextStyle(
-                                                  color: Config.colors
-                                                      .primaryTextBlack)));
+                                          child: Text(
+                                            items,
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondaryContainer),
+                                          ));
                                     }).toList(),
                                     onChanged: (value) {
                                       setState(() {
@@ -384,7 +403,9 @@ class InvitationState extends State<Invitation> {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                // backgroundColor: Config.colors.primarySelect,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: width(context) *
                                       0.20, // Change the horizontal padding to 20% of the screen width
@@ -394,8 +415,11 @@ class InvitationState extends State<Invitation> {
                                     height(context) *
                                         0.08), // Change the height to 40 pixels
                               ),
-                              child: const Text(
+                              child: Text(
                                 "LANCER LE DUEL",
+                                selectionColor: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondaryContainer,
                               ),
                             )
                           ]),

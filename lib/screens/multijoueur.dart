@@ -55,7 +55,8 @@ class MultijoueurState extends State<Multijoueur> {
                     route(context, const Invitation());
                   },
                   style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -65,8 +66,10 @@ class MultijoueurState extends State<Multijoueur> {
                         height(context) *
                             0.08), // Change the height to 40 pixels
                   ),
-                  child: const Text(
+                  child: Text(
                     "LANCER DUEL",
+                    selectionColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                   ),
                 ),
                 const SizedBox(
@@ -77,7 +80,8 @@ class MultijoueurState extends State<Multijoueur> {
                     // route(context, const MesPartiesMultijoueur());
                   },
                   style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -87,8 +91,10 @@ class MultijoueurState extends State<Multijoueur> {
                         height(context) *
                             0.08), // Change the height to 40 pixels
                   ),
-                  child: const Text(
+                  child: Text(
                     "MES PARTIES",
+                    selectionColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                   ),
                 ),
                 const SizedBox(
@@ -97,7 +103,8 @@ class MultijoueurState extends State<Multijoueur> {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -107,8 +114,10 @@ class MultijoueurState extends State<Multijoueur> {
                         height(context) *
                             0.08), // Change the height to 40 pixels
                   ),
-                  child: const Text(
+                  child: Text(
                     "RESULTATS",
+                    selectionColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                   ),
                 ),
                 const SizedBox(
@@ -119,7 +128,8 @@ class MultijoueurState extends State<Multijoueur> {
                     route(context, const Classement());
                   },
                   style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.secondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -129,8 +139,10 @@ class MultijoueurState extends State<Multijoueur> {
                         height(context) *
                             0.08), // Change the height to 40 pixels
                   ),
-                  child: const Text(
+                  child: Text(
                     "CLASSEMENT",
+                    selectionColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                   ),
                 ),
               ],

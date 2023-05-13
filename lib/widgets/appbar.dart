@@ -82,7 +82,7 @@ class AppbarState extends State<Appbar> {
               builder: (BuildContext context) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    color: Theme.of(context).colorScheme.primaryContainer,
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Center(
@@ -135,12 +135,12 @@ class AppbarState extends State<Appbar> {
                 return Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: Config.colors.primaryColor),
+                      color: Theme.of(context).colorScheme.primaryContainer),
                   child: Center(
                     child: IconButton(
                       icon: const FaIcon(FontAwesomeIcons.arrowLeftLong),
                       iconSize: width(context) / 20,
-                      color: Config.colors.primaryTextColor,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                       hoverColor: Colors.transparent,
                       onPressed: () {
                         widget.retour();

@@ -80,12 +80,17 @@ class NouvellePartieState extends State<NouvellePartie> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          decoration:
-                              BoxDecoration(color: Config.colors.primarySelect),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                              borderRadius: BorderRadius.circular(10)),
                           padding: const EdgeInsets.only(left: 15, right: 10),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
-                                dropdownColor: Config.colors.primarySelectItem,
+                                dropdownColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 value: ligne,
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
@@ -99,8 +104,9 @@ class NouvellePartieState extends State<NouvellePartie> {
                                       child: Text(
                                         items,
                                         style: TextStyle(
-                                            color:
-                                                Config.colors.primaryTextBlack),
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer),
                                       ),
                                     ),
                                   );
@@ -116,12 +122,17 @@ class NouvellePartieState extends State<NouvellePartie> {
                             size: width(context) / 20,
                             color: Config.colors.primaryTitreSelect),
                         Container(
-                          decoration:
-                              BoxDecoration(color: Config.colors.primarySelect),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                              borderRadius: BorderRadius.circular(10)),
                           padding: const EdgeInsets.only(left: 15, right: 10),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
-                                dropdownColor: Config.colors.primarySelectItem,
+                                dropdownColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 value: colonne,
                                 icon: Icon(Icons.keyboard_arrow_down,
                                     color: Config.colors.primaryTextBlack),
@@ -133,8 +144,9 @@ class NouvellePartieState extends State<NouvellePartie> {
                                         child: Text(
                                           items,
                                           style: TextStyle(
-                                              color: Config
-                                                  .colors.primaryTextBlack),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondaryContainer),
                                         ),
                                       ));
                                 }).toList(),
@@ -162,12 +174,16 @@ class NouvellePartieState extends State<NouvellePartie> {
                     ),
                     Container(
                       width: width(context) / 1.1,
-                      decoration:
-                          BoxDecoration(color: Config.colors.primarySelect),
-                      padding: const EdgeInsets.only(left: 15, right: 10),
+                      decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).colorScheme.secondaryContainer,
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.only(left: 15, right: 15),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton(
-                            dropdownColor: Config.colors.primarySelectItem,
+                            dropdownColor: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
                             value: diff,
                             icon: Icon(
                               Icons.keyboard_arrow_down,
@@ -180,8 +196,9 @@ class NouvellePartieState extends State<NouvellePartie> {
                                     child: Text(
                                       items,
                                       style: TextStyle(
-                                          color:
-                                              Config.colors.primaryTextBlack),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer),
                                     ),
                                   ));
                             }).toList(),

@@ -10,7 +10,6 @@ import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
-import 'package:kakuro/widgets/Boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -195,22 +194,58 @@ class GameState extends State<Game> {
                     height: 30,
                   ),
                   // boutton to get a hint
-                  Boutton(
-                      value: "INDICE",
-                      onPress: () {
-                        openDialogIndice();
-                      }),
-                  const SizedBox(
-                    height: 10,
+                  ElevatedButton(
+                    onPressed: () {
+                      openDialogIndice();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // backgroundColor: Config.colors.primarySelect,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width(context) *
+                            0.20, // Change the horizontal padding to 20% of the screen width
+                      ),
+                      minimumSize: Size(
+                          width(context) * 0.90,
+                          height(context) *
+                              0.08), // Change the height to 40 pixels
+                    ),
+                    child: Text(
+                      "INDICE",
+                      selectionColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
+                    ),
                   ),
-                  Boutton(
-                      value: "VALIDER",
-                      onPress: () {
-                        bool res = testValide();
-                        if (!res) {
-                          openDialogFaux();
-                        }
-                      }),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      bool res = testValide();
+                      if (!res) {
+                        openDialogFaux();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // backgroundColor: Config.colors.primarySelect,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width(context) *
+                            0.20, // Change the horizontal padding to 20% of the screen width
+                      ),
+                      minimumSize: Size(
+                          width(context) * 0.90,
+                          height(context) *
+                              0.08), // Change the height to 40 pixels
+                    ),
+                    child: Text(
+                      "VALIDER",
+                      selectionColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
+                    ),
+                  ),
                 ],
               ),
             ),

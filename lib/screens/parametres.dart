@@ -221,7 +221,9 @@ class ParametreState extends State<Parametre> {
                                 style: ElevatedButton.styleFrom(
                                   shape: const CircleBorder(),
                                   padding: const EdgeInsets.all(20),
-                                  backgroundColor: Config.colors.primarySelect,
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
                                   minimumSize: Size(
                                     width(context) / 15,
                                     width(context) / 15,
@@ -243,7 +245,9 @@ class ParametreState extends State<Parametre> {
                                 style: ElevatedButton.styleFrom(
                                   shape: const CircleBorder(),
                                   padding: const EdgeInsets.all(20),
-                                  backgroundColor: Config.colors.primarySelect,
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
                                   minimumSize: Size(
                                     width(context) / 15,
                                     width(context) /
@@ -268,7 +272,9 @@ class ParametreState extends State<Parametre> {
                                 toLight();
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Config.colors.primarySelect,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: (width(context)) * 0.1,
                                   vertical: width(context) / 10,
@@ -291,7 +297,9 @@ class ParametreState extends State<Parametre> {
                                 });
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Config.colors.primarySelect,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: (width(context)) * 0.1,
                                   vertical: width(context) / 10,
@@ -312,7 +320,9 @@ class ParametreState extends State<Parametre> {
                                 toDark();
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Config.colors.primarySelect,
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 padding: EdgeInsets.symmetric(
                                   horizontal: (width(context)) * 0.1,
                                   vertical: width(context) / 10,
@@ -333,7 +343,9 @@ class ParametreState extends State<Parametre> {
                         Row(
                           children: [
                             Divider(
-                              color: Config.colors.primaryTextBlack,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
                               thickness: 2,
                               // put adaptive height to the divider to make it responsive to the screen size and put it at the bottom of the page
                               height: height(context) / 4,
@@ -345,6 +357,11 @@ class ParametreState extends State<Parametre> {
                               Auth(FirebaseAuth.instance)
                                   .signOutGoogle(context);
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                            ),
                             child: const Text("SIGN OUT")),
                         TextButton(
                             style: ButtonStyle(
