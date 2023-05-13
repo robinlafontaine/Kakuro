@@ -179,6 +179,7 @@ class ParametreState extends State<Parametre> {
                                     const EdgeInsets.only(left: 15, right: 10),
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
+                                      borderRadius: BorderRadius.circular(10),
                                       dropdownColor: Theme.of(context)
                                           .colorScheme
                                           .secondaryContainer,

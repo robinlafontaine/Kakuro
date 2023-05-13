@@ -228,6 +228,7 @@ class InvitationState extends State<Invitation> {
                                       left: 15, right: 10),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                        borderRadius: BorderRadius.circular(10),
                                         dropdownColor: Theme.of(context)
                                             .colorScheme
                                             .secondaryContainer,
@@ -273,6 +274,7 @@ class InvitationState extends State<Invitation> {
                                       left: 15, right: 10),
                                   child: DropdownButtonHideUnderline(
                                     child: DropdownButton(
+                                        borderRadius: BorderRadius.circular(10),
                                         dropdownColor: Theme.of(context)
                                             .colorScheme
                                             .secondaryContainer,
@@ -330,6 +332,7 @@ class InvitationState extends State<Invitation> {
                                   const EdgeInsets.only(left: 15, right: 10),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(
+                                    borderRadius: BorderRadius.circular(10),
                                     dropdownColor: Theme.of(context)
                                         .colorScheme
                                         .secondaryContainer,
