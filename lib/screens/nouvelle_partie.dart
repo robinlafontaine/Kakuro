@@ -254,8 +254,11 @@ class NouvellePartieState extends State<NouvellePartie> {
               reaload: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),
