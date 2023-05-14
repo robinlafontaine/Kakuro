@@ -75,6 +75,10 @@ class _MesPartiesState extends State<MesParties> {
     etatSet = setEtat();
   }
 
+  Future<bool> go() async {
+    return true;
+  }
+
   void retour() {
     route(context, const Menu());
   }
@@ -99,6 +103,7 @@ class _MesPartiesState extends State<MesParties> {
           body: Padding(
             padding: const EdgeInsets.all(15),
             child: FutureBuilder<bool?>(
+              future: go(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data == true) {
