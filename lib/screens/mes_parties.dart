@@ -107,6 +107,18 @@ class _MesPartiesState extends State<MesParties> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data == true) {
+                    if (grilles.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'Aucune partie en cours',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
+                        ),
+                      );
+                    }
                     return ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
