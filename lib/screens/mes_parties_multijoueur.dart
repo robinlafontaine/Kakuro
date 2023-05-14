@@ -1,15 +1,11 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
+import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:kakuro/widgets/boutton.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../duels.dart';
 import '../widgets/appbar.dart';
@@ -23,55 +19,42 @@ class MesPartiesMultijoueur extends StatefulWidget {
   State<MesPartiesMultijoueur> createState() => MesPartiesState();
 }
 
+final _uid = FirebaseAuth.instance.currentUser!.uid;
+
 class MesPartiesState extends State<MesPartiesMultijoueur> {
   List<String> grilles = [];
-  List<String> chronos = [];
-  List<String> minutes = [];
-  List<String> secondes = [];
-  List<String> etats = [];
-  List etatSet = [];
   List<Kakuro> kakuros = [];
+  List<String> adversaires = [];
 
-  List setEtat() {
-    List liste = [];
-    for (int k = 0; k < etats.length; k++) {
-      liste.add(jsonDecode(etats[k]));
-    }
-    return liste;
+  Future<bool> go() async {
+    return true;
   }
 
   String getAffichage(int n) {
     return n.toString().padLeft(2, "0");
   }
 
-  Future<bool> launch() async {
-    Future<List> duelsEnCours =
-        Duels.getPendingDuels(FirebaseAuth.instance.currentUser!.uid);
-    if (kDebugMode) {
-      print("duelsEnCours: $duelsEnCours");
-    }
-    await duelsEnCours;
+  @override
+  void initState() {
+    super.initState();
+    launch();
+  }
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? grilles = prefs.getStringList("grilles");
-    List<String>? chronos = prefs.getStringList("chronos");
-    List<String>? etats = prefs.getStringList("etats");
-    grilles ??= [];
-    chronos ??= [];
-    etats ??= [];
+  Future<void> launch() async {
+    List duelsEnCours = await Duels.getPendingDuels(_uid);
+
+    for (var doc in duelsEnCours) {
+      grilles.add(doc['board']);
+      var adversaire =
+          doc['players'][0] == _uid ? doc['players'][1] : doc['players'][0];
+      adversaires.add(await Leaderboard.getPlayerName(adversaire));
+    }
+
     setState(() {
-      grilles = grilles!;
-      chronos = chronos!;
-      etats = etats!;
-      for (int i = 0; i < grilles!.length; i++) {
-        kakuros.add(Kakuro.withXML(grilles![i]));
-        Duration duration = Duration(seconds: int.parse(chronos![i]));
-        minutes.add(getAffichage(duration.inMinutes.remainder(60)));
-        secondes.add(getAffichage(duration.inSeconds.remainder(60)));
+      for (int i = 0; i < grilles.length; i++) {
+        kakuros.add(Kakuro.withXML(grilles[i]));
       }
-      etatSet = setEtat();
     });
-    return grilles!.isNotEmpty;
   }
 
   void retour() {
@@ -97,81 +80,110 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
           ),
           body: SingleChildScrollView(
             child: FutureBuilder<bool>(
-                future: launch(),
+                future: go(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data == true) {
-                      return Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            padding: const EdgeInsets.all(2),
-                            itemCount: grilles.length,
-                            itemBuilder: (_, i) {
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 20),
-                                padding: const EdgeInsets.all(15),
-                                decoration: BoxDecoration(
-                                    color: Config.colors.primaryColor),
-                                width: width(context) / 2,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                            "Taille : (${kakuros[i].n},${kakuros[i].m})",
-                                            style: TextStyle(
-                                                color: Config
-                                                    .colors.primaryTextColor)),
-                                        const SizedBox(
-                                          height: 3,
-                                        ),
-                                        Text(
+                      if (grilles.isEmpty) {
+                        return Center(
+                          child: Text(
+                            'Aucune invitation',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        padding: const EdgeInsets.all(2),
+                        itemCount: grilles.length,
+                        itemBuilder: (_, i) {
+                          return Card(
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: SizedBox(
+                              width: width(context) / 2,
+                              height: height(context) *
+                                  0.12, // Change the height to 20% of the screen height
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text(
+                                            adversaires[i],
+                                          ),
+                                          const SizedBox(
+                                            height: 3,
+                                          ),
+                                          Text(
+                                            "Taille : ${kakuros[i].n}x${kakuros[i].m}",
+                                          ),
+                                          const SizedBox(
+                                            height: 3,
+                                          ),
+                                          Text(
                                             "Difficulté : ${kakuros[i].difficulte}",
-                                            style: TextStyle(
-                                                color: Config
-                                                    .colors.primaryTextColor)),
-                                        const SizedBox(
-                                          height: 3,
-                                        ),
-                                        Text(
-                                            "Chrono : ${minutes[i]}:${secondes[i]}",
-                                            style: TextStyle(
-                                                color: Config
-                                                    .colors.primaryTextColor)),
-                                      ],
-                                    ),
-                                    Boutton(
-                                        value: "JOUER",
-                                        couleur: true,
-                                        size: width(context) / 3,
-                                        onPress: () {
+                                          ),
+                                          const SizedBox(
+                                            height: 3,
+                                          ),
+                                        ],
+                                      ),
+                                      OutlinedButton(
+                                        onPressed: () {
                                           Config.newgame = false;
                                           route(
-                                              context,
-                                              Game(
-                                                  kakuro: kakuros[i],
-                                                  base: etatSet[i],
-                                                  index: i,
-                                                  chrono:
-                                                      int.parse(chronos[i])));
-                                        })
-                                  ],
-                                ),
-                              );
-                            }),
-                      ));
+                                            context,
+                                            Game(
+                                              kakuro: kakuros[i],
+                                            ),
+                                          );
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondaryContainer,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: width(context) *
+                                                0.05, // Change the horizontal padding to 20% of the screen width
+                                          ),
+                                          minimumSize: Size(
+                                              width(context) * 0.05,
+                                              height(context) *
+                                                  0.05), // Change the height to 40 pixels
+                                        ),
+                                        child: const Text(
+                                          "COMMENCER",
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     } else {
                       return Center(
-                          child: Text(
-                        'Aucune partie en cours',
-                        style:
-                            TextStyle(color: Config.colors.primaryTitreSelect),
-                      ));
+                        child: Text(
+                          'Aucune invitation',
+                          style: TextStyle(
+                              color: Config.colors.primaryTitreSelect),
+                        ),
+                      );
                     }
                   } else {
                     return const Center(child: CircularProgressIndicator());
@@ -183,8 +195,11 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
               reaload: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),
