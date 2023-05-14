@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-
 import '../Config/fonctions.dart';
 import '../leaderboard.dart';
 import '../widgets/appbar.dart';
@@ -46,6 +44,9 @@ class ClassementState extends State<Classement> {
                   future: scoresFuture,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
+                      bool cache = snapshot.data.metadata.isFromCache;
+                      print("cache?: $cache");
+                      //TODO : afficher un message pour dire si les données sont a jour ou non !
                       return Center(
                         child: Column(
                           children: [
@@ -98,7 +99,7 @@ class ClassementState extends State<Classement> {
                                 ],
                               ),
                             ),
-                            for (int i = 0; i < snapshot.data.length; i++)
+                            for (int i = 0; i < snapshot.data.docs.length; i++)
                               Container(
                                 width: width(context) / 1.1,
                                 decoration: BoxDecoration(
@@ -124,17 +125,17 @@ class ClassementState extends State<Classement> {
                                         alignment: Alignment.centerLeft,
                                         width: width(context) / 2.7,
                                         height: 40,
-                                        child: Text(snapshot.data[i].id ==
+                                        child: Text(snapshot.data.docs[i].id ==
                                                 FirebaseAuth
                                                     .instance.currentUser?.uid
                                             ? "Moi"
-                                            : snapshot.data[i]["name"])),
+                                            : snapshot.data.docs[i]["name"])),
                                     Container(
                                         width: width(context) / 3.3,
                                         height: 40,
                                         child: Center(
-                                            child: Text(snapshot.data[i]
-                                                    ["score"]
+                                            child: Text(snapshot
+                                                .data.docs[i]["score"]
                                                 .toString()))),
                                   ],
                                 ),

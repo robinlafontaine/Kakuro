@@ -62,7 +62,7 @@ class InvitationState extends State<Invitation> {
                   if (snapshot.hasData) {
                     // empty map
                     Map<String, String> data = {};
-                    for (var document in snapshot.data) {
+                    for (var document in snapshot.data.docs) {
                       String name = document['name'];
                       String documentId = document.id;
                       // add document id to list
