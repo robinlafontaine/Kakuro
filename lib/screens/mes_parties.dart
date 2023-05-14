@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
@@ -44,8 +45,19 @@ class _MesPartiesState extends State<MesParties> {
     return paddedNumbers[n];
   }
 
-  Future<bool> launch() async {
+  @override
+  void initState() {
+    super.initState();
+    launch();
+  }
+
+  Future<void> launch() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (kDebugMode) {
+      print("grilles: ${prefs.getStringList("grilles")}");
+      print("chronos: ${prefs.getStringList("chronos")}");
+      print("etats: ${prefs.getStringList("etats")}");
+    }
     List<String>? mesgrilles = prefs.getStringList("grilles") ?? [];
     List<String>? meschronos = prefs.getStringList("chronos") ?? [];
     List<String>? mesetats = prefs.getStringList("etats") ?? [];
@@ -53,7 +65,7 @@ class _MesPartiesState extends State<MesParties> {
     chronos = meschronos;
     etats = mesetats;
     setState(() {
-      for (int i = 0; i < mesgrilles.length; i++) {
+      for (int i = 0; i < grilles.length; i++) {
         kakuros.add(Kakuro.withXML(grilles[i]));
         Duration duration = Duration(seconds: int.parse(chronos[i]));
         minutes.add(getAffichage(duration.inMinutes.remainder(60)));
@@ -61,7 +73,10 @@ class _MesPartiesState extends State<MesParties> {
       }
     });
     etatSet = setEtat();
-    return grilles.isNotEmpty;
+  }
+
+  Future<bool> go() async {
+    return true;
   }
 
   void retour() {
@@ -87,8 +102,8 @@ class _MesPartiesState extends State<MesParties> {
           ),
           body: Padding(
             padding: const EdgeInsets.all(15),
-            child: FutureBuilder<bool>(
-              future: launch(),
+            child: FutureBuilder<bool?>(
+              future: go(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data == true) {
