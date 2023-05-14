@@ -42,7 +42,11 @@ class Duels {
           .where("winner", isEqualTo: "")
           .get();
 
-      return snapshot.docs;
+      if (snapshot.docs.isEmpty) {
+        return [];
+      } else {
+        return snapshot.docs;
+      }
     } catch (e) {
       if (kDebugMode) {
         print(e);

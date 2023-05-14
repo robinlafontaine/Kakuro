@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
@@ -10,6 +11,7 @@ import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/widgets/boutton.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../duels.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 import 'menu.dart';
@@ -43,17 +45,12 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
   }
 
   Future<bool> launch() async {
-    // Future<List> duelsEnCours =
-    // Duels.getPendingDuels(FirebaseAuth.instance.currentUser!.uid);
+    Future<List> duelsEnCours =
+        Duels.getPendingDuels(FirebaseAuth.instance.currentUser!.uid);
     if (kDebugMode) {
-      //print("duelsEnCours: $duelsEnCours");
+      print("duelsEnCours: $duelsEnCours");
     }
-    // for (var doc in duelsEnCours) {
-    //   if (doc.data()["etat"] == "attente") {
-    //     route(context, multijoueur());
-    //     return false;
-    //   }
-    // }
+    await duelsEnCours;
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? grilles = prefs.getStringList("grilles");
