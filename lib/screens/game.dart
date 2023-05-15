@@ -251,7 +251,7 @@ class GameState extends State<Game> {
             ),
           ),
           bottomNavigationBar: Navbar(
-              actif: 10,
+              actif: 2,
               checkGrille: () {
                 (Config.newgame) ? saveGrille() : majGrille();
               },

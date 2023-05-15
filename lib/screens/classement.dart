@@ -150,7 +150,7 @@ class ClassementState extends State<Classement> {
                     }
                   })),
           bottomNavigationBar: Navbar(
-              actif: 10,
+              actif: 2,
               reaload: () {
                 Navigator.push(
                     context,

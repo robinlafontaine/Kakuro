@@ -150,7 +150,7 @@ class MultijoueurState extends State<Multijoueur> {
             ),
           ),
           bottomNavigationBar: Navbar(
-              actif: 10,
+              actif: 0,
               reaload: () {
                 Navigator.push(
                     context,

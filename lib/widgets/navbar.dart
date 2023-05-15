@@ -20,72 +20,88 @@ class Navbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: Theme.of(context).colorScheme.secondaryContainer,
-      elevation: 0,
-      notchMargin: 0,
-      clipBehavior: Clip.antiAlias,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            onPressed: () {
-              if (checkGrille != null) {
-                checkGrille!();
-              }
-              route(context, const Menu());
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.house,
-              color: (actif != 0)
-                  ? Config.colors.primaryTextColor
-                  : Theme.of(context).colorScheme.primary,
-              size: 24,
-            ),
+    return NavigationBar(
+      // elevation: 2,
+      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      destinations: [
+        NavigationDestination(
+          icon: Icon(
+            Icons.home,
+            color: (actif != 0)
+                ? Config.colors.primaryTextColor
+                : Theme.of(context).colorScheme.primary,
           ),
-          IconButton(
-            onPressed: () {
-              if (checkGrille != null) checkGrille!();
-              route(context, const NouvellePartie());
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.plus,
-              color: (actif != 1)
-                  ? Config.colors.primaryTextColor
-                  : Theme.of(context).colorScheme.primary,
-              size: 24,
-            ),
+          selectedIcon: Icon(
+            Icons.home,
+            color: Theme.of(context).colorScheme.primary,
           ),
-          IconButton(
-            onPressed: () {
-              if (checkGrille != null) {
-                checkGrille!();
-              }
-              route(context, const MesParties());
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.gamepad,
-              color: (actif != 2)
-                  ? Config.colors.primaryTextColor
-                  : Theme.of(context).colorScheme.primary,
-              size: 24,
-            ),
+          label: 'Accueil',
+        ),
+        // route to menu
+        NavigationDestination(
+          icon: Icon(
+            Icons.add,
+            color: (actif != 1)
+                ? Config.colors.primaryTextColor
+                : Theme.of(context).colorScheme.primary,
           ),
-          IconButton(
-            onPressed: () {
-              reaload();
-              if (checkGrille != null) checkGrille!();
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.gears,
-              color: (actif != 3)
-                  ? Config.colors.primaryTextColor
-                  : Theme.of(context).colorScheme.primary,
-              size: 24,
-            ),
+          selectedIcon: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.primary,
           ),
-        ],
-      ),
+          label: 'Nouvelle partie',
+        ),
+        NavigationDestination(
+          icon: Icon(
+            Icons.gamepad,
+            color: (actif != 2)
+                ? Config.colors.primaryTextColor
+                : Theme.of(context).colorScheme.primary,
+          ),
+          selectedIcon: Icon(
+            Icons.gamepad,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          label: 'Mes parties',
+        ),
+        NavigationDestination(
+          icon: Icon(
+            Icons.settings,
+            color: (actif != 3)
+                ? Config.colors.primaryTextColor
+                : Theme.of(context).colorScheme.primary,
+          ),
+          selectedIcon: Icon(
+            Icons.settings,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          label: 'Paramètres',
+        ),
+      ],
+      selectedIndex: actif,
+      onDestinationSelected: (index) {
+        if (checkGrille != null) {
+          checkGrille!();
+        }
+        switch (index) {
+          case 0:
+            route(context, const Menu());
+            break;
+          case 1:
+            route(context, const NouvellePartie());
+            break;
+          case 2:
+            route(context, const MesParties());
+            break;
+          case 3:
+            reaload();
+            break;
+          default:
+            // do nothing
+            break;
+        }
+      },
     );
   }
 }
