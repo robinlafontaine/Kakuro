@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/color_picker.dart';
 import 'package:kakuro/widgets/Boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
@@ -206,7 +205,9 @@ class ParametreState extends State<Parametre> {
                                 value: son,
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
-                                  color: Config.colors.primaryTextBlack,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer,
                                 ),
                                 items: Config.sons.sons.map((items) {
                                   return DropdownMenuItem(
@@ -255,7 +256,9 @@ class ParametreState extends State<Parametre> {
                                 ? Icons.pause
                                 : Icons.play_arrow,
                             size: width(context) / 20,
-                            color: Config.colors.primaryTextBlack,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
                           ),
                         ),
                         ElevatedButton(
@@ -277,7 +280,9 @@ class ParametreState extends State<Parametre> {
                           child: Icon(
                             Icons.stop,
                             size: width(context) / 20,
-                            color: Config.colors.primaryTextBlack,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
                           ),
                         ),
                       ]),
@@ -302,7 +307,9 @@ class ParametreState extends State<Parametre> {
                         child: FaIcon(
                           Icons.wb_sunny,
                           size: width(context) / 20,
-                          color: Config.colors.primaryTextBlack,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
                         ),
                       ),
                       const Spacer(),
@@ -372,7 +379,9 @@ class ParametreState extends State<Parametre> {
                         child: FaIcon(
                           Icons.format_paint,
                           size: width(context) / 20,
-                          color: Config.colors.primaryTextBlack,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
                         ),
                       ),
                       const Spacer(),
@@ -394,7 +403,9 @@ class ParametreState extends State<Parametre> {
                         child: FaIcon(
                           FontAwesomeIcons.solidMoon,
                           size: width(context) / 20,
-                          color: Config.colors.primaryTextBlack,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSecondaryContainer,
                         ),
                       )
                     ],
@@ -411,22 +422,28 @@ class ParametreState extends State<Parametre> {
                     ],
                   ),
                   ElevatedButton(
-                      onPressed: () {
-                        Auth(FirebaseAuth.instance).signOutGoogle(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).colorScheme.primaryContainer,
-                      ),
-                      child: const Text("SIGN OUT")),
+                    onPressed: () {
+                      Auth(FirebaseAuth.instance).signOutGoogle(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                    ),
+                    child: Text(
+                      "SIGN OUT",
+                      selectionColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
+                    ),
+                  ),
+
                   TextButton(
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(
-                          Config.colors.primaryTextBlack,
+                          Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       onPressed: () {
-                        route(context, const ColorPickerDemo());
+                        // route(context, const ColorPickerDemo());
                       },
                       child: const Text("TEST")),
                   // put space to the bottom of the page
