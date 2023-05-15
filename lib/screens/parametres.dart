@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/widgets/Boutton.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:kakuro/config/config.dart';

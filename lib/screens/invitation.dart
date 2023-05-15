@@ -83,7 +83,9 @@ class InvitationState extends State<Invitation> {
                               style: TextStyle(
                                   fontSize: width(context) / 21,
                                   fontWeight: FontWeight.w600,
-                                  color: Config.colors.primaryTitreSelect),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
                             ),
                             const SizedBox(
                               height: 10,
@@ -182,25 +184,11 @@ class InvitationState extends State<Invitation> {
                             Container(
                               width: width(context) / 1.1,
                               decoration: BoxDecoration(
-                                  color: Config.colors.primarySelect),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer),
                               padding:
                                   const EdgeInsets.only(left: 15, right: 10),
-                              // child: DropdownButtonHideUnderline(
-                              //   child: DropdownButton<String>(
-                              //       dropdownColor:
-                              //           Config.colors.primarySelectItem,
-                              //       value: adversaire,
-                              //       icon: Icon(
-                              //         Icons.keyboard_arrow_down,
-                              //         color: Config.colors.primaryTextBlack,
-                              //       ),
-                              //       items: joueurs,
-                              //       onChanged: (String? value) {
-                              //         setState(() {
-                              //           adversaire = value!;
-                              //         });
-                              //       }),
-                              // ),
                             ),
                             const SizedBox(
                               height: 30,
@@ -210,7 +198,9 @@ class InvitationState extends State<Invitation> {
                               style: TextStyle(
                                   fontSize: width(context) / 21,
                                   fontWeight: FontWeight.w600,
-                                  color: Config.colors.primaryTitreSelect),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
                             ),
                             const SizedBox(
                               height: 10,
@@ -235,7 +225,9 @@ class InvitationState extends State<Invitation> {
                                         value: ligne,
                                         icon: Icon(
                                           Icons.keyboard_arrow_down,
-                                          color: Config.colors.primaryTextBlack,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
                                         ),
                                         items: items.map((items) {
                                           return DropdownMenuItem(
@@ -262,7 +254,9 @@ class InvitationState extends State<Invitation> {
                                 FaIcon(
                                   FontAwesomeIcons.xmark,
                                   size: width(context) / 20,
-                                  color: Config.colors.primaryTitreSelect,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
@@ -281,7 +275,9 @@ class InvitationState extends State<Invitation> {
                                         value: colonne,
                                         icon: Icon(
                                           Icons.keyboard_arrow_down,
-                                          color: Config.colors.primaryTextBlack,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
                                         ),
                                         items: items.map((items) {
                                           return DropdownMenuItem(
@@ -316,7 +312,9 @@ class InvitationState extends State<Invitation> {
                               style: TextStyle(
                                   fontSize: width(context) / 21,
                                   fontWeight: FontWeight.w600,
-                                  color: Config.colors.primaryTitreSelect),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
                             ),
                             const SizedBox(
                               height: 10,
@@ -339,7 +337,9 @@ class InvitationState extends State<Invitation> {
                                     value: diff,
                                     icon: Icon(
                                       Icons.keyboard_arrow_down,
-                                      color: Config.colors.primaryTextBlack,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondaryContainer,
                                     ),
                                     items: difficulte.map((items) {
                                       return DropdownMenuItem(

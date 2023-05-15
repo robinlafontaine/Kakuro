@@ -71,7 +71,7 @@ class NouvellePartieState extends State<NouvellePartie> {
                       style: TextStyle(
                           fontSize: width(context) / 21,
                           fontWeight: FontWeight.w600,
-                          color: Config.colors.primaryTitreSelect),
+                          color: Theme.of(context).colorScheme.onBackground),
                     ),
                     const SizedBox(
                       height: 10,
@@ -95,7 +95,9 @@ class NouvellePartieState extends State<NouvellePartie> {
                                 value: ligne,
                                 icon: Icon(
                                   Icons.keyboard_arrow_down,
-                                  color: Config.colors.primaryTextBlack,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer,
                                 ),
                                 items: items.map((items) {
                                   return DropdownMenuItem(
@@ -121,7 +123,7 @@ class NouvellePartieState extends State<NouvellePartie> {
                         ),
                         FaIcon(FontAwesomeIcons.xmark,
                             size: width(context) / 20,
-                            color: Config.colors.primaryTitreSelect),
+                            color: Theme.of(context).colorScheme.onBackground),
                         Container(
                           decoration: BoxDecoration(
                               color: Theme.of(context)
@@ -137,7 +139,9 @@ class NouvellePartieState extends State<NouvellePartie> {
                                     .secondaryContainer,
                                 value: colonne,
                                 icon: Icon(Icons.keyboard_arrow_down,
-                                    color: Config.colors.primaryTextBlack),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondaryContainer),
                                 items: items.map((items) {
                                   return DropdownMenuItem(
                                       value: items,
@@ -169,7 +173,7 @@ class NouvellePartieState extends State<NouvellePartie> {
                       style: TextStyle(
                           fontSize: width(context) / 21,
                           fontWeight: FontWeight.w600,
-                          color: Config.colors.primaryTitreSelect),
+                          color: Theme.of(context).colorScheme.onBackground),
                     ),
                     const SizedBox(
                       height: 10,
@@ -190,7 +194,9 @@ class NouvellePartieState extends State<NouvellePartie> {
                             value: diff,
                             icon: Icon(
                               Icons.keyboard_arrow_down,
-                              color: Config.colors.primaryTextBlack,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondaryContainer,
                             ),
                             items: difficulte.map((items) {
                               return DropdownMenuItem(

@@ -103,6 +103,7 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                         itemCount: grilles.length,
                         itemBuilder: (_, i) {
                           return Card(
+                            color: Theme.of(context).colorScheme.primary,
                             elevation: 2,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),

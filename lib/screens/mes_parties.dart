@@ -127,6 +127,7 @@ class _MesPartiesState extends State<MesParties> {
                       itemBuilder: (_, i) {
                         return Card(
                           elevation: 2,
+                          color: Theme.of(context).colorScheme.primaryContainer,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
@@ -145,18 +146,27 @@ class _MesPartiesState extends State<MesParties> {
                                       children: [
                                         Text(
                                           "Taille : ${kakuros[i].n}x${kakuros[i].m}",
+                                          selectionColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimaryContainer,
                                         ),
                                         const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
                                           "Difficulté : ${kakuros[i].difficulte}",
+                                          selectionColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimaryContainer,
                                         ),
                                         const SizedBox(
                                           height: 3,
                                         ),
                                         Text(
                                           "Chrono : ${minutes[i]}:${secondes[i]}",
+                                          selectionColor: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimaryContainer,
                                         ),
                                       ],
                                     ),
