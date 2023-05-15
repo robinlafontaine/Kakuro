@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Config {
   static final colors = _Color();
@@ -7,6 +8,7 @@ class Config {
   static final sons = _Audio();
   static var online = false;
   static var newgame = false;
+  static var theme = ThemeMode.light;
 }
 
 class _Color {
@@ -31,6 +33,14 @@ class _Color {
   final defaultNavIcon = const Color(0xFFE0E0E0);
   final defaultSelectItem = const Color(0xFFFFFFFF);
 }
+
+// class Swatch {
+//   ColorScheme customColorScheme = ColorScheme.fromSwatch(
+//     primarySwatch: ,
+//     accentColor: const Color(0xFF464646),
+//     brightness: Brightness.light,
+//   );
+// }
 
 class _Image {
   final logo = "assets/images/logo.png";

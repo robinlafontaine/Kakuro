@@ -1,8 +1,11 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/menu.dart';
+import 'config/config.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -25,6 +28,16 @@ Future<void> main() async {
   // runApp(const MyApp());
 }
 
+final light = ColorScheme.fromSwatch(
+    primarySwatch: ColorTools.createPrimarySwatch(const Color(0xFFE0E0E0)),
+    accentColor: const Color(0xFF464646),
+    brightness: Brightness.light);
+
+final dark = ColorScheme.fromSwatch(
+    primarySwatch: ColorTools.createPrimarySwatch(const Color(0xFFE0E0E0)),
+    accentColor: const Color(0xFF464646),
+    brightness: Brightness.dark);
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -32,11 +45,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          //scaffoldBackgroundColor: config.colors.primaryBackground,
           textTheme:
               GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-          // light green
-          colorSchemeSeed: const Color(0xFF00BFA5),
+          colorScheme: light,
           useMaterial3: true),
       debugShowCheckedModeBanner: false,
       home: const Menu(),
