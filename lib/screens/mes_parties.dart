@@ -154,7 +154,11 @@ class _MesPartiesState extends State<MesParties> {
                                           height: 3,
                                         ),
                                         Text(
-                                          "Difficulté : ${kakuros[i].difficulte}",
+                                          (kakuros[i].difficulte==4)?
+                                          "Difficulté : Facile}"
+                                          :(kakuros[i].difficulte==7)?
+                                          "Difficulté : Moyen"
+                                          :"Difficulté : Difficile",
                                           selectionColor: Theme.of(context)
                                               .colorScheme
                                               .onPrimaryContainer,
