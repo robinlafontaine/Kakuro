@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:kakuro/Config/Config.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/Config/fonctions.dart';
+import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/nouvelle_partie.dart';
@@ -34,6 +34,7 @@ class GameState extends State<Game> {
   List grille = [];
   int seconde = 0;
   Timer? timer;
+  int newIndex = 0;
   Duration duration = const Duration();
 
   GameState(this.kakuro);
@@ -72,10 +73,36 @@ class GameState extends State<Game> {
     chronos.add(seconde.toString());
     String etatsActuel = getEtat();
     etats.add(etatsActuel);
+    newIndex = grilles.length-1;
+    print(grilles.length-1);
     await prefs.setStringList('grilles', grilles);
     await prefs.setStringList('chronos', chronos);
     await prefs.setStringList('etats', etats);
 
+    /*  await prefs.setStringList('grilles', []);
+    await prefs.setStringList('chronos', []);
+    await prefs.setStringList('etats', []);*/
+  }
+
+
+  Future<void> saveGrilleAndReload() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? grilles = prefs.getStringList("grilles");
+    List<String>? chronos = prefs.getStringList("chronos");
+    List<String>? etats = prefs.getStringList("etats");
+    grilles ??= [];
+    chronos ??= [];
+    etats ??= [];
+    grilles.add(kakuro.toXML());
+    chronos.add(seconde.toString());
+    String etatsActuel = getEtat();
+    etats.add(etatsActuel);
+    newIndex = grilles.length - 1;
+    print(grilles.length - 1);
+    await prefs.setStringList('grilles', grilles);
+    await prefs.setStringList('chronos', chronos);
+    await prefs.setStringList('etats', etats);
+    route(context, Game(kakuro: kakuro, base: grille, index: newIndex, chrono: seconde,));
     /*  await prefs.setStringList('grilles', []);
     await prefs.setStringList('chronos', []);
     await prefs.setStringList('etats', []);*/
@@ -394,6 +421,7 @@ class GameState extends State<Game> {
                         j = Random().nextInt(kakuro.m - 1) + 1;
                       }
                       grille[i][j] = kakuro.grilleUpdated[i][j];
+
                       // popup avec la valeur changee et la position
                       showDialog(
                           context: context,
@@ -405,6 +433,12 @@ class GameState extends State<Game> {
                                   TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
+                                        if(Config.newgame){
+                                          Config.newgame = false;
+                                          saveGrilleAndReload();
+                                        }else{
+                                          route(context, Game(kakuro: kakuro, base: grille, index: widget.index, chrono: seconde,));
+                                        }
                                       },
                                       child: Text(
                                         "OK",
