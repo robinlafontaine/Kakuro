@@ -160,7 +160,7 @@ class AppbarState extends State<Appbar> {
                 Icon(
                   Icons.timer,
                   size: width(context) / 12,
-                  color: Config.colors.primaryTitreSelect,
+                  color: Theme.of(context).colorScheme.onBackground,
                 ),
                 const SizedBox(
                   width: 5,
@@ -168,7 +168,7 @@ class AppbarState extends State<Appbar> {
                 Text(
                   "$minute:$seconde",
                   style: TextStyle(
-                      color: Config.colors.primaryTitreSelect,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontSize: width(context) / 11),
                 ),
               ],
@@ -186,6 +186,7 @@ class AppbarState extends State<Appbar> {
                   child: FaIcon(
                     FontAwesomeIcons.ban,
                     size: width(context) / 20,
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
                   ),
                   onTap: () {
                     widget.abandon!();
