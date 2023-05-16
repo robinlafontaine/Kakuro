@@ -73,8 +73,8 @@ class GameState extends State<Game> {
     chronos.add(seconde.toString());
     String etatsActuel = getEtat();
     etats.add(etatsActuel);
-    newIndex = grilles.length-1;
-    print(grilles.length-1);
+    newIndex = grilles.length - 1;
+    print(grilles.length - 1);
     await prefs.setStringList('grilles', grilles);
     await prefs.setStringList('chronos', chronos);
     await prefs.setStringList('etats', etats);
@@ -83,7 +83,6 @@ class GameState extends State<Game> {
     await prefs.setStringList('chronos', []);
     await prefs.setStringList('etats', []);*/
   }
-
 
   Future<void> saveGrilleAndReload() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -102,7 +101,14 @@ class GameState extends State<Game> {
     await prefs.setStringList('grilles', grilles);
     await prefs.setStringList('chronos', chronos);
     await prefs.setStringList('etats', etats);
-    route(context, Game(kakuro: kakuro, base: grille, index: newIndex, chrono: seconde,));
+    route(
+        context,
+        Game(
+          kakuro: kakuro,
+          base: grille,
+          index: newIndex,
+          chrono: seconde,
+        ));
     /*  await prefs.setStringList('grilles', []);
     await prefs.setStringList('chronos', []);
     await prefs.setStringList('etats', []);*/
@@ -371,6 +377,7 @@ class GameState extends State<Game> {
                         }
 
                         grille[i][j] = kakuro.grilleUpdated[i][j];
+                        Navigator.pop(context);
                         // popup avec la valeur changee et la position
                         showDialog(
                             context: context,
@@ -382,6 +389,19 @@ class GameState extends State<Game> {
                                     TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
+                                          if (Config.newgame) {
+                                            Config.newgame = false;
+                                            saveGrilleAndReload();
+                                          } else {
+                                            route(
+                                                context,
+                                                Game(
+                                                  kakuro: kakuro,
+                                                  base: grille,
+                                                  index: widget.index,
+                                                  chrono: seconde,
+                                                ));
+                                          }
                                         },
                                         child: Text(
                                           "OK",
@@ -433,11 +453,18 @@ class GameState extends State<Game> {
                                   TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
-                                        if(Config.newgame){
+                                        if (Config.newgame) {
                                           Config.newgame = false;
                                           saveGrilleAndReload();
-                                        }else{
-                                          route(context, Game(kakuro: kakuro, base: grille, index: widget.index, chrono: seconde,));
+                                        } else {
+                                          route(
+                                              context,
+                                              Game(
+                                                kakuro: kakuro,
+                                                base: grille,
+                                                index: widget.index,
+                                                chrono: seconde,
+                                              ));
                                         }
                                       },
                                       child: Text(
