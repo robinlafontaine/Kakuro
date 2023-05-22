@@ -17,13 +17,15 @@ class Duels {
     }
   }
 
-  static Future<Object> getFinishedDuels(String? uid) async {
+  static Future<Object> getFinishedDuels(String uid) async {
     try {
       final snapshot = await db
           .collection("duelsEnded")
           .where("players", arrayContains: uid)
           .where("winner", isNotEqualTo: "")
           .get();
+
+
 
       return snapshot;
     } catch (e) {
@@ -34,7 +36,7 @@ class Duels {
     }
   }
 
-  static Future<List> getPendingDuels(String uid) async {
+  static Future<List> getPendingDuels(String? uid) async {
     try {
       final snapshot = await db
           .collection("duels")
