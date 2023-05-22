@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
-import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/gameMulti.dart';
 import 'package:kakuro/screens/parametres.dart';
 
@@ -147,7 +145,11 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                                           ),
                                         ],
                                       ),
-                                      OutlinedButton(
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.play_arrow,
+                                          color: Colors.green,
+                                        ),
                                         onPressed: () {
                                           Config.newgame = false;
                                           route(
@@ -171,8 +173,30 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                                               height(context) *
                                                   0.05), // Change the height to 40 pixels
                                         ),
-                                        child: const Text(
-                                          "COMMENCER",
+                                      ),
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {
+                                          Duels().deleteDuel(
+                                              grillesAndID[grilles[i]]!);
+                                          setState(() {
+                                            grilles.removeAt(i);
+                                            kakuros.removeAt(i);
+                                            adversaires.removeAt(i);
+                                          });
+                                        },
+                                        style: OutlinedButton.styleFrom(
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondaryContainer,
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: width(context) *
+                                                0.05, // Change the horizontal padding to 20% of the screen width
+                                          ),
+                                          // Change the height to 40 pixels
                                         ),
                                       ),
                                     ],
