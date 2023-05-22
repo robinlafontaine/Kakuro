@@ -140,15 +140,31 @@ class Duels {
         final player2 = snapshot.data()!["players"][1];
         final timer1 = snapshot.data()!["timers"][player1];
         final timer2 = snapshot.data()!["timers"][player2];
-        if (timer1 < timer2) {
-          await endDuel(idpartie, player1, kakuroN, kakuroM);
-        } else if (timer1 > timer2) {
-          await endDuel(idpartie, player2, kakuroN, kakuroM);
+        if (timer1 == -1) {
+          if (timer2 > -1) {
+            await endDuel(idpartie, player2, kakuroN, kakuroM);
+          } else {
+            await endDuel(idpartie, "draw", kakuroN, kakuroM);
+          }
+        } else if (timer2 == -1) {
+          if (timer1 > -1) {
+            await endDuel(idpartie, player1, kakuroN, kakuroM);
+          } else {
+            await endDuel(idpartie, "draw", kakuroN, kakuroM);
+          }
         } else {
-          await endDuel(idpartie, "draw", kakuroN, kakuroM);
+          // if both players finished the kakuro, we check who finished first
+          if (timer1 < timer2) {
+            await endDuel(idpartie, player1, kakuroN, kakuroM);
+          } else if (timer2 < timer1) {
+            await endDuel(idpartie, player2, kakuroN, kakuroM);
+          } else {
+            await endDuel(idpartie, "draw", kakuroN, kakuroM);
+          }
         }
         // delete the game from the database
         await deleteDuel(idpartie);
+
       }
     } catch (e) {
       if (kDebugMode) {
