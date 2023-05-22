@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:flutter/material.dart';
@@ -8,23 +7,17 @@ import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/multijoueur.dart';
-import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:kakuro/duels.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'menu.dart';
-import 'mes_parties.dart';
 
 class GameMulti extends StatefulWidget {
   final Kakuro kakuro;
   final String ID;
 
-  const GameMulti(
-  {super.key, required this.kakuro, required this.ID});
+  const GameMulti({super.key, required this.kakuro, required this.ID});
 
   @override
   State<GameMulti> createState() => GameMultiState(kakuro);
@@ -58,7 +51,6 @@ class GameMultiState extends State<GameMulti> {
     return s;
   }
 
-
   bool testValide() {
     bool valide = true;
     for (int i = 0; i < kakuro.n; i++) {
@@ -77,7 +69,8 @@ class GameMultiState extends State<GameMulti> {
     }
     if (valide) {
       //addPoints();
-      duel.sendResults(widget.ID, FirebaseAuth.instance.currentUser?.uid, seconde, kakuro.n, kakuro.m);
+      duel.sendResults(widget.ID, FirebaseAuth.instance.currentUser?.uid,
+          seconde, kakuro.n, kakuro.m);
 
       route(context, const Multijoueur());
     }
@@ -95,7 +88,6 @@ class GameMultiState extends State<GameMulti> {
   void maj(int i, int j, int valeur) {
     grille[i][j] = valeur;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +117,7 @@ class GameMultiState extends State<GameMulti> {
                   SizedBox(
                     height: height(context) / 10,
                   ),
-                  Center(
-                      child: Scene(kakuro: kakuro, maj: maj)
-                  ),
+                  Center(child: Scene(kakuro: kakuro, maj: maj)),
                   const SizedBox(
                     height: 30,
                   ),
@@ -142,7 +132,7 @@ class GameMultiState extends State<GameMulti> {
                     style: ElevatedButton.styleFrom(
                       // backgroundColor: Config.colors.primarySelect,
                       backgroundColor:
-                      Theme.of(context).colorScheme.secondaryContainer,
+                          Theme.of(context).colorScheme.secondaryContainer,
                       padding: EdgeInsets.symmetric(
                         horizontal: width(context) *
                             0.20, // Change the horizontal padding to 20% of the screen width
@@ -155,7 +145,7 @@ class GameMultiState extends State<GameMulti> {
                     child: Text(
                       "VALIDER",
                       selectionColor:
-                      Theme.of(context).colorScheme.onSecondaryContainer,
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                   ),
                 ],
@@ -164,11 +154,7 @@ class GameMultiState extends State<GameMulti> {
           ),
           bottomNavigationBar: Navbar(
               actif: 2,
-              checkGrille: () {
-                
-                
-                
-              },
+              checkGrille: () {},
               reaload: () {
                 Navigator.push(
                     context,
@@ -181,49 +167,53 @@ class GameMultiState extends State<GameMulti> {
   }
 
   Future openDialogFaux() => showDialog(
-    // met un message comme quoi la grille n'est pas valide
+      // met un message comme quoi la grille n'est pas valide
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Grille non valide'),
-        content:
-        const Text('La grille n\'est pas valide, veuillez réessayer'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "OK",
-                style: TextStyle(color: Config.colors.defaultPrimary),
-              ))
-        ],
-      ));
+            title: const Text('Grille non valide'),
+            content:
+                const Text('La grille n\'est pas valide, veuillez réessayer'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "OK",
+                    style: TextStyle(color: Config.colors.defaultPrimary),
+                  ))
+            ],
+          ));
 
   Future openDialogAbandon() => showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Abandon'),
-        content: const Text(
-            'Etes-vous sûr de vouloir abandonner cette partie ?'),
-        actions: [
-          TextButton(
-              onPressed: () {
-                duel.sendResults(widget.ID, FirebaseAuth.instance.currentUser?.uid, -1, kakuro.n, kakuro.m);
-                route(context, const Multijoueur());
-              },
-              child: Text(
-                "Oui",
-                style: TextStyle(color: Config.colors.defaultPrimary),
-              )),
-          TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "NON",
-                style: TextStyle(color: Config.colors.defaultPrimary),
-              ))
-        ],
-      ));
-
+            title: const Text('Abandon'),
+            content: const Text(
+                'Etes-vous sûr de vouloir abandonner cette partie ?'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    duel.sendResults(
+                        widget.ID,
+                        FirebaseAuth.instance.currentUser?.uid,
+                        -1,
+                        kakuro.n,
+                        kakuro.m);
+                    route(context, const Multijoueur());
+                  },
+                  child: Text(
+                    "Oui",
+                    style: TextStyle(color: Config.colors.defaultPrimary),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "NON",
+                    style: TextStyle(color: Config.colors.defaultPrimary),
+                  ))
+            ],
+          ));
 }

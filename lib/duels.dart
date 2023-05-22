@@ -39,7 +39,7 @@ class Duels {
       final snapshot = await db
           .collection("duels")
           .where("players", arrayContains: uid)
-          .where("done.$uid", isEqualTo: false)
+          // where id of the current user is false in done dictionnary
           .where("winner", isEqualTo: "")
           .get();
 
@@ -131,8 +131,8 @@ class Duels {
     try {
       // send the value of chrono to the database
       await db.collection("duels").doc(idpartie).update({
-        'timers': {uid: chrono},
-        'done': {uid: true}
+        "timers.$uid": chrono,
+        "done.$uid": true,
       });
       if (kDebugMode) {
         print("chrono sent");

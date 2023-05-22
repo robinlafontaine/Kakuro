@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/Config/Config.dart';
@@ -47,7 +48,8 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
 
     for (var doc in duelsEnCours) {
       grilles.add(doc['board']);
-      grillesAndID[doc['board']] = doc['id'];
+      // map the id of the game to the board
+      grillesAndID[doc['board']] = doc.id;
       var adversaire =
           doc['players'][0] == _uid ? doc['players'][1] : doc['players'][0];
       adversaires.add(await Leaderboard.getPlayerName(adversaire));
