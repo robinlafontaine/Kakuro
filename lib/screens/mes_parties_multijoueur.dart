@@ -5,6 +5,7 @@ import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/gameMulti.dart';
 import 'package:kakuro/screens/parametres.dart';
 
 import '../duels.dart';
@@ -25,6 +26,7 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
   List<String> grilles = [];
   List<Kakuro> kakuros = [];
   List<String> adversaires = [];
+  Map<String, String> grillesAndID = {};
 
   Future<bool> go() async {
     return true;
@@ -45,6 +47,7 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
 
     for (var doc in duelsEnCours) {
       grilles.add(doc['board']);
+      grillesAndID[doc['board']] = doc['id'];
       var adversaire =
           doc['players'][0] == _uid ? doc['players'][1] : doc['players'][0];
       adversaires.add(await Leaderboard.getPlayerName(adversaire));
@@ -147,8 +150,9 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                                           Config.newgame = false;
                                           route(
                                             context,
-                                            Game(
+                                            GameMulti(
                                               kakuro: kakuros[i],
+                                              ID: grillesAndID[grilles[i]]!,
                                             ),
                                           );
                                         },
