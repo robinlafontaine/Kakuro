@@ -111,7 +111,7 @@ class Duels {
 
   Future<String> startDuel(uid1, uid2, diff, xmlKakuro) async {
     try {
-      await db.collection("duels").add({
+      final docRef = await db.collection("duels").add({
         'board': xmlKakuro,
         'difficulty': diff,
         'done': {uid1: false, uid2: false},
@@ -119,7 +119,7 @@ class Duels {
         'timers': {uid1: 0, uid2: 0},
         'winner': ""
       });
-      return db.collection("duels").doc().id;
+      return docRef.id;
     } catch (e) {
       if (kDebugMode) {
         print(e);
