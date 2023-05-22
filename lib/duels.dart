@@ -40,6 +40,7 @@ class Duels {
           .collection("duels")
           .where("players", arrayContains: uid)
           // where id of the current user is false in done dictionnary
+          .where("done.$uid", isEqualTo: false)
           .where("winner", isEqualTo: "")
           .get();
 
