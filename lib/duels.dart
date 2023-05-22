@@ -122,16 +122,32 @@ class Duels {
     }
   }
 
-  Future sendResults(idpartie, uid, chrono) async {
+  Future sendResults(idpartie, uid, chrono, kakuroN, kakuroM) async {
     try {
       // send the value of chrono to the database
       await db.collection("duels").doc(idpartie).update({
         'timers': {uid: chrono},
         'done': {uid: true}
       });
-      // final snapshot = await db.collection("duels").doc(idpartie).get();
-      // if the values in done dictionnary are true, the game is over
-      // TODO
+      final snapshot = await db.collection("duels").doc(idpartie).get();
+      // if all values in done dictionnary are true, the game is over
+      if (snapshot.data()!["done"][snapshot.data()!["players"][0]] &&
+          snapshot.data()!["done"][snapshot.data()!["players"][1]]) {
+        // if the game is over, we check who won
+        final player1 = snapshot.data()!["players"][0];
+        final player2 = snapshot.data()!["players"][1];
+        final timer1 = snapshot.data()!["timers"][player1];
+        final timer2 = snapshot.data()!["timers"][player2];
+        if (timer1 < timer2) {
+          await endDuel(idpartie, player1, kakuroN, kakuroM);
+        } else if (timer1 > timer2) {
+          await endDuel(idpartie, player2, kakuroN, kakuroM);
+        } else {
+          await endDuel(idpartie, "draw", kakuroN, kakuroM);
+        }
+        // delete the game from the database
+        await deleteDuel(idpartie);
+      }
     } catch (e) {
       if (kDebugMode) {
         print(e);
