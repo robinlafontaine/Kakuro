@@ -105,7 +105,7 @@ class Duels {
     }
   }
 
-  Future startDuel(uid1, uid2, diff, xmlKakuro) async {
+  Future<String> startDuel(uid1, uid2, diff, xmlKakuro) async {
     try {
       await db.collection("duels").add({
         'board': xmlKakuro,
@@ -121,6 +121,7 @@ class Duels {
         print(e);
       }
     }
+    return '';
   }
 
   Future sendResults(idpartie, uid, chrono, kakuroN, kakuroM) async {

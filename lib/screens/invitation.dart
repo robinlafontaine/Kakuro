@@ -5,6 +5,7 @@ import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/duels.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
+import 'package:kakuro/screens/gameMulti.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import '../Config/fonctions.dart';
@@ -373,6 +374,10 @@ class InvitationState extends State<Invitation> {
                                   if (await duels.checkuid(adversaire) &&
                                       adversaire != "") {
                                     uid2 = adversaire;
+
+
+
+
                                   } else {
                                     // si le doc n'existe pas, on affiche un message d'erreur et on ne lance pas le duel
                                     // ignore: use_build_context_synchronously
@@ -393,13 +398,14 @@ class InvitationState extends State<Invitation> {
                                         });
                                   }
                                   if (uid2 != "test") {
-                                    duels.startDuel(
+                                    String idGame = await duels.startDuel(
                                         uid1, uid2, diff, kakuroOnline.toXML());
                                     // ignore: use_build_context_synchronously
                                     route(
                                         context,
-                                        Game(
+                                        GameMulti(
                                           kakuro: kakuroOnline,
+                                          ID: idGame,
                                         ));
                                   }
                                 },
