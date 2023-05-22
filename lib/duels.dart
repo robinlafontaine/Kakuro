@@ -115,6 +115,7 @@ class Duels {
         'timers': {uid1: 0, uid2: 0},
         'winner': ""
       });
+      return db.collection("duels").doc().id;
     } catch (e) {
       if (kDebugMode) {
         print(e);
