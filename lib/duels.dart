@@ -17,7 +17,7 @@ class Duels {
     }
   }
 
-  static Future<Object> getFinishedDuels(String uid) async {
+  static Future<Object> getFinishedDuels(String? uid) async {
     try {
       final snapshot = await db
           .collection("duelsEnded")

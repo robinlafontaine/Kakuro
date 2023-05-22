@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/screens/classement.dart';
 import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/mes_parties_multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-
-import '../Config/fonctions.dart';
+import 'package:kakuro/screens/resultat.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
 import 'menu.dart';
@@ -102,7 +102,9 @@ class MultijoueurState extends State<Multijoueur> {
                   height: 10,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    route(context, Resultat());
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
