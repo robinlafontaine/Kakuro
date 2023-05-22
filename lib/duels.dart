@@ -121,4 +121,21 @@ class Duels {
       }
     }
   }
+
+  Future sendResults(idpartie, uid, chrono) async {
+    try {
+      // send the value of chrono to the database
+      await db.collection("duels").doc(idpartie).update({
+        'timers': {uid: chrono},
+        'done': {uid: true}
+      });
+      // final snapshot = await db.collection("duels").doc(idpartie).get();
+      // if the values in done dictionnary are true, the game is over
+      // TODO
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+  }
 }
