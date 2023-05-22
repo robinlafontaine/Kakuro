@@ -2,10 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/duels.dart';
 import 'package:kakuro/kakuro.dart';
-import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/gameMulti.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
@@ -103,34 +101,7 @@ class InvitationState extends State<Invitation> {
                               });
                             },
                             onSelected: (String selection) async {
-                              // invite(selection, data[selection]);
-                              // popup with name and uid
-                              await showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('Inviter $selection'),
-                                    content: Text(
-                                        'Voulez-vous inviter $selection ?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'Annuler'),
-                                        child: const Text('Annuler'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          adversaire =
-                                              (data[selection] as String);
-                                          // await invite(selection, data[selection]);
-                                          Navigator.pop(context, 'Inviter');
-                                        },
-                                        child: const Text('Inviter'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
+                              adversaire = (data[selection] as String);
                             },
                             fieldViewBuilder: (BuildContext context,
                                 TextEditingController textEditingController,
