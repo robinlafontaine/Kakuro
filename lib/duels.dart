@@ -39,8 +39,11 @@ class Duels {
       final snapshot = await db
           .collection("duels")
           .where("players", arrayContains: uid)
+          .where("done.$uid", isEqualTo: false)
           .where("winner", isEqualTo: "")
           .get();
+
+      // remove duels where if the id of the player in done is true
 
       if (snapshot.docs.isEmpty) {
         return [];
@@ -131,6 +134,9 @@ class Duels {
         'timers': {uid: chrono},
         'done': {uid: true}
       });
+      if (kDebugMode) {
+        print("chrono sent");
+      }
       final snapshot = await db.collection("duels").doc(idpartie).get();
       // if all values in done dictionnary are true, the game is over
       if (snapshot.data()!["done"][snapshot.data()!["players"][0]] &&
@@ -164,7 +170,6 @@ class Duels {
         }
         // delete the game from the database
         await deleteDuel(idpartie);
-
       }
     } catch (e) {
       if (kDebugMode) {
