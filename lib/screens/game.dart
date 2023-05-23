@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:kakuro/Config/Config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -164,7 +165,9 @@ class GameState extends State<Game> {
       addPoints();
       if (Config.newgame == false) suppGrille();
       route(context, const Menu());
+      return valide;
     }
+    AudioPlayer().play(AssetSource("roblox.mp3"));
     return valide;
   }
 
