@@ -8,6 +8,8 @@ import '../auth.dart';
 import '../leaderboard.dart';
 import '../screens/menu.dart';
 
+import 'package:connectivity/connectivity.dart';
+
 class Appbar extends StatefulWidget {
   bool home;
   bool enjeu;
@@ -41,6 +43,22 @@ class AppbarState extends State<Appbar> {
   void initState() {
     super.initState();
     startTimer();
+    if (FirebaseAuth.instance.currentUser == null) {
+      return;
+    }
+    final connectivity = Connectivity();
+    connectivity.onConnectivityChanged.listen((event) {
+      if (event == ConnectivityResult.wifi ||
+          event == ConnectivityResult.mobile) {
+        setState(() {
+          Config.online = true;
+        });
+      } else {
+        setState(() {
+          Config.online = false;
+        });
+      }
+    });
   }
 
   String getAffichage(int n) {
