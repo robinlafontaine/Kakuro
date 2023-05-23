@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro/Config/Config.dart';
-import 'package:kakuro/Config/fonctions.dart';
+import 'package:kakuro/config/config.dart';
+import 'package:kakuro/config/fonctions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Boutton extends StatelessWidget {

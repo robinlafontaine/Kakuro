@@ -1,16 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/Config/fonctions.dart';
-import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
-import 'package:kakuro/screens/gameMulti.dart';
+import 'package:kakuro/screens/game_multi.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-
-import '../duels.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/duels.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 
 class MesPartiesMultijoueur extends StatefulWidget {
   const MesPartiesMultijoueur({super.key});

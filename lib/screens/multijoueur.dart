@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/screens/classement.dart';
 import 'package:kakuro/screens/invitation.dart';
 import 'package:kakuro/screens/mes_parties_multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/resultat.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 import 'menu.dart';
 
 class Multijoueur extends StatefulWidget {

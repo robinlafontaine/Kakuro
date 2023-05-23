@@ -1,18 +1,13 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/foundation.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/theme.dart';
 import 'package:kakuro/screens/menu.dart';
-import 'config/config.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:kakuro/config/theme.dart';
-import 'package:kakuro/config/config.dart';
 import 'package:get_storage/get_storage.dart';
 
 Future<void> main() async {

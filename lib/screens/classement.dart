@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-import '../Config/fonctions.dart';
-import '../leaderboard.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/leaderboard.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 
 class Classement extends StatefulWidget {
   const Classement({super.key});
@@ -120,44 +120,49 @@ class ClassementState extends State<Classement> {
                                         width: width(context) / 5,
                                         height: 40,
                                         child: Center(
-                                            child: Text((i + 1).toString(),
-                                            style: TextStyle( fontWeight :
-                                                (snapshot.data.docs[i].id == FirebaseAuth.instance.currentUser?.uid) ?
-                                                    FontWeight.bold
-                                                    :
-                                                    FontWeight.normal
-                                              ),
-                                            )
-                                        )),
+                                            child: Text(
+                                          (i + 1).toString(),
+                                          style: TextStyle(
+                                              fontWeight:
+                                                  (snapshot.data.docs[i].id ==
+                                                          FirebaseAuth.instance
+                                                              .currentUser?.uid)
+                                                      ? FontWeight.bold
+                                                      : FontWeight.normal),
+                                        ))),
                                     Container(
                                         alignment: Alignment.centerLeft,
                                         width: width(context) / 2.7,
                                         height: 40,
-                                        child: Text(snapshot.data.docs[i].id ==
-                                                FirebaseAuth
-                                                    .instance.currentUser?.uid
-                                            ? "Moi"
-                                            : snapshot.data.docs[i]["name"],
-                                          style :TextStyle( fontWeight :
-                                          (snapshot.data.docs[i].id == FirebaseAuth.instance.currentUser?.uid) ?
-                                          FontWeight.bold
-                                              :
-                                          FontWeight.normal
-                                          ),)),
+                                        child: Text(
+                                          snapshot.data.docs[i].id ==
+                                                  FirebaseAuth
+                                                      .instance.currentUser?.uid
+                                              ? "Moi"
+                                              : snapshot.data.docs[i]["name"],
+                                          style: TextStyle(
+                                              fontWeight:
+                                                  (snapshot.data.docs[i].id ==
+                                                          FirebaseAuth.instance
+                                                              .currentUser?.uid)
+                                                      ? FontWeight.bold
+                                                      : FontWeight.normal),
+                                        )),
                                     Container(
                                         width: width(context) / 3.3,
                                         height: 40,
                                         child: Center(
-                                            child: Text(snapshot
-                                                .data.docs[i]["score"]
-                                                .toString(),
-                                              style :TextStyle( fontWeight :
-                                              (snapshot.data.docs[i].id == FirebaseAuth.instance.currentUser?.uid) ?
-                                              FontWeight.bold
-                                                  :
-                                              FontWeight.normal
-                                              ),)
-                                        )),
+                                            child: Text(
+                                          snapshot.data.docs[i]["score"]
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontWeight:
+                                                  (snapshot.data.docs[i].id ==
+                                                          FirebaseAuth.instance
+                                                              .currentUser?.uid)
+                                                      ? FontWeight.bold
+                                                      : FontWeight.normal),
+                                        ))),
                                   ],
                                 ),
                               )

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/parametres.dart';
-import '../Config/fonctions.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 import 'menu.dart';
 
 class NouvellePartie extends StatefulWidget {

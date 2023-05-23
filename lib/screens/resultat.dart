@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:kakuro/duels.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-import '../Config/fonctions.dart';
-import '../leaderboard.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 
 class Resultat extends StatefulWidget {
   const Resultat({super.key});
@@ -17,16 +16,16 @@ class Resultat extends StatefulWidget {
 }
 
 class ResultatState extends State<Resultat> {
-  final Future resFuture = Duels.getFinishedDuels(FirebaseAuth.instance.currentUser?.uid);
-
+  final Future resFuture =
+      Duels.getFinishedDuels(FirebaseAuth.instance.currentUser?.uid);
 
   String getAffichage(int n) {
     return n.toString().padLeft(2, "0");
   }
 
   String getSeconde(int seconde) {
-     Duration duration = Duration(seconds: seconde);
-     return getAffichage(duration.inSeconds.remainder(60));
+    Duration duration = Duration(seconds: seconde);
+    return getAffichage(duration.inSeconds.remainder(60));
   }
 
   String getMinute(int seconde) {
@@ -52,7 +51,7 @@ class ResultatState extends State<Resultat> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child:
-              Appbar(home: false, enjeu: false, retour: () => {retour()}),
+                  Appbar(home: false, enjeu: false, retour: () => {retour()}),
             ),
           ),
           body: SingleChildScrollView(
@@ -80,17 +79,17 @@ class ResultatState extends State<Resultat> {
                               child: Row(
                                 children: [
                                   Container(
-                                      width: width(context)/4.5,
+                                      width: width(context) / 4.5,
                                       height: 40,
-                                      margin: const EdgeInsets.only( left: 10),
+                                      margin: const EdgeInsets.only(left: 10),
                                       child: Center(
                                           child: Text(
-                                            "Joueur",
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onSecondaryContainer),
-                                          ))),
+                                        "Joueur",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer),
+                                      ))),
                                   Container(
                                       alignment: Alignment.center,
                                       width: width(context) / 7,
@@ -138,67 +137,93 @@ class ResultatState extends State<Resultat> {
                                 ],
                               ),
                             ),
-                            for (int i = 0; i < snapshot.data[0].docs.length; i++)
+                            for (int i = 0;
+                                i < snapshot.data[0].docs.length;
+                                i++)
                               Container(
                                 width: width(context) / 1.1,
                                 decoration: BoxDecoration(
-                                    color:
-                                    (snapshot.data[0].docs[i]["winner"]=="draw")?
-                                      Colors.orange
-                                    :(snapshot.data[0].docs[i]["winner"]==FirebaseAuth.instance.currentUser?.uid)?
-                                      Colors.green
-                                    :Colors.redAccent
-                                ),
+                                    color: (snapshot.data[0].docs[i]
+                                                ["winner"] ==
+                                            "draw")
+                                        ? Colors.orange
+                                        : (snapshot.data[0].docs[i]["winner"] ==
+                                                FirebaseAuth
+                                                    .instance.currentUser?.uid)
+                                            ? Colors.green
+                                            : Colors.redAccent),
                                 child: Row(
                                   children: [
                                     Container(
-                                        margin:
-                                        const EdgeInsets.only(left: 10),
-                                        width: width(context)/4.5,
+                                        margin: const EdgeInsets.only(left: 10),
+                                        width: width(context) / 4.5,
                                         height: 60,
                                         child: Center(
-                                            child: Text((snapshot.data[1][i]).toString().split(' ').join('\n'),))),
+                                            child: Text(
+                                          (snapshot.data[1][i])
+                                              .toString()
+                                              .split(' ')
+                                              .join('\n'),
+                                        ))),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
                                         height: 60,
                                         child: Text(
-                                            (snapshot.data[0].docs[i]['timers'].values.toList()[0] == -1)?"N/A":
-                                            "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[0])}:"
-                                                "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[0])}"
-                                          ,
+                                          (snapshot.data[0].docs[i]['timers']
+                                                      .values
+                                                      .toList()[0] ==
+                                                  -1)
+                                              ? "N/A"
+                                              : "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[0])}:"
+                                                  "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[0])}",
                                           style: TextStyle(
-                                              fontWeight: (snapshot.data[0].docs[0]["timers"].keys.toList()[0]==FirebaseAuth.instance.currentUser?.uid)?
-                                              FontWeight.bold:
-                                              FontWeight.normal
-                                          ),)
-                                    ),
+                                              fontWeight: (snapshot
+                                                          .data[0]
+                                                          .docs[0]["timers"]
+                                                          .keys
+                                                          .toList()[0] ==
+                                                      FirebaseAuth.instance
+                                                          .currentUser?.uid)
+                                                  ? FontWeight.bold
+                                                  : FontWeight.normal),
+                                        )),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
                                         height: 60,
                                         child: Text(
-                                        (snapshot.data[0].docs[i]['timers'].values.toList()[1] == -1)?"N/A":
-                                          "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[1])}:"
-                                          "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[1])}"
-                                        ,
-                                        style: TextStyle(
-                                            fontWeight: (snapshot.data[0].docs[0]["timers"].keys.toList()[1]==FirebaseAuth.instance.currentUser?.uid)?
-                                                FontWeight.bold:
-                                                FontWeight.normal
-                                          ),
-                                        )
-                                    ),
+                                          (snapshot.data[0].docs[i]['timers']
+                                                      .values
+                                                      .toList()[1] ==
+                                                  -1)
+                                              ? "N/A"
+                                              : "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[1])}:"
+                                                  "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[1])}",
+                                          style: TextStyle(
+                                              fontWeight: (snapshot
+                                                          .data[0]
+                                                          .docs[0]["timers"]
+                                                          .keys
+                                                          .toList()[1] ==
+                                                      FirebaseAuth.instance
+                                                          .currentUser?.uid)
+                                                  ? FontWeight.bold
+                                                  : FontWeight.normal),
+                                        )),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
                                         height: 60,
-                                        child: Text(snapshot.data[0].docs[i]["board"])),
+                                        child: Text(
+                                            snapshot.data[0].docs[i]["board"])),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 4.5,
                                         height: 60,
-                                        child: Text(snapshot.data[0].docs[i]["difficulty"].toString())),
+                                        child: Text(snapshot
+                                            .data[0].docs[i]["difficulty"]
+                                            .toString())),
                                   ],
                                 ),
                               )
@@ -218,7 +243,7 @@ class ResultatState extends State<Resultat> {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                      const Parametre(),
+                          const Parametre(),
                       transitionDuration: const Duration(seconds: 0),
                     )).then((value) {
                   setState(() {});

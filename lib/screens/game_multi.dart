@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/kakuro.dart';

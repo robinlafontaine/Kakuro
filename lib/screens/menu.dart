@@ -1,16 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kakuro/Config/Config.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/mes_parties.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
-
-import '../auth.dart';
-import '../Config/fonctions.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/auth.dart';
+import 'package:kakuro/Config/fonctions.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});

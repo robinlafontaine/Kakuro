@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kakuro/Config/Config.dart';
-import 'package:kakuro/Config/fonctions.dart';
-import '../auth.dart';
-import '../leaderboard.dart';
-import '../screens/menu.dart';
+import 'package:kakuro/config/config.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/auth.dart';
+import 'package:kakuro/leaderboard.dart';
+import 'package:kakuro/screens/menu.dart';
 
 import 'package:connectivity/connectivity.dart';
 

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/duels.dart';
 import 'package:kakuro/kakuro.dart';
-import 'package:kakuro/screens/gameMulti.dart';
+import 'package:kakuro/screens/game_multi.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
-import '../Config/fonctions.dart';
-import '../leaderboard.dart';
-import '../widgets/appbar.dart';
-import '../widgets/navbar.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/leaderboard.dart';
+import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/navbar.dart';
 
 class Invitation extends StatefulWidget {
   const Invitation({super.key});
@@ -22,7 +22,7 @@ class Invitation extends StatefulWidget {
 class InvitationState extends State<Invitation> {
   String ligne = "6", colonne = "6", diff = "Facile", adversaire = "";
   var items = ["5", "6", "7", "8", "9", "10"];
-  var difficulte = ["Facile","Moyen","Difficle"];
+  var difficulte = ["Facile", "Moyen", "Difficle"];
 
   final Future playersFuture = Leaderboard.getPlayers();
 
@@ -331,13 +331,13 @@ class InvitationState extends State<Invitation> {
                               var uid1 = FirebaseAuth.instance.currentUser!.uid;
 
                               var kakuroOnline = Kakuro(
-                                  int.parse(ligne),
-                                  int.parse(colonne),
-                                  (diff == difficulte[0])
-                                      ? 4
-                                      : (diff == difficulte[1])
-                                      ? 7
-                                      : 10,
+                                int.parse(ligne),
+                                int.parse(colonne),
+                                (diff == difficulte[0])
+                                    ? 4
+                                    : (diff == difficulte[1])
+                                        ? 7
+                                        : 10,
                               );
                               // call Future checkuid(String uid) from duels on adversaire
                               Duels duels = Duels();
@@ -365,11 +365,7 @@ class InvitationState extends State<Invitation> {
                               }
                               if (uid2 != "test") {
                                 String idGame = await duels.startDuel(
-                                    uid1,
-                                    uid2,
-                                    diff,
-                                    kakuroOnline.toXML()
-                                );
+                                    uid1, uid2, diff, kakuroOnline.toXML());
                                 if (kDebugMode) print(idGame);
 
                                 // ignore: use_build_context_synchronously

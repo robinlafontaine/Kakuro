@@ -2,16 +2,15 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/theme.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:material_color_generator/material_color_generator.dart';
-import '../auth.dart';
-import '../Config/fonctions.dart';
-import '../widgets/appbar.dart';
+import 'package:kakuro/auth.dart';
+import 'package:kakuro/config/fonctions.dart';
+import 'package:kakuro/widgets/appbar.dart';
 
 class Parametre extends StatefulWidget {
   const Parametre({super.key});
