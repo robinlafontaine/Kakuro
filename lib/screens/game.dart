@@ -189,7 +189,7 @@ class GameState extends State<Game> {
       route(context, const NouvellePartie());
     } else {
       majGrille();
-      route(context, const MesParties());
+      route(context, const Menu());
     }
   }
 
