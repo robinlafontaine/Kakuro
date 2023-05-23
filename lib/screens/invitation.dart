@@ -20,9 +20,9 @@ class Invitation extends StatefulWidget {
 }
 
 class InvitationState extends State<Invitation> {
-  String ligne = "6", colonne = "6", diff = "1", adversaire = "";
+  String ligne = "6", colonne = "6", diff = "Facile", adversaire = "";
   var items = ["5", "6", "7", "8", "9", "10"];
-  var difficulte = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  var difficulte = ["Facile","Moyen","Difficle"];
 
   final Future playersFuture = Leaderboard.getPlayers();
 
@@ -330,8 +330,15 @@ class InvitationState extends State<Invitation> {
                               var uid2 = "test";
                               var uid1 = FirebaseAuth.instance.currentUser!.uid;
 
-                              var kakuroOnline = Kakuro(int.parse(ligne),
-                                  int.parse(colonne), int.parse(diff));
+                              var kakuroOnline = Kakuro(
+                                  int.parse(ligne),
+                                  int.parse(colonne),
+                                  (diff == difficulte[0])
+                                      ? 4
+                                      : (diff == difficulte[1])
+                                      ? 7
+                                      : 10,
+                              );
                               // call Future checkuid(String uid) from duels on adversaire
                               Duels duels = Duels();
                               if (await duels.checkuid(adversaire) &&
@@ -358,7 +365,11 @@ class InvitationState extends State<Invitation> {
                               }
                               if (uid2 != "test") {
                                 String idGame = await duels.startDuel(
-                                    uid1, uid2, diff, kakuroOnline.toXML());
+                                    uid1,
+                                    uid2,
+                                    diff,
+                                    kakuroOnline.toXML()
+                                );
                                 if (kDebugMode) print(idGame);
 
                                 // ignore: use_build_context_synchronously

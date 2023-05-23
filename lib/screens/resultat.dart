@@ -20,6 +20,20 @@ class ResultatState extends State<Resultat> {
   final Future resFuture = Duels.getFinishedDuels(FirebaseAuth.instance.currentUser?.uid);
 
 
+  String getAffichage(int n) {
+    return n.toString().padLeft(2, "0");
+  }
+
+  String getSeconde(int seconde) {
+     Duration duration = Duration(seconds: seconde);
+     return getAffichage(duration.inSeconds.remainder(60));
+  }
+
+  String getMinute(int seconde) {
+    Duration duration = Duration(seconds: seconde);
+    return getAffichage(duration.inMinutes.remainder(60));
+  }
+
   void retour() {
     route(context, const Multijoueur());
   }
@@ -46,8 +60,7 @@ class ResultatState extends State<Resultat> {
                   future: resFuture,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      print("LAAAA");
-                      print(snapshot.data);
+                      print(snapshot.data[0].docs[0]["difficulty"]);
                       //bool cache = snapshot.data.metadata.isFromCache;
                       //print("cache?: $cache");
                       //TODO : afficher un message pour dire si les données sont a jour ou non !
@@ -149,12 +162,22 @@ class ResultatState extends State<Resultat> {
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
                                         height: 60,
-                                        child: Text("${snapshot.data[0].docs[i]['timers'].values.toList()[0]}")),
+                                        child: Text(
+                                            (snapshot.data[0].docs[i]['timers'].values.toList()[0] == -1)?"N/A":
+                                            "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[0])}:"
+                                                "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[0])}"
+                                        )
+                                    ),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
                                         height: 60,
-                                        child: Text("${snapshot.data[0].docs[i]['timers'].values.toList()[1]}")),
+                                        child: Text(
+                                        (snapshot.data[0].docs[i]['timers'].values.toList()[1] == -1)?"N/A":
+                                          "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[1])}:"
+                                          "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[1])}"
+                                        )
+                                    ),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
@@ -164,7 +187,7 @@ class ResultatState extends State<Resultat> {
                                         alignment: Alignment.center,
                                         width: width(context) / 4,
                                         height: 60,
-                                        child: Text(snapshot.data[0].docs[i]["difficulty"])),
+                                        child: Text(snapshot.data[0].docs[i]["difficulty"].toString())),
                                   ],
                                 ),
                               )
