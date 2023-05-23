@@ -9,7 +9,8 @@ class Config {
   static final sons = _Audio();
   static var online = false;
   static var newgame = false;
-  static ThemeData? theme = ThemeData.light(useMaterial3: true);
+  static ThemeData themeDefault = ThemeData.dark(useMaterial3: true);
+  static ThemeData? theme = themeDefault;
   static final colors = _Color();
 }
 

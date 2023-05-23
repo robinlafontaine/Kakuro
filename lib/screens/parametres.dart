@@ -84,10 +84,9 @@ class ParametreState extends State<Parametre> {
   }
 
   void resetTheme() {
-    final themeDefault = ThemeData.light(useMaterial3: true);
     setState(() {
-      Storage.storeTheme(themeDefault);
-      MyThemeData.of(context).updateTheme(themeDefault);
+      Storage.storeTheme(Config.themeDefault);
+      MyThemeData.of(context).updateTheme(Config.themeDefault);
     });
   }
 
