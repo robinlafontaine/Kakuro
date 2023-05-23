@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kakuro/config/theme.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:kakuro/config/config.dart';
@@ -37,7 +38,7 @@ class ParametreState extends State<Parametre> {
   void initState() {
     super.initState();
     //A changer avec SharedPreferences
-    pickerColor = Config.colors.primaryColor ?? const Color(0x0fffffff);
+    pickerColor = Config.theme!.primaryColor;
     son = Config.sons.actuel;
     if (Config.sons.player.state == PlayerState.playing) {
       etatPlayer = "play";
@@ -75,50 +76,18 @@ class ParametreState extends State<Parametre> {
     Navigator.pop(context);
   }
 
-  void toLight() {
+  void changeTheme(ThemeData newTheme) {
     setState(() {
-      Config.colors.primaryColor = Config.colors.defaultPrimary;
-      Config.colors.primaryBackground = Config.colors.defaultBackground;
-      Config.colors.primaryTextBlack = Config.colors.defaultTextBlack;
-      Config.colors.primarySelect = Config.colors.defaultPrimarySelect;
-      Config.colors.primaryTitreSelect = Config.colors.defaultTextBlack;
-      Config.colors.primaryTextBackground = Config.colors.primaryColor;
+      Storage.storeTheme(newTheme);
+      MyThemeData.of(context).updateTheme(newTheme);
     });
   }
 
-  void toDark() {
+  void resetTheme() {
+    final themeDefault = ThemeData.light(useMaterial3: true);
     setState(() {
-      ThemeData theme = Theme.of(context);
-      Config.colors.primaryColor = theme.colorScheme.primary;
-      Config.colors.primaryBackground = theme.colorScheme.primaryContainer;
-      Config.colors.primaryTextBlack = theme.colorScheme.onPrimary;
-      Config.colors.primarySelect = theme.colorScheme.primary;
-      Config.colors.primarySelectItem = theme.colorScheme.primary;
-      Config.colors.primaryTitreSelect = theme.colorScheme.onPrimary;
-      Config.colors.primaryTextBackground = theme.colorScheme.primary;
-    });
-  }
-
-  void toPerso() {
-    setState(() {
-      Config.colors.primaryBackground = pickerColor.withOpacity(1);
-      if (pickerColor.red > 200 &&
-          pickerColor.green > 200 &&
-          pickerColor.blue > 200) {
-        Config.colors.primaryColor = Config.colors.defaultPrimary;
-        Config.colors.primarySelect = Config.colors.defaultPrimary;
-        Config.colors.primaryTextBlack = Config.colors.defaultPrimaryText;
-        Config.colors.primarySelectItem = Config.colors.defaultPrimary;
-        Config.colors.primaryTitreSelect = Config.colors.defaultTextBlack;
-        Config.colors.primaryTextBackground = Config.colors.primaryColor;
-      } else {
-        Config.colors.primarySelect = Colors.black.withOpacity(0.3);
-        Config.colors.primaryColor = Colors.black.withOpacity(0.3);
-        Config.colors.primaryTextBlack = Config.colors.defaultPrimaryText;
-        Config.colors.primarySelectItem = Config.colors.defaultPrimary;
-        Config.colors.primaryTitreSelect = Config.colors.defaultPrimaryText;
-        Config.colors.primaryTextBackground = Config.colors.primaryBackground;
-      }
+      Storage.storeTheme(themeDefault);
+      MyThemeData.of(context).updateTheme(themeDefault);
     });
   }
 
@@ -143,11 +112,11 @@ class ParametreState extends State<Parametre> {
       colorCodePrefixStyle: Theme.of(context).textTheme.bodySmall,
       selectedPickerTypeColor: Theme.of(context).colorScheme.primary,
       pickersEnabled: const <ColorPickerType, bool>{
-        // ColorPickerType.both: false,
-        // ColorPickerType.primary: true,
-        // ColorPickerType.accent: true,
-        // ColorPickerType.bw: false,
-        // ColorPickerType.custom: true,
+        ColorPickerType.both: false,
+        ColorPickerType.primary: true,
+        ColorPickerType.accent: true,
+        ColorPickerType.bw: false,
+        ColorPickerType.custom: true,
         ColorPickerType.wheel: true,
       },
     ).showPickerDialog(
@@ -156,10 +125,6 @@ class ParametreState extends State<Parametre> {
       constraints:
           const BoxConstraints(minHeight: 480, minWidth: 300, maxWidth: 320),
     );
-  }
-
-  void changeColor(Color color) {
-    setState(() => pickerColor = color);
   }
 
   @override
@@ -290,7 +255,12 @@ class ParametreState extends State<Parametre> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          toLight();
+                          setState(() {
+                            changeTheme(Config.theme!.copyWith(
+                                colorScheme: Config.theme!.colorScheme.copyWith(
+                              background: Colors.white,
+                            )));
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
@@ -361,7 +331,10 @@ class ParametreState extends State<Parametre> {
                                 minHeight: 480, minWidth: 320, maxWidth: 320),
                           );
                           setState(() {
-                            pickerColor = newColor;
+                            changeTheme(Config.theme!.copyWith(
+                                colorScheme: Config.theme!.colorScheme.copyWith(
+                              secondaryContainer: newColor,
+                            )));
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -386,7 +359,12 @@ class ParametreState extends State<Parametre> {
                       const Spacer(),
                       ElevatedButton(
                         onPressed: () {
-                          toDark();
+                          setState(() {
+                            changeTheme(Config.theme!.copyWith(
+                                colorScheme: Config.theme!.colorScheme.copyWith(
+                              background: Colors.black,
+                            )));
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
@@ -442,9 +420,9 @@ class ParametreState extends State<Parametre> {
                         ),
                       ),
                       onPressed: () {
-                        // route(context, const ColorPickerDemo());
+                        resetTheme();
                       },
-                      child: const Text("TEST")),
+                      child: const Text("Reset Theme")),
                   // put space to the bottom of the page
                   // TODO: A REMPLACER PAR SPACER
                   // const Spacer(),

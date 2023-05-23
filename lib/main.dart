@@ -5,11 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kakuro/config/config.dart';
+import 'package:kakuro/config/theme.dart';
 import 'package:kakuro/screens/menu.dart';
 import 'config/config.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:kakuro/config/theme.dart';
+import 'package:kakuro/config/config.dart';
+import 'package:get_storage/get_storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,35 +28,44 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Config.sons.player.play(AssetSource('loop.mp3'));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+      .then((_) async {
+    await GetStorage.init();
     runApp(const MyApp());
   });
   // runApp(const MyApp());
 }
 
-final light = ColorScheme.fromSwatch(
-    primarySwatch: ColorTools.createPrimarySwatch(const Color(0xFFE0E0E0)),
-    accentColor: const Color(0xFF464646),
-    brightness: Brightness.light);
-
-final dark = ColorScheme.fromSwatch(
-    primarySwatch: ColorTools.createPrimarySwatch(const Color(0xFFE0E0E0)),
-    accentColor: const Color(0xFF464646),
-    brightness: Brightness.dark);
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late ThemeData _theme;
+
+  @override
+  void initState() {
+    super.initState();
+    Storage.fetchTheme();
+    _theme = Config.theme!;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          textTheme:
-              GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-          colorScheme: light,
-          useMaterial3: true),
-      debugShowCheckedModeBanner: false,
-      home: const Menu(),
+    return MyThemeData(
+      themeData: _theme,
+      onThemeUpdated: (newTheme) {
+        setState(() {
+          _theme = newTheme;
+        });
+      },
+      child: MaterialApp(
+        theme: _theme,
+        debugShowCheckedModeBanner: false,
+        home: const Menu(),
+      ),
     );
   }
 }

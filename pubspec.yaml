@@ -51,6 +51,8 @@ dependencies:
   dynamic_color: ^1.6.3
   flex_color_picker: ^3.2.2
   connectivity: ^3.0.6
+  json_theme: ^5.0.2+6
+  get_storage: ^2.1.1
 
 dev_dependencies:
   flutter_test:

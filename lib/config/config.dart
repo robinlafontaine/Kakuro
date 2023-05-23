@@ -1,14 +1,16 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:json_theme/json_theme.dart';
+import 'dart:convert';
 
 class Config {
-  static final colors = _Color();
   static final images = _Image();
   static final sons = _Audio();
   static var online = false;
   static var newgame = false;
-  static var theme = ThemeMode.light;
+  static ThemeData? theme = ThemeData.light(useMaterial3: true);
+  static final colors = _Color();
 }
 
 class _Color {
@@ -34,13 +36,24 @@ class _Color {
   final defaultSelectItem = const Color(0xFFFFFFFF);
 }
 
-// class Swatch {
-//   ColorScheme customColorScheme = ColorScheme.fromSwatch(
-//     primarySwatch: ,
-//     accentColor: const Color(0xFF464646),
-//     brightness: Brightness.light,
-//   );
-// }
+class Storage {
+  static void storeTheme(ThemeData theme) async {
+    Config.theme = theme;
+    var themeJSON = ThemeEncoder.encodeThemeData(theme);
+    String? themeString = json.encode(themeJSON);
+    GetStorage().write("theme", themeString);
+  }
+
+  static void fetchTheme() {
+    String? themeString = GetStorage().read("theme");
+    if (themeString == null) {
+      return;
+    }
+    var themeJSON = json.decode(themeString);
+    ThemeData? theme = ThemeDecoder.decodeThemeData(themeJSON, validate: true);
+    Config.theme = theme;
+  }
+}
 
 class _Image {
   final logo = "assets/images/logo.png";
@@ -49,6 +62,7 @@ class _Image {
 
 class _Audio {
   var actuel = "Jojo.mp3";
+
   final player = AudioPlayer();
   final sons = ["Jojo.mp3", "Quoicoubeh.mp3", "MarioSlider.mp3"];
 }
