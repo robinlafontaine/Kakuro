@@ -24,8 +24,11 @@ class Duels {
       final snapshot = await db
           .collection("duelsEnded")
           .where("players", arrayContains: uid)
-          .where("winner", isNotEqualTo: "")
+          .orderBy("timestamp", descending: true)
           .get();
+      if (kDebugMode) {
+        print(snapshot.docs);
+      }
 
       List<String> names = [];
       final snapshot2 = await db.collection("leaderboard").get();
