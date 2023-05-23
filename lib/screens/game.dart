@@ -235,7 +235,6 @@ class GameState extends State<Game> {
                       openDialogIndice();
                     },
                     style: ElevatedButton.styleFrom(
-                      // backgroundColor: Config.colors.primarySelect,
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
                       padding: EdgeInsets.symmetric(
@@ -264,7 +263,6 @@ class GameState extends State<Game> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      // backgroundColor: Config.colors.primarySelect,
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
                       padding: EdgeInsets.symmetric(
@@ -316,7 +314,7 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "OK",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(color: Theme.of(context).primaryColorDark),
                   ))
             ],
           ));
@@ -339,7 +337,7 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "Oui",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(color: Theme.of(context).primaryColorDark),
                   )),
               TextButton(
                   onPressed: () {
@@ -347,7 +345,7 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "NON",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(color: Theme.of(context).primaryColorDark),
                   ))
             ],
           ));
@@ -409,8 +407,8 @@ class GameState extends State<Game> {
                                         child: Text(
                                           "OK",
                                           style: TextStyle(
-                                              color:
-                                                  Config.colors.defaultPrimary),
+                                              color: Theme.of(context)
+                                                  .primaryColorDark),
                                         ))
                                   ],
                                 ));
@@ -431,8 +429,8 @@ class GameState extends State<Game> {
                                         child: Text(
                                           "OK",
                                           style: TextStyle(
-                                              color:
-                                                  Config.colors.defaultPrimary),
+                                              color: Theme.of(context)
+                                                  .primaryColorDark),
                                         ))
                                   ],
                                 ));
@@ -473,8 +471,8 @@ class GameState extends State<Game> {
                                       child: Text(
                                         "OK",
                                         style: TextStyle(
-                                            color:
-                                                Config.colors.defaultPrimary),
+                                            color: Theme.of(context)
+                                                .primaryColorDark),
                                       ))
                                 ],
                               ));
@@ -486,7 +484,7 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "Oui",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(color: Theme.of(context).primaryColorDark),
                   )),
               TextButton(
                   onPressed: () {
@@ -494,7 +492,7 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "NON",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(color: Theme.of(context).primaryColorDark),
                   ))
             ],
           ));

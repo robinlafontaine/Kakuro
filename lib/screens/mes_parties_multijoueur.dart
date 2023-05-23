@@ -212,7 +212,8 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                         child: Text(
                           'Aucune invitation',
                           style: TextStyle(
-                              color: Config.colors.primaryTitreSelect),
+                              color: Theme.of(context).colorScheme.onBackground,
+                              fontSize: 20),
                         ),
                       );
                     }

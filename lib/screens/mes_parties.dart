@@ -154,11 +154,11 @@ class _MesPartiesState extends State<MesParties> {
                                           height: 3,
                                         ),
                                         Text(
-                                          (kakuros[i].difficulte==4)?
-                                          "Difficulté : Facile"
-                                          :(kakuros[i].difficulte==7)?
-                                          "Difficulté : Moyen"
-                                          :"Difficulté : Difficile",
+                                          (kakuros[i].difficulte == 4)
+                                              ? "Difficulté : Facile"
+                                              : (kakuros[i].difficulte == 7)
+                                                  ? "Difficulté : Moyen"
+                                                  : "Difficulté : Difficile",
                                           selectionColor: Theme.of(context)
                                               .colorScheme
                                               .onPrimaryContainer,
@@ -216,8 +216,9 @@ class _MesPartiesState extends State<MesParties> {
                     return Center(
                       child: Text(
                         'Aucune partie en cours',
-                        style:
-                            TextStyle(color: Config.colors.primaryTitreSelect),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.onBackground,
+                            fontSize: 20),
                       ),
                     );
                   }

@@ -451,7 +451,7 @@ class ParametreState extends State<Parametre> {
                   TextButton(
                       style: ButtonStyle(
                         foregroundColor: MaterialStateProperty.all<Color>(
-                          Config.colors.primaryTextBlack,
+                          Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       onPressed: () {
