@@ -60,7 +60,7 @@ class ResultatState extends State<Resultat> {
                   future: resFuture,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      print(snapshot.data[0].docs[0]["difficulty"]);
+                      print(snapshot.data[0].docs[0]["timers"].keys.toList());
                       //bool cache = snapshot.data.metadata.isFromCache;
                       //print("cache?: $cache");
                       //TODO : afficher un message pour dire si les données sont a jour ou non !
@@ -80,7 +80,7 @@ class ResultatState extends State<Resultat> {
                               child: Row(
                                 children: [
                                   Container(
-                                      width: width(context)/5,
+                                      width: width(context)/4.5,
                                       height: 40,
                                       margin: const EdgeInsets.only( left: 10),
                                       child: Center(
@@ -126,7 +126,7 @@ class ResultatState extends State<Resultat> {
                                       )),
                                   Container(
                                       alignment: Alignment.center,
-                                      width: width(context) / 4,
+                                      width: width(context) / 4.5,
                                       height: 40,
                                       child: Text(
                                         "Difficulté",
@@ -154,10 +154,10 @@ class ResultatState extends State<Resultat> {
                                     Container(
                                         margin:
                                         const EdgeInsets.only(left: 10),
-                                        width: width(context)/5,
+                                        width: width(context)/4.5,
                                         height: 60,
                                         child: Center(
-                                            child: Text(snapshot.data[1][i]))),
+                                            child: Text((snapshot.data[1][i]).toString().split(' ').join('\n'),))),
                                     Container(
                                         alignment: Alignment.center,
                                         width: width(context) / 7,
@@ -166,7 +166,12 @@ class ResultatState extends State<Resultat> {
                                             (snapshot.data[0].docs[i]['timers'].values.toList()[0] == -1)?"N/A":
                                             "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[0])}:"
                                                 "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[0])}"
-                                        )
+                                          ,
+                                          style: TextStyle(
+                                              fontWeight: (snapshot.data[0].docs[0]["timers"].keys.toList()[0]==FirebaseAuth.instance.currentUser?.uid)?
+                                              FontWeight.bold:
+                                              FontWeight.normal
+                                          ),)
                                     ),
                                     Container(
                                         alignment: Alignment.center,
@@ -176,6 +181,12 @@ class ResultatState extends State<Resultat> {
                                         (snapshot.data[0].docs[i]['timers'].values.toList()[1] == -1)?"N/A":
                                           "${getMinute(snapshot.data[0].docs[i]['timers'].values.toList()[1])}:"
                                           "${getSeconde(snapshot.data[0].docs[i]['timers'].values.toList()[1])}"
+                                        ,
+                                        style: TextStyle(
+                                            fontWeight: (snapshot.data[0].docs[0]["timers"].keys.toList()[1]==FirebaseAuth.instance.currentUser?.uid)?
+                                                FontWeight.bold:
+                                                FontWeight.normal
+                                          ),
                                         )
                                     ),
                                     Container(
@@ -185,7 +196,7 @@ class ResultatState extends State<Resultat> {
                                         child: Text(snapshot.data[0].docs[i]["board"])),
                                     Container(
                                         alignment: Alignment.center,
-                                        width: width(context) / 4,
+                                        width: width(context) / 4.5,
                                         height: 60,
                                         child: Text(snapshot.data[0].docs[i]["difficulty"].toString())),
                                   ],
