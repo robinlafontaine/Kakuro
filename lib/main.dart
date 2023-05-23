@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
     return true;
   };
   WidgetsFlutterBinding.ensureInitialized();
+  Config.sons.player.play(AssetSource('loop.mp3'));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const MyApp());
