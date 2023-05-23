@@ -17,17 +17,32 @@ class Duels {
     }
   }
 
-  static Future<Object> getFinishedDuels(String uid) async {
+  static Future<Object> getFinishedDuels(String? uid) async {
     try {
+      List res = [];
+
       final snapshot = await db
           .collection("duelsEnded")
           .where("players", arrayContains: uid)
           .where("winner", isNotEqualTo: "")
           .get();
 
+      List<String> names = [];
+      final snapshot2 = await db.collection("leaderboard").get();
+      for (var doc in snapshot.docs) {
+        for (var doc2 in snapshot2.docs) {
+          if (doc.data()["players"][0] == doc2.id && doc.data()["players"][0] != uid) {
+            names.add(doc2.data()["name"]);
+          }
+          if (doc.data()["players"][1] == doc2.id && doc.data()["players"][1] != uid) {
+            names.add(doc2.data()["name"]);
+          }
+        }
+      }
 
-
-      return snapshot;
+      res.add(snapshot);
+      res.add(names);
+      return res;
     } catch (e) {
       if (kDebugMode) {
         print(e);

@@ -17,8 +17,7 @@ class Resultat extends StatefulWidget {
 }
 
 class ResultatState extends State<Resultat> {
-  final Future resFuture = Duels.getFinishedDuels("gjpaUunOCBNVpu52qdTo9TaA8X23");
-  final Future resFuture2 = Duels.getFinishedDuels("gjpaUunOCBNVpu52qdTo9TaA8X23");
+  final Future resFuture = Duels.getFinishedDuels(FirebaseAuth.instance.currentUser?.uid);
 
 
   void retour() {
@@ -44,11 +43,11 @@ class ResultatState extends State<Resultat> {
           ),
           body: SingleChildScrollView(
               child: FutureBuilder(
-                  future: Future.wait([resFuture,resFuture2]),
-                  builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+                  future: resFuture,
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       print("LAAAA");
-                      print(snapshot.data()[0].docs[0]['timers'].values.toList()[0]);
+                      print(snapshot.data);
                       //bool cache = snapshot.data.metadata.isFromCache;
                       //print("cache?: $cache");
                       //TODO : afficher un message pour dire si les données sont a jour ou non !
@@ -68,9 +67,9 @@ class ResultatState extends State<Resultat> {
                               child: Row(
                                 children: [
                                   Container(
-                                      width: width(context) / 5,
+                                      width: width(context)/5,
                                       height: 40,
-                                      margin: const EdgeInsets.only(right: 10),
+                                      margin: const EdgeInsets.only( left: 10),
                                       child: Center(
                                           child: Text(
                                             "Joueur",
@@ -80,7 +79,7 @@ class ResultatState extends State<Resultat> {
                                                     .onSecondaryContainer),
                                           ))),
                                   Container(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: Alignment.center,
                                       width: width(context) / 7,
                                       height: 40,
                                       child: Text(
@@ -91,7 +90,7 @@ class ResultatState extends State<Resultat> {
                                                 .onSecondaryContainer),
                                       )),
                                   Container(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: Alignment.center,
                                       width: width(context) / 7,
                                       height: 40,
                                       child: Text(
@@ -102,8 +101,8 @@ class ResultatState extends State<Resultat> {
                                                 .onSecondaryContainer),
                                       )),
                                   Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: width(context) / 6,
+                                      alignment: Alignment.center,
+                                      width: width(context) / 7,
                                       height: 40,
                                       child: Text(
                                         "Grille",
@@ -113,11 +112,11 @@ class ResultatState extends State<Resultat> {
                                                 .onSecondaryContainer),
                                       )),
                                   Container(
-                                      alignment: Alignment.centerLeft,
-                                      width: width(context) / 5,
+                                      alignment: Alignment.center,
+                                      width: width(context) / 4,
                                       height: 40,
                                       child: Text(
-                                        "Difficulte",
+                                        "Difficulté",
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -126,48 +125,46 @@ class ResultatState extends State<Resultat> {
                                 ],
                               ),
                             ),
-                            for (int i = 0; i < snapshot.data.docs.length; i++)
+                            for (int i = 0; i < snapshot.data[0].docs.length; i++)
                               Container(
                                 width: width(context) / 1.1,
                                 decoration: BoxDecoration(
-                                    color: (i % 2 == 0)
-                                        ? Theme.of(context)
-                                        .colorScheme
-                                        .secondaryContainer
-                                        .withOpacity(0.5)
-                                        : Theme.of(context)
-                                        .colorScheme
-                                        .secondaryContainer
-                                        .withOpacity(0.2)),
+                                    color:
+                                    (snapshot.data[0].docs[i]["winner"]=="draw")?
+                                      Colors.orange
+                                    :(snapshot.data[0].docs[i]["winner"]==FirebaseAuth.instance.currentUser?.uid)?
+                                      Colors.green
+                                    :Colors.redAccent
+                                ),
                                 child: Row(
                                   children: [
                                     Container(
                                         margin:
-                                        const EdgeInsets.only(right: 10),
-                                        width: width(context) / 6,
-                                        height: 40,
+                                        const EdgeInsets.only(left: 10),
+                                        width: width(context)/5,
+                                        height: 60,
                                         child: Center(
-                                            child: Text("on verra"))),
+                                            child: Text(snapshot.data[1][i]))),
                                     Container(
-                                        alignment: Alignment.centerLeft,
-                                        width: width(context) / 6,
-                                        height: 40,
-                                        child: Text(snapshot.data.docs[i]['timers'].values.toList()[0].toString())),
+                                        alignment: Alignment.center,
+                                        width: width(context) / 7,
+                                        height: 60,
+                                        child: Text("${snapshot.data[0].docs[i]['timers'].values.toList()[0]}")),
                                     Container(
-                                        alignment: Alignment.centerLeft,
-                                        width: width(context) / 6,
-                                        height: 40,
-                                        child: Text(snapshot.data.docs[i]['timers'].values.toList()[1].toString())),
+                                        alignment: Alignment.center,
+                                        width: width(context) / 7,
+                                        height: 60,
+                                        child: Text("${snapshot.data[0].docs[i]['timers'].values.toList()[1]}")),
                                     Container(
-                                        alignment: Alignment.centerLeft,
-                                        width: width(context) / 6,
-                                        height: 40,
-                                        child: Text(snapshot.data.docs[i]["board"])),
+                                        alignment: Alignment.center,
+                                        width: width(context) / 7,
+                                        height: 60,
+                                        child: Text(snapshot.data[0].docs[i]["board"])),
                                     Container(
-                                        alignment: Alignment.centerLeft,
-                                        width: width(context) / 6,
-                                        height: 40,
-                                        child: Text(snapshot.data.docs[i]["difficulty"])),
+                                        alignment: Alignment.center,
+                                        width: width(context) / 4,
+                                        height: 60,
+                                        child: Text(snapshot.data[0].docs[i]["difficulty"])),
                                   ],
                                 ),
                               )

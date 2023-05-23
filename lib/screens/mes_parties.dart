@@ -155,7 +155,7 @@ class _MesPartiesState extends State<MesParties> {
                                         ),
                                         Text(
                                           (kakuros[i].difficulte==4)?
-                                          "Difficulté : Facile}"
+                                          "Difficulté : Facile"
                                           :(kakuros[i].difficulte==7)?
                                           "Difficulté : Moyen"
                                           :"Difficulté : Difficile",
