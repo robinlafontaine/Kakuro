@@ -31,10 +31,12 @@ class Duels {
       final snapshot2 = await db.collection("leaderboard").get();
       for (var doc in snapshot.docs) {
         for (var doc2 in snapshot2.docs) {
-          if (doc.data()["players"][0] == doc2.id && doc.data()["players"][0] != uid) {
+          if (doc.data()["players"][0] == doc2.id &&
+              doc.data()["players"][0] != uid) {
             names.add(doc2.data()["name"]);
           }
-          if (doc.data()["players"][1] == doc2.id && doc.data()["players"][1] != uid) {
+          if (doc.data()["players"][1] == doc2.id &&
+              doc.data()["players"][1] != uid) {
             names.add(doc2.data()["name"]);
           }
         }
@@ -90,6 +92,7 @@ class Duels {
           "board": size,
           "timers": timers,
           "difficulty": difficulty,
+          "timestamp": DateTime.now()
         });
         value.reference.delete();
       });
