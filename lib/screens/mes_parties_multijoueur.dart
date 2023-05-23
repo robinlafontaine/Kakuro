@@ -5,12 +5,12 @@ import 'package:kakuro/Config/Config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/gameMulti.dart';
+import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 
 import '../duels.dart';
 import '../widgets/appbar.dart';
 import '../widgets/navbar.dart';
-import 'menu.dart';
 
 class MesPartiesMultijoueur extends StatefulWidget {
   const MesPartiesMultijoueur({super.key});
@@ -61,7 +61,7 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
   }
 
   void retour() {
-    route(context, const Menu());
+    route(context, const Multijoueur());
   }
 
   @override
@@ -82,6 +82,7 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
             ),
           ),
           body: SingleChildScrollView(
+            padding: const EdgeInsets.all(15),
             child: FutureBuilder<bool>(
                 future: go(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
