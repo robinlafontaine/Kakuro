@@ -8,7 +8,7 @@ import 'package:kakuro/config/theme.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:kakuro/config/config.dart';
-
+import 'package:material_color_generator/material_color_generator.dart';
 import '../auth.dart';
 import '../Config/fonctions.dart';
 import '../widgets/appbar.dart';
@@ -256,8 +256,10 @@ class ParametreState extends State<Parametre> {
                         onPressed: () {
                           setState(() {
                             changeTheme(Config.theme!.copyWith(
-                                colorScheme: Config.theme!.colorScheme.copyWith(
-                              background: Colors.white,
+                                colorScheme: ColorScheme.fromSwatch(
+                              primarySwatch: generateMaterialColor(
+                                  color: Color.fromARGB(255, 187, 121, 121)),
+                              brightness: Brightness.light,
                             )));
                           });
                         },
@@ -331,8 +333,9 @@ class ParametreState extends State<Parametre> {
                           );
                           setState(() {
                             changeTheme(Config.theme!.copyWith(
-                                colorScheme: Config.theme!.colorScheme.copyWith(
-                              secondaryContainer: newColor,
+                                colorScheme: ColorScheme.fromSwatch(
+                              primarySwatch:
+                                  generateMaterialColor(color: newColor),
                             )));
                           });
                         },
@@ -360,9 +363,12 @@ class ParametreState extends State<Parametre> {
                         onPressed: () {
                           setState(() {
                             changeTheme(Config.theme!.copyWith(
-                                colorScheme: Config.theme!.colorScheme.copyWith(
-                              background: Colors.black,
-                            )));
+                              colorScheme: ColorScheme.fromSwatch(
+                                primarySwatch: Colors.grey,
+                                accentColor: Colors.grey,
+                                brightness: Brightness.dark,
+                              ),
+                            ));
                           });
                         },
                         style: ElevatedButton.styleFrom(
