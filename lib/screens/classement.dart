@@ -120,7 +120,15 @@ class ClassementState extends State<Classement> {
                                         width: width(context) / 5,
                                         height: 40,
                                         child: Center(
-                                            child: Text((i + 1).toString()))),
+                                            child: Text((i + 1).toString(),
+                                            style: TextStyle( fontWeight :
+                                                (snapshot.data.docs[i].id == FirebaseAuth.instance.currentUser?.uid) ?
+                                                    FontWeight.bold
+                                                    :
+                                                    FontWeight.normal
+                                              ),
+                                            )
+                                        )),
                                     Container(
                                         alignment: Alignment.centerLeft,
                                         width: width(context) / 2.7,
@@ -129,14 +137,27 @@ class ClassementState extends State<Classement> {
                                                 FirebaseAuth
                                                     .instance.currentUser?.uid
                                             ? "Moi"
-                                            : snapshot.data.docs[i]["name"])),
+                                            : snapshot.data.docs[i]["name"],
+                                          style :TextStyle( fontWeight :
+                                          (snapshot.data.docs[i].id == FirebaseAuth.instance.currentUser?.uid) ?
+                                          FontWeight.bold
+                                              :
+                                          FontWeight.normal
+                                          ),)),
                                     Container(
                                         width: width(context) / 3.3,
                                         height: 40,
                                         child: Center(
                                             child: Text(snapshot
                                                 .data.docs[i]["score"]
-                                                .toString()))),
+                                                .toString(),
+                                              style :TextStyle( fontWeight :
+                                              (snapshot.data.docs[i].id == FirebaseAuth.instance.currentUser?.uid) ?
+                                              FontWeight.bold
+                                                  :
+                                              FontWeight.normal
+                                              ),)
+                                        )),
                                   ],
                                 ),
                               )
