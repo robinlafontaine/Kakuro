@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
-import 'package:kakuro/auth.dart';
-import 'package:kakuro/leaderboard.dart';
-import 'package:kakuro/screens/menu.dart';
 
 import 'package:connectivity/connectivity.dart';
 
@@ -108,41 +105,13 @@ class AppbarState extends State<Appbar> {
                       icon: Icon((Config.online) ? Icons.wifi : Icons.wifi_off),
                       iconSize: width(context) / 15,
                       color: (Config.online) ? Colors.green : Colors.red,
-                      onPressed: () {
-                        (Config.online)
-                            ? {
-                                Config.online = false,
-                                route(context, const Menu())
-                              }
-                            : {
-                                Auth(FirebaseAuth.instance)
-                                    .signedIn()
-                                    .then(((connected) => {
-                                          if (!connected)
-                                            {
-                                              Auth(FirebaseAuth.instance)
-                                                  .signInGoogle(context)
-                                                  .then((value) => Leaderboard()
-                                                      .userExists(context)
-                                                      .then((value) => {
-                                                            if (FirebaseAuth
-                                                                    .instance
-                                                                    .currentUser !=
-                                                                null)
-                                                              Config.online =
-                                                                  true,
-                                                            route(context,
-                                                                const Menu())
-                                                          }))
-                                            }
-                                          else
-                                            {
-                                              Config.online = true,
-                                              route(context, const Menu())
-                                            }
-                                        }))
-                              };
-                      },
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      // ignore: avoid_returning_null_for_void
+                      onPressed: () =>
+                          // do nothing
+                          null,
                     ),
                   ),
                 );

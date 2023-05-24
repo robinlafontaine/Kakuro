@@ -391,14 +391,37 @@ class ParametreState extends State<Parametre> {
                       )
                     ],
                   ),
-
+                  // put space between buttons
+                  SizedBox(height: height(context) / 20),
+                  ElevatedButton(
+                    onPressed: () => {
+                      // reset theme with config.themeDefault
+                      resetTheme(),
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // backgroundColor: Config.colors.primarySelect,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.secondaryContainer,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: width(context) *
+                            0.20, // Change the horizontal padding to 20% of the screen width
+                      ),
+                      minimumSize: Size(
+                          width(context) * 0.90,
+                          height(context) *
+                              0.08), // Change the height to 40 pixels
+                    ),
+                    child: const Text(
+                      "Réinitialiser le thème",
+                    ),
+                  ),
                   Row(
                     children: [
                       Divider(
                         color: Theme.of(context).colorScheme.primaryContainer,
                         thickness: 2,
                         // put adaptive height to the divider to make it responsive to the screen size and put it at the bottom of the page
-                        height: height(context) / 4,
+                        height: height(context) / 5,
                       ),
                     ],
                   ),
@@ -416,17 +439,6 @@ class ParametreState extends State<Parametre> {
                           Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                   ),
-
-                  TextButton(
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                          Theme.of(context).colorScheme.onBackground,
-                        ),
-                      ),
-                      onPressed: () {
-                        resetTheme();
-                      },
-                      child: const Text("Reset Theme")),
                   // put space to the bottom of the page
                   // TODO: A REMPLACER PAR SPACER
                   // const Spacer(),
