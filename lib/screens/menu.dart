@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/screens/mes_parties.dart';
@@ -38,10 +39,20 @@ class MenuState extends State<Menu> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  Config.images.icon,
-                  width: width(context) / 2,
-                  height: width(context) / 2,
+                Container(
+                  decoration: ShapeDecoration(
+                    shape: CircleBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.secondaryContainer,
+                      ),
+                    ),
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                  ),
+                  child: Image.asset(
+                    Config.images.icon,
+                    width: width(context) / 2,
+                    height: width(context) / 2,
+                  ),
                 ),
                 const SizedBox(
                   height: 40,

@@ -43,10 +43,20 @@ class MultijoueurState extends State<Multijoueur> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  Config.images.icon,
-                  width: width(context) / 2,
-                  height: width(context) / 2,
+                Container(
+                  decoration: ShapeDecoration(
+                    shape: CircleBorder(
+                      side: BorderSide(
+                        color: Theme.of(context).colorScheme.secondaryContainer,
+                      ),
+                    ),
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                  ),
+                  child: Image.asset(
+                    Config.images.icon,
+                    width: width(context) / 2,
+                    height: width(context) / 2,
+                  ),
                 ),
                 const SizedBox(
                   height: 40,

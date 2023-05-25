@@ -58,7 +58,8 @@ class Storage {
 
 class _Image {
   final logo = "assets/images/logo.png";
-  final icon = "assets/images/icon.png";
+  final icon = "assets/images/Kakuro_menu.png";
+  // Color 0x404040
 }
 
 class _Audio {
