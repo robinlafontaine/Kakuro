@@ -46,15 +46,17 @@ class ClassementState extends State<Classement> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       bool cache = snapshot.data.metadata.isFromCache;
-                      print("cache?: $cache");
-
+                      if (cache) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Popup.showAlert(context);
+                        });
+                      }
                       return Center(
                         child: Column(
                           children: [
                             const SizedBox(
                               height: 30,
                             ),
-                            // const Popup.showAlert(context),
                             Container(
                               decoration: BoxDecoration(
                                 color: Theme.of(context)
