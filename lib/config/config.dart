@@ -41,10 +41,10 @@ class _Image {
 }
 
 class _Audio {
-  var actuel = "Jojo.mp3";
+  var actuel = "loop.mp3";
 
   final player = AudioPlayer();
-  final sons = ["Jojo.mp3", "Quoicoubeh.mp3", "MarioSlider.mp3"];
+  final sons = ["loop.mp3"];
 }
 
 class _Multi {
