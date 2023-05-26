@@ -142,7 +142,11 @@ class ResultatState extends State<Resultat> {
                                 i++)
                               Container(
                                 width: width(context) / 1.1,
+                                padding: const EdgeInsets.only(top: 10, bottom: 10),
                                 decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(width: 1.0, color: Colors.black),
+                                    ),
                                     color: (snapshot.data[0].docs[i]
                                                 ["winner"] ==
                                             "draw")
@@ -180,7 +184,7 @@ class ResultatState extends State<Resultat> {
                                           style: TextStyle(
                                               fontWeight: (snapshot
                                                           .data[0]
-                                                          .docs[0]["timers"]
+                                                          .docs[i]["timers"]
                                                           .keys
                                                           .toList()[0] ==
                                                       FirebaseAuth.instance
@@ -203,7 +207,7 @@ class ResultatState extends State<Resultat> {
                                           style: TextStyle(
                                               fontWeight: (snapshot
                                                           .data[0]
-                                                          .docs[0]["timers"]
+                                                          .docs[i]["timers"]
                                                           .keys
                                                           .toList()[1] ==
                                                       FirebaseAuth.instance
