@@ -41,7 +41,7 @@ class CaseState extends State<Case> {
           width: taille,
           height: taille,
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer),
+              color: Theme.of(context).colorScheme.secondaryContainer),
           child: Center(
             child: (valeur == 0)
                 ? null
@@ -50,7 +50,7 @@ class CaseState extends State<Case> {
                     style: TextStyle(
                         fontSize: taille * 0.5,
                         color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   ),
           ),
         ),

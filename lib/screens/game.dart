@@ -144,7 +144,7 @@ class GameState extends State<Game> {
     GetStorage().write("etats", etats);
   }
 
-  bool testValide() {
+  bool testValide({indice = false}) {
     bool valide = true;
     for (int i = 0; i < kakuro.n; i++) {
       for (int j = 0; j < kakuro.m; j++) {
@@ -160,13 +160,15 @@ class GameState extends State<Game> {
       copie.insert(0, List.filled(kakuro.m, -1));
       valide = kakuro.estValideDiff(copie);
     }
+    if (indice) {
+      return valide;
+    }
     if (valide) {
       addPoints();
       if (Config.newgame == false) suppGrille();
       route(context, const Menu());
       return valide;
     }
-    AudioPlayer().play(AssetSource("roblox.mp3"));
     return valide;
   }
 
@@ -293,10 +295,14 @@ class GameState extends State<Game> {
                 (Config.newgame) ? saveGrille() : majGrille();
               },
               reaload: () {
+                saveGrille();
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const Parametre())).then((value) {
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const Parametre(),
+                      transitionDuration: const Duration(seconds: 0),
+                    )).then((value) {
                   setState(() {});
                 });
               })),
@@ -362,6 +368,26 @@ class GameState extends State<Game> {
             ],
           ));
 
+  Future openDialogVictoire() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: const Text('Victoire'),
+            content: const Text('Félicitation, vous avez gagné !'),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "OK",
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
+                  ))
+            ],
+          ));
+
   // show a dialog to say that the player has asked for a hint
   // then find a random value to give to the playerv and update the grid with the value
   Future openDialogIndice() => showDialog(
@@ -385,7 +411,7 @@ class GameState extends State<Game> {
                       }
                     }
                     if (!zero) {
-                      if (!testValide()) {
+                      if (!testValide(indice: true)) {
                         while (kakuro.grilleUpdated[i][j] == grille[i][j]) {
                           i = Random().nextInt(kakuro.n - 1) + 1;
                           j = Random().nextInt(kakuro.m - 1) + 1;
