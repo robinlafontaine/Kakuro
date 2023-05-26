@@ -154,53 +154,142 @@ class ParametreState extends State<Parametre> {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: width(context) / 8,
-                          decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                              borderRadius: BorderRadius.circular(10)),
-                          padding: const EdgeInsets.only(left: 15, right: 10),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                                borderRadius: BorderRadius.circular(10),
-                                dropdownColor: Theme.of(context)
-                                    .colorScheme
-                                    .secondaryContainer,
-                                value: son,
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondaryContainer,
-                                ),
-                                items: Config.sons.sons.map((items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: SizedBox(
-                                      width: width(context) / 2.5,
-                                      child: Text(
-                                        items.replaceRange(
-                                            items.length - 4, items.length, ""),
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondaryContainer),
-                                      ),
+                        ToggleButtonsTheme(
+                          data: ToggleButtonsThemeData(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            selectedColor:
+                                Theme.of(context).colorScheme.onPrimary,
+                            fillColor: Theme.of(context).colorScheme.primary,
+                            textStyle: Theme.of(context).textTheme.bodySmall,
+                            selectedBorderColor:
+                                Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(14),
+                            borderColor: Theme.of(context).colorScheme.primary,
+                          ),
+                          child: ToggleButtons(
+                            isSelected: [
+                              Config.theme!.brightness == Brightness.light,
+                              Config.theme!.brightness == Brightness.dark,
+                            ],
+                            onPressed: (int index) {
+                              if (index == 0) {
+                                setState(() {
+                                  changeTheme(Config.theme!.copyWith(
+                                    colorScheme: ColorScheme.fromSwatch(
+                                      primarySwatch: generateMaterialColor(
+                                          color: Color.fromARGB(
+                                              255, 187, 121, 121)),
+                                      brightness: Brightness.light,
                                     ),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    value == null ? "" : son = value;
-                                    Config.sons.actuel = value!;
-                                    etatPlayer = "pause";
-                                    Config.sons.player.stop();
-                                  });
-                                }),
+                                  ));
+                                });
+                              } else {
+                                setState(() {
+                                  changeTheme(Config.theme!.copyWith(
+                                    colorScheme: ColorScheme.fromSwatch(
+                                      primarySwatch: Colors.grey,
+                                      accentColor: Colors.grey,
+                                      brightness: Brightness.dark,
+                                    ),
+                                  ));
+                                });
+                              }
+                            },
+                            constraints: const BoxConstraints(
+                              maxWidth: 60,
+                              minWidth: 60,
+                              minHeight: 50,
+                              maxHeight: 50,
+                            ),
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(Icons.wb_sunny, size: 20),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(Icons.nightlight_round, size: 20),
+                              ),
+                            ],
                           ),
                         ),
+                        const Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            padding: const EdgeInsets.all(20),
+                            backgroundColor: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
+                            minimumSize: Size(
+                              width(context) / 15,
+                              width(context) / 15,
+                            ),
+                          ),
+                          onPressed: () async {
+                            final Color newColor = await showColorPickerDialog(
+                              context,
+                              pickerColor,
+                              width: 40,
+                              height: 40,
+                              spacing: 0,
+                              runSpacing: 0,
+                              borderRadius: 0,
+                              wheelDiameter: 165,
+                              enableOpacity: true,
+                              showColorCode: true,
+                              colorCodeHasColor: true,
+                              pickersEnabled: <ColorPickerType, bool>{
+                                ColorPickerType.wheel: true,
+                              },
+                              copyPasteBehavior:
+                                  const ColorPickerCopyPasteBehavior(
+                                pasteButton: true,
+                                longPressMenu: true,
+                              ),
+                              actionButtons: const ColorPickerActionButtons(
+                                okButton: true,
+                                closeButton: true,
+                                dialogActionButtons: false,
+                              ),
+                              transitionBuilder: (BuildContext context,
+                                  Animation<double> a1,
+                                  Animation<double> a2,
+                                  Widget widget) {
+                                final double curvedValue =
+                                    Curves.easeInOutBack.transform(a1.value) -
+                                        1.0;
+                                return Transform(
+                                  transform: Matrix4.translationValues(
+                                      0.0, curvedValue * 200, 0.0),
+                                  child: Opacity(
+                                    opacity: a1.value,
+                                    child: widget,
+                                  ),
+                                );
+                              },
+                              transitionDuration:
+                                  const Duration(milliseconds: 400),
+                              constraints: const BoxConstraints(
+                                  minHeight: 480, minWidth: 320, maxWidth: 320),
+                            );
+                            setState(() {
+                              changeTheme(Config.theme!.copyWith(
+                                  colorScheme: ColorScheme.fromSwatch(
+                                primarySwatch:
+                                    generateMaterialColor(color: newColor),
+                              )));
+                            });
+                          },
+                          child: FaIcon(
+                            Icons.format_paint,
+                            size: width(context) / 20,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
                         ElevatedButton(
                           // play button
                           style: ElevatedButton.styleFrom(
@@ -227,6 +316,8 @@ class ParametreState extends State<Parametre> {
                                 .onSecondaryContainer,
                           ),
                         ),
+                        // smaller spacer
+                        const SizedBox(width: 10),
                         ElevatedButton(
                           // circular shape for stop button
                           style: ElevatedButton.styleFrom(
@@ -252,150 +343,6 @@ class ParametreState extends State<Parametre> {
                           ),
                         ),
                       ]),
-                  SizedBox(height: height(context) / 20),
-                  Row(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            changeTheme(Config.theme!.copyWith(
-                                colorScheme: ColorScheme.fromSwatch(
-                              primarySwatch: generateMaterialColor(
-                                  color: Color.fromARGB(255, 187, 121, 121)),
-                              brightness: Brightness.light,
-                            )));
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: (width(context)) * 0.1,
-                            vertical: width(context) / 10,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        child: FaIcon(
-                          Icons.wb_sunny,
-                          size: width(context) / 20,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSecondaryContainer,
-                        ),
-                      ),
-                      const Spacer(),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final Color newColor = await showColorPickerDialog(
-                            context,
-                            pickerColor,
-                            width: 40,
-                            height: 40,
-                            spacing: 0,
-                            runSpacing: 0,
-                            borderRadius: 0,
-                            wheelDiameter: 165,
-                            enableOpacity: true,
-                            showColorCode: true,
-                            colorCodeHasColor: true,
-                            pickersEnabled: <ColorPickerType, bool>{
-                              ColorPickerType.wheel: true,
-                            },
-                            copyPasteBehavior:
-                                const ColorPickerCopyPasteBehavior(
-                              pasteButton: true,
-                              longPressMenu: true,
-                            ),
-                            actionButtons: const ColorPickerActionButtons(
-                              okButton: true,
-                              closeButton: true,
-                              dialogActionButtons: false,
-                            ),
-                            transitionBuilder: (BuildContext context,
-                                Animation<double> a1,
-                                Animation<double> a2,
-                                Widget widget) {
-                              final double curvedValue =
-                                  Curves.easeInOutBack.transform(a1.value) -
-                                      1.0;
-                              return Transform(
-                                transform: Matrix4.translationValues(
-                                    0.0, curvedValue * 200, 0.0),
-                                child: Opacity(
-                                  opacity: a1.value,
-                                  child: widget,
-                                ),
-                              );
-                            },
-                            transitionDuration:
-                                const Duration(milliseconds: 400),
-                            constraints: const BoxConstraints(
-                                minHeight: 480, minWidth: 320, maxWidth: 320),
-                          );
-                          setState(() {
-                            changeTheme(Config.theme!.copyWith(
-                                colorScheme: ColorScheme.fromSwatch(
-                              primarySwatch:
-                                  generateMaterialColor(color: newColor),
-                            )));
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: (width(context)) * 0.1,
-                            vertical: width(context) / 10,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        child: FaIcon(
-                          Icons.format_paint,
-                          size: width(context) / 20,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSecondaryContainer,
-                        ),
-                      ),
-                      const Spacer(),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            changeTheme(Config.theme!.copyWith(
-                              colorScheme: ColorScheme.fromSwatch(
-                                primarySwatch: Colors.grey,
-                                accentColor: Colors.grey,
-                                brightness: Brightness.dark,
-                              ),
-                            ));
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondaryContainer,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: (width(context)) * 0.1,
-                            vertical: width(context) / 10,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        child: FaIcon(
-                          FontAwesomeIcons.solidMoon,
-                          size: width(context) / 20,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSecondaryContainer,
-                        ),
-                      )
-                    ],
-                  ),
-                  // put space between buttons
                   SizedBox(height: height(context) / 20),
                   ElevatedButton(
                     onPressed: () => {
@@ -427,7 +374,7 @@ class ParametreState extends State<Parametre> {
                         color: Theme.of(context).colorScheme.primaryContainer,
                         thickness: 2,
                         // put adaptive height to the divider to make it responsive to the screen size and put it at the bottom of the page
-                        height: height(context) / 5,
+                        height: height(context) / 3,
                       ),
                     ],
                   ),
@@ -463,11 +410,22 @@ class ParametreState extends State<Parametre> {
                                   title: const Text("Développeurs"),
                                   content: const Text(
                                       "Ce projet a été réalisé par : \n\n- Robin Lafontaine\n- Korantin Varnière\n- Tristan Versel \n- Maxime Zimmermann"),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
                                   actions: [
                                     TextButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
+                                      style: ButtonStyle(
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                      ),
                                       child: const Text("Fermer"),
                                     )
                                   ],

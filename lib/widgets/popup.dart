@@ -11,10 +11,13 @@ class Popup extends StatelessWidget {
             title: const Text("Attention"),
             content: const Text(
                 "Les données ne sont pas à jour, vérifiez votre connexion internet."),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             actions: <Widget>[
               TextButton(
                 style: TextButton.styleFrom(
                   textStyle: Theme.of(context).textTheme.labelLarge,
+                  foregroundColor:
+                      Theme.of(context).colorScheme.onSecondaryContainer,
                 ),
                 child: const Text('OK'),
                 onPressed: () {
