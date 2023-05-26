@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
 import 'dart:math' as math;
 
 class Indice extends StatelessWidget {

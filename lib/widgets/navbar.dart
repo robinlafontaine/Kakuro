@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/screens/mes_parties.dart';
 import 'package:kakuro/screens/nouvelle_partie.dart';

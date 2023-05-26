@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kakuro/config/config.dart';
 
 class Case extends StatefulWidget {
   final int valeur;
@@ -48,7 +47,10 @@ class CaseState extends State<Case> {
                 ? null
                 : Text(
                     valeur.toString(),
-                    style: TextStyle(fontSize: taille * 0.5, color: Colors.red),
+                    style: TextStyle(
+                        fontSize: taille * 0.5,
+                        color:
+                            Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
           ),
         ),
