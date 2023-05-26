@@ -37,6 +37,7 @@ class GameMultiState extends State<GameMulti> {
   @override
   void initState() {
     super.initState();
+    Config.multi.setMulti(true, widget.ID, kakuro.n, kakuro.m);
     grille = kakuro.getBase();
     startTimer();
   }
@@ -71,7 +72,7 @@ class GameMultiState extends State<GameMulti> {
       //addPoints();
       duel.sendResults(widget.ID, FirebaseAuth.instance.currentUser?.uid,
           seconde, kakuro.n, kakuro.m);
-
+      Config.multi.clearMulti();
       route(context, const Multijoueur());
     }
     return valide;
@@ -194,6 +195,7 @@ class GameMultiState extends State<GameMulti> {
             actions: [
               TextButton(
                   onPressed: () {
+                    Config.multi.clearMulti();
                     duel.sendResults(
                         widget.ID,
                         FirebaseAuth.instance.currentUser?.uid,
@@ -212,6 +214,24 @@ class GameMultiState extends State<GameMulti> {
                   },
                   child: Text(
                     "NON",
+                    style: TextStyle(color: Config.colors.defaultPrimary),
+                  ))
+            ],
+          ));
+  Future opendialogPartieAbandonnee() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+            title: const Text('Partie abandonnée'),
+            content: const Text(
+                "Vous avez abandonné car vous avez quitté l'application"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Config.multi.clearMulti();
+                    route(context, const Multijoueur());
+                  },
+                  child: Text(
+                    "OK",
                     style: TextStyle(color: Config.colors.defaultPrimary),
                   ))
             ],

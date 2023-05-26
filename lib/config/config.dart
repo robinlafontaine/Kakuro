@@ -12,6 +12,7 @@ class Config {
   static ThemeData themeDefault = ThemeData.dark(useMaterial3: true);
   static ThemeData? theme = themeDefault;
   static final colors = _Color();
+  static var multi = _Multi();
 }
 
 class _Color {
@@ -66,4 +67,25 @@ class _Audio {
 
   final player = AudioPlayer();
   final sons = ["Jojo.mp3", "Quoicoubeh.mp3", "MarioSlider.mp3"];
+}
+
+class _Multi {
+  bool inMulti = false;
+  String gameID = "";
+  var n = 0;
+  var m = 0;
+
+  void setMulti(bool inMulti, String gameID, int n, int m) {
+    Config.multi.inMulti = inMulti;
+    Config.multi.gameID = gameID;
+    Config.multi.n = n;
+    Config.multi.m = m;
+  }
+
+  void clearMulti() {
+    Config.multi.inMulti = false;
+    Config.multi.gameID = "";
+    Config.multi.n = 0;
+    Config.multi.m = 0;
+  }
 }
