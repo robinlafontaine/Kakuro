@@ -40,7 +40,9 @@ class Indice extends StatelessWidget {
             left: 2,
             child: Text(
               indiceColonne.toString(),
-              style: TextStyle(fontSize: taille * 0.35),
+              style: TextStyle(
+                fontSize: taille * 0.35,
+              ),
             ),
           ),
         ]),

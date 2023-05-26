@@ -97,10 +97,11 @@ class Leaderboard {
       final docRef = db.collection("leaderboard").doc(uid);
       final docData = await docRef.get();
       var score = (docData.data()?["score"] as int?) ?? 0;
-      score += newPoints;
-
-      await docRef.set({"name": currentUser.displayName, "score": score},
-          SetOptions(merge: true));
+      if (newPoints > score) {
+        score = newPoints;
+        await docRef.set({"name": currentUser.displayName, "score": score},
+            SetOptions(merge: true));
+      }
       return;
     } catch (e) {
       if (kDebugMode) {

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class GameState extends State<Game> {
   Timer? timer;
   int newIndex = 0;
   Duration duration = const Duration();
+  int indices = 1;
 
   GameState(this.kakuro);
 
@@ -52,7 +54,8 @@ class GameState extends State<Game> {
   }
 
   void addPoints() {
-    int puntos = (20 * (kakuro.n + kakuro.m + kakuro.difficulte) - seconde);
+    int puntos =
+        (5 * (kakuro.n * kakuro.m * kakuro.difficulte) - seconde) ~/ indices;
     Leaderboard.addNewScore(puntos);
   }
 
@@ -307,6 +310,7 @@ class GameState extends State<Game> {
             title: const Text('Grille non valide'),
             content:
                 const Text('La grille n\'est pas valide, veuillez réessayer'),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             actions: [
               TextButton(
                   onPressed: () {
@@ -327,6 +331,7 @@ class GameState extends State<Game> {
             title: const Text('Abandon'),
             content: const Text(
                 'Etes-vous sûr de vouloir abandonner cette partie ?'),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             actions: [
               TextButton(
                   onPressed: () {
@@ -336,6 +341,7 @@ class GameState extends State<Game> {
                       suppGrille()
                           .then((value) => route(context, const MesParties()));
                     }
+                    setState(() {});
                   },
                   child: Text(
                     "Oui",
@@ -366,6 +372,8 @@ class GameState extends State<Game> {
             actions: [
               TextButton(
                   onPressed: () {
+                    indices++;
+                    if (kDebugMode) print(indices);
                     int i = Random().nextInt(kakuro.n - 1);
                     int j = Random().nextInt(kakuro.m - 1);
                     var zero = false;
@@ -392,6 +400,9 @@ class GameState extends State<Game> {
                                   title: const Text('Indice'),
                                   content: Text(
                                       'La valeur en position (${i + 1}, ${j + 1}) doit être changée par ${kakuro.grilleUpdated[i][j]}'),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
                                   actions: [
                                     TextButton(
                                         onPressed: () {
@@ -428,6 +439,9 @@ class GameState extends State<Game> {
                                   title: const Text('Indice'),
                                   content: const Text(
                                       'La grille est valide, vous n\'avez pas besoin d\'indice'),
+                                  backgroundColor: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
                                   actions: [
                                     TextButton(
                                         onPressed: () {

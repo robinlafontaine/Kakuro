@@ -229,6 +229,7 @@ class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
             title: const Text('Abandon'),
             content: const Text(
                 'Etes-vous sûr de vouloir abandonner cette partie ?'),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             actions: [
               TextButton(
                   onPressed: () {
@@ -240,6 +241,7 @@ class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
                         kakuro.n,
                         kakuro.m);
                     route(context, const Multijoueur());
+                    setState(() {});
                   },
                   child: Text(
                     "Oui",
