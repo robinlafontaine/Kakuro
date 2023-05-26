@@ -76,17 +76,21 @@ class ParametreState extends State<Parametre> {
   }
 
   void changeTheme(ThemeData newTheme) {
+    Config.isReloading = true;
     setState(() {
       Storage.storeTheme(newTheme);
       MyThemeData.of(context).updateTheme(newTheme);
     });
+    Config.isReloading = false;
   }
 
   void resetTheme() {
+    Config.isReloading = true;
     setState(() {
       Storage.storeTheme(Config.themeDefault);
       MyThemeData.of(context).updateTheme(Config.themeDefault);
     });
+    Config.isReloading = false;
   }
 
   Future<bool> colorPickerDialog() async {

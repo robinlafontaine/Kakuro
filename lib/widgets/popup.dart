@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Popup extends StatelessWidget {
-  const Popup({super.key});
+  const Popup({Key? key}) : super(key: key);
 
   static Future<void> showAlert(context) async {
     return showDialog<void>(

@@ -41,7 +41,8 @@ class CaseState extends State<Case> {
           margin: widget.last ? null : const EdgeInsets.only(right: 2),
           width: taille,
           height: taille,
-          decoration: BoxDecoration(color: Config.colors.caseColor),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer),
           child: Center(
             child: (valeur == 0)
                 ? null

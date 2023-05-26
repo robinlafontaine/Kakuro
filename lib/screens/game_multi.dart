@@ -216,7 +216,9 @@ class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
                   },
                   child: Text(
                     "OK",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   ))
             ],
           ));
@@ -241,7 +243,9 @@ class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
                   },
                   child: Text(
                     "Oui",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   )),
               TextButton(
                   onPressed: () {
@@ -249,7 +253,9 @@ class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
                   },
                   child: Text(
                     "NON",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   ))
             ],
           ));

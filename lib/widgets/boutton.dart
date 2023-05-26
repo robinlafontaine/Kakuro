@@ -26,17 +26,18 @@ class Boutton extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
             color: (couleur == null)
-                ? Config.colors.primaryColor
-                : Config.colors.primaryTextColor),
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.primaryContainer),
         child: Text(
           value,
           style: GoogleFonts.montserrat(
               fontSize: 19,
               fontWeight: FontWeight.w500,
               color: (couleur == null)
-                  ? Config.colors.primaryTextColor
-                  : Config.colors
-                      .primaryTextBackground), /*
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context)
+                      .colorScheme
+                      .primaryContainer), /*
               style: TextStyle(
                   fontSize: 19,
                   : GoogleFonts.caveatBrushTextTheme(),
