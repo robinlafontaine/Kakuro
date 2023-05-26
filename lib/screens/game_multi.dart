@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -23,7 +24,7 @@ class GameMulti extends StatefulWidget {
   State<GameMulti> createState() => GameMultiState(kakuro);
 }
 
-class GameMultiState extends State<GameMulti> {
+class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
   Kakuro kakuro;
   List grille = [];
   int seconde = 0;
@@ -38,8 +39,42 @@ class GameMultiState extends State<GameMulti> {
   void initState() {
     super.initState();
     Config.multi.setMulti(true, widget.ID, kakuro.n, kakuro.m);
+    WidgetsBinding.instance.addObserver(this);
     grille = kakuro.getBase();
     startTimer();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(final AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if ((state == AppLifecycleState.paused ||
+            state == AppLifecycleState.detached) &&
+        Config.multi.inMulti == true) {
+      // send current user data
+      Duels().sendResults(
+          Config.multi.gameID,
+          FirebaseAuth.instance.currentUser?.uid,
+          -1,
+          Config.multi.n,
+          Config.multi.m);
+      Config.multi.clearMulti();
+      if (kDebugMode) {
+        print("multi cleared");
+      }
+      // TODO
+      Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Multijoueur()))
+          .then((value) {
+        Navigator.pop(context);
+      });
+      setState(() {});
+    }
   }
 
   void addPoints() {
@@ -214,24 +249,6 @@ class GameMultiState extends State<GameMulti> {
                   },
                   child: Text(
                     "NON",
-                    style: TextStyle(color: Config.colors.defaultPrimary),
-                  ))
-            ],
-          ));
-  Future opendialogPartieAbandonnee() => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: const Text('Partie abandonnée'),
-            content: const Text(
-                "Vous avez abandonné car vous avez quitté l'application"),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Config.multi.clearMulti();
-                    route(context, const Multijoueur());
-                  },
-                  child: Text(
-                    "OK",
                     style: TextStyle(color: Config.colors.defaultPrimary),
                   ))
             ],

@@ -1,14 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kakuro/config/config.dart';
-import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/config/theme.dart';
-import 'package:kakuro/duels.dart';
 import 'package:kakuro/screens/menu.dart';
-import 'package:kakuro/screens/multijoueur.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -61,28 +57,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(final AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if ((state == AppLifecycleState.paused ||
-            state == AppLifecycleState.detached) &&
-        Config.multi.inMulti == true) {
-      // send current user data
-      Duels().sendResults(
-          Config.multi.gameID,
-          FirebaseAuth.instance.currentUser?.uid,
-          -1,
-          Config.multi.n,
-          Config.multi.m);
-      Config.multi.clearMulti();
-      if (kDebugMode) {
-        print("multi cleared");
-      }
-      // TODO
-      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const Multijoueur()))
-          .then((value) {
-        Navigator.pop(context);
-      });
-      setState(() {});
-    }
     if (state == AppLifecycleState.resumed) {
       Config.sons.player.resume();
     } else {
