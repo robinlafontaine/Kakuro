@@ -6,6 +6,7 @@ import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/leaderboard.dart';
 import 'package:kakuro/widgets/appbar.dart';
 import 'package:kakuro/widgets/navbar.dart';
+import 'package:kakuro/widgets/popup.dart';
 
 class Classement extends StatefulWidget {
   const Classement({super.key});
@@ -45,8 +46,11 @@ class ClassementState extends State<Classement> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       bool cache = snapshot.data.metadata.isFromCache;
-                      print("cache?: $cache");
-                      //TODO : afficher un message pour dire si les données sont a jour ou non !
+                      if (cache) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          Popup.showAlert(context);
+                        });
+                      }
                       return Center(
                         child: Column(
                           children: [
@@ -165,7 +169,7 @@ class ClassementState extends State<Classement> {
                                         ))),
                                   ],
                                 ),
-                              )
+                              ),
                           ],
                         ),
                       );
