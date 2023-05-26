@@ -165,10 +165,10 @@ class GameState extends State<Game> {
     }
     if (valide) {
       addPoints();
-      if (Config.newgame == false) suppGrille();
-      route(context, const Menu());
+      openDialogVictoire();
       return valide;
     }
+    AudioPlayer().play(AssetSource("roblox.mp3"));
     return valide;
   }
 
@@ -378,6 +378,8 @@ class GameState extends State<Game> {
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
+                    if (Config.newgame == false) suppGrille();
+                    route(context, const Menu());
                   },
                   child: Text(
                     "OK",
@@ -395,6 +397,7 @@ class GameState extends State<Game> {
       builder: (context) => AlertDialog(
             title: const Text('Indice'),
             content: const Text('Voulez-vous un indice ?'),
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
             actions: [
               TextButton(
                   onPressed: () {
@@ -498,6 +501,9 @@ class GameState extends State<Game> {
                                 title: const Text('Indice'),
                                 content: Text(
                                     'La valeur en position (${i + 1}, ${j + 1}) est ${kakuro.grilleUpdated[i][j]}'),
+                                backgroundColor: Theme.of(context)
+                                    .colorScheme
+                                    .secondaryContainer,
                                 actions: [
                                   TextButton(
                                       onPressed: () {
