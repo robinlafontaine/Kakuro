@@ -62,9 +62,9 @@ class GameState extends State<Game> {
   }
 
   void saveGrille() async {
-    List<String>? grilles = GetStorage().read("grilles");
-    List<String>? chronos = GetStorage().read("chronos");
-    List<String>? etats = GetStorage().read("etats");
+    List? grilles = GetStorage().read("grilles");
+    List? chronos = GetStorage().read("chronos");
+    List? etats = GetStorage().read("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
@@ -84,9 +84,9 @@ class GameState extends State<Game> {
   }
 
   void saveGrilleAndReload() async {
-    List<String>? grilles = GetStorage().read("grilles");
-    List<String>? chronos = GetStorage().read("chronos");
-    List<String>? etats = GetStorage().read("etats");
+    List? grilles = GetStorage().read("grilles");
+    List? chronos = GetStorage().read("chronos");
+    List? etats = GetStorage().read("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
@@ -112,8 +112,8 @@ class GameState extends State<Game> {
   }
 
   void majGrille() async {
-    List<String>? etats = GetStorage().read("etats");
-    List<String>? chronos = GetStorage().read("chronos");
+    List? etats = GetStorage().read("etats");
+    List? chronos = GetStorage().read("chronos");
     etats ??= [];
     chronos ??= [];
     String etatsActuel = getEtat();
@@ -126,9 +126,9 @@ class GameState extends State<Game> {
   }
 
   Future<void> suppGrille() async {
-    List<String>? grilles = GetStorage().read("grilles");
-    List<String>? chronos = GetStorage().read("chronos");
-    List<String>? etats = GetStorage().read("etats");
+    List? grilles = GetStorage().read("grilles");
+    List? chronos = GetStorage().read("chronos");
+    List? etats = GetStorage().read("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];

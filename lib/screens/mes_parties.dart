@@ -18,11 +18,11 @@ class MesParties extends StatefulWidget {
 }
 
 class _MesPartiesState extends State<MesParties> {
-  List<String> grilles = [];
-  List<String> chronos = [];
-  List<String> minutes = [];
-  List<String> secondes = [];
-  List<String> etats = [];
+  List grilles = [];
+  List chronos = [];
+  List minutes = [];
+  List secondes = [];
+  List etats = [];
   List etatSet = [];
   List<Kakuro> kakuros = [];
 
@@ -55,9 +55,9 @@ class _MesPartiesState extends State<MesParties> {
       print("chronos: ${GetStorage().read("chronos")}");
       print("etats: ${GetStorage().read("etats")}");
     }
-    List<String>? mesgrilles = GetStorage().read("grilles") ?? [];
-    List<String>? meschronos = GetStorage().read("chronos") ?? [];
-    List<String>? mesetats = GetStorage().read("etats") ?? [];
+    List mesgrilles = GetStorage().read("grilles") ?? [];
+    List meschronos = GetStorage().read("chronos") ?? [];
+    List mesetats = GetStorage().read("etats") ?? [];
     grilles = mesgrilles;
     chronos = meschronos;
     etats = mesetats;
