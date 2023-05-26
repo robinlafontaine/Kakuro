@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kakuro/config/config.dart';
 import 'package:kakuro/screens/multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -46,7 +47,7 @@ class ClassementState extends State<Classement> {
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       bool cache = snapshot.data.metadata.isFromCache;
-                      if (cache) {
+                      if (cache && !Config.isReloading) {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           Popup.showAlert(context);
                         });

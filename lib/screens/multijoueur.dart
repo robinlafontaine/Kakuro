@@ -8,6 +8,7 @@ import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/resultat.dart';
 import 'package:kakuro/widgets/appbar.dart';
 import 'package:kakuro/widgets/navbar.dart';
+import 'package:kakuro/widgets/popup.dart';
 import 'menu.dart';
 
 class Multijoueur extends StatefulWidget {

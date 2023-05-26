@@ -17,7 +17,8 @@ class Indice extends StatelessWidget {
         margin: last ? null : const EdgeInsets.only(right: 2),
         width: taille,
         height: taille,
-        decoration: BoxDecoration(color: Config.colors.caseColor),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer),
         child: Stack(children: [
           Center(
               child: Transform.rotate(
@@ -56,7 +57,8 @@ class Indice extends StatelessWidget {
             child: Container(
               width: taille,
               height: taille,
-              decoration: BoxDecoration(color: Config.colors.caseColor),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer),
             ),
           ),
           Positioned(
@@ -78,7 +80,8 @@ class Indice extends StatelessWidget {
             child: Container(
               width: taille,
               height: taille,
-              decoration: BoxDecoration(color: Config.colors.caseColor),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer),
             ),
           ),
           Positioned(
