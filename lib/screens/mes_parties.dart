@@ -188,6 +188,9 @@ class _MesPartiesState extends State<MesParties> {
                                         backgroundColor: Theme.of(context)
                                             .colorScheme
                                             .secondaryContainer,
+                                        foregroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondaryContainer,
                                         padding: EdgeInsets.symmetric(
                                           horizontal: width(context) *
                                               0.05, // Change the horizontal padding to 20% of the screen width

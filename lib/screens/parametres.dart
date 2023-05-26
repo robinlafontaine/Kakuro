@@ -402,6 +402,8 @@ class ParametreState extends State<Parametre> {
                       // backgroundColor: Config.colors.primarySelect,
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       padding: EdgeInsets.symmetric(
                         horizontal: width(context) *
                             0.20, // Change the horizontal padding to 20% of the screen width
@@ -432,6 +434,8 @@ class ParametreState extends State<Parametre> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                     ),
                     child: Text(
                       "SIGN OUT",

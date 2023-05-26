@@ -20,20 +20,19 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      // elevation: 2,
-      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      // elevation: 100,
+      backgroundColor:
+          Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.5),
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       destinations: [
         NavigationDestination(
           icon: Icon(
             Icons.home,
-            color: (actif != 0)
-                ? Config.colors.primaryTextColor
-                : Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
           ),
           selectedIcon: Icon(
             Icons.home,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
           label: 'Accueil',
         ),
@@ -41,39 +40,31 @@ class Navbar extends StatelessWidget {
         NavigationDestination(
           icon: Icon(
             Icons.add,
-            color: (actif != 1)
-                ? Config.colors.primaryTextColor
-                : Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
           ),
           selectedIcon: Icon(
             Icons.add,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
           label: 'Nouvelle partie',
         ),
         NavigationDestination(
           icon: Icon(
             Icons.gamepad,
-            color: (actif != 2)
-                ? Config.colors.primaryTextColor
-                : Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
           ),
           selectedIcon: Icon(
             Icons.gamepad,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
           label: 'Mes parties',
         ),
         NavigationDestination(
-          icon: Icon(
-            Icons.settings,
-            color: (actif != 3)
-                ? Config.colors.primaryTextColor
-                : Theme.of(context).colorScheme.primary,
-          ),
+          icon: Icon(Icons.settings,
+              color: Theme.of(context).colorScheme.onSecondaryContainer),
           selectedIcon: Icon(
             Icons.settings,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
           label: 'Paramètres',
         ),

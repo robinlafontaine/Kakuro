@@ -64,6 +64,8 @@ class MenuState extends State<Menu> {
                     // backgroundColor: Config.colors.primaryColor,
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                     // backgroundColor: Colors.transparent,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
@@ -89,6 +91,8 @@ class MenuState extends State<Menu> {
                     // backgroundColor: Config.colors.primarySelect,
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
@@ -137,6 +141,8 @@ class MenuState extends State<Menu> {
                     // backgroundColor: Config.colors.primarySelect,
                     backgroundColor:
                         Theme.of(context).colorScheme.secondaryContainer,
+                    foregroundColor:
+                        Theme.of(context).colorScheme.onSecondaryContainer,
                     padding: EdgeInsets.symmetric(
                       horizontal: width(context) *
                           0.20, // Change the horizontal padding to 20% of the screen width
