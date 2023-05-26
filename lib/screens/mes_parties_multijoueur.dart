@@ -145,10 +145,12 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                                           ),
                                         ],
                                       ),
-                                      IconButton(
-                                        icon: const Icon(
+                                      IconButton.outlined(
+                                        icon: Icon(
                                           Icons.play_arrow,
-                                          color: Colors.green,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
                                         ),
                                         onPressed: () {
                                           Config.newgame = false;
@@ -174,10 +176,12 @@ class MesPartiesState extends State<MesPartiesMultijoueur> {
                                                   0.05), // Change the height to 40 pixels
                                         ),
                                       ),
-                                      IconButton(
-                                        icon: const Icon(
+                                      IconButton.outlined(
+                                        icon: Icon(
                                           Icons.delete,
-                                          color: Colors.red,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
                                         ),
                                         onPressed: () {
                                           Duels().deleteDuel(
