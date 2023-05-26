@@ -169,6 +169,8 @@ class GameMultiState extends State<GameMulti> with WidgetsBindingObserver {
                       // backgroundColor: Config.colors.primarySelect,
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       padding: EdgeInsets.symmetric(
                         horizontal: width(context) *
                             0.20, // Change the horizontal padding to 20% of the screen width

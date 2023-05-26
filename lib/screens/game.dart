@@ -233,6 +233,8 @@ class GameState extends State<Game> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       padding: EdgeInsets.symmetric(
                         horizontal: width(context) *
                             0.20, // Change the horizontal padding to 20% of the screen width
@@ -261,6 +263,8 @@ class GameState extends State<Game> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Theme.of(context).colorScheme.secondaryContainer,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondaryContainer,
                       padding: EdgeInsets.symmetric(
                         horizontal: width(context) *
                             0.20, // Change the horizontal padding to 20% of the screen width
@@ -310,7 +314,9 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "OK",
-                    style: TextStyle(color: Theme.of(context).primaryColorDark),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   ))
             ],
           ));
@@ -333,15 +339,19 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "Oui",
-                    style: TextStyle(color: Theme.of(context).primaryColorDark),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   )),
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "NON",
-                    style: TextStyle(color: Theme.of(context).primaryColorDark),
+                    "Non",
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   ))
             ],
           ));
@@ -404,7 +414,8 @@ class GameState extends State<Game> {
                                           "OK",
                                           style: TextStyle(
                                               color: Theme.of(context)
-                                                  .primaryColorDark),
+                                                  .colorScheme
+                                                  .onSecondaryContainer),
                                         ))
                                   ],
                                 ));
@@ -426,7 +437,8 @@ class GameState extends State<Game> {
                                           "OK",
                                           style: TextStyle(
                                               color: Theme.of(context)
-                                                  .primaryColorDark),
+                                                  .colorScheme
+                                                  .onSecondaryContainer),
                                         ))
                                   ],
                                 ));
@@ -468,7 +480,8 @@ class GameState extends State<Game> {
                                         "OK",
                                         style: TextStyle(
                                             color: Theme.of(context)
-                                                .primaryColorDark),
+                                                .colorScheme
+                                                .onSecondaryContainer),
                                       ))
                                 ],
                               ));
@@ -480,7 +493,9 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "Oui",
-                    style: TextStyle(color: Theme.of(context).primaryColorDark),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   )),
               TextButton(
                   onPressed: () {
@@ -488,7 +503,9 @@ class GameState extends State<Game> {
                   },
                   child: Text(
                     "NON",
-                    style: TextStyle(color: Theme.of(context).primaryColorDark),
+                    style: TextStyle(
+                        color:
+                            Theme.of(context).colorScheme.onSecondaryContainer),
                   ))
             ],
           ));
