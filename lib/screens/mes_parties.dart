@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kakuro/config/fonctions.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:kakuro/kakuro.dart';
 import 'package:kakuro/screens/game.dart';
 import 'package:kakuro/screens/parametres.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:kakuro/widgets/appbar.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'menu.dart';
@@ -50,15 +50,14 @@ class _MesPartiesState extends State<MesParties> {
   }
 
   Future<void> launch() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (kDebugMode) {
-      print("grilles: ${prefs.getStringList("grilles")}");
-      print("chronos: ${prefs.getStringList("chronos")}");
-      print("etats: ${prefs.getStringList("etats")}");
+      print("grilles: ${GetStorage().read("grilles")}");
+      print("chronos: ${GetStorage().read("chronos")}");
+      print("etats: ${GetStorage().read("etats")}");
     }
-    List<String>? mesgrilles = prefs.getStringList("grilles") ?? [];
-    List<String>? meschronos = prefs.getStringList("chronos") ?? [];
-    List<String>? mesetats = prefs.getStringList("etats") ?? [];
+    List<String>? mesgrilles = GetStorage().read("grilles") ?? [];
+    List<String>? meschronos = GetStorage().read("chronos") ?? [];
+    List<String>? mesetats = GetStorage().read("etats") ?? [];
     grilles = mesgrilles;
     chronos = meschronos;
     etats = mesetats;

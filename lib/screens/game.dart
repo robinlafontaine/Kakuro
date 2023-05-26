@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kakuro/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:kakuro/config/fonctions.dart';
@@ -12,8 +13,6 @@ import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
 import 'package:kakuro/widgets/navbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'menu.dart';
 import 'mes_parties.dart';
 
@@ -62,11 +61,10 @@ class GameState extends State<Game> {
     return s;
   }
 
-  Future<void> saveGrille() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? grilles = prefs.getStringList("grilles");
-    List<String>? chronos = prefs.getStringList("chronos");
-    List<String>? etats = prefs.getStringList("etats");
+  void saveGrille() async {
+    List<String>? grilles = GetStorage().read("grilles");
+    List<String>? chronos = GetStorage().read("chronos");
+    List<String>? etats = GetStorage().read("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
@@ -76,20 +74,19 @@ class GameState extends State<Game> {
     etats.add(etatsActuel);
     newIndex = grilles.length - 1;
     print(grilles.length - 1);
-    await prefs.setStringList('grilles', grilles);
-    await prefs.setStringList('chronos', chronos);
-    await prefs.setStringList('etats', etats);
+    GetStorage().write("grilles", grilles);
+    GetStorage().write("chronos", chronos);
+    GetStorage().write("etats", etats);
 
     /*  await prefs.setStringList('grilles', []);
     await prefs.setStringList('chronos', []);
     await prefs.setStringList('etats', []);*/
   }
 
-  Future<void> saveGrilleAndReload() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? grilles = prefs.getStringList("grilles");
-    List<String>? chronos = prefs.getStringList("chronos");
-    List<String>? etats = prefs.getStringList("etats");
+  void saveGrilleAndReload() async {
+    List<String>? grilles = GetStorage().read("grilles");
+    List<String>? chronos = GetStorage().read("chronos");
+    List<String>? etats = GetStorage().read("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
@@ -99,9 +96,11 @@ class GameState extends State<Game> {
     etats.add(etatsActuel);
     newIndex = grilles.length - 1;
     print(grilles.length - 1);
-    await prefs.setStringList('grilles', grilles);
-    await prefs.setStringList('chronos', chronos);
-    await prefs.setStringList('etats', etats);
+
+    GetStorage().write("grilles", grilles);
+    GetStorage().write("chronos", chronos);
+    GetStorage().write("etats", etats);
+
     route(
         context,
         Game(
@@ -110,39 +109,36 @@ class GameState extends State<Game> {
           index: newIndex,
           chrono: seconde,
         ));
-    /*  await prefs.setStringList('grilles', []);
-    await prefs.setStringList('chronos', []);
-    await prefs.setStringList('etats', []);*/
   }
 
-  Future<void> majGrille() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? etats = prefs.getStringList("etats");
-    List<String>? chronos = prefs.getStringList("chronos");
+  void majGrille() async {
+    List<String>? etats = GetStorage().read("etats");
+    List<String>? chronos = GetStorage().read("chronos");
     etats ??= [];
     chronos ??= [];
     String etatsActuel = getEtat();
     String chronoActuel = seconde.toString();
     etats[widget.index!] = etatsActuel;
     chronos[widget.index!] = chronoActuel;
-    await prefs.setStringList('etats', etats);
-    await prefs.setStringList('chronos', chronos);
+
+    GetStorage().write("etats", etats);
+    GetStorage().write("chronos", chronos);
   }
 
   Future<void> suppGrille() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? grilles = prefs.getStringList("grilles");
-    List<String>? chronos = prefs.getStringList("chronos");
-    List<String>? etats = prefs.getStringList("etats");
+    List<String>? grilles = GetStorage().read("grilles");
+    List<String>? chronos = GetStorage().read("chronos");
+    List<String>? etats = GetStorage().read("etats");
     grilles ??= [];
     chronos ??= [];
     etats ??= [];
     grilles.remove(grilles[widget.index!]);
     chronos.remove(chronos[widget.index!]);
     etats.remove(etats[widget.index!]);
-    await prefs.setStringList('grilles', grilles);
-    await prefs.setStringList('chronos', chronos);
-    await prefs.setStringList('etats', etats);
+
+    GetStorage().write("grilles", grilles);
+    GetStorage().write("chronos", chronos);
+    GetStorage().write("etats", etats);
   }
 
   bool testValide() {
