@@ -55,7 +55,7 @@ class GameState extends State<Game> {
 
   void addPoints() {
     int puntos =
-        (5 * (kakuro.n * kakuro.m * kakuro.difficulte) - seconde) ~/ indices;
+        (30 * (kakuro.n * kakuro.m * kakuro.difficulte) - seconde) ~/ indices;
     Leaderboard.addNewScore(puntos);
   }
 
