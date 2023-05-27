@@ -42,6 +42,7 @@ class _Image {
 
 class _Audio {
   var actuel = "loop.mp3";
+  bool paused = false;
 
   final player = AudioPlayer();
   final sons = ["loop.mp3"];

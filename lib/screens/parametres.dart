@@ -42,6 +42,7 @@ class ParametreState extends State<Parametre> {
     son = Config.sons.actuel;
     if (Config.sons.player.state == PlayerState.playing) {
       etatPlayer = "play";
+      Config.sons.paused = false;
     }
   }
 
@@ -50,6 +51,7 @@ class ParametreState extends State<Parametre> {
     setState(() {
       etatPlayer = "pause";
     });
+    Config.sons.paused = true;
     if (kDebugMode) {
       print(etatPlayer);
     }
@@ -61,6 +63,7 @@ class ParametreState extends State<Parametre> {
       setState(() {
         etatPlayer = "pause";
       });
+      Config.sons.paused = true;
     } else {
       if (Config.sons.player.state == PlayerState.paused) {
         Config.sons.player.resume();
@@ -69,6 +72,7 @@ class ParametreState extends State<Parametre> {
       setState(() {
         etatPlayer = "play";
       });
+      Config.sons.paused = false;
     }
   }
 
