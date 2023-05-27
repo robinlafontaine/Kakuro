@@ -9,6 +9,7 @@ import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/auth.dart';
 import 'package:kakuro/Config/fonctions.dart';
 import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/bouttonmd3.dart';
 import 'package:kakuro/widgets/navbar.dart';
 
 class Menu extends StatefulWidget {
@@ -56,106 +57,49 @@ class MenuState extends State<Menu> {
                 const SizedBox(
                   height: 40,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    route(context, const NouvellePartie());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primaryColor,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    // backgroundColor: Colors.transparent,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: const Text(
-                    "NOUVELLE PARTIE",
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      route(context, const NouvellePartie());
+                    },
+                    text: "NOUVELLE PARTIE"),
                 const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    route(context, const MesParties());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: Text(
-                    "MES PARTIES",
-                    selectionColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      route(context, const MesParties());
+                    },
+                    text: "MES PARTIES"),
                 const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  onPressed: () => {
-                    Auth(FirebaseAuth.instance)
-                        .signedIn()
-                        .then(((connected) => {
-                              if (!connected)
-                                {
-                                  Auth(FirebaseAuth.instance)
-                                      .signInGoogle(context)
-                                      .then((value) => Leaderboard()
-                                          .userExists(context)
-                                          .then((value) => {
-                                                if (FirebaseAuth
-                                                        .instance.currentUser !=
-                                                    null)
-                                                  route(context,
-                                                      const Multijoueur())
-                                              }))
-                                }
-                              else
-                                {
-                                  Config.online = true,
-                                  route(context, const Multijoueur())
-                                }
-                            }))
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // backgroundColor: Config.colors.primarySelect,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: const Text(
-                    "MULTIJOUEUR",
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      Auth(FirebaseAuth.instance)
+                          .signedIn()
+                          .then(((connected) => {
+                                if (!connected)
+                                  {
+                                    Auth(FirebaseAuth.instance)
+                                        .signInGoogle(context)
+                                        .then((value) => Leaderboard()
+                                            .userExists(context)
+                                            .then((value) => {
+                                                  if (FirebaseAuth.instance
+                                                          .currentUser !=
+                                                      null)
+                                                    route(context,
+                                                        const Multijoueur())
+                                                }))
+                                  }
+                                else
+                                  {
+                                    Config.online = true,
+                                    route(context, const Multijoueur())
+                                  }
+                              }));
+                    },
+                    text: "MULTIJOUEUR"),
               ],
             ),
           ),

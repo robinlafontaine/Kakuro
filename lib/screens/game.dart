@@ -13,6 +13,7 @@ import 'package:kakuro/screens/nouvelle_partie.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/scene.dart';
 import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/bouttonmd3.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'menu.dart';
 import 'mes_parties.dart';
@@ -231,60 +232,22 @@ class GameState extends State<Game> {
                     height: 30,
                   ),
                   // boutton to get a hint
-                  ElevatedButton(
-                    onPressed: () {
-                      openDialogIndice();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.secondaryContainer,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondaryContainer,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: width(context) *
-                            0.20, // Change the horizontal padding to 20% of the screen width
-                      ),
-                      minimumSize: Size(
-                          width(context) * 0.90,
-                          height(context) *
-                              0.08), // Change the height to 40 pixels
-                    ),
-                    child: Text(
-                      "INDICE",
-                      selectionColor:
-                          Theme.of(context).colorScheme.onSecondaryContainer,
-                    ),
-                  ),
+                  BouttonMd3(
+                      onTap: () {
+                        openDialogIndice();
+                      },
+                      text: "INDICE"),
                   const SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      bool res = testValide();
-                      if (!res) {
-                        openDialogFaux();
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.secondaryContainer,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondaryContainer,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: width(context) *
-                            0.20, // Change the horizontal padding to 20% of the screen width
-                      ),
-                      minimumSize: Size(
-                          width(context) * 0.90,
-                          height(context) *
-                              0.08), // Change the height to 40 pixels
-                    ),
-                    child: Text(
-                      "VALIDER",
-                      selectionColor:
-                          Theme.of(context).colorScheme.onSecondaryContainer,
-                    ),
-                  ),
+                  BouttonMd3(
+                      onTap: () {
+                        bool res = testValide();
+                        if (!res) {
+                          openDialogFaux();
+                        }
+                      },
+                      text: "VERIFIER"),
                 ],
               ),
             ),

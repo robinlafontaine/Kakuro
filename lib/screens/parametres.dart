@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kakuro/config/theme.dart';
+import 'package:kakuro/widgets/bouttonmd3.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:kakuro/config/config.dart';
@@ -344,29 +345,11 @@ class ParametreState extends State<Parametre> {
                         ),
                       ]),
                   SizedBox(height: height(context) / 20),
-                  ElevatedButton(
-                    onPressed: () => {
-                      // reset theme with config.themeDefault
-                      resetTheme(),
+                  BouttonMd3(
+                    onTap: () {
+                      resetTheme();
                     },
-                    style: ElevatedButton.styleFrom(
-                      // backgroundColor: Config.colors.primarySelect,
-                      backgroundColor:
-                          Theme.of(context).colorScheme.secondaryContainer,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondaryContainer,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: width(context) *
-                            0.20, // Change the horizontal padding to 20% of the screen width
-                      ),
-                      minimumSize: Size(
-                          width(context) * 0.90,
-                          height(context) *
-                              0.08), // Change the height to 40 pixels
-                    ),
-                    child: const Text(
-                      "Réinitialiser le thème",
-                    ),
+                    text: "Réinitialiser le thème",
                   ),
                   Row(
                     children: [

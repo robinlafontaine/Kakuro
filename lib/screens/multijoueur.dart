@@ -7,6 +7,7 @@ import 'package:kakuro/screens/mes_parties_multijoueur.dart';
 import 'package:kakuro/screens/parametres.dart';
 import 'package:kakuro/screens/resultat.dart';
 import 'package:kakuro/widgets/appbar.dart';
+import 'package:kakuro/widgets/bouttonmd3.dart';
 import 'package:kakuro/widgets/navbar.dart';
 import 'package:kakuro/widgets/popup.dart';
 import 'menu.dart';
@@ -62,111 +63,35 @@ class MultijoueurState extends State<Multijoueur> {
                 const SizedBox(
                   height: 40,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    route(context, const Invitation());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: Text(
-                    "LANCER DUEL",
-                    selectionColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      route(context, const Invitation());
+                    },
+                    text: 'LANCER UN DUEL'),
                 const SizedBox(
                   height: 10,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    route(context, const MesPartiesMultijoueur());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: Text(
-                    "MES PARTIES",
-                    selectionColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      route(context, const MesPartiesMultijoueur());
+                    },
+                    text: 'MES PARTIES'),
                 const SizedBox(
                   height: 10,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    route(context, const Resultat());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: Text(
-                    "RESULTATS",
-                    selectionColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      route(context, const Resultat());
+                    },
+                    text: 'RESULTATS'),
                 const SizedBox(
                   height: 10,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    route(context, const Classement());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.secondaryContainer,
-                    foregroundColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: width(context) *
-                          0.20, // Change the horizontal padding to 20% of the screen width
-                    ),
-                    minimumSize: Size(
-                        width(context) * 0.90,
-                        height(context) *
-                            0.08), // Change the height to 40 pixels
-                  ),
-                  child: Text(
-                    "CLASSEMENT",
-                    selectionColor:
-                        Theme.of(context).colorScheme.onSecondaryContainer,
-                  ),
-                ),
+                BouttonMd3(
+                    onTap: () {
+                      route(context, const Classement());
+                    },
+                    text: 'CLASSEMENT'),
               ],
             ),
           ),
