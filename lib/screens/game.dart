@@ -166,7 +166,9 @@ class GameState extends State<Game> {
     }
     if (valide) {
       addPoints();
-      openDialogVictoire();
+      Config.wingame = true;
+      if (Config.newgame == false) suppGrille();
+      route(context, const Menu());
       return valide;
     }
     AudioPlayer().play(AssetSource("roblox.mp3"));
@@ -331,27 +333,6 @@ class GameState extends State<Game> {
             ],
           ));
 
-  Future openDialogVictoire() => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: const Text('Victoire'),
-            content: const Text('Félicitation, vous avez gagné !'),
-            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    if (Config.newgame == false) suppGrille();
-                    route(context, const Menu());
-                  },
-                  child: Text(
-                    "OK",
-                    style: TextStyle(
-                        color:
-                            Theme.of(context).colorScheme.onSecondaryContainer),
-                  ))
-            ],
-          ));
 
   // show a dialog to say that the player has asked for a hint
   // then find a random value to give to the playerv and update the grid with the value

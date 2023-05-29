@@ -20,6 +20,17 @@ class Menu extends StatefulWidget {
 }
 
 class MenuState extends State<Menu> {
+
+
+  @override
+  void initState() {
+    if(Config.wingame)
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        openDialogVictoire();
+      });
+    Config.wingame = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -118,4 +129,25 @@ class MenuState extends State<Menu> {
               })),
     );
   }
+
+  Future openDialogVictoire() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Victoire'),
+        content: const Text('Félicitation, vous avez gagné !'),
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "OK",
+                style: TextStyle(
+                    color:
+                    Theme.of(context).colorScheme.onSecondaryContainer),
+              ))
+        ],
+      ));
+
 }
