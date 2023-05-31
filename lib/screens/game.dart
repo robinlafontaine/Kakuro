@@ -260,7 +260,7 @@ class GameState extends State<Game> {
                 (Config.newgame) ? saveGrille() : majGrille();
               },
               reaload: () {
-                saveGrille();
+                // saveGrille();
                 Navigator.push(
                     context,
                     PageRouteBuilder(
@@ -332,7 +332,6 @@ class GameState extends State<Game> {
                   ))
             ],
           ));
-
 
   // show a dialog to say that the player has asked for a hint
   // then find a random value to give to the playerv and update the grid with the value
