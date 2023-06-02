@@ -167,9 +167,10 @@ class ParametreState extends State<Parametre> {
                             fillColor: Theme.of(context).colorScheme.primary,
                             textStyle: Theme.of(context).textTheme.bodySmall,
                             selectedBorderColor:
-                                Theme.of(context).colorScheme.primary,
+                                Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.circular(14),
-                            borderColor: Theme.of(context).colorScheme.primary,
+                            borderColor:
+                                Theme.of(context).colorScheme.secondary,
                           ),
                           child: ToggleButtons(
                             isSelected: [
@@ -273,6 +274,9 @@ class ParametreState extends State<Parametre> {
                                   ),
                                 );
                               },
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
                               transitionDuration:
                                   const Duration(milliseconds: 400),
                               constraints: const BoxConstraints(

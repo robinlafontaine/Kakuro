@@ -10,7 +10,21 @@ class Config {
   static var online = false;
   static var newgame = false;
   static var wingame = false;
-  static ThemeData themeDefault = ThemeData.dark(useMaterial3: true);
+  static ThemeData themeDefault = ThemeData(
+      colorScheme: ColorScheme(
+        primary: Color(0xFF000000),
+        secondary: Color(0xFF404040),
+        surface: Color(0xFF404040),
+        background: Color(0xFFE0E0E0),
+        error: Colors.red,
+        onPrimary: Color(0xFFFFFFFF),
+        onSecondary: Color(0xFFFFFFFF),
+        onSurface: Color(0xFFFFFFFF),
+        onBackground: Color(0xFFFFFFFF),
+        onError: Color(0xFFFFFFFF),
+        brightness: Brightness.dark,
+      ),
+      useMaterial3: true);
   static ThemeData? theme = themeDefault;
   static var multi = _Multi();
   static bool isReloading = false;

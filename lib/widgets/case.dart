@@ -49,8 +49,7 @@ class CaseState extends State<Case> {
                     valeur.toString(),
                     style: TextStyle(
                         fontSize: taille * 0.5,
-                        color:
-                            Theme.of(context).colorScheme.onSecondaryContainer),
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
           ),
         ),
