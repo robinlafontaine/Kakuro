@@ -41,7 +41,7 @@ class CaseState extends State<Case> {
           width: taille,
           height: taille,
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryContainer),
+              color: Theme.of(context).colorScheme.background.withAlpha(240)),
           child: Center(
             child: (valeur == 0)
                 ? null

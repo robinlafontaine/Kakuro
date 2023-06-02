@@ -143,6 +143,7 @@ class _MesPartiesState extends State<MesParties> {
                                       children: [
                                         Text(
                                           "Taille : ${kakuros[i].n}x${kakuros[i].m}",
+                                          style: TextStyle(color: Theme.of(context).colorScheme.onSecondaryContainer),
                                           selectionColor: Theme.of(context)
                                               .colorScheme
                                               .onPrimaryContainer,
@@ -156,6 +157,7 @@ class _MesPartiesState extends State<MesParties> {
                                               : (kakuros[i].difficulte == 7)
                                                   ? "Difficulté : Moyen"
                                                   : "Difficulté : Difficile",
+                                          style: TextStyle(color: Theme.of(context).colorScheme.onSecondaryContainer),
                                           selectionColor: Theme.of(context)
                                               .colorScheme
                                               .onPrimaryContainer,
@@ -165,6 +167,7 @@ class _MesPartiesState extends State<MesParties> {
                                         ),
                                         Text(
                                           "Chrono : ${minutes[i]}:${secondes[i]}",
+                                          style: TextStyle(color: Theme.of(context).colorScheme.onSecondaryContainer),
                                           selectionColor: Theme.of(context)
                                               .colorScheme
                                               .onPrimaryContainer,
@@ -200,8 +203,9 @@ class _MesPartiesState extends State<MesParties> {
                                             height(context) *
                                                 0.05), // Change the height to 40 pixels
                                       ),
-                                      child: const Text(
+                                      child: Text(
                                         "REPRENDRE",
+                                        style: TextStyle(color: Theme.of(context).colorScheme.onSecondaryContainer),
                                       ),
                                     ),
                                   ],

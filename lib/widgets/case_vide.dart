@@ -14,7 +14,7 @@ class CaseVide extends StatelessWidget {
           : const EdgeInsets.only(right: 2),
       width: taille,
       height: taille,
-      decoration: const BoxDecoration(color: Colors.black),
+      decoration: BoxDecoration( color: Colors.transparent),
     );
   }
 }

@@ -17,7 +17,7 @@ class Indice extends StatelessWidget {
         width: taille,
         height: taille,
         decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondaryContainer),
+            color: Theme.of(context).colorScheme.background),
         child: Stack(children: [
           Center(
               child: Transform.rotate(
@@ -33,7 +33,7 @@ class Indice extends StatelessWidget {
             right: 2,
             child: Text(
               indiceLigne.toString(),
-              style: TextStyle(fontSize: taille * 0.35),
+              style: TextStyle(fontSize: taille * 0.35, color: Theme.of(context).colorScheme.onSecondaryContainer),
             ),
           ),
           Positioned(
@@ -42,6 +42,7 @@ class Indice extends StatelessWidget {
             child: Text(
               indiceColonne.toString(),
               style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
                 fontSize: taille * 0.35,
               ),
             ),
@@ -58,7 +59,7 @@ class Indice extends StatelessWidget {
               width: taille,
               height: taille,
               decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondaryContainer),
+                  color: Theme.of(context).colorScheme.background),
             ),
           ),
           Positioned(
@@ -66,7 +67,7 @@ class Indice extends StatelessWidget {
             right: 2,
             child: Text(
               indiceLigne.toString(),
-              style: TextStyle(fontSize: taille * 0.35),
+              style: TextStyle(fontSize: taille * 0.35, color: Theme.of(context).colorScheme.onSecondaryContainer),
             ),
           ),
         ]),
@@ -81,7 +82,7 @@ class Indice extends StatelessWidget {
               width: taille,
               height: taille,
               decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondaryContainer),
+                  color: Theme.of(context).colorScheme.background),
             ),
           ),
           Positioned(
@@ -89,7 +90,7 @@ class Indice extends StatelessWidget {
             left: 2,
             child: Text(
               indiceColonne.toString(),
-              style: TextStyle(fontSize: taille * 0.35),
+              style: TextStyle(fontSize: taille * 0.35, color: Theme.of(context).colorScheme.onSecondaryContainer),
             ),
           ),
         ]),

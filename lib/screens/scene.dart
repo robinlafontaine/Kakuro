@@ -31,7 +31,7 @@ class SceneState extends State<Scene> {
     return Container(
         width: (width(context) / 1.1) + 2,
         height: (width(context) / 1.1) + 2,
-        decoration: const BoxDecoration(color: Colors.black),
+        decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer),
         child: Center(
           child: ListView.builder(
               scrollDirection: Axis.vertical,
