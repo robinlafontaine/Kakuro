@@ -125,9 +125,12 @@ class InvitationState extends State<Invitation> {
                               return Align(
                                 alignment: Alignment.topLeft,
                                 child: Material(
-                                  elevation: 4.0,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondaryContainer,
                                   child: SizedBox(
                                     height: 200.0,
+                                    width: width(context) / 1.1,
                                     child: ListView.builder(
                                       padding: const EdgeInsets.all(8.0),
                                       itemCount: options.length,
@@ -141,6 +144,9 @@ class InvitationState extends State<Invitation> {
                                           },
                                           child: ListTile(
                                             title: Text(option),
+                                            textColor: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
                                           ),
                                         );
                                       },
