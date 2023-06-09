@@ -1,5 +1,6 @@
 ## lien apk
 
+(prendre version release)
 https://drive.google.com/drive/folders/1ixeaPys3UIH9axnlReDUiQvOwoSnKRs0?usp=sharing
 
 ## première compilation
